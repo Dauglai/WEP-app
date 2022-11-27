@@ -1,5 +1,5 @@
 """
-ASGI config for wepsite project.
+ASGI config for WEP-app project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wepsite.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WEP-app.settings')
 
 application = get_asgi_application()

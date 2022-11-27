@@ -2,9 +2,9 @@
 <html lang="ru">
   <head>
     <title>Login</title>
-    <link rel="stylesheet" href="/wepsite/main/static/css/normalize.css">
-    <link rel="stylesheet" href="/wepsite/main/static/css/index.css">
-    <link rel="stylesheet" href="/wepsite/main/static/css/login.css">
+    <link rel="stylesheet" href="/WEP-app/main/static/css/normalize.css">
+    <link rel="stylesheet" href="/WEP-app/main/static/css/index.css">
+    <link rel="stylesheet" href="/WEP-app/main/static/css/login.css">
   </head>
   <body class="container">
     <header class="header-container">
@@ -12,13 +12,13 @@
       <div class="header-container__item">
         <nav class="nav-header">
           <ul class="list_reset nav-header__list">
-            <li class="nav-header__item"><a href="frontMain/index.html#tasks">Задания</a></li>
-            <li class="nav-header__item"><a href="frontMain/index.html#description">Описание</a></li>
-            <li class="nav-header__item"><a href="frontMain/index.html#reviews">Отзывы</a></li>
+            <li class="nav-header__item"><a href="main/index.html#tasks">Задания</a></li>
+            <li class="nav-header__item"><a href="main/index.html#description">Описание</a></li>
+            <li class="nav-header__item"><a href="main/index.html#reviews">Отзывы</a></li>
           </ul>
         </nav>
         <a href="./base.html" class="login__btn" id="login-btn">Вход</a>
-        <a href="frontMain/registration.html" class="login__btn" id="reg-btn">Регистрация</a>
+        <a href="main/registration.html" class="login__btn" id="reg-btn">Регистрация</a>
       </div>
     </header>
     {% if user.is_authenticated %}
@@ -50,8 +50,8 @@
           </label>
         </fieldset>
       </form>
-      <a href="frontMain/registration.html" class="create-account">Создать аккаунт</a>
+      <a href="main/registration.html" class="create-account">Создать аккаунт</a>
     </main>
   </body>
-  <script src="/wepsite/main/static/js/script.js"></script>
+  <script src="/WEP-app/main/static/js/script.js"></script>
 </html>
