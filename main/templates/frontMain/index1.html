@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>WEP</title>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/index.css"> 
+    <link rel="stylesheet" href="./css/login.css"> 
+  </head>
+  <body class="container">
+    <header class="header-container">
+      <a href="#"><h1 class="logo">WEP</h1></a>
+      <div class="header-container__item">
+        <nav class="nav-header">
+          <ul class="list_reset nav-header__list">
+            <li class="nav-header__item"><a href="./index.html#tasks">Задания</a></li>
+            <li class="nav-header__item"><a href="#description">Описание</a></li>
+            <li class="nav-header__item"><a href="#reviews">Отзывы</a></li>
+          </ul>
+        </nav>
+        <a href="./html/logIn.html" class="login__btn" id="login-btn">Вход</a>
+        <a href="./html/registration.html" class="login__btn" id="reg-btn">Регистрация</a>
+      </div>
+    </header>
+    <main>
+      <section class="tasks section" id="tasks">
+        <h2>Задания</h2>
+        <div class="btn-container">
+          <button onclick="window.location.href='./html/teacher.html'" class="btn-start">Начать (за учителя)</button>
+          <button onclick="window.location.href='./html/student.html'" class="btn-start">Начать (за ученика)</button>
+          <!-- <a href="" class="btn-start">Начать</a> -->
+        </div>
+      </section>
+      <section class="description section" id="description">
+        <h2>Описание</h2>
+      </section>
+      <section class="reviews section" id="reviews">
+        <h2>Отзывы</h2>
+      </section>
+    </main>
+  </body>
+  <footer>
+    
+  </footer>
+</html>

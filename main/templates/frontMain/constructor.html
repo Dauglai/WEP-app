@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<HTML>
+  <head>
+    <title>Constructor</title>
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/constructor.css">
+  </head>
+  <body>
+    <header class="header-container">
+      <div class="btn-container">
+        <button class="btn" onclick="window.location.href='{% url 'teacher' %}'">Главная</button>
+        <button class="btn">Статистика</button>
+        <div id = "nav" class="profile">
+          <ul>
+            <li><a href = "#">Вася Пупкин Пупкович</a>
+              <ul class = "second profile__second">
+                <li><a href = "{% url 'home' %}">На главную</a></li>
+                <li><a href = "#">Профиль</a></li>
+                <li><a href = "#">Выйти</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- <button class="btn">Вася Пупкин Пупкович</button> -->
+      </div>
+    </header>
+    <main class="main-container">
+      <h2>Тест №1</h2>
+      <div class="test__container">
+        <form action="https://jsonplaceholder.typicode.com/posts" method="post" class="form">
+          <div class="form__item">
+            <input type="text" name="name-test" placeholder="Название теста">
+            <input type="number" name="difficulty" min="1" max="10" placeholder="Сложность">
+          </div>
+          <div class="form__item">
+            <ul class="list_reset">
+              <li>Время выполнения <input type="number" name="execution-time"> мин</li>
+              <li>Срок сдачи <input type="time" name="deadline-time"> <input type="date" name="deadline-date"></li>
+            </ul>
+          </div>
+          <div class="form__item">
+            <ul class="list_reset">
+              Критерии оценивания
+              <li>5 - <input type="number" name="score-5"></li>
+              <li>4 - <input type="number" name="score-4"></li>
+              <li>3 - <input type="number" name="score-3"></li>
+              <li>2 - <input type="number" name="score-2"></li>
+            </ul>
+          </div>
+          <div class="form__item">
+            <ul class="list_reset list-classes">
+              Классы
+              <li class="list-classes__item"><input type="checkbox" name="class-11A"> - 11A</li>
+              <li class="list-classes__item"><input type="checkbox" name="class-11Б"> - 11Б</li>
+              <li class="list-classes__item"><input type="checkbox" name="class-11Б"> - 10Б</li>
+            </ul>
+          </div>
+          <div class="form__item question" id="q-1">
+            Задание №<span class="sequence-number">1</span>
+            <ul class="list_reset" >
+              <li><textarea name="1" cols="50" placeholder="Поле для ввода вопроса"></textarea></li>
+              <li class="answer"><input type="text" name="1_1" placeholder="Ответ"></li>
+              <button type="button" class="add-answer">Добавить вариант ответа +</button>
+            </ul>
+          </div>
+          <button type="button" class="add-question">Добавить вопрос +</button>
+          <button>Сохранить</button>
+        </form>
+      </div>
+    </main>
+  </body>
+  <script src="/static/js/script.js"></script>
+</HTML>

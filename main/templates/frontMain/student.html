@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<HTML>
+  <head>
+    <title>Student</title>
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/student.css">
+  </head>
+  <body>
+    <header class="header-container">
+      <div class="btn-container">
+        <button class="btn">Рейтинг</button>
+        <button class="btn">Статистика</button>
+        <button class="btn">Персонаж</button>
+        <div id = "nav" class="profile">
+          <ul>
+            <li><a href = "#">Вася Пупкин Пупкович</a>
+              <ul class = "second profile__second">
+                <li><a href = "{% url 'home' %}">На главную</a></li>
+                <li><a href = "#">Профиль</a></li>
+                <li><a href = "#">Выйти</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- <button class="btn">Вася Пупкин Пупкович</button> -->
+      </div>
+    </header>
+    <main class="main-container">
+      <section class="character-block block">
+        <div class="block__container">
+          <h2 class='block__h'>Персонаж</h2>
+          <div class="block__character"></div>
+          <div class="block__rating-position">5 место из 25</div>
+          <div class="block__characteristic">
+            <h4>Характеристики</h4>
+          </div>
+        </div>
+      </section>
+      <section class="tasks-block block">
+        <div class="block__container"> 
+          <h2 class='block__h'>Текущие задания</h2>
+          <div class="block__test">
+            <span>Тест №1 - 10 вопросов</span>
+            <span>Предмет: Физика</span>
+            <span>Учитель: кто-то там</span>
+          </div>
+          <div class="block__test">
+            <span>Тест №2 - 25 вопросов</span>
+            <span>Предмет: Физика</span>
+            <span>Учитель: кто-то там</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+  <script src="/static/js/script.js"></script>
+</HTML>
