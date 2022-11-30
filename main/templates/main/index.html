@@ -1,4 +1,4 @@
-{% extends "frontMain/wrapper.html" %}
+{% extends "main/wrapper.html" %}
 
 {% block content %}
 <body class="container">
@@ -7,7 +7,7 @@
       <div class="header-container__item">
         <nav class="nav-header">
           <ul class="list_reset nav-header__list">
-            <li class="nav-header__item"><a href="./index.html#tasks">Задания</a></li>
+            <li class="nav-header__item"><a href="#tasks">Задания</a></li>
             <li class="nav-header__item"><a href="#description">Описание</a></li>
             <li class="nav-header__item"><a href="#reviews">Отзывы</a></li>
           </ul>
@@ -20,8 +20,8 @@
       <section class="tasks section" id="tasks">
         <h2>Задания</h2>
         <div class="btn-container">
-          <button onclick="window.location.href='{% url 'teacher' %}'" class="btn-start">Начать (за учителя)</button>
-          <button onclick="window.location.href='{% url 'student' %}'" class="btn-start">Начать (за ученика)</button>
+          <a href="{% url 'teacher' %}" class="btn-start">Начать (за учителя)</a>
+          <a href="{% url 'student' %}" class="btn-start">Начать (за ученика)</a>
           <!-- <a href="" class="btn-start">Начать</a> -->
         </div>
       </section>

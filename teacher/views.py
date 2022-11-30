@@ -1,5 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-def office(request):
-    return render(request, 'frontMain/teacher.html')
+def index(request):
+    return render(request, 'main/index.html')
+
+def teacher_office(request):
+    return render(request, 'teacher/teacher.html')
+
+def constructor(request):
+    return render(request, 'teacher/constructor.html')
