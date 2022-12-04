@@ -7,6 +7,10 @@ function showPassword() {
         el.type = "text";
 };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c22c8dff7254532421d6ea07bf573d084dd1642c
 let countQuestions = 1;
 let deadСountQuestions = 1;
 let countAnswer = 1;
@@ -28,12 +32,18 @@ function initializeBtnAnswer() {
     btnAddAnswer.item(btnAddAnswer.length - 1).addEventListener('click', (el)=> {
         let curEl = el.target; 
         let answerClone = answers.item(0).cloneNode(true);
+<<<<<<< HEAD
         console.log(answerClone);
+=======
+>>>>>>> c22c8dff7254532421d6ea07bf573d084dd1642c
 
         let textarea = curEl.parentNode.querySelector('textarea');
         let inputs = curEl.parentNode.querySelectorAll('input');
         let inputInAnswer = answerClone.querySelector('input');
+<<<<<<< HEAD
         inputInAnswer.value = "";
+=======
+>>>>>>> c22c8dff7254532421d6ea07bf573d084dd1642c
         
         inputInAnswer.setAttribute('name', `${textarea.getAttribute('name')}_${inputs.length + 1}`);
         console.log(inputs)
@@ -77,4 +87,8 @@ function updateSeqNum() {
         seqNum[i].innerHTML = i + 1;
         // console.log(countBeverageы);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c22c8dff7254532421d6ea07bf573d084dd1642c
