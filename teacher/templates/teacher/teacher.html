@@ -3,13 +3,14 @@
   <head>
     <title>Teacher</title>
     <link rel="stylesheet" href="/static/css/normalize.css">
-    <!-- <link rel="stylesheet" href="./css/index.css">  -->
-    <link rel="stylesheet" href="/static/css/teacher.css">
+    <link rel="stylesheet" href="/static/css/teacher copy.css">
+    <link rel="stylesheet" href="/static/css/accordion.css">
   </head>
   <body>
     <header class="header-container">
       <div class="btn-container">
         <button class="btn" onclick="window.location.href='{% url 'constructor' %}'">Конструктор</button>
+        <button class="btn" onclick="window.location.href='{% url 'rating_table' %}'">Рейтинг</button>
         <button class="btn">Статистика</button>
         <div id = "nav" class="profile">
           <ul>

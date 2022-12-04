@@ -6,3 +6,6 @@ def index(request):
 
 def student_office(request):
     return render(request, 'student/student.html')
+
+def rating_table(request):
+    return render(request, 'main/rating_table.html')

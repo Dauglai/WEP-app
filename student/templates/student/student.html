@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <HTML>
   <head>
-    <title>Student</title>
+    <title>Ученик</title>
     <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/accordion.css">
     <link rel="stylesheet" href="/static/css/student.css">
   </head>
   <body>
     <header class="header-container">
       <div class="btn-container">
-        <button class="btn">Рейтинг</button>
+        <button class="btn" onclick="window.location.href='{% url 'rating_table' %}'">Рейтинг</button>
         <button class="btn">Статистика</button>
         <button class="btn">Персонаж</button>
         <div id = "nav" class="profile">
@@ -22,7 +23,6 @@
             </li>
           </ul>
         </div>
-        <!-- <button class="btn">Вася Пупкин Пупкович</button> -->
       </div>
     </header>
     <main class="main-container">
@@ -30,25 +30,31 @@
         <div class="block__container">
           <h2 class='block__h'>Персонаж</h2>
           <div class="block__character"></div>
-          <div class="block__rating-position">5 место из 25</div>
+          <div class="block__rating-position" onclick="window.location.href='{% url 'rating_table' %}'">
+            <span class="place_in_rating">5 место из 25</span>
+          </div>
           <div class="block__characteristic">
             <h4>Характеристики</h4>
           </div>
         </div>
       </section>
       <section class="tasks-block block">
-        <div class="block__container"> 
+        <div class="block__container">
           <h2 class='block__h'>Текущие задания</h2>
-          <div class="block__test">
-            <span>Тест №1 - 10 вопросов</span>
-            <span>Предмет: Физика</span>
-            <span>Учитель: кто-то там</span>
-          </div>
-          <div class="block__test">
-            <span>Тест №2 - 25 вопросов</span>
-            <span>Предмет: Физика</span>
-            <span>Учитель: кто-то там</span>
-          </div>
+          <a href="{% url 'task' %}">
+            <div class="block__test">
+              <span>Тест №1 - 10 вопросов</span>
+              <span>Предмет: Физика</span>
+              <span>Учитель: кто-то там</span>
+            </div>
+          </a>
+          <a href="{% url 'task' %}">
+            <div class="block__test">
+              <span>Тест №2 - 25 вопросов</span>
+              <span>Предмет: Физика</span>
+              <span>Учитель: кто-то там</span>
+            </div>
+          </a>
         </div>
       </section>
     </main>

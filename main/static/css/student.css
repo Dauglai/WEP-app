@@ -15,9 +15,6 @@
 .btn {
   min-width: 170px;
   height: 50px;
-}
-
-.btn {
   margin-right: 70px;
 }
 
@@ -27,143 +24,6 @@
   display: inline-block;
   position: absolute;
   right: 0;
-}
-
-  /* Профиль */
-
-*{
-	margin: 0;
-	padding: 0;
-}
-
-#nav{
-  min-width: 200px;
-  white-space: nowrap;
-  display: inline-block;
-  position: absolute;
-  right: 0;
-	height: 70px;
-}
-
-#nav ul{
-	list-style: none;
-}
-
-#nav > ul > li{
-	/* float: left; */
-	min-width: 200px;
-	position: relative;
-}
-
-#nav li a{
-	display: block;
-	background: #f0f0f0;
-	border: 1px solid #060A13;
-	color: #060A13;
-	padding: 8px;
-	text-align: center;
-	text-decoration: none;
-}
-#nav li a:hover{
-	background: #2F718E;
-}
-
-#nav li .second{
-	display: none;
-	position: absolute;
-	top: 100%;
-  z-index: 1000;
-}
-
-#nav li:hover .second{
-	display: block;
-}
-
-#nav li li{
-	width: 180px;
-}
-
-/* /Профиль */
-
-/* Модальное окно */
-
-/* Стили для подложки */
-
-.overlay {
-   
-  /* Скрываем подложку  */
-  opacity: 0;
-  visibility: hidden;
-  
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .5);
-  z-index: 20;
-  transition: .3s all;
-}
-
-
-/* Стили для модальных окон */
-
-.modal {
-  
-  /* Скрываем окна  */
-  opacity: 0;
-  visibility: hidden;
-  
-  
-  /*  Установаем ширину окна  */
-  width: 100%;
-  max-width: 500px;
-  
-  /*  Центрируем и задаем z-index */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 30; /* Должен быть выше чем у подложки*/
-  
-  /*  Побочные стили   */
-  box-shadow: 0 3px 10px -.5px rgba(0, 0, 0, .2); 
-  text-align: center;
-  padding: 30px;
-  border-radius: 3px;
-  background-color: #fff;
-  transition: 0.3s all;
-}
-
-/* Стили для кнопки закрытия */
-
-.modal__cross {
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  fill: #444;
-  cursor: pointer;
-}
-
-
-/* Стили для кнопок. Мы ведь порядочные разработчики, негоже простые ссылки оставлять */
-
-a {
-  padding: 20px;
-  display: inline-block;
-  text-decoration: none;
-  background-color: #414b52;
-  margin: 10px;
-  color: #fff;
-  border-radius: 3px;
-}
-
-.modal.active,
-.overlay.active{
-   opacity: 1;
-   visibility: visible;
 }
 
 
@@ -187,6 +47,11 @@ a {
   margin-bottom: 20px;
 }
 
+.block__container a {
+  color: black;
+  text-decoration: none;
+}
+
 .block__h {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -203,6 +68,7 @@ a {
 }
 
 .block__rating-position {
+  user-select: none;
   position: relative;
   right: 15px;
   border: 1px solid #cfcdcd;
@@ -211,7 +77,17 @@ a {
   width: 200px;
   height: 40px;
   margin: 0 auto;
+  text-decoration: none;
   margin-bottom: 10px;
+}
+
+.place_in_rating {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  top: 10px;
+  color:rgb(21, 21, 163);
+  height: 100%;
 }
 
 .block__characteristic {
