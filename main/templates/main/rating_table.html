@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<HTML>
+  <head>
+    <title>Рейтинговая таблица</title>
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/accordion.css">
+    <link rel="stylesheet" href="/static/css/rating_table copy.css">
+  </head>
+  <body>
+    <header class="header-container">
+      <div class="btn-container">
+        <button class="btn" id="btn-main">Главная</button>
+        <div id = "nav" class="profile">
+          <ul>
+            <li><a href = "#">Вася Пупкин Пупкович</a>
+              <ul class = "second profile__second">
+                <li><a href = "{% url 'home' %}">На главную</a></li>
+                <li><a href = "#">Профиль</a></li>
+                <li><a href = "#">Выйти</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <main class="table-container">
+      <h1 class="table-title">Рейтинговая таблица</h1>
+      <div class="table">
+        <div class="table__nav">
+          <button class="btn-nav table__btn-class">Класс</button>
+          <button class="btn-nav table__btn-school">Школа</button>
+        </div>
+        <div class="table__body">
+          
+          <!-- Первая ячейка -->
+          <div class="table__cell">
+            <span class="position">1</span>
+            <span class="name">Вася Пупкин Пупкович</span>
+            <div class="block__score">
+              Очки: <span class="score">5</span>
+              Опыт: <span class="experience">95</span>
+              Уровень: <span class="lvl">3</span>
+            </div>
+          </div>
+          
+          <!-- Вторая ячейка -->
+          <div class="table__cell">
+            <span class="position">2</span>
+            <span class="name">НеВася НеПупкин НеПупкович</span>
+            <div class="block__score">
+              Очки: <span class="score">0</span>
+              Опыт: <span class="experience">10</span>
+              Уровень: <span class="lvl">1</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="/static/js/previousLink.js"></script>
+</HTML>

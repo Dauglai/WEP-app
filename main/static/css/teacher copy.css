@@ -15,74 +15,16 @@
 .btn {
   min-width: 170px;
   height: 50px;
-}
-
-.btn:nth-child(1) {
   margin-right: 70px;
 }
 
-.btn:nth-child(3) {
+.btn:last-child {
   min-width: 200px;
   white-space: nowrap;
   display: inline-block;
   position: absolute;
   right: 0;
 }
-
-
-*{
-	margin: 0;
-	padding: 0;
-}
-
-#nav{
-  min-width: 200px;
-  white-space: nowrap;
-  display: inline-block;
-  position: absolute;
-  right: 0;
-	height: 70px;
-}
-
-#nav ul{
-	list-style: none;
-}
-
-#nav > ul > li{
-	/* float: left; */
-	min-width: 200px;
-	position: relative;
-}
-
-#nav li a{
-	display: block;
-	background: #f0f0f0;
-	border: 1px solid #060A13;
-	color: #060A13;
-	padding: 8px;
-	text-align: center;
-	text-decoration: none;
-}
-#nav li a:hover{
-	background: #2F718E;
-}
-
-#nav li .second{
-	display: none;
-	position: absolute;
-	top: 100%;
-  z-index: 1000;
-}
-
-#nav li:hover .second{
-	display: block;
-}
-
-#nav li li{
-	width: 180px;
-}
-
-
 
 .main-container {
   position: relative;

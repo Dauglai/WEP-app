@@ -9,3 +9,6 @@ def teacher_office(request):
 
 def constructor(request):
     return render(request, 'teacher/constructor.html')
+
+def task(request):
+    return render(request, 'teacher/task1.html')
