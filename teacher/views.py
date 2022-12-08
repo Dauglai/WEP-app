@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Test, Question
 from .forms import TestForm, QuestionsForm
 
@@ -9,9 +9,26 @@ def teacher_office(request):
     return render(request, 'teacher/teacher.html')
 
 def constructor(request):
+    error = ''
+    if request.method == "POST":
+        test_form = TestForm(request.POST)
+        questions_form = QuestionsForm(request.POST)
+        questions_form.test = test_form
+        if test_form.is_valid() and questions_form.is_valid():
+
+            test_form.save()
+            questions_form.save()
+            return redirect('home')
+        else:
+            error = 'Форма была неверной'
+
     test_form = TestForm()
     questions_form = QuestionsForm()
-    data = {'test_form': test_form, 'questions_form': questions_form}
+    data = {
+        'test_form': test_form,
+        'questions_form': questions_form,
+        'error': error
+    }
     return render(request, 'teacher/constructor.html', data)
 
 def task(request):

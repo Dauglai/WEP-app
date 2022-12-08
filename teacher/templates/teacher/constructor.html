@@ -27,53 +27,24 @@
     <main class="main-container">
       <h2>Тест №1</h2>
       <div class="test__container">
-          {% csrf_token %}
-          {{ test_form.title}}
-          {{ test_form.time }}
-          {{ test_form.deadline }}
-          {{ test_form.boss }}
-          {{ test_form.five }}
-          {{ test_form.four }}
-          {{ test_form.three }}
-          {{ test_form.two }}
+        <form method="post" class="form">
+            {% csrf_token %}
+          {{ test_form.title}}<br>
+          {{ test_form.time }}<br>
+          {{ test_form.deadline }}<br>
+          {{ test_form.boss }}<br>
+          {{ test_form.five }}<br>
+          {{ test_form.four }}<br>
+          {{ test_form.three }}<br>
+          {{ test_form.two }}<br>
 
-            {{ questions_form }}
-        <form action="https://jsonplaceholder.typicode.com/posts" method="post" class="form">
-          <div class="form__item">
-            <input type="text" name="name-test" placeholder="Название теста">
-            <input type="number" name="difficulty" min="1" max="10" placeholder="Сложность">
-          </div>
-          <div class="form__item">
-            <ul class="list_reset">
-              <li>Время выполнения <input type="number" name="execution-time"> мин</li>
-              <li>Срок сдачи <input type="time" name="deadline-time"> <input type="date" name="deadline-date"></li>
-            </ul>
-          </div>
-          <div class="form__item">
-            <ul class="list_reset">
-              Критерии оценивания
-              <li>5 - <input type="number" name="score-5"></li>
-              <li>4 - <input type="number" name="score-4"></li>
-              <li>3 - <input type="number" name="score-3"></li>
-              <li>2 - <input type="number" name="score-2"></li>
-            </ul>
-          </div>
-          <div class="form__item">
-            <ul class="list_reset list-classes">
-              Классы
-              <li class="list-classes__item"><input type="checkbox" name="class-11A"> - 11A</li>
-              <li class="list-classes__item"><input type="checkbox" name="class-11Б"> - 11Б</li>
-              <li class="list-classes__item"><input type="checkbox" name="class-11Б"> - 10Б</li>
-            </ul>
-          </div>
-          <div class="form__item question" id="q-1">
-            Задание №<span class="sequence-number">1</span>
-            <ul class="list_reset" >
-              <li><textarea name="1" cols="50" placeholder="Поле для ввода вопроса"></textarea></li>
-              <li class="answer"><input type="text" name="1_1" placeholder="Ответ"></li>
-              <button type="button" class="add-answer">Добавить вариант ответа +</button>
-            </ul>
-          </div>
+          {{ questions_form.question }}<br>
+          {{ questions_form.first_answer }}<br>
+          {{ questions_form.second_answer }}<br>
+          {{ questions_form.third_answer }}<br>
+          {{ questions_form.four_answer }}<br>
+          {{ questions_form.number_correct_answer}}<br>
+            <span>{{ error }}</span>
           <button type="button" class="add-question">Добавить вопрос +</button>
           <button type="submit">Сохранить</button>
         </form>
