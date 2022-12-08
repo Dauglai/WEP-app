@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/registration.css">
+  </head>
+  <body class="container">
+    <header class="header-container">
+      <a href="./index.html"><h1 class="logo">WEP</h1></a>
+      <div class="header-container__item">
+        <nav class="nav-header">
+          <ul class="list_reset nav-header__list">
+            <li class="nav-header__item"><a href="./index.html#tasks">Задания</a></li>
+            <li class="nav-header__item"><a href="./index.html#description">Описание</a></li>
+            <li class="nav-header__item"><a href="./index.html#reviews">Отзывы</a></li>
+          </ul>
+        </nav>
+        <a href="../base.html" class="login__btn" id="login-btn">Вход</a>
+        <a href="#" class="login__btn" id="reg-btn">Регистрация</a>
+      </div>
+    </header>
+    <main>
+      <form class="form" action="https://jsonplaceholder.typicode.com/posts" method="post">
+        <fieldset class="account-info">
+          <h1 class="login-title">Регистрация</h1>
+          <label>
+            Фамилия
+            <input class="input-data" type="text" name="last-name" required>
+          </label>
+          <label>
+            Имя
+            <input class="input-data" type="text" name="last-name" required>
+          </label>
+          <label>
+            Отчество
+            <input class="input-data" type="text" name="patronymic">
+          </label>
+          <label>
+            Город
+            <select class="input-data" name="city" id="">
+              <option value="Екатеринбург">Екатеринбург</option>
+              <option value="Москва">Москва</option>
+              <option value="Санкт-Петербург">Санкт-Петербург</option>
+            </select>
+          </label>
+          <label>
+            Номер школы
+            <input class="input-data" type="number" name="school-number" min="1">
+          </label>
+          <label>
+            Электронная почта
+            <input class="input-data" type="text" name="first-name" required>
+          </label>
+          <label class="input-password">
+            Пароль
+            <input class="input-data" type="password" class="input-password__item" id="input-password" name="password" autocomplete="current-password" required>
+            <button class="btn-show" type="button" onclick="showPassword()">?</button>
+          </label>
+          <label>
+            Учитель
+            <div>
+              <input class="input-role" type="checkbox" name="teacher">
+            </div>
+          </label>
+          <label>
+            Пол
+            <div class="input-gender">
+              <input type="radio" name="gender" value="male" required><span>М</span>
+              <input type="radio" name="gender" value="female" required><span>Ж</span>
+            </div>
+          </label>
+        </fieldset>
+        <fieldset class="account-action">
+          <input class="btn" type="submit" name="submit" value="Создать">
+        </fieldset>
+      </form>
+    </main>
+  </body>
+  <script src="./script.js"></script>
+</html>

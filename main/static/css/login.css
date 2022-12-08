@@ -1,0 +1,119 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+main {
+  position: relative;
+}
+
+.form {
+  border: 1px solid #c6c7cc;
+  border-radius: 3px;
+  overflow: hidden;
+  width: 300px;
+  margin: 100px auto;
+  margin-bottom: 20px;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  border-radius: 3px;
+  margin: 0;
+}
+
+.account-info {
+  padding: 20px 20px 10px 20px;
+}
+
+.login-title {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+  font-size: 25px;
+  color: #2c4354;
+  font-weight: 300;
+}
+
+.input-password {
+  position: relative;
+}
+
+.input-password__item {
+  width: 10px;
+}
+
+.btn-show {
+  position: absolute;
+  top: 29px;
+  right: 5px;
+}
+
+.account-info label {
+  color: #395870;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.account-info input, select {
+  background: rgb(242, 240, 240);
+  border: 1px solid #c6c7cc;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1);
+  color: #636466;
+  padding: 6px;
+  margin-top: 6px;
+  width: 100%;
+}
+
+.account-action {
+  background: rgb(237, 236, 236);
+  border-top: 1px solid #c6c7cc;
+  padding: 20px;
+}
+
+.account-action .btn {
+  background: linear-gradient(#49708f, #42617c);
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  float: left;
+  padding: 8px 25px;
+}
+
+.account-action label {
+  color: #7c7c80;
+  font-size: 12px;
+  float: left;
+  margin: 10px 0 0 20px;
+}
+
+.account-login__item{
+  position: absolute;
+  left: 15px;
+  bottom: 3px;
+  user-select: none;
+}
+
+.account-login {
+  position: relative;
+  left: 15px;
+}
+
+.create-account {
+  color: rgb(62, 62, 158);
+  --length: 200px;
+  display: inline-block;
+  width: var(--length);
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+  left: calc(50% - (var(--length) /2));
+}

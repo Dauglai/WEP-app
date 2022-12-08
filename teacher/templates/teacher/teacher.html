@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<HTML>
+  <head>
+    <title>Teacher</title>
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/teacher copy.css">
+    <link rel="stylesheet" href="/static/css/accordion.css">
+  </head>
+  <body>
+    <header class="header-container">
+      <div class="btn-container">
+        <button class="btn" onclick="window.location.href='{% url 'constructor' %}'">Конструктор</button>
+        <button class="btn" onclick="window.location.href='{% url 'rating_table' %}'">Рейтинг</button>
+        <button class="btn">Статистика</button>
+        <div id = "nav" class="profile">
+          <ul>
+            <li><a href = "#">Вася Пупкин Пупкович</a>
+              <ul class = "second profile__second">
+                <li><a href = "{% url 'home' %}">На главную</a></li>
+                <li><a href = "#">Профиль</a></li>
+                <li><a href = "#">Выйти</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- <button class="btn">Вася Пупкин Пупкович</button> -->
+      </div>
+    </header>
+    <main class="main-container">
+      <ul class="list-blocks">
+        <li class="class">
+          <div class="block__container"> 
+            <h2 class="block__h">Классы</h2>
+            <button class="block__btn">Добавить новый класс +</button>
+          </div>
+        </li>
+        <li class="task">
+          <div class="block__container"> 
+            <h2 class="block__h">Тесты</h2>
+            <button class="block__btn" onclick="window.location.href='{% url 'constructor' %}'">Добавить новый тест +</button>
+          </div>
+        </li>
+      </ul>
+    </main>
+  </body>
+</HTML>
