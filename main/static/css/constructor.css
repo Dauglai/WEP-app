@@ -33,7 +33,13 @@
   position: relative;
 	max-width: 1000px;
 	margin: 0 auto;
+  margin-bottom: 10px;
   /* background-color: #e5e5e5; */
+}
+
+.main-container__h {
+  margin: 0 auto;
+  margin-bottom: 5px;
 }
 
 .test__container {
@@ -53,6 +59,10 @@
   border-radius: 5px;
 }
 
+.test-difficulty {
+  min-width: 300px;
+}
+
 .question {
 	border: 1px solid #cfcfcf;
 	margin-bottom: 20px;
@@ -60,6 +70,14 @@
 
 .list_reset {
 	list-style: none;
+}
+
+.list-question {
+  margin-bottom: 20px;
+}
+
+.sec__item:not(:last-child) {
+  margin-bottom: 5px;
 }
 
 .list-classes {

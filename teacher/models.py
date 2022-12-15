@@ -4,9 +4,9 @@ from django.db import models
 class Test(models.Model):
     title = models.CharField('Название теста', max_length=100)
     difficulty = models.PositiveIntegerField('Сложность', null=True)
-    time = models.TimeField('Время выполнения')
-    deadline = models.DateTimeField('Срок сдачи')
-    boss = models.ImageField('Босс')
+    time = models.TimeField('Время выполнения', null=True)
+    time_deadline = models.TimeField('Время сдачи', null=True)
+    date_deadline = models.DateField('Дата сдачи', null=True)
     five = models.PositiveIntegerField('Количество баллов для оценки 5')
     four = models.PositiveIntegerField('Количество баллов для оценки 4')
     three = models.PositiveIntegerField('Количество баллов для оценки 3')

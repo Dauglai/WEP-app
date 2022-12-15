@@ -21,36 +21,9 @@
         <a href="main/registration.html" class="login__btn" id="reg-btn">Регистрация</a>
       </div>
     </header>
-    {% if user.is_authenticated %}
-    <p>Hi {{ user.username }}!</p>
-    {% else %}
-      <p>You are not logged in.</p>
-      <a href="{% url 'login' %}">Log In</a>
-    {% endif %}
-  {% block content %}
-  {% endblock content %}
     <main>
-      <form class="form" action="https://jsonplaceholder.typicode.com/posts" method="post">
-        <fieldset class="account-info">
-          <h1 class="login-title">Войти</h1>
-          <label>
-            Электронная почта
-            <input type="email" name="email" required>
-          </label>
-          <label class="input-password">
-            Пароль
-            <input type="password" class="input-password__item" id="input-password" name="password" autocomplete="current-password" required>
-            <button class="btn-show" type="button" onclick="showPassword()">?</button>
-          </label>
-        </fieldset>
-        <fieldset class="account-action">
-          <input class="btn" type="submit" name="submit" value="Войти">
-          <label class="account-login">
-            <input type="checkbox" name="remember"><span class="account-login__item">Запомнить</span>
-          </label>
-        </fieldset>
-      </form>
-      <a href="main/registration.html" class="create-account">Создать аккаунт</a>
+      {% block content %}
+      {% endblock content %}
     </main>
   </body>
   <script src="/WEP-app/main/static/js/script.js"></script>

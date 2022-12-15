@@ -3,7 +3,7 @@
   <head>
     <title>Constructor</title>
     <link rel="stylesheet" href="/static/css/normalize.css">
-    <link rel="stylesheet" href="/static/css/constructor.css">
+    <link rel="stylesheet" href="/static/css/constructor.css?{% now 'U' %}">
     <link rel="stylesheet" href="/static/css/accordion.css">
   </head>
   <body>
@@ -14,36 +14,59 @@
           <ul>
             <li><a href = "#">Вася Пупкин Пупкович</a>
               <ul class = "second profile__second">
-                <li><a href = "{% url 'home' %}">На главную</a></li>
+                <li><a href = "{% url 'main' %}">На главную</a></li>
                 <li><a href = "#">Профиль</a></li>
                 <li><a href = "#">Выйти</a></li>
               </ul>
             </li>
           </ul>
         </div>
-        <!-- <button class="btn">Вася Пупкин Пупкович</button> -->
       </div>
     </header>
     <main class="main-container">
-      <h2>Тест №1</h2>
+      <h2 class="main-container__h">Конструктор заданий</h2>
       <div class="test__container">
         <form method="post" class="form">
             {% csrf_token %}
-          {{ test_form.title}}<br>
-          {{ test_form.time }}<br>
-          {{ test_form.deadline }}<br>
-          {{ test_form.boss }}<br>
-          {{ test_form.five }}<br>
-          {{ test_form.four }}<br>
-          {{ test_form.three }}<br>
-          {{ test_form.two }}<br>
-
-          {{ questions_form.question }}<br>
-          {{ questions_form.first_answer }}<br>
-          {{ questions_form.second_answer }}<br>
-          {{ questions_form.third_answer }}<br>
-          {{ questions_form.four_answer }}<br>
-          {{ questions_form.number_correct_answer}}<br>
+          <div class="form__item">
+            <ul class="list_reset">
+              <li class="sec__item">Название теста: {{ test_form.title}}</li>
+              <li class="sec__item">Сложность: {{ test_form.difficulty}} [от 0 до 10]</li>
+            </ul>
+          </div>
+          <div class="form__item">
+            <ul class="list_reset">
+              <!-- <li class="sec__item">Время выполнения: {{ test_form.time }}  [часы:минуты:секунды]</li> -->
+              <!-- <li class="sec__item">Срок сдачи: {{ test_form.deadline }}  [день:месяц:год]</li> -->
+              <li class="sec__item">Время выполнения: {{ test_form.time }}  [часы:минуты]</li>
+              <li class="sec__item">Срок сдачи: {{ test_form.time_deadline }} {{ test_form.date_deadline }}  [часы:минуты] [день:месяц:год]</li>
+            </ul>
+          </div>
+          <div class="form__item">
+            <ul class="list_reset">
+              Критерии оценивания
+              <li>5 - {{ test_form.five }}</li>
+              <li>4 - {{ test_form.four }}</li>
+              <li>3 - {{ test_form.three }}</li>
+              <li>2 - {{ test_form.two }}</li>
+            </ul>
+          </div>
+          <!-- Куда переносить выбор классов? -->
+          <div class="form__item question" id="q-1">
+            Задание №<span class="sequence-number">1</span>
+            <ul class="list-question list_reset">
+              <li>{{ questions_form.question }}</li>
+              <li class="answer">{{ questions_form.first_answer }}</li>
+              <li class="answer">{{ questions_form.second_answer }}</li>
+              <li class="answer">{{ questions_form.third_answer }}</li>
+              <li class="answer">{{ questions_form.four_answer }}</li>
+              <!-- <button type="button" class="add-answer">Добавить вариант ответа +</button> -->
+            </ul>
+            Номер правильного ответа 
+            <div>
+              {{ questions_form.number_correct_answer}}
+            </div>
+          </div>
             <span>{{ error }}</span>
           <button type="button" class="add-question">Добавить вопрос +</button>
           <button type="submit">Сохранить</button>

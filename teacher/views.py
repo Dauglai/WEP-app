@@ -14,10 +14,8 @@ def constructor(request):
         test_form = TestForm(request.POST)
         questions_form = QuestionsForm(request.POST)
         questions_form.test = test_form
-        if test_form.is_valid() and questions_form.is_valid():
-
+        if test_form.is_valid():
             test_form.save()
-            questions_form.save()
             return redirect('home')
         else:
             error = 'Форма была неверной'
