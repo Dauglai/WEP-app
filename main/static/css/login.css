@@ -8,13 +8,23 @@ main {
   position: relative;
 }
 
-.form {
+.form-login {
   border: 1px solid #c6c7cc;
   border-radius: 3px;
   overflow: hidden;
   width: 300px;
   margin: 100px auto;
   margin-bottom: 20px;
+}
+
+.form-login input{
+  background: rgb(242, 240, 240);
+  border: 1px solid #c6c7cc;
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1);*/
+  color: #636466;
+  padding: 6px;
+  margin-top: 6px;
+  width: 100%;
 }
 
 fieldset {
@@ -55,21 +65,11 @@ input {
   right: 5px;
 }
 
-.account-info label {
+.field-containers {
   color: #395870;
   display: block;
   font-weight: bold;
   margin-bottom: 20px;
-}
-
-.account-info input, select {
-  background: rgb(242, 240, 240);
-  border: 1px solid #c6c7cc;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1);
-  color: #636466;
-  padding: 6px;
-  margin-top: 6px;
-  width: 100%;
 }
 
 .account-action {
@@ -107,7 +107,7 @@ input {
   left: 15px;
 }
 
-.create-account {
+.lost-password {
   color: rgb(62, 62, 158);
   --length: 200px;
   display: inline-block;

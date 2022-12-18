@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<HTML>
+<HTML lang="ru">
   <head>
     <title>Passing the test</title>
     <link rel="stylesheet" href="/static/css/normalize.css">
@@ -8,8 +8,10 @@
   <body class="body-container">
     <header class="header-container">
       <div class="nav-container">
-        <span class="timer">12:05</span>
-        <span class="name-test">Название теста (Тест №1)</span>
+        {% for test in tests%}
+        <span class="timer">{{ test.time }}</span>
+        <span class="name-test">{{ test.title }}</span>
+        {% endfor %}
         <!-- <button class="btn-end" form="all-form">Завершить</span> -->
       </div>
     </header>
@@ -45,7 +47,7 @@
         </label>
         <input type="submit">
       </form>
-        {% endfor %}
+      {% endfor %}
     </main>
   </body>
   <script src="/static/js/script.js"></script>

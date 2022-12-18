@@ -14,11 +14,11 @@
         <button class="btn">Персонаж</button>
         <div id = "nav" class="profile">
           <ul>
-            <li><a href = "#">Вася Пупкин Пупкович</a>
+            <li><a href = "#">{{ user.last_name }} {{ user.first_name }}</a>
               <ul class = "second profile__second">
                 <li><a href = "{% url 'main' %}">На главную</a></li>
                 <li><a href = "#">Профиль</a></li>
-                <li><a href = "#">Выйти</a></li>
+                <li><a href = "{% url 'logout' %}">Выйти</a></li>
               </ul>
             </li>
           </ul>

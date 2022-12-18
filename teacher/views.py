@@ -16,7 +16,7 @@ def constructor(request):
         questions_form.test = test_form
         if test_form.is_valid():
             test_form.save()
-            return redirect('home')
+            return redirect('teacher')
         else:
             error = 'Форма была неверной'
 
@@ -32,6 +32,6 @@ def constructor(request):
 def task(request):
     test = Test.objects.filter(title= "Тестовый тест")
     questions = Question.objects.filter(test__title="Тестовый тест")
-    return render(request, 'teacher/task1.html', {'test': test, 'questions': questions})
+    return render(request, 'teacher/task1.html', {'tests': test, 'questions': questions})
 
 
