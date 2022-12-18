@@ -13,8 +13,8 @@ def constructor(request):
 def student_office(request):
     return render(request, 'student/student.html')
 
-def registration(request):
-    return render(request, 'registration/registration.html')
+# def registration(request):
+#     return render(request, 'registration/registration.html')
 
 def login(request):
     return render(request, 'registration/login.html')

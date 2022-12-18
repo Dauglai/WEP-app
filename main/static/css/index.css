@@ -20,6 +20,7 @@
 }
 
 .header-container {
+    /*margin-top: 20px;*/
     margin-bottom: 50px;
     position: relative;
 }
@@ -27,7 +28,7 @@
 .header-container__item {
     position: absolute;
     display: inline-block;
-    top: 10px;
+    top: 30px;
     right: 1%;
 }
 
@@ -39,6 +40,7 @@
 .list_reset {
     display: flex;
     list-style: none;
+    margin: 0;
 }
 
 .nav-header__item {
