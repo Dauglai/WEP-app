@@ -3,17 +3,34 @@
 {% block content %}
 <body class="container">
     <header class="header-container">
-      <a href="#"><h1 class="logo">WEP</h1></a>
+      <a href="{% url 'main' %}"><h1 class="logo">WEP</h1></a>
       <div class="header-container__item">
         <nav class="nav-header">
           <ul class="list_reset nav-header__list">
             <li class="nav-header__item"><a href="#tasks">Задания</a></li>
             <li class="nav-header__item"><a href="#description">Описание</a></li>
             <li class="nav-header__item"><a href="#reviews">Отзывы</a></li>
+            <li class="nav-header__item"></li>
           </ul>
         </nav>
-        <a href="./html/logIn.html" class="login__btn" id="login-btn">Вход</a>
-        <a href="./html/registration.html" class="login__btn" id="reg-btn">Регистрация</a>
+        <div class="label-login">
+          {% if user.is_authenticated %}
+          <div id = "nav" class="profile">
+            <ul>
+              <li><a href = "#">{{ user.last_name }} {{ user.first_name }}</a>
+                <ul class = "second profile__second">
+  {#                <li><a href = "{% url 'main' %}">На главную</a></li>#}
+                  <li><a href = "#">Профиль</a></li>
+                  <li><a href = "{% url 'logout' %}">Выйти</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          {% else %}
+            <a href="{% url 'login' %}" class="login__btn" id="login-btn">Вход</a>
+            <a href="{% url 'signup' %}" class="login__btn" id="reg-btn">Регистрация</a>
+          {% endif %}
+        </div>
       </div>
     </header>
     <main>

@@ -1,10 +1,12 @@
 {% load static %}
 <html lang="ru">
   <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="/WEP-app/main/static/css/normalize.css">
-    <link rel="stylesheet" href="/WEP-app/main/static/css/index.css">
-    <link rel="stylesheet" href="/WEP-app/main/static/css/login.css">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="/static/css/index.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/registration.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/login.css?{% now 'U' %}">
+    <script src="{% static '/js/script.js' %}"></script>
   </head>
   <body class="container">
     <header class="header-container">
@@ -12,13 +14,15 @@
       <div class="header-container__item">
         <nav class="nav-header">
           <ul class="list_reset nav-header__list">
-            <li class="nav-header__item"><a href="main/index.html#tasks">Задания</a></li>
-            <li class="nav-header__item"><a href="main/index.html#description">Описание</a></li>
-            <li class="nav-header__item"><a href="main/index.html#reviews">Отзывы</a></li>
+            <li class="nav-header__item"><a href="{% url 'main' %}">Задания</a></li>
+            <li class="nav-header__item"><a href="{% url 'main' %}">Описание</a></li>
+            <li class="nav-header__item"><a href="{% url 'main' %}">Отзывы</a></li>
           </ul>
         </nav>
-        <a href="./base.html" class="login__btn" id="login-btn">Вход</a>
-        <a href="main/registration.html" class="login__btn" id="reg-btn">Регистрация</a>
+        <div class="label-login">
+          <a href="{% url 'login' %}" class="login__btn" id="login-btn">Вход</a>
+          <a href="{% url 'signup' %}" class="login__btn" id="reg-btn">Регистрация</a>
+        </div>
       </div>
     </header>
     <main>
@@ -26,5 +30,5 @@
       {% endblock content %}
     </main>
   </body>
-  <script src="/WEP-app/main/static/js/script.js"></script>
+{#  <script src="/static/js/script.js"></script>#}
 </html>

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/WEP-app-main.iml" filepath="$PROJECT_DIR$/.idea/WEP-app-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/WEP-app.iml" filepath="$PROJECT_DIR$/.idea/WEP-app.iml" />
     </modules>
   </component>
 </project>

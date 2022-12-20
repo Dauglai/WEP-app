@@ -1,4 +1,4 @@
-*{
+#nav a, li, ul{
 	margin: 0;
 	padding: 0;
 }
@@ -9,6 +9,7 @@
   display: inline-block;
   position: absolute;
   right: 0;
+	/*top: 10px;*/
   height: 70px;
 }
 
@@ -38,7 +39,7 @@
 	display: none;
 	position: absolute;
 	top: 100%;
-  z-index: 1000;
+  	z-index: 1000;
 }
 
 #nav li:hover .second{
