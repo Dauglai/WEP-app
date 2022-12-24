@@ -1,6 +1,6 @@
 from .models import Test, Question
 from django.forms import ModelForm, TextInput, DateTimeInput, DateInput, DateField, Textarea, NumberInput, TimeInput, \
-    TimeField, FileInput
+    TimeField, FileInput, modelformset_factory
 
 
 class DateInput(DateInput):
@@ -10,7 +10,11 @@ class DateInput(DateInput):
 class TimeInput(TimeInput):
     input_type = 'time'
 
-
+"""
+QuestionFormSet = modelformset_factory(
+    Question, fields=('test', 'question', 'first_answer', 'second_answer', 'third_answer', 'four_answer',
+                      'number_correct_answer'), extra=1)
+"""
 class TestForm(ModelForm):
     class Meta:
         model = Test

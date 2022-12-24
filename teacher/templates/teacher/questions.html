@@ -28,30 +28,10 @@
       <div class="test__container">
         <form method="post" class="form">
             {% csrf_token %}
-          <div class="form__item">
-            <ul class="list_reset">
-              <li class="sec__item">Название теста: {{ test_form.title}}</li>
-              <li class="sec__item">Сложность: {{ test_form.difficulty}} [от 0 до 10]</li>
-            </ul>
-          </div>
-          <div class="form__item">
-            <ul class="list_reset">
-              <!-- <li class="sec__item">Время выполнения: {{ test_form.time }}  [часы:минуты:секунды]</li> -->
-              <!-- <li class="sec__item">Срок сдачи: {{ test_form.deadline }}  [день:месяц:год]</li> -->
-              <li class="sec__item">Время выполнения: {{ test_form.time }}  [часы:минуты]</li>
-              <li class="sec__item">Срок сдачи: {{ test_form.time_deadline }} {{ test_form.date_deadline }}  [часы:минуты] [день:месяц:год]</li>
-            </ul>
-          </div>
-          <div class="form__item">
-            <ul class="list_reset">
-              Критерии оценивания
-              <li>5 - {{ test_form.five }}</li>
-              <li>4 - {{ test_form.four }}</li>
-              <li>3 - {{ test_form.three }}</li>
-              <li>2 - {{ test_form.two }}</li>
-            </ul>
-          </div>
-          <!-- Куда переносить выбор классов? -->
+            {{formset.management_form}}
+            {% for form in formset %}
+                <div class="bird-form">{{form.as_p}}</div>
+            {% endfor %}
             <span>{{ error }}</span>
           <button type="button" class="add-question">Добавить вопрос +</button>
           <button type="submit">Сохранить</button>
