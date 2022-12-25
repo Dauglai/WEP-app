@@ -8,19 +8,24 @@
         <fieldset class="account-info">
           <h1 class="login-title">Регистрация</h1>
           <label class="field-containers">
-            Фамилия
+            {{ form.last_name.label_tag }}
             {{ form.last_name }}
           </label>
           <label class="field-containers">
-            Имя
+{#            Имя#}
+            {{ form.first_name.label_tag }}
             {{ form.first_name }}
           </label>
           <label class="field-containers">
-            Отчество
+{#            Отчество#}
+            {{ form.patronymic.label_tag }}
+            {{ form.patronymic }}
 {#            <input class="input-data" type="text" name="patronymic">#}
           </label>
           <label class="field-containers">
-            Город
+{#            Город#}
+            {{ form.location.label_tag }}
+            {{ form.location }}
 {#            <select class="input-data" name="city" id="">#}
 {#              <option value="Екатеринбург">Екатеринбург</option>#}
 {#              <option value="Москва">Москва</option>#}
@@ -28,33 +33,38 @@
 {#            </select>#}
           </label>
           <label class="field-containers">
-            Номер школы
+{#            Номер школы#}
+            {{ form.school_number.label_tag }}
+            {{ form.school_number }}
 {#            <input class="input-data" type="number" name="school-number" min="1">#}
           </label>
           <label class="field-containers">
-            Электронная почта
+{#            Электронная почта#}
+            {{ form.email.label_tag }}
             {{ form.email }}
           </label>
           <label class="field-containers">
-            Логин (ник)
-            {{ form.username }}
-          </label>
-          <label class="field-containers">
-            Пароль
+{#            Пароль#}
+            {{ form.password1.label_tag }}
             {{ form.password1 }}
             <button onclick="showPassword()" class="btn-show" type="button">?</button>
           </label>
           <label class="field-containers">
-            Подтверждение пароля
+{#            Подтверждение пароля#}
+            {{ form.password2.label_tag }}
             {{ form.password2 }}
             <button onclick="showPassword()" class="btn-show" type="button">?</button>
           </label>
           <label class="field-containers">
-            Учитель
+{#            Учитель#}
+            {{ form.is_teacher.label_tag }}
+            {{ form.is_teacher }}
 {#            <input class="input-role" type="checkbox" name="teacher">#}
           </label>
           <label class="field-containers">
-            Пол
+{#            Пол#}
+            {{ form.gender.label_tag }}
+            {{ form.gender }}
 {#            <div class="input-gender">#}
 {#              <input type="radio" name="gender" value="male" required><span>М</span>#}
 {#              <input type="radio" name="gender" value="female" required><span>Ж</span>#}
