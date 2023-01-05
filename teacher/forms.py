@@ -75,37 +75,44 @@ class TestForm(ModelForm):
             }),
         }
 
-
-class QuestionsForm(ModelForm):
-    class Meta:
-        model = Question
-        fields = ['test', 'question', 'first_answer', 'second_answer', 'third_answer', 'four_answer', 'reward',
-                  'number_correct_answer']
-        widgets = {
-            'question': TextInput(attrs={
+QuestionFormSet = modelformset_factory(
+        Question,
+        fields=(
+            'question', 'first_answer', 'second_answer', 'third_answer', 'four_answer', 'reward', 'number_correct_answer'
+        ),
+        widgets={
+            'question': Textarea(attrs={
                 'placeholder': "Поле для ввода вопроса",
-                'class': "form-control"
+                'class': "form-control",
+                'rows': 2, 'cols': 50,
             }),
-            'first_answer': TextInput(attrs={
+            'first_answer': Textarea(attrs={
                 'placeholder': "Ответ",
-                'class': "answer"
+                'class': "answer",
+                'rows': 1, 'cols': 50,
             }),
-            'second_answer': TextInput(attrs={
+            'second_answer': Textarea(attrs={
                 'placeholder': "Ответ",
-                'class': "answer"
+                'class': "answer",
+                'rows': 1, 'cols': 50,
             }),
-            'third_answer': TextInput(attrs={
+            'third_answer': Textarea(attrs={
                 'placeholder': "Ответ",
-                'class': "answer"
+                'class': "answer",
+                'rows': 1, 'cols': 50,
             }),
-            'four_answer': TextInput(attrs={
+            'four_answer': Textarea(attrs={
                 'placeholder': "Ответ",
-                'class': "answer"
+                'class': "answer",
+                'rows': 1, 'cols': 50,
             }),
             'number_correct_answer': NumberInput(attrs={
                 'style': 'width:50px',
             }),
             'reward': NumberInput(attrs={
                 'style': 'width:50px',
+                'value': 1,
             }),
-        }
+        },
+        extra=1,
+    )

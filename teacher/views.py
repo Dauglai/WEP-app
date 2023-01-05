@@ -4,7 +4,9 @@ from django.forms import modelformset_factory, NumberInput, TextInput, Textarea
 
 from accounts.models import Account
 from .models import Test, Question, Choice, Answer
-from .forms import TestForm, QuestionsForm, AnswerForm
+from .forms import TestForm, AnswerForm, QuestionFormSet
+
+
 # from .serializers import QuestionSerializer, AnswerSerializer
 # from rest_framework.permissions import IsAuthenticated
 # from rest_framework.generics import GenericAPIView
@@ -56,10 +58,8 @@ def constructor(request):
         print(request.user.email)
         if test_form.is_valid():
             test_form = test_form.save(commit=False)
-            # test_form.owner = Account.objects.get(pk=(Account.objects.last()).id)
             test_form.owner = Account.objects.get(pk=(request.user.id))
             test_form.owner_name = f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}'
-            # test_form.owner = Account.objects.get(request.user.email)
             print(test_form.owner)
             test_form.save()
             return redirect('questions')
@@ -72,6 +72,34 @@ def constructor(request):
         'error': error
     }
     return render(request, 'teacher/constructor.html', data)
+
+
+class QuestionAddView(TemplateView):
+    template_name = 'teacher/questions.html'
+
+    def get(self, *args, **kwargs):
+        formset = QuestionFormSet(queryset=Question.objects.none())
+        return self.render_to_response({'question_formset': formset})
+
+    def post(self, *args, **kwargs):
+        error = ''
+        formset = QuestionFormSet(data=self.request.POST)
+        # print(formset)
+        if formset.is_valid():
+            questions = formset.save(commit=False)
+            for question in questions:
+                question.test = Test.objects.get(pk=(Test.objects.last()).id)
+                question.save()
+            return redirect("teacher")
+        else:
+            error = 'Форма была неверной'
+
+        formset = QuestionFormSet()
+        data = {
+            'question_formset': formset,
+            'error': error
+        }
+        return self.render_to_response(data)
 
 def questions(request):
     error=''

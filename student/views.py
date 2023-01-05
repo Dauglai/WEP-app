@@ -12,7 +12,7 @@ def rating_table(request):
 
 class TestListView(ListView):
     model = Test
-    template_name = "student/1.html"
+    template_name = "student.html"
 
 # def task(request):
 #     test = Test.objects.filter()

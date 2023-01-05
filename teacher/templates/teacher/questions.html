@@ -31,58 +31,59 @@
       <div class="test__container">
         <form method="post" id="form-container">
           {% csrf_token %}
-          {{formset.management_form}}
-            {% for form in formset %}
-              <fieldset class="form-fieldset">
-                <div>
-                  <div class="form__item">
-                    {{form.question.label_tag}}
-                    <div>
-                        {{form.question}}
-                    </div>
-                  </div>
-                  <div class="form__item">
-                    {{form.first_answer.label_tag}}
-                    <div>
-                    {{form.first_answer}}
-                    </div>
-                  </div>
-                  <div class="form__item">
-                    {{form.second_answer.label_tag}}
-                    <div>
-                    {{form.second_answer}}
-                    </div>
-                  </div>
-                  <div class="form__item">
-                    {{form.third_answer.label_tag}}
-                    <div>
-                    {{form.third_answer}}
-                    </div>
-                  </div>
-                  <div class="form__item">
-                    {{form.four_answer.label_tag}}
-                    <div>
-                    {{form.four_answer}}
-                    </div>
-                  </div>
-                  <div class="form__item">
-                    {{form.number_correct_answer.label_tag}}
-                    {{form.number_correct_answer}}
-                  </div>
-                  <div class="form__item">
-                    {{form.reward.label_tag}}
-                    {{form.reward}}
+          {{question_formset.management_form}}
+          {% for form in question_formset %}
+            <fieldset class="form-fieldset question-form">
+              <h3>Вопрос №<span class="question-number">1</span></h3>
+              <div>
+                <div class="form__item">
+                  {{form.question.label_tag}}
+                  <div>
+                      {{form.question}}
                   </div>
                 </div>
-                <div class="explanations">
-                  <h2 class="explanations__heading">Памятка</h2>
-                  <span class="explanations__text">
-                    Заполните все поля формы и нажмите кнопку "Сохранить". 
-                    <p>Будет создано тестовое задание, которым можно поделиться с учениками.</p>  
-                  </span>
+                <div class="form__item">
+                  {{form.first_answer.label_tag}}
+                  <div>
+                  {{form.first_answer}}
+                  </div>
                 </div>
-              </fieldset>
-            {% endfor %}
+                <div class="form__item">
+                  {{form.second_answer.label_tag}}
+                  <div>
+                  {{form.second_answer}}
+                  </div>
+                </div>
+                <div class="form__item">
+                  {{form.third_answer.label_tag}}
+                  <div>
+                  {{form.third_answer}}
+                  </div>
+                </div>
+                <div class="form__item">
+                  {{form.four_answer.label_tag}}
+                  <div>
+                  {{form.four_answer}}
+                  </div>
+                </div>
+                <div class="form__item">
+                  {{form.number_correct_answer.label_tag}}
+                  {{form.number_correct_answer}}
+                </div>
+                <div class="form__item">
+                  {{form.reward.label_tag}}
+                  {{form.reward}}
+                </div>
+              </div>
+              <div class="explanations">
+                <h4 class="explanations__heading">Памятка</h4>
+                <span class="explanations__text">
+                  Заполните все поля формы и нажмите кнопку "Сохранить". 
+                  <p>Будет создано тестовое задание, которым можно поделиться с учениками.</p>  
+                </span>
+              </div>
+            </fieldset>
+          {% endfor %}
           <fieldset class="form-fieldset">
             <button type="button" class="add-question">Добавить вопрос +</button>
             <button type="submit" class="btn-save">Сохранить</button> 
@@ -93,5 +94,6 @@
     </main>
   </body>
   <script src="/static/js/previousLink.js?{% now 'U' %}"></script>
+  <script src="/static/js/addFormQuestion.js?{% now 'U' %}"></script>
   <!-- <script src="/static/js/script.js"></script> -->
 </HTML>

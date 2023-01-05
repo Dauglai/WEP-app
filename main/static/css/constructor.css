@@ -222,6 +222,7 @@ input {
   border-radius: 8px;
   border: none !important;
   background-color: var(--header-color-1) !important;
+  cursor: pointer;
 }
 
 .mark-list {
@@ -256,6 +257,7 @@ input {
   border-radius: 8px;
   border: none !important;
   background-color: var(--header-color-1) !important;
+  cursor: pointer;
 }
 
 /* Памятка */
