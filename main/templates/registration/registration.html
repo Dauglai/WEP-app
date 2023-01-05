@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+  {% extends 'base.html' %} &nbsp;
+  {% block content %}
+    <main>
+      <form class="form" action="https://jsonplaceholder.typicode.com/posts" method="post">
+        <fieldset class="account-info">
+          <h1 class="login-title">Регистрация</h1>
+          <label class="field-containers">
+            Фамилия
+            <input class="input-data" type="text" name="last-name" required>
+          </label>
+          <label class="field-containers">
+            Имя
+            <input class="input-data" type="text" name="last-name" required>
+          </label>
+          <label class="field-containers">
+            Отчество
+            <input class="input-data" type="text" name="patronymic">
+          </label>
+          <label class="field-containers">
+            Город
+            <select class="input-data" name="city" id="">
+              <option value="Екатеринбург">Екатеринбург</option>
+              <option value="Москва">Москва</option>
+              <option value="Санкт-Петербург">Санкт-Петербург</option>
+            </select>
+          </label>
+          <label class="field-containers">
+            Номер школы
+            <input class="input-data" type="number" name="school-number" min="1">
+          </label>
+          <label class="field-containers">
+            Электронная почта
+            <input class="input-data" type="text" name="e-mail" required>
+          </label>
+          <label class="field-containers">
+            Логин (ник)
+            <input class="input-data" type="text" name="login" required>
+          </label>
+          <label class="field-containers">
+            Пароль
+            <input class="input-data" type="password" class="input-password__item" id="input-password" name="password" autocomplete="current-password" required>
+            <button onclick="showPassword()" class="btn-show" type="button">?</button>
+          </label>
+          <label class="field-containers">
+            Учитель
+            <input class="input-role" type="checkbox" name="teacher">
+          </label>
+          <label class="field-containers">
+            Пол
+            <div class="input-gender">
+              <input type="radio" name="gender" value="male" required><span>М</span>
+              <input type="radio" name="gender" value="female" required><span>Ж</span>
+            </div>
+          </label>
+        </fieldset>
+        <fieldset class="account-action">
+          <input class="btn" type="submit" name="submit" value="Создать">
+        </fieldset>
+      </form>
+    </main>
+  </body>
+{#  <script type="text/javascript" src={% static "js/script.js" %}></script>#}
+{#  <script src=" ./script.js"></script>#}
+    <script src="/static/js/script.js"></script>
+</html>
+{% endblock %}
