@@ -2,24 +2,27 @@
 <HTML>
   <head>
     <title>Рейтинговая таблица</title>
-    <link rel="stylesheet" href="/static/css/normalize.css">
-    <link rel="stylesheet" href="/static/css/accordion.css">
-    <link rel="stylesheet" href="/static/css/rating_table copy.css">
+    <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/accordion.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/rating_table copy.css?{% now 'U' %}">
   </head>
   <body>
     <header class="header-container">
-      <div class="btn-container">
-        <button class="btn" id="btn-main">Главная</button>
-        <div id = "nav" class="profile">
-          <ul>
-            <li><a href = "#">Вася Пупкин Пупкович</a>
-              <ul class = "second profile__second">
-                <li><a href = "{% url 'home' %}">На главную</a></li>
-                <li><a href = "#">Профиль</a></li>
-                <li><a href = "#">Выйти</a></li>
-              </ul>
-            </li>
-          </ul>
+      <div class="container">
+        <div class="btn-container">
+          <button class="btn" id="btn-back">Назад</button>
+          <a href="{% url 'main' %}"><h1 class="logo">WEP</h1></a>
+          <div id = "nav">
+            <ul>
+              <li><a href = "#" class="profile">{{ user.last_name }} {{ user.first_name }}</a>
+                <ul class = "second profile__second">
+                  <li><a href = "{% url 'main' %}">На главную</a></li>
+                  <li><a href = "#">Профиль</a></li>
+                  <li><a href = "{% url 'logout' %}">Выйти</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
@@ -33,15 +36,18 @@
         <div class="table__body">
           
           <!-- Первая ячейка -->
-          <div class="table__cell">
-            <span class="position">1</span>
-            <span class="name">Вася Пупкин Пупкович</span>
-            <div class="block__score">
-              Очки: <span class="score">5</span>
-              Опыт: <span class="experience">95</span>
-              Уровень: <span class="lvl">3</span>
-            </div>
-          </div>
+          {% for stat in object_list %}
+              <div class="table__cell">
+                <span class="position">1</span>
+                <span class="name">Вася Пупкин Пупкович</span>
+                <div class="block__score">
+                  {{stat.score.la}} <span class="score">{{stat.score}}</span>
+                  {{stat.score}} <span class="experience">{{stat.experience}}</span>
+                  {{stat.score}} <span class="lvl">{{stat.lvl}}</span>
+                </div>
+              </div>
+          {% endfor %}
+
           
           <!-- Вторая ячейка -->
           <div class="table__cell">
@@ -58,5 +64,5 @@
       </div>
     </main>
   </body>
-  <script src="/static/js/previousLink.js"></script>
+  <script src="/static/js/previousLink.js?{% now 'U' %}""></script>
 </HTML>

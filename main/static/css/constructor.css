@@ -1,7 +1,40 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+:root {
+  --header-color-1:#e5e5e5;
+  --header-color-2:#365998;
+  --header-color-3:#4165a9;
+  --main-color-1:#cfcfcf;
+  --main-color-2:#f5f4f4;
+  --main-heading-1:#817f7f;
+  --main-text-1: #8a8989;
+  --main-btn-start: #ece8e8;
+  --main--border-color: #a3a3a3;
+  --sec-color:rgba(77, 111, 178, 0.1);
+  --footer-color-1:#aeadad;
+}
+
+body {
+  background-color: var( --header-color-1);
+}
+
+.container {
+  position: relative;
+  max-width: 1020px;
+  margin: 0 auto;
+    /* background-color: var(--header-color-1); */
+}
+
 .header-container {
   height: 90px;
   background-color: #cfcdcd;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var( --header-color-1);
+  position: relative;
+  background-color: var(--header-color-2);
   margin-bottom: 50px;
 }
 
@@ -9,12 +42,45 @@
   position: relative;
   max-width: 1170px;
 	margin: 0 auto;
-  top: 20px;
+}
+
+textarea {
+  border-radius: 5px;
+  background-color: rgb(242, 240, 240);
+}
+
+input {
+  border-radius: 5px;
+  border: 1px solid !important;
+  min-height: 30px;
+  background-color: rgb(242, 240, 240);
+}
+
+.logo {
+  display: inline-block;
+  visibility: hidden;
+  color: var(--main-color-1);
+  user-select: none;
+  margin-right: 100px;
 }
 
 .btn {
-  min-width: 170px;
-  height: 50px;
+  text-decoration: none;
+  padding: 5px 30px 5px;
+  min-width: 120px;
+  /* max-height: 10%; */
+  padding: 12px 25px 12px;
+  /* height: 50px; */
+  margin-right: 70px;
+  border-radius: 8px;
+  border: none !important;
+  background-color: var(--header-color-1) !important;
+  color: var(--header-color-3);
+  cursor: pointer;
+}
+
+#nav {
+  top: 30px;
 }
 
 .btn:nth-child(1) {
@@ -29,37 +95,105 @@
   right: 0;
 }
 
+/* .main-container {
+  position: relative;
+	margin: 0 auto;
+  margin-bottom: 10px;
+} */
+
 .main-container {
   position: relative;
+  padding: 20px 50px 40px 50px;
 	max-width: 1000px;
 	margin: 0 auto;
-  /* background-color: #e5e5e5; */
+  margin-bottom: 45px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 6px 3px var(--sec-color);
+}
+
+.main-container__h {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  color: var(--main-heading-1);
 }
 
 .test__container {
-	border: 1px solid #e5e5e5;
+	border: 1px solid var(--main--border-color);
   border-radius: 10px;
+  position: relative;
 }
 
 .form {
-	margin: 30px auto;
+  display: inline-block;
+	margin: 30px 0 30px 40px;
 	width: 70%;
 }
 
 .form__item {
-	margin-bottom: 30px;
-	/* border-top: 1px solid #e5e5e5;
-	border-bottom: 1px solid #e5e5e5; */
+	margin-bottom: 20px;
   border-radius: 5px;
 }
 
-.question {
-	border: 1px solid #cfcfcf;
-	margin-bottom: 20px;
+.form__item:last-child {
+  margin-bottom: 60px;
 }
+
+.form-fieldset {
+  position: relative;
+  border: none;
+  border-bottom: 1px solid var(--main--border-color);
+  padding: 30px 40px 15px 40px;
+}
+
+.form-fieldset:last-child {
+  /* margin: 0; */
+  /* padding: 0; */
+  border: none;
+  padding-top: 15px;
+}
+
+.test-difficulty {
+  min-width: 300px;
+}
+
+
+/*Для стилизации форм*/
+/* QuestionFormSet */
+
+.question {
+	/*border: 1px solid #cfcfcf;*/
+	/*margin-bottom: 20px;*/
+    /*width: 250px;*/
+    /*height: 50px;*/
+}
+
+.answer {
+
+}
+
+/* Стилизия полей формы */
+
+.name-test {
+
+}
+
+.test-difficulty {
+  width: 30px !important;
+}
+
+/* Конец стилизии полей формы */
 
 .list_reset {
 	list-style: none;
+}
+
+.list-question {
+  margin-bottom: 20px;
+}
+
+.sec__item{
+  margin-bottom: 20px;
 }
 
 .list-classes {
@@ -78,5 +212,72 @@
 
 .add-question {
 	display: block;
-	margin-bottom: 15px;
+	/* margin-bottom: 15px; */
+  /* margin-top: 20px; */
+  text-decoration: none;
+  padding: 5px 30px 5px;
+  min-width: 120px;
+  padding: 12px 25px 12px;
+  margin-right: 70px;
+  border-radius: 8px;
+  border: none !important;
+  background-color: var(--header-color-1) !important;
+}
+
+.mark-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mark-list li {
+  margin-right: 10px;
+  position: relative;
+  top: 5px;
+}
+
+.mark-list li:last-child {
+  margin-right: 0;
+}
+
+.mark-list__tiitle {
+  margin-right: 20px;
+  width: 80px;
+  /* text-align: center; */
+}
+
+.btn-save {
+  margin-top: 20px;
+  margin-right: 30px !important;
+  text-decoration: none;
+  padding: 5px 30px 5px;
+  min-width: 120px;
+  padding: 12px 25px 12px;
+  margin-right: 70px;
+  border-radius: 8px;
+  border: none !important;
+  background-color: var(--header-color-1) !important;
+}
+
+/* Памятка */
+
+.explanations {
+  position: absolute;
+  height: 100%;
+  border-radius: 10px;
+  border-left: 1px solid var(--main--border-color);
+  right: 0;
+  top: 0;
+  width: 35%;
+  /* padding-left: 20px; */
+  padding: 0 30px 15px 30px;
+}
+
+.explanations__heading {
+  font-size: 18px;
+  font-weight: 500;
+  /* color: var(--main-heading-1); */
+}
+
+.explanations__text {
+  font-size: 14px;
 }

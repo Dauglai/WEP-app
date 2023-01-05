@@ -1,29 +1,77 @@
-.header-container {
-  height: 90px;
-  background-color: #cfcdcd;
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 50px;
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
-    
-.btn-container {
+
+:root {
+  --header-color-1:#e5e5e5;
+  --header-color-2:#365998;
+  --header-color-3:#4165a9;
+  --main-color-1:#cfcfcf;
+  --main-color-2:#f5f4f4;
+  --main-heading-1:#817f7f;
+  --main-text-1: #8a8989;
+  --main-btn-start: #ece8e8;
+  --sec-color:rgba(77, 111, 178, 0.1);
+  --footer-color-1:#aeadad;
+}
+
+body {
+  background-color: var( --header-color-1);
+}
+
+.container {
   position: relative;
   max-width: 1170px;
   margin: 0 auto;
-  top: 20px;
+    /* background-color: var(--header-color-1); */
+}
+
+.header-container {
+  margin-bottom: 50px;
+  height: 90px;
+  background-color: #cfcdcd;
+  border-bottom: 1px solid #e5e5e5;
+  position: relative;
+  background-color: var(--header-color-2);
+}
+
+.btn-container {
+  position: relative;
+  max-width: 1170px;
+	margin: 0 auto;
+  /* top: 20px; */
+}
+
+.logo {
+  display: inline-block;
+  color: var(--main-color-1);
+  user-select: none;
+  margin-right: 100px;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .btn {
-  min-width: 170px;
-  height: 50px;
+  text-decoration: none;
+  padding: 12px 25px 12px;
   margin-right: 70px;
+  border-radius: 8px;
+  border: none !important;
+  background-color: var(--header-color-1) !important;
+  color: var(--header-color-3);
 }
 
-.btn:last-child {
-  min-width: 200px;
-  white-space: nowrap;
-  display: inline-block;
-  position: absolute;
-  right: 0;
+#nav {
+  top: 30px;
+}
+
+.main-container {
+  padding-top: 50px;
+  position: relative;
+	margin: 0 auto;
+  background-color: var(--header-color-1);
 }
 
 .table-container {
@@ -31,17 +79,27 @@
   max-width: 1170px;
   margin: 0 auto;
   margin-bottom: 50px;
+  background-color: #fff;
+  padding-bottom: 30px;
+  min-height: 700px;
+  max-height: 1000px;
+  padding: 40px 50px 30px 40px;
+  border-radius: 8px;
 }
 
 .table-title {
-  position: relative;
+  color: var(--main-heading-1);
   font-size: 25px;
-  width: 500px;
-  left: calc(50% - 140px);
+  text-align: center;
+  width: 30%;
+  margin: 0 auto;
+  margin-bottom: 30px;
 }
 
 .table {
+  border-radius: 10px;
   width: 90%;
+  height: 100%;
   min-height: 400px;
   border: 5px solid #e5e5e5;
   margin: 0 auto;
