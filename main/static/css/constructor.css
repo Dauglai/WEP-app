@@ -153,6 +153,11 @@ input {
   padding-top: 15px;
 }
 
+.title-question-number {
+  margin-top: 0;
+  font-weight: 500;
+}
+
 .test-difficulty {
   min-width: 300px;
 }

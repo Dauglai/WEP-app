@@ -41,15 +41,9 @@ def index(request):
 def teacher_office(request):
     return render(request, 'teacher/teacher.html')
 
-def task(request):
-    test = Test.objects.get(pk=(Test.objects.last()).id)
-    questions = Question.objects.filter(test__title=test.title)
-    data = {
-        'test': test,
-        'questions': questions
-    }
-    return render(request, 'teacher/task1.html', data)
-
+class TeacherTestListView(ListView):
+    model = Test
+    template_name = 'teacher/teacher.html'
 
 def constructor(request):
     error = ''
@@ -100,62 +94,4 @@ class QuestionAddView(TemplateView):
             'error': error
         }
         return self.render_to_response(data)
-
-def questions(request):
-    error=''
-    QuestionFormSet = modelformset_factory(
-        Question,
-        fields=('question', 'first_answer', 'second_answer', 'third_answer', 'four_answer', 'reward', 'number_correct_answer'),
-        widgets={
-            'question': Textarea(attrs={
-                'placeholder': "Поле для ввода вопроса",
-                'class': "form-control",
-                'rows': 2, 'cols': 50,
-            }),
-            'first_answer': Textarea(attrs={
-                'placeholder': "Ответ",
-                'class': "answer",
-                'rows':1, 'cols':50,
-            }),
-            'second_answer': Textarea(attrs={
-                'placeholder': "Ответ",
-                'class': "answer",
-                'rows':1, 'cols':50,
-            }),
-            'third_answer': Textarea(attrs={
-                'placeholder': "Ответ",
-                'class': "answer",
-                'rows':1, 'cols':50,
-            }),
-            'four_answer': Textarea(attrs={
-                'placeholder': "Ответ",
-                'class': "answer",
-                'rows':1, 'cols':50,
-            }),
-            'number_correct_answer': NumberInput(attrs={
-                'style': 'width:50px',
-            }),
-            'reward': NumberInput(attrs={
-                'style': 'width:50px',
-                'value': 1,
-            }),
-        },
-        extra=1)
-    """передача extra через JS"""
-    formset = QuestionFormSet(data=request.POST)
-    if formset.is_valid():
-        questions = formset.save(commit=False)
-        for question in questions:
-            question.test = Test.objects.get(pk=(Test.objects.last()).id)
-            question.save()
-        return redirect("teacher")
-    else:
-        error = 'Форма была неверной'
-
-    formset = QuestionFormSet()
-    data = {
-        'formset': formset,
-        'error': error
-    }
-    return render(request, 'teacher/questions.html', data)
 

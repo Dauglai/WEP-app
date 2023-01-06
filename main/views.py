@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from accounts.models import Account_Statistics
 from teacher.models import Test
@@ -17,9 +17,22 @@ def constructor(request):
 # def student_office(request):
 #     return render(request, 'student/student.html')
 
-class TestListView(ListView):
+class Teacher(ListView):
+    model = Test
+    template_name = 'teacher/teacher.html'
+    # queryset = Test.objects.filter(owner='2')
+
+class Student(ListView):
+    model = Test
+    template_name = 'student/student.html'
+    # queryset = Test.objects.filter(owner='2')
+
+# На доработку
+class TestDetailView(DetailView):
     model = Test
     template_name = "student/student.html"
+    # slug_field = 'custom_slug_field'
+    # queryset = Test.objects.filter(owner='1')
 
 class StatisticListView(ListView):
     model = Account_Statistics
