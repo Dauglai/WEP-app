@@ -175,7 +175,7 @@
 
 .btn-container {
     position:absolute;
-    top: calc(50% - 80px);
+    top: calc(50% - 50px);
     left: calc(50% - 100px);
 }
 
@@ -203,4 +203,25 @@
     background-color: var(--footer-color-1);
     padding-top: 50px;
     min-height: 300px;
+}
+
+.footer-logo__container {
+    text-decoration: none;
+    text-align: center;
+}
+
+.footer__logo {
+    font-size: 35px;
+    display: block;
+    color: rgb(76, 75, 75);
+    user-select: none;
+    border: none;
+}
+
+.footer__sign {
+    font-size: 25px;
+    display: block;
+    color: rgb(76, 75, 75);
+    user-select: none;
+    border: none;
 }

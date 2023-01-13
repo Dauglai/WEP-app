@@ -7,10 +7,25 @@ from django.conf import settings
 from django.db import models
 
 
-class Test(models.Model):
+class Group(models.Model):
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
     owner_name = models.CharField('ФИО автора', max_length=600, null=True)
-    # owner = models.CharField('Владелец', max_length=300,  null=True)
+    group_name = models.CharField('Название группы', max_length=300)
+    login = models.CharField('Логин', max_length=50)
+    password = models.CharField('Пароль', max_length=50)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Группа (класс)'
+        verbose_name_plural = 'Группы (классы)'
+
+
+class Test(models.Model):
+    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
+    groups = models.ManyToManyField(Group)
+    owner_name = models.CharField('ФИО автора', max_length=600, null=True)
     title = models.CharField('Название теста', max_length=300)
     subject = models.CharField('Название предмета', max_length=100, null=True)
     text = models.TextField('Дополнительный текст к тесту', max_length=1000, null=True, blank = True)
@@ -26,6 +41,10 @@ class Test(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Тест'
+        verbose_name_plural = 'Тесты'
+
 
 class Question(models.Model):
     test = models.ForeignKey(Test, on_delete=models.CASCADE, null=True)
@@ -37,15 +56,10 @@ class Question(models.Model):
     reward = models.PositiveIntegerField('Количество баллов', null=True)
     number_correct_answer = models.PositiveIntegerField('Номер правильного ответа')
 
+    class Meta:
+        verbose_name = 'Вопрос'
+        verbose_name_plural = 'Вопросы'
 
-# class Group(models.Model):
-#     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
-#     owner_name = models.CharField('ФИО автора', max_length=600, null=True)
-#     name = models.CharField('Название теста', max_length=300)
-#     members = serializers.IntegerField(min = 0)
-#
-#     def __str__(self):
-#         return self.title
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.DO_NOTHING)

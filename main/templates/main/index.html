@@ -24,7 +24,7 @@
                       <li><a class="second_cell" href = "#">Admin</a></li>
                     {% else %}
                     {% endif %}
-                    <li><a class="second_cell" href = "#">Задания</a></li>
+                    <!-- <li><a class="second_cell" href = "#">Задания</a></li> -->
                     <li><a class="second_cell" href = "#">Профиль</a></li>
                     <li><a class="second_cell" href = "{% url 'logout' %}">Выйти</a></li>
                   </ul>
@@ -43,8 +43,20 @@
       <section class="tasks section" id="tasks">
         <h2 class="section__heading">О нас</h2>
         <div class="btn-container">
-          <button onclick="window.location.href='{% url 'teacher' %}'" class="btn-start">Начать (за учителя)</button>
-          <button onclick="window.location.href='{% url 'student' %}'" class="btn-start">Начать (за ученика)</button>
+          {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <button onclick="window.location.href='{% url 'teacher' %}'" class="btn-start">Начать (за учителя)</button>
+            <button onclick="window.location.href='{% url 'student' %}'" class="btn-start">Начать (за ученика)</button>
+            {% else %}
+              {% if user.is_teacher %}
+                <button onclick="window.location.href='{% url 'teacher' %}'" class="btn-start">Начать (за учителя)</button>
+              {% else %}
+                <button onclick="window.location.href='{% url 'student' %}'" class="btn-start">Начать (за ученика)</button>
+              {% endif %}
+            {% endif %}
+          {% else %}
+          <button onclick="window.location.href='{% url 'login' %}'" class="btn-start">Начать (login)</button>
+          {% endif %}
           <!-- <a href="" class="btn-start">Начать</a> -->
         </div>
       </section>
@@ -79,9 +91,12 @@
         <h2 class="section__heading">Отзывы</h2>
       </section>
     </main>
-    <footer class="footer-container">
+    <footer class="footer-container footer">
       <div class="container">
-    
+        <a class="footer-logo__container" href="{% url 'main' %}">
+          <h2 class="footer__logo">WEP</h2>
+          <h3 class="footer__sign">Команда: 4002</h3>
+        </a>
       </div>
     </footer>
 </body>

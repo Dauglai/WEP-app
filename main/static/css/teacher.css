@@ -151,6 +151,7 @@ body {
   border: none;
 
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .block__test {
@@ -160,6 +161,10 @@ body {
   /* width: 80%; */
   /* height: 40px; */
   margin-bottom: 10px;
+}
+
+.block__test_block {
+  display: block;
 }
 
 .block__test span {

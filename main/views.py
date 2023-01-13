@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
-from accounts.models import Account_Statistics
+from student.models import Account_Statistics
 from teacher.models import Test
 
 

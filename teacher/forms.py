@@ -1,7 +1,7 @@
-from .models import Test, Question, Choice, Answer
+from .models import Test, Question, Choice, Answer, Group
 from django import forms
 from django.forms import ModelForm, TextInput, DateTimeInput, DateInput, DateField, Textarea, NumberInput, TimeInput, \
-    TimeField, FileInput, modelformset_factory
+    TimeField, FileInput, PasswordInput, modelformset_factory
 
 
 class DateInput(DateInput):
@@ -72,6 +72,24 @@ class TestForm(ModelForm):
             }),
             'two': NumberInput(attrs={
                 'style': 'width:50px',
+            }),
+        }
+
+class GroupFrom(ModelForm):
+    class Meta:
+        model = Group
+        fields = ['group_name', 'login', 'password']
+        widgets = {
+            'group_name': Textarea(attrs={
+                'placeholder': "Название группы",
+                'class': "",
+                'rows': 1, 'cols': 50,
+            }),
+            'login': TextInput(attrs={
+                'placeholder': "Логин",
+            }),
+            'password': PasswordInput(attrs={
+                'placeholder': "Пароль",
             }),
         }
 

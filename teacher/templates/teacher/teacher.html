@@ -5,8 +5,10 @@
     <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
     <link rel="stylesheet" href="/static/css/accordion.css?{% now 'U' %}">
     <link rel="stylesheet" href="/static/css/teacher.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/modal-window.css?{% now 'U' %}">
   </head>
   <body>
+    <div class="modal-overlay"></div>
     <header class="header-container">
       <div class="container">
         <div class="btn-container">
@@ -39,7 +41,7 @@
           <li class="class">
             <div class="block__container"> 
               <h2 class="block__h">Группы</h2>
-              <button class="block__btn">Добавить новую группу +</button>
+              <button class="block__btn add-new-group">Добавить новую группу +</button>
             </div>
           </li>
           <li class="task">
@@ -50,9 +52,8 @@
       {#                <a href="{{ task.get_absolute_url }}">#}
                           <div class="block__test">
                               <span>Название: {{task.title}} - {{task.difficulty}}</span>
-                              <span>Предмет: {{task.subject}}</span>
-                              <div>Учитель: {{task.owner_name}}</div>
-                              <span>Дедлайн: {{task.time_deadline}} {{task.date_deadline}}</span>
+                              <span>Предмет:&nbsp;{{task.subject}}</span>
+                              <span class="block__test_block">Дедлайн: {{task.time_deadline}} {{task.date_deadline}}</span>
                           </div>
                       </a>
                   {% endfor %}
@@ -63,5 +64,23 @@
         </ul>
       </div>
     </main>
+
+    <div class="modal-window">
+      <div class="modal_position_relative">
+        <h3 class="modal-window__headling">Создание новой группы</h3>
+        <form action="{% url 'add_group' %}" method="post" class="form-group">
+          {% csrf_token %}
+          {{ form.group_name.label_tag}} 
+          <div>{{ form.group_name}}</div>
+          {{ group_form.login.label_tag}} 
+          <div>{{ group_form.login}}</div>
+          {{ group_form.password.label_tag}} 
+          <div>{{ group_form.password}}</div>
+          <button type="submit" class="submit-modal-window">Создать</button>
+        </form>
+        <button type="button" class="close-modal-window"></button>
+      </div>
+    </div>
   </body>
+  <script src="/static/js/modal-window.js?{% now 'U' %}"></script>
 </HTML>
