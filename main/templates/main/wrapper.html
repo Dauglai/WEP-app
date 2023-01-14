@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    {% load static %}
-    <link rel="stylesheet" href="/main/static/css/index.css">
-    <link rel="stylesheet" href="/static/css/index.css">
-    <link rel="stylesheet" href="/static/css/registration.css">
-
+  <meta charset="UTF-8">
+  <title>wepedu.ru</title>
+  {% load static %}
+  <link rel="stylesheet" href="/static/css/index.css?{% now 'U' %}">
+  <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
+  <link rel="stylesheet" href="/static/css/accordion.css?{% now 'U' %}">
+  <link rel="shortcut icon" href="/static/img/favicon.svg" type="image/x-icon">
 </head>
   {% block content %}
 

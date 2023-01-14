@@ -2,61 +2,90 @@
 <HTML>
   <head>
     <title>Ученик</title>
-    <link rel="stylesheet" href="/static/css/normalize.css">
-    <link rel="stylesheet" href="/static/css/accordion.css">
-    <link rel="stylesheet" href="/static/css/student.css">
+    <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/accordion.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/student.css?{% now 'U' %}">
   </head>
   <body>
     <header class="header-container">
-      <div class="btn-container">
-        <button class="btn" onclick="window.location.href='{% url 'rating_table' %}'">Рейтинг</button>
-        <button class="btn">Статистика</button>
-        <button class="btn">Персонаж</button>
-        <div id = "nav" class="profile">
-          <ul>
-            <li><a href = "#">Вася Пупкин Пупкович</a>
-              <ul class = "second profile__second">
-                <li><a href = "{% url 'home' %}">На главную</a></li>
-                <li><a href = "#">Профиль</a></li>
-                <li><a href = "#">Выйти</a></li>
-              </ul>
-            </li>
-          </ul>
+      <div class="container">
+        <div class="btn-container">
+          <a href="{% url 'main' %}"><h1 class="logo">WEP</h1></a>
+          <a class="btn" href="{% url 'rating_table' %}">Рейтинг</a>
+          <a class="btn" href="{% url 'rating_table' %}">Статистика</a>
+          <a class="btn" href="{% url 'rating_table' %}">Персонаж</a>
+          <div id = "nav">
+            <ul>
+              <li><a href = "#" class="profile">{{ user.last_name }} {{ user.first_name }}</a>
+                <ul class = "second profile__second">
+                  <li><a href = "{% url 'main' %}">На главную</a></li>
+                  <li><a href = "#">Профиль</a></li>
+                  <li><a href = "{% url 'logout' %}">Выйти</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
     <main class="main-container">
-      <section class="character-block block">
-        <div class="block__container">
-          <h2 class='block__h'>Персонаж</h2>
-          <div class="block__character"></div>
-          <div class="block__rating-position" onclick="window.location.href='{% url 'rating_table' %}'">
-            <span class="place_in_rating">5 место из 25</span>
-          </div>
-          <div class="block__characteristic">
-            <h4>Характеристики</h4>
-          </div>
-        </div>
-      </section>
-      <section class="tasks-block block">
-        <div class="block__container">
-          <h2 class='block__h'>Текущие задания</h2>
-          <a href="{% url 'task' %}">
-            <div class="block__test">
-              <span>Тест №1 - 10 вопросов</span>
-              <span>Предмет: Физика</span>
-              <span>Учитель: кто-то там</span>
+      <div class="container">
+        <ul class="list-blocks">
+          <li class="character">
+            <div class="block__container"> 
+              <h2 class='block__h'>Персонаж</h2>
+              <div class="block__character"></div>
+              <div class="block__rating-position" onclick="window.location.href='{% url 'rating_table' %}'">
+                <span class="place_in_rating">5 место из 25</span>
+              </div>
+              <div class="block__characteristic">
+                <h4 class="block__h-char">Характеристики</h4>
+              </div>
             </div>
-          </a>
-          <a href="{% url 'task' %}">
-            <div class="block__test">
-              <span>Тест №2 - 25 вопросов</span>
-              <span>Предмет: Физика</span>
-              <span>Учитель: кто-то там</span>
+          </li>
+          <li class="closed-tasks">
+            <div class="block__container"> 
+              <h2 class='block__h'>Выполненные задания</h2>
             </div>
-          </a>
-        </div>
-      </section>
+          </li>
+          <li class="tasks-and-teams">
+            <ul class="list-blocks">
+              <li class="tasks">
+                <div class="block__container"> 
+                  <h2 class='block__h'>Текущие задания</h2>
+                  {% for task in object_list %}
+                      <a href="{% url 'task' %}">
+      {#                <a href="{{ task.get_absolute_url }}">#}
+                          <div class="block__test">
+                              <span>Название: {{task.title}} - {{task.difficulty}}</span>
+                              <span>Предмет: {{task.subject}}</span>
+                              <div>Учитель: {{task.owner_name}}</div>
+                              <span>Дедлайн: {{task.time_deadline}} {{task.date_deadline}}</span>
+                          </div>
+                      </a>
+                  {% endfor %}
+                </div>
+              </li>
+              <li class="teams">
+                <div class="block__container"> 
+                  <h2 class='block__h'>Группы</h2>
+                  <button class="block__btn">Присоединиться</button>
+                  {% for task in object_list %}
+                      <!-- <a href="{% url 'task' %}">
+      {#                <a href="{{ task.get_absolute_url }}">#}
+                          <div class="block__test">
+                              <span>{{task.title}} - {{task.difficulty}}</span>
+                              <span>Предмет: {{task.subject}}</span>
+      {#                        <span>Учитель: кто-то там</span>#}
+                          </div> -->
+                      </a>
+                  {% endfor %}
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </main>
   </body>
   <script src="/static/js/script.js"></script>

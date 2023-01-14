@@ -1,36 +1,103 @@
 {% extends "main/wrapper.html" %}
 
 {% block content %}
-<body class="container">
+<body>
     <header class="header-container">
-      <a href="#"><h1 class="logo">WEP</h1></a>
-      <div class="header-container__item">
-        <nav class="nav-header">
-          <ul class="list_reset nav-header__list">
-            <li class="nav-header__item"><a href="#tasks">Задания</a></li>
-            <li class="nav-header__item"><a href="#description">Описание</a></li>
-            <li class="nav-header__item"><a href="#reviews">Отзывы</a></li>
-          </ul>
-        </nav>
-        <a href="./html/logIn.html" class="login__btn" id="login-btn">Вход</a>
-        <a href="./html/registration.html" class="login__btn" id="reg-btn">Регистрация</a>
+      <div class="container">
+        <a href="{% url 'main' %}"><h1 class="logo">WEP</h1></a>
+        <div class="header-container__item">
+          <nav class="nav-header">
+            <ul class="list_reset nav-header__list">
+              <li class="nav-header__item"><a href="#tasks">О нас</a></li>
+              <li class="nav-header__item"><a href="#description">Описание</a></li>
+              <li class="nav-header__item"><a href="#reviews">Отзывы</a></li>
+              <!-- <li class="nav-header__item"></li> -->
+            </ul>
+          </nav>
+          <div class="label-login">
+            {% if user.is_authenticated %}
+            <div id = "nav">
+              <ul>
+                <li><a href = "#" class="profile">{{ user.last_name }} {{ user.first_name }}</a>
+                  <ul class = "second profile__second">
+                    {% if user.is_superuser %}
+                      <li><a class="second_cell" href = "#">Admin</a></li>
+                    {% else %}
+                    {% endif %}
+                    <!-- <li><a class="second_cell" href = "#">Задания</a></li> -->
+                    <li><a class="second_cell" href = "#">Профиль</a></li>
+                    <li><a class="second_cell" href = "{% url 'logout' %}">Выйти</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            {% else %}
+              <a href="{% url 'login' %}" class="login__btn" id="login-btn">Вход</a>
+              <a href="{% url 'signup' %}" class="login__btn" id="reg-btn">Регистрация</a>
+            {% endif %}
+          </div>
+        </div>
       </div>
     </header>
-    <main>
+    <main class="main-container">
       <section class="tasks section" id="tasks">
-        <h2>Задания</h2>
+        <h2 class="section__heading">О нас</h2>
         <div class="btn-container">
-          <button onclick="window.location.href='{% url 'teacher' %}'" class="btn-start">Начать (за учителя)</button>
-          <button onclick="window.location.href='{% url 'student' %}'" class="btn-start">Начать (за ученика)</button>
+          {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <button onclick="window.location.href='{% url 'teacher' %}'" class="btn-start">Начать (за учителя)</button>
+            <button onclick="window.location.href='{% url 'student' %}'" class="btn-start">Начать (за ученика)</button>
+            {% else %}
+              {% if user.is_teacher %}
+                <button onclick="window.location.href='{% url 'teacher' %}'" class="btn-start">Начать (за учителя)</button>
+              {% else %}
+                <button onclick="window.location.href='{% url 'student' %}'" class="btn-start">Начать (за ученика)</button>
+              {% endif %}
+            {% endif %}
+          {% else %}
+          <button onclick="window.location.href='{% url 'login' %}'" class="btn-start">Начать (login)</button>
+          {% endif %}
           <!-- <a href="" class="btn-start">Начать</a> -->
         </div>
       </section>
       <section class="description section" id="description">
-        <h2>Описание</h2>
+        <h2 class="section__heading">Описание</h2>
+        <div class="section__text">
+          <div class="section__text-p">
+            <span>Рыцарство. От пажа до рыцаря.</span>
+            <span>Мальчику исполнилось 7 лет, его отдали в обучение знатному рыцарю.</span>
+            <span>На протяжении семи лет мальчик ездил на охоту, в дальние поездки, на прогулки, прислуживал за столом, обучался этикету.</span>
+            <span>В 14 лет становится оруженосцем, сопровождает рыцаря, ходит в походы, помогает в битвах.</span>
+            <span>За время обучения мальчик овладевает «семью рыцарскими добродетелями»: умеет ездить верхом, владеет мечом, копьем, умеет плавать, охотиться, играть в шашки, сочиняет стихи и поет.</span>
+            <span>При успешном прохождении всех испытаний в 21 год оруженосец посвящался в рыцари.</span>
+          </div>
+          <div class="section__text-p">
+            <span>Посвящение.</span>
+            <span>В белой одежде и красном плаще всю ночь юноша молился в церкви, а наутро знатные рыцари надевали ему шпоры и опоясывали его мечом. После этого, вскочив на лошадь и на полном скаку поразив копьём мишень, молодой человек доказывал, что достоин рыцарского звания.</span>
+          </div>
+          <div class="section__text-p">
+            <span>После посвящения появляется выбор:</span>
+            <span>Красный герб (храбрость, любовь, великодушие)</span>
+            <span>Фиолетовый герб (сила, власть, честь)</span>
+          </div>
+          <div class="section__text-p">
+            <span>Красный герб (путь)</span>
+            <span>Рыцарю доносят весть, что принцессу похитили. Король собрал рыцарей, устроил поединок, чтобы выявить самого сильного, кто пойдет спасать его дочь.</span>
+            <span>Чтобы выиграть этот поединок, рыцарю нужно правильно выполнить задание.</span>
+          </div>
+        </div>
       </section>
       <section class="reviews section" id="reviews">
-        <h2>Отзывы</h2>
+        <h2 class="section__heading">Отзывы</h2>
       </section>
     </main>
+    <footer class="footer-container footer">
+      <div class="container">
+        <a class="footer-logo__container" href="{% url 'main' %}">
+          <h2 class="footer__logo">WEP</h2>
+          <h3 class="footer__sign">Команда: 4002</h3>
+        </a>
+      </div>
+    </footer>
 </body>
 {% endblock %}

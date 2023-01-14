@@ -1,43 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="./css/registration.css">
-  </head>
-  <body class="container">
-    <header class="header-container">
-      <a href="./index.html"><h1 class="logo">WEP</h1></a>
-      <div class="header-container__item">
-        <nav class="nav-header">
-          <ul class="list_reset nav-header__list">
-            <li class="nav-header__item"><a href="./index.html#tasks">Задания</a></li>
-            <li class="nav-header__item"><a href="./index.html#description">Описание</a></li>
-            <li class="nav-header__item"><a href="./index.html#reviews">Отзывы</a></li>
-          </ul>
-        </nav>
-        <a href="../base.html" class="login__btn" id="login-btn">Вход</a>
-        <a href="#" class="login__btn" id="reg-btn">Регистрация</a>
-      </div>
-    </header>
+<html lang="ru">
+  {% extends 'base.html' %} &nbsp;
+  {% block content %}
     <main>
       <form class="form" action="https://jsonplaceholder.typicode.com/posts" method="post">
         <fieldset class="account-info">
           <h1 class="login-title">Регистрация</h1>
-          <label>
+          <label class="field-containers">
             Фамилия
             <input class="input-data" type="text" name="last-name" required>
           </label>
-          <label>
+          <label class="field-containers">
             Имя
             <input class="input-data" type="text" name="last-name" required>
           </label>
-          <label>
+          <label class="field-containers">
             Отчество
             <input class="input-data" type="text" name="patronymic">
           </label>
-          <label>
+          <label class="field-containers">
             Город
             <select class="input-data" name="city" id="">
               <option value="Екатеринбург">Екатеринбург</option>
@@ -45,26 +26,28 @@
               <option value="Санкт-Петербург">Санкт-Петербург</option>
             </select>
           </label>
-          <label>
+          <label class="field-containers">
             Номер школы
             <input class="input-data" type="number" name="school-number" min="1">
           </label>
-          <label>
+          <label class="field-containers">
             Электронная почта
-            <input class="input-data" type="text" name="first-name" required>
+            <input class="input-data" type="text" name="e-mail" required>
           </label>
-          <label class="input-password">
+          <label class="field-containers">
+            Логин (ник)
+            <input class="input-data" type="text" name="login" required>
+          </label>
+          <label class="field-containers">
             Пароль
             <input class="input-data" type="password" class="input-password__item" id="input-password" name="password" autocomplete="current-password" required>
-            <button class="btn-show" type="button" onclick="showPassword()">?</button>
+            <button onclick="showPassword()" class="btn-show" type="button">?</button>
           </label>
-          <label>
+          <label class="field-containers">
             Учитель
-            <div>
-              <input class="input-role" type="checkbox" name="teacher">
-            </div>
+            <input class="input-role" type="checkbox" name="teacher">
           </label>
-          <label>
+          <label class="field-containers">
             Пол
             <div class="input-gender">
               <input type="radio" name="gender" value="male" required><span>М</span>
@@ -78,5 +61,8 @@
       </form>
     </main>
   </body>
-  <script src="./script.js"></script>
+{#  <script type="text/javascript" src={% static "js/script.js" %}></script>#}
+{#  <script src=" ./script.js"></script>#}
+    <script src="/static/js/script.js"></script>
 </html>
+{% endblock %}

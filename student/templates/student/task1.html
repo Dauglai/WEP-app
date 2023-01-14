@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<HTML lang="ru">
+  <head>
+    <title>Passing the test</title>
+    <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/task.css?{% now 'U' %}">
+  </head>
+  <body class="body-container">
+    <header class="header-container">
+      <div class="nav-container">
+        <span class="timer">{{ test.time }}</span>
+        <span class="name-test">{{ test.title }}</span>
+        <!-- <button class="btn-end" form="all-form">Завершить</span> -->
+      </div>
+    </header>
+      <div class="container-battle">
+        <div class="container-battle__item">
+          <div class="block__character container-battle__student">student</div>
+          <span>100 HP</span>
+        </div>
+        <!-- Невидимый. Работает неисправно -->
+        <div class="block__character container-battle__img-battle">vs</div>
+        <div class="container-battle__item">
+          <div class="block__character container-battle__enemy">enemy</div>
+          <span>90 HP</span>
+        </div>
+      </div>
+    <main class="main-container">
+      <!-- <form action="https://jsonplaceholder.typicode.com/posts"  method="post" id="all-form"> -->
+      {% for question in questions%}
+      <form class="question" action="https://jsonplaceholder.typicode.com/posts" method="post" id="task_{{ question.id }}">
+        <h2 class="question__title">Задание <span>{{ question.id }}</span></h2>
+        <p>{{ question.question }}</p>
+        <label for="">
+          <input type="radio" name="1" value="{{ question.first_answer }}"> {{ question.first_answer }}
+        </label>
+        <label for="">
+          <input type="radio" name="1" value="{{ question.second_answer }}"> {{ question.second_answer }}
+        </label>
+        <label for="">
+          <input type="radio" name="1" value="{{ question.third_answer }}"> {{ question.third_answer }}
+        </label>
+        <label for="">
+          <input type="radio" name="1" value="{{ question.four_answer }}"> {{ question.four_answer }}
+        </label>
+        <input type="submit">
+      </form>
+      {% endfor %}
+    </main>
+  </body>
+  <script src="/static/js/script.js"></script>
+</HTML>
