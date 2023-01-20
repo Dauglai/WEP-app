@@ -11,11 +11,11 @@ class Group(models.Model):
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
     owner_name = models.CharField('ФИО автора', max_length=600, null=True)
     group_name = models.CharField('Название группы', max_length=300)
-    login = models.CharField('Логин', max_length=50)
+    login = models.CharField('Логин', max_length=50, unique=True)
     password = models.CharField('Пароль', max_length=50)
 
     def __str__(self):
-        return self.title
+        return self.group_name
 
     class Meta:
         verbose_name = 'Группа (класс)'
@@ -41,9 +41,13 @@ class Test(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('author-detail', kwargs={'pk': self.pk})
+
     class Meta:
         verbose_name = 'Тест'
         verbose_name_plural = 'Тесты'
+
 
 
 class Question(models.Model):

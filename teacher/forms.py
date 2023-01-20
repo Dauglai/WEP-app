@@ -81,15 +81,15 @@ class GroupFrom(ModelForm):
         fields = ['group_name', 'login', 'password']
         widgets = {
             'group_name': Textarea(attrs={
-                'placeholder': "Название группы",
+                'placeholder': "Физика 11А",
                 'class': "",
-                'rows': 1, 'cols': 50,
+                'rows': 1, 'cols': 29,
             }),
             'login': TextInput(attrs={
-                'placeholder': "Логин",
+                'placeholder': "class11",
             }),
             'password': PasswordInput(attrs={
-                'placeholder': "Пароль",
+                'placeholder': "2134",
             }),
         }
 

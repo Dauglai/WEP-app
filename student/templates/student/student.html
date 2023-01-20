@@ -5,8 +5,10 @@
     <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
     <link rel="stylesheet" href="/static/css/accordion.css?{% now 'U' %}">
     <link rel="stylesheet" href="/static/css/student.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/modal-window.css?{% now 'U' %}">
   </head>
   <body>
+    <div class="modal-overlay"></div>
     <header class="header-container">
       <div class="container">
         <div class="btn-container">
@@ -69,14 +71,14 @@
               <li class="teams">
                 <div class="block__container"> 
                   <h2 class='block__h'>Группы</h2>
-                  <button class="block__btn">Присоединиться</button>
+                  <button class="block__btn add-new-group">Присоединиться</button>
                   {% for task in object_list %}
                       <!-- <a href="{% url 'task' %}">
-      {#                <a href="{{ task.get_absolute_url }}">#}
+                        <a href="{{ task.get_absolute_url }}">
                           <div class="block__test">
                               <span>{{task.title}} - {{task.difficulty}}</span>
                               <span>Предмет: {{task.subject}}</span>
-      {#                        <span>Учитель: кто-то там</span>#}
+                              <span>Учитель: кто-то там</span>
                           </div> -->
                       </a>
                   {% endfor %}
@@ -87,6 +89,30 @@
         </ul>
       </div>
     </main>
+
+    <div class="modal-window">
+      <div class="modal_position_relative">
+        <h3 class="modal-window__headling">Присоединиться к группе</h3>
+        <form method="post" action="{% url 'student' %}" class="form-group">
+          {% csrf_token %}
+          <label class="field-containers">
+            <span class="field-containers__span_margin-right">Login:</span>  
+            {{ group_form.login}}
+          </label>
+          <label class="field-containers">
+            <span>Password:</span>
+            {{ group_form.password}}
+          </label>
+          <!-- <label class="field-containers">
+            {{ group_form.password.label_tag}} 
+            {{ group_form.password}}
+          </label> -->
+          <button type="submit" class="submit-modal-window">Присоединиться</button>
+        </form>
+        <button type="button" class="close-modal-window"></button>
+      </div>
+    </div>
   </body>
   <script src="/static/js/script.js"></script>
+  <script src="/static/js/modal-window.js?{% now 'U' %}"></script>
 </HTML>

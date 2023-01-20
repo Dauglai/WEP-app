@@ -75,7 +75,7 @@ body {
   display: flex;
   list-style: none;
   flex-direction: column;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   background-color: #fff;
   border-radius: 10px;
   background-color: var(--header-color-1);

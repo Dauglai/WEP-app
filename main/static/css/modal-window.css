@@ -62,3 +62,43 @@
 .modal_relative {
   position: relative;
 }
+
+.submit-modal-window {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  width: 62%;
+  padding: 5px 0 5px 0;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+
+
+/* form */
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  box-shadow:  0 0 6px 3px var(--sec-color);
+  border-radius: 10px;
+}
+
+.field-containers {
+  /* color: #395870; */
+  display: block;
+  margin-bottom: 10px;
+}
+
+.field-containers__span_margin-right {
+  margin-right: 8px;
+}
+
+input, textarea{
+  border-radius: 5px;
+  margin: 0;
+  /* margin-bottom: 10px; */
+  border-width: 1px;
+  background-color: rgb(242, 240, 240);
+  /* min-width: 200px !important; */
+}

@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.template.response import TemplateResponse
 from django.views.generic import ListView, TemplateView, FormView
 from django.forms import modelformset_factory, NumberInput, TextInput, Textarea
 
@@ -33,17 +35,54 @@ from .forms import TestForm, AnswerForm, QuestionFormSet, GroupFrom
 #             answer.save()
 #             return Response({'result': 'OK'})
 
-
 def index(request):
     return render(request, 'main/index.html')
-
 
 def teacher_office(request):
     return render(request, 'teacher/teacher.html')
 
+def teacher(request):
+    error = ''
+    tests = request.user.test_set.all()
+    groups = request.user.group_set.all()
+
+    if request.method == "POST":
+        group_form = GroupFrom(request.POST)
+        if group_form.is_valid():
+            group_form = group_form.save(commit=False)
+            print(group_form.owner)
+            group_form.owner = Account.objects.get(pk=(request.user.id))
+            group_form.save()
+            return redirect('teacher')
+        else:
+            error = 'Форма была неверной'
+
+    group_form = GroupFrom()
+    data = {
+        'group_form': group_form,
+        'tests': tests,
+        'groups': groups,
+    }
+    return TemplateResponse(request, 'teacher/teacher.html', data)
+
+def add_group(request):
+    error = ''
+
+    # return render(request, 'teacher/teacher.html', data)
+
 class TeacherTestListView(ListView):
     model = Test
     template_name = 'teacher/teacher.html'
+
+# class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+#     """Generic class-based view listing books on loan to current user."""
+#     model = BookInstance
+#     template_name = 'catalog/bookinstance_list_borrowed_user.html'
+#     paginate_by = 10
+#
+#     def get_queryset(self):
+#         return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
+
 
 def FormGroup(FormView):
     template_name = 'teacher/teacher.html'
@@ -52,12 +91,12 @@ def FormGroup(FormView):
     form_class = GroupFrom
     success_url = '/teacher'
 
-    def form_valid(self, form):
-        form = form.save(commit=False)
-        form.owner = Account.objects.get(pk=(request.user.id))
-        form.owner_name = f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}'
-        form.save()
-        return super(add_group, self).form_valid(form)
+    # def form_valid(self, form):
+    #     form = form.save(commit=False)
+    #     form.owner = Account.objects.get(pk=(request.user.id))
+    #     form.owner_name = f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}'
+    #     form.save()
+    #     return super(add_group, self).form_valid(form)
 
     # def get_context_data(self, **kwargs):
     #     context = super(add_group, self).get_context_data(**kwargs)

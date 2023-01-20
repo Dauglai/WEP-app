@@ -266,3 +266,7 @@ body {
 .block__test span {
   margin-right: 20px;
 }
+
+.field-containers__span_margin-right {
+  margin-right: 22px !important;
+}
