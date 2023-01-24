@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
+
 class AccountManager(BaseUserManager):
     def create_user(self, email, password=None, **kwargs):
         if not email:
@@ -55,7 +56,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     id = models.AutoField(primary_key=True)
     last_name = models.CharField('Фамилия', max_length=255, blank=True, null=True)
     first_name = models.CharField('Имя', max_length=255, blank=True, null=True)
-    patronymic = models.CharField('Отчество', max_length=255, null=True)
+    patronymic = models.CharField('Отчество', max_length=255, null=True, blank=True)
 
     location = models.CharField('Место учебы', max_length=50, blank=True, null=True, choices=locations)
     school_number = models.PositiveIntegerField('Номер школы', blank=True, null=True)

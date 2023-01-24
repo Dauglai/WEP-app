@@ -55,7 +55,7 @@
               <li class="tasks">
                 <div class="block__container"> 
                   <h2 class='block__h'>Текущие задания</h2>
-                  {% for task in object_list %}
+                  {% for task in tasks %}
                       <a href="{% url 'task' %}">
       {#                <a href="{{ task.get_absolute_url }}">#}
                           <div class="block__test">
@@ -72,14 +72,14 @@
                 <div class="block__container"> 
                   <h2 class='block__h'>Группы</h2>
                   <button class="block__btn add-new-group">Присоединиться</button>
-                  {% for task in object_list %}
-                      <!-- <a href="{% url 'task' %}">
-                        <a href="{{ task.get_absolute_url }}">
+                  {% for group in groups %}
+                      <a href="{% url 'task' %}">
+{#                        <a href="{{ task.get_absolute_url }}">#}
                           <div class="block__test">
-                              <span>{{task.title}} - {{task.difficulty}}</span>
-                              <span>Предмет: {{task.subject}}</span>
-                              <span>Учитель: кто-то там</span>
-                          </div> -->
+                              <span>{{group.group_name}} - {{group.owner_name}}</span>
+{#                              <span>Предмет: {{task.subject}}</span>#}
+{#                              <span>Учитель: кто-то там</span>#}
+                          </div>
                       </a>
                   {% endfor %}
                 </div>

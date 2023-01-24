@@ -2,7 +2,7 @@ from django.urls import path, re_path, include
 
 from main.views import Teacher
 from . import views
-from .views import QuestionAddView, FormGroup
+from .views import QuestionAddView
 
 urlpatterns = [
     # path('', Teacher.as_view(), name='teacher'),
