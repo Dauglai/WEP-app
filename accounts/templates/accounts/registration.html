@@ -1,83 +1,65 @@
 <!DOCTYPE html>
 <html lang="ru">
-  {% extends 'base.html' %} &nbsp;
+  {% extends 'base.html' %}
   {% block content %}
-      <form class="form-reg" method="post" action="{% url 'signup' %}">
-      {% csrf_token %}
-        <fieldset class="account-info">
-          <h1 class="login-title">Регистрация</h1>
-          <label class="field-containers">
-            {{ form.last_name.label_tag }}
-            {{ form.last_name }}
-          </label>
-          <label class="field-containers">
-{#            Имя#}
-            {{ form.first_name.label_tag }}
-            {{ form.first_name }}
-          </label>
-          <label class="field-containers">
-{#            Отчество#}
-            {{ form.patronymic.label_tag }}
-            {{ form.patronymic }}
-{#            <input class="input-data" type="text" name="patronymic">#}
-          </label>
-          <label class="field-containers">
-{#            Город#}
-            {{ form.location.label_tag }}
-            {{ form.location }}
-{#            <select class="input-data" name="city" id="">#}
-{#              <option value="Екатеринбург">Екатеринбург</option>#}
-{#              <option value="Москва">Москва</option>#}
-{#              <option value="Санкт-Петербург">Санкт-Петербург</option>#}
-{#            </select>#}
-          </label>
-          <label class="field-containers">
-{#            Номер школы#}
-            {{ form.school_number.label_tag }}
-            {{ form.school_number }}
-{#            <input class="input-data" type="number" name="school-number" min="1">#}
-          </label>
-          <label class="field-containers">
-{#            Электронная почта#}
-            {{ form.email.label_tag }}
-            {{ form.email }}
-          </label>
-          <label class="field-containers">
-{#            Пароль#}
-            {{ form.password1.label_tag }}
-            <div>
-              {{ form.password1 }}
-              <button onclick="showPassword()" class="btn-show" type="button">?</button>
-            </div>
-          </label>
-          <label class="field-containers">
-{#            Подтверждение пароля#}
-            {{ form.password2.label_tag }}
-            <div>
-              {{ form.password2 }}
-              <button onclick="showPassword()" class="btn-show" type="button">?</button>
-            </div>
-          </label>
-          <label class="field-containers">
-{#            Учитель#}
-            {{ form.is_teacher.label_tag }}
-            {{ form.is_teacher }}
-{#            <input class="input-role" type="checkbox" name="teacher">#}
-          </label>
-          <label class="field-containers">
-{#            Пол#}
-            {{ form.gender.label_tag }}
-            {{ form.gender }}
-{#            <div class="input-gender">#}
-{#              <input type="radio" name="gender" value="male" required><span>М</span>#}
-{#              <input type="radio" name="gender" value="female" required><span>Ж</span>#}
-{#            </div>#}
-          </label>
-        </fieldset>
-        <fieldset class="account-action">
-          <input type="submit" value="Зарегистрироваться" class="account-action__btn">
-        </fieldset>
-      </form>
+    {% if form.errors %}
+      {{ error }}
+    {% endif %}
+    <form class="form-reg" method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+      <fieldset class="account-info">
+        <h1 class="login-title">Регистрация</h1>
+        <label class="field-containers">
+          {{ form.last_name.label_tag }}
+          {{ form.last_name }}
+        </label>
+        <label class="field-containers">
+          {{ form.first_name.label_tag }}
+          {{ form.first_name }}
+        </label>
+        <label class="field-containers">
+          {{ form.patronymic.label_tag }}
+          {{ form.patronymic }}
+        </label>
+        <label class="field-containers">
+          {{ form.location.label_tag }}
+          {{ form.location }}
+        </label>
+        <label class="field-containers">
+          {{ form.school_number.label_tag }}
+          {{ form.school_number }}
+        </label>
+        <label class="field-containers">
+          {{ form.email.label_tag }}
+          {{ form.email }}
+        </label>
+        <label class="field-containers">
+          {{ form.password1.label_tag }}
+          <div>
+            {{ form.password1 }}
+            <button onclick="showPassword()" class="btn-show" type="button">?</button>
+          </div>
+        </label>
+        <label class="field-containers">
+          {{ form.password2.label_tag }}
+          <div>
+            {{ form.password2 }}
+            <button onclick="showPassword()" class="btn-show" type="button">?</button>
+          </div>
+        </label>
+        <label class="field-containers">
+          {{ form.is_teacher.label_tag }}
+          {{ form.is_teacher }}
+        </label>
+        <label class="field-containers">
+          {{ form.gender.label_tag }}
+          {{ form.gender }}
+        </label>
+      </fieldset>
+      <fieldset class="account-action">
+        <input type="submit" value="Зарегистрироваться" class="account-action__btn">
+      </fieldset>
+    </form>
   </body>
 {#  <script type="text/javascript" src={% static "js/script.js" %}></script>#}
 {#  <script src=" ./script.js"></script>#}

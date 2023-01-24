@@ -53,11 +53,11 @@
           <li class="tasks-and-teams">
             <ul class="list-blocks">
               <li class="tasks">
-                <div class="block__container"> 
+                <div class="block__container">
                   <h2 class='block__h'>Текущие задания</h2>
                   {% for task in tasks %}
-                      <a href="{% url 'task' %}">
-      {#                <a href="{{ task.get_absolute_url }}">#}
+{#                      <a href="{% url 'task' %}">#}
+                      <a href="{{ task.get_absolute_url }}">
                           <div class="block__test">
                               <span>Название: {{task.title}} - {{task.difficulty}}</span>
                               <span>Предмет: {{task.subject}}</span>
@@ -65,6 +65,8 @@
                               <span>Дедлайн: {{task.time_deadline}} {{task.date_deadline}}</span>
                           </div>
                       </a>
+                    {% empty %}
+                    <p>Отсутствуют новые задания</p>
                   {% endfor %}
                 </div>
               </li>
@@ -73,7 +75,7 @@
                   <h2 class='block__h'>Группы</h2>
                   <button class="block__btn add-new-group">Присоединиться</button>
                   {% for group in groups %}
-                      <a href="{% url 'task' %}">
+{#                      <a href="{% url 'task' %}">#}
 {#                        <a href="{{ task.get_absolute_url }}">#}
                           <div class="block__test">
                               <span>{{group.group_name}} - {{group.owner_name}}</span>

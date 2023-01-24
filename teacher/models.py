@@ -26,7 +26,11 @@ class Test(models.Model):
         return self.title
 
     # def get_absolute_url(self):
-    #     return reverse('author-detail', kwargs={'pk': self.pk})
+    #     return "/student/tasks/%i" % self.id
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('task', kwargs={'task_id': self.pk})
 
     class Meta:
         verbose_name = 'Тест'

@@ -132,7 +132,7 @@ body {
 
 .table__cell {
   margin: 0 auto;
-  padding: 10px 5px 0 5px;
+  padding: 5px 5px 10px 5px;
   width: 95%;
   height: 30px;
   border-radius: 5px;

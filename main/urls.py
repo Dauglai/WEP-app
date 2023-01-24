@@ -10,6 +10,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('teacher/', include('teacher.urls')),
     path('student/', include('student.urls')),
-    path('rating_table/', StatisticListView.as_view(), name='rating_table'),
+    # path('rating_table/', StatisticListView.as_view(), name='rating_table'),
+    path('rating_table/', views.statistics, name='rating_table'),
     # path('student/<int:pk>/', TestDetailView.as_view(), name='student'),
 ]

@@ -49,11 +49,11 @@ def student(request):
     }
     return TemplateResponse(request, 'student/student.html', data)
 
-def task(request):
-    test = Test.objects.get(pk=(Test.objects.last()).id)
-    questions = Question.objects.filter(test__title=test.title)
+def task(request, task_id):
+    task = Test.objects.get(pk=task_id)
+    questions = Question.objects.filter(test__title=task.title)
     data = {
-        'test': test,
+        'test': task,
         'questions': questions
     }
-    return render(request, 'student/task1.html', data)
+    return render(request, 'student/task.html', context=data)

@@ -26,25 +26,24 @@
         </div>
       </div>
     <main class="main-container">
-      <!-- <form action="https://jsonplaceholder.typicode.com/posts"  method="post" id="all-form"> -->
       {% for question in questions%}
-      <form class="question" action="https://jsonplaceholder.typicode.com/posts" method="post" id="task_{{ question.id }}">
-        <h2 class="question__title">Задание <span>{{ question.id }}</span></h2>
-        <p>{{ question.question }}</p>
-        <label for="">
-          <input type="radio" name="1" value="{{ question.first_answer }}"> {{ question.first_answer }}
-        </label>
-        <label for="">
-          <input type="radio" name="1" value="{{ question.second_answer }}"> {{ question.second_answer }}
-        </label>
-        <label for="">
-          <input type="radio" name="1" value="{{ question.third_answer }}"> {{ question.third_answer }}
-        </label>
-        <label for="">
-          <input type="radio" name="1" value="{{ question.four_answer }}"> {{ question.four_answer }}
-        </label>
-        <input type="submit">
-      </form>
+        <form class="question" action="https://jsonplaceholder.typicode.com/posts" method="post" id="task_{{ question.id }}">
+          <h2 class="question__title">Задание <span>{{ forloop.counter }}</span></h2>
+          <p>{{ question.question }}</p>
+          <label for="">
+            <input type="radio" name="1" value="{{ question.first_answer }}"> {{ question.first_answer }}
+          </label>
+          <label for="">
+            <input type="radio" name="1" value="{{ question.second_answer }}"> {{ question.second_answer }}
+          </label>
+          <label for="">
+            <input type="radio" name="1" value="{{ question.third_answer }}"> {{ question.third_answer }}
+          </label>
+          <label for="">
+            <input type="radio" name="1" value="{{ question.four_answer }}"> {{ question.four_answer }}
+          </label>
+          <input type="submit">
+        </form>
       {% endfor %}
     </main>
   </body>

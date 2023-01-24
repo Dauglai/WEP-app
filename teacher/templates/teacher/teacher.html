@@ -54,18 +54,8 @@
           <li class="task">
             <div class="block__container"> 
               <h2 class="block__h">Тесты</h2>
-              <!-- {% for task in object_list %}
-                <a href="{% url 'task' %}">
-                <a href="{{ task.get_absolute_url }}">
-                  <div class="block__test">
-                    <span>Название: {{task.title}} - {{task.difficulty}}</span>
-                    <span>Предмет:&nbsp;{{task.subject}}</span>
-                    <span class="block__test_block">Дедлайн: {{task.time_deadline}} {{task.date_deadline}}</span>
-                  </div>
-                </a>
-              {% endfor %} -->
               {% for test in tests %}
-                <a href="{% url 'task' %}">
+                <a href="{{ task.get_absolute_url }}">
                   <div class="block__test">
                     <span>Название: {{test.title}} - {{test.difficulty}}</span>
                       <span>Предмет:&nbsp;{{test.subject}}</span>
