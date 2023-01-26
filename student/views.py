@@ -50,10 +50,37 @@ def student(request):
     return TemplateResponse(request, 'student/student.html', data)
 
 def task(request, task_id):
+    user_stat = Account_Statistics.objects.get(account=request.user)
     task = Test.objects.get(pk=task_id)
     questions = Question.objects.filter(test__title=task.title)
+
+    transcripts = {
+        1: 'first_answer',
+        2: 'second_answer',
+        3: 'third_answer',
+        4: 'four_answer',
+    }
+
     data = {
         'test': task,
         'questions': questions
     }
+
+    if request.method == "POST":
+        response = request.POST
+        print(response)
+        cur_question = questions.get(id=response['id'])
+        user_answer = response['answer']
+        number_user_answer = 0
+        for key in transcripts:
+            if getattr(cur_question, transcripts[key]) == user_answer:
+                number_user_answer = key
+        if number_user_answer == cur_question.number_correct_answer:
+            user_stat.experience =user_stat.experience + 1
+            user_stat.save(update_fields=["experience"])
+            print('+')
+        else:
+            print('-')
+
     return render(request, 'student/task.html', context=data)
+
