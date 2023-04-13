@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<HTML>
+<HTML lang="ru">
   <head>
     <title>Teacher</title>
     <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
@@ -55,12 +55,16 @@
             <div class="block__container"> 
               <h2 class="block__h">Тесты</h2>
               {% for test in tests %}
-                <a href="{{ task.get_absolute_url }}">
+{#                <a href="{{ task.get_absolute_url }}">#}
                   <div class="block__test">
                     <span>Название: {{test.title}} - {{test.difficulty}}</span>
-                      <span>Предмет:&nbsp;{{test.subject}}</span>
-                      <span class="block__test_block">Дедлайн: {{test.time_deadline}} {{test.date_deadline}}</span>
-                    </div>
+                    <span>Предмет:&nbsp;{{test.subject}}</span>
+{#                    <span class="external_link"></span>#}
+                    <button type="button" value="{{test.id}}" class="external_link add-new-group-1" name="test_id"></button>
+                    <button type="button" class="more_horizontal"></button>
+{#                    <span class="more_horizontal"></span>#}
+                    <span class="block__test_block">Дедлайн: {{test.time_deadline}} {{test.date_deadline}}</span>
+                  </div>
                 </a>
               {%endfor%}
               <button class="block__btn" onclick="window.location.href='{% url 'constructor' %}'">Добавить новый тест +</button>
@@ -76,7 +80,7 @@
         <form method="post" action="{% url 'teacher' %}" class="form-group">
           {% csrf_token %}
           <label class="field-containers">
-            {{ group_form.group_name.label_tag}} 
+            {{ group_form.group_name.label_tag}}
             <div>{{ group_form.group_name}}</div>
           </label>
           <label class="field-containers">
@@ -84,7 +88,7 @@
             {{ group_form.login}}
           </label>
           <label class="field-containers">
-            {{ group_form.password.label_tag}} 
+            {{ group_form.password.label_tag}}
             {{ group_form.password}}
           </label>
           <button type="submit" class="submit-modal-window">Создать</button>
@@ -92,6 +96,27 @@
         <button type="button" class="close-modal-window"></button>
       </div>
     </div>
+
+
+    <div class="modal-window-1">
+      <div class="modal_position_relative">
+        <h3 class="modal-window__headling">Группы</h3>
+        <form method="post" action="postuser/" class="form-group">
+          <input type="" value="{{group.id}}" name="test_id" hidden>
+          {% csrf_token %}
+          {% for group in groups %}
+            <div class="block__test">
+              <span>Название: {{group.group_name}}</span>
+              <input type="checkbox" value="{{group.id}}" name="scales">
+            </div>
+          {%endfor%}
+          <button type="submit" class="submit-modal-window">Подтвердить</button>
+        </form>
+        <button type="button" class="close-modal-window-1"></button>
+      </div>
+    </div>
+
   </body>
   <script src="/static/js/modal-window.js?{% now 'U' %}"></script>
+  <script src="/static/js/modal-window-1.js?{% now 'U' %}"></script>
 </HTML>

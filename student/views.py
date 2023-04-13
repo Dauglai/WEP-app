@@ -1,12 +1,9 @@
-from django.db.models import QuerySet
 from django.template.response import TemplateResponse
-from django.views.generic import ListView, TemplateView, DetailView
-from django.shortcuts import render
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
-from accounts.models import Account
 from student.forms import JoinGroupForm
-from student.models import Account_Statistics
+from student.models import Account_Statistics, Protagonist
 from teacher.models import Test, Question, Group
 
 def getAllTests(groups):
@@ -20,13 +17,12 @@ def getAllTests(groups):
     print(tasks)
     return tasks
 
-
-def index(request):
-    return render(request, 'main/index.html')
-
+@login_required
 def student(request):
+    if request.user.is_teacher and request.user.is_staff and request.user.is_admin:
+        return redirect('main')
     user_stat = Account_Statistics.objects.get(account=request.user)
-
+    user_protagonist = Protagonist.objects.get(account=request.user)
     groups = user_stat.groups.all()
     tasks = getAllTests(groups)
 
@@ -37,7 +33,6 @@ def student(request):
         print(con_group)
         if len(con_group) > 0:
             user_stat.groups.add(con_group[0])
-
             groups = user_stat.groups.all()
             tasks = getAllTests(groups)
 
@@ -46,8 +41,16 @@ def student(request):
         'group_form': group_form,
         'tasks': tasks,
         'groups': groups,
+        'balance': user_stat.balance,
+        'protagonist': user_protagonist,
     }
+    print(f'Hero_{request.user.id}')
     return TemplateResponse(request, 'student/student.html', data)
+
+def protagonist(request):
+    if request.user.is_teacher and request.user.is_staff and request.user.is_admin:
+        return redirect('main')
+    return render(request, 'student/protagonist.html')
 
 def task(request, task_id):
     user_stat = Account_Statistics.objects.get(account=request.user)

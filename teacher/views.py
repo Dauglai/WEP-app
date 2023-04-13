@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.template.response import TemplateResponse
 from django.views.generic import ListView, TemplateView, FormView
 from django.forms import modelformset_factory, NumberInput, TextInput, Textarea
@@ -35,13 +35,14 @@ from .forms import TestForm, QuestionFormSet, GroupFrom
 #             answer.save()
 #             return Response({'result': 'OK'})
 
-def index(request):
-    return render(request, 'main/index.html')
-
+@login_required
 def teacher(request):
+    if not request.user.is_teacher and not request.user.is_staff and not request.user.is_admin:
+        return redirect('main')
     error = ''
     tests = request.user.test_set.all()
     groups = request.user.group_set.all()
+    # checked_groups = request.user
 
     if request.method == "POST":
         group_form = GroupFrom(request.POST)
@@ -63,7 +64,21 @@ def teacher(request):
     }
     return TemplateResponse(request, 'teacher/teacher.html', data)
 
+def postuser(request):
+    # получаем из данных запроса POST отправленные через форму данные
+    scales = request.POST.getlist("scales", -1)
+    if scales == -1:
+        return redirect('/teacher/')
+    for id in scales:
+        group = request.user.group_set.all()
+
+    print(scales)
+    return redirect('/teacher/')
+
+
 def constructor(request):
+    if not request.user.is_teacher and not request.user.is_staff and not request.user.is_admin:
+        return redirect('main')
     error = ''
     if request.method == "POST":
         test_form = TestForm(request.POST)

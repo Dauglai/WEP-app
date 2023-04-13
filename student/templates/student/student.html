@@ -15,7 +15,7 @@
           <a href="{% url 'main' %}"><h1 class="logo">WEP</h1></a>
           <a class="btn" href="{% url 'rating_table' %}">Рейтинг</a>
           <a class="btn" href="{% url 'rating_table' %}">Статистика</a>
-          <a class="btn" href="{% url 'rating_table' %}">Персонаж</a>
+          <a class="btn" href="{% url 'protagonist' %}">Персонаж</a>
           <div id = "nav">
             <ul>
               <li><a href = "#" class="profile">{{ user.last_name }} {{ user.first_name }}</a>
@@ -37,11 +37,19 @@
             <div class="block__container"> 
               <h2 class='block__h'>Персонаж</h2>
               <div class="block__character"></div>
+              <div class="field-balance">{{ balance }} gold</div>
               <div class="block__rating-position" onclick="window.location.href='{% url 'rating_table' %}'">
-                <span class="place_in_rating">5 место из 25</span>
+                <span class="place_in_rating">1 место из 2</span>
               </div>
               <div class="block__characteristic">
                 <h4 class="block__h-char">Характеристики</h4>
+                <div>Имя героя: {{ protagonist.name }}</div>
+                <div>Здоровье: {{ protagonist.health }}</div>
+                <div>Выносливость: {{ protagonist.endurance }}</div>
+                <div>Сила: {{ protagonist.power }}</div>
+                <div>Ловкость: {{ protagonist.dexterity }}</div>
+                <div>Стойкость: {{ protagonist.resistance }}</div>
+                <div>Свободные очки навыков: {{ protagonist.up_score }}</div>
               </div>
             </div>
           </li>

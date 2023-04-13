@@ -61,6 +61,8 @@ body {
   border: none !important;
   background-color: var(--header-color-1) !important;
   color: var(--header-color-3);
+  cursor: pointer;
+  user-select: none;
 }
 
 #nav {
@@ -82,7 +84,7 @@ body {
   background-color: #fff;
   padding-bottom: 30px;
   min-height: 700px;
-  max-height: 1000px;
+  /*max-height: 1000px;*/
   padding: 40px 50px 30px 40px;
   border-radius: 8px;
 }
@@ -97,13 +99,39 @@ body {
 }
 
 .table {
+  position: relative;
   border-radius: 10px;
   width: 90%;
   height: 100%;
-  min-height: 400px;
+  min-height: 450px;
   border: 5px solid #e5e5e5;
   margin: 0 auto;
   margin-bottom: 50px;
+}
+
+.block__character {
+  position: absolute;
+  left: 70px;
+  top: 32px;
+  display: inline-block;
+  background-color: #cfcdcd;
+  width: 300px;
+  height: 375px;
+}
+
+.block__inventory {
+  position: absolute;
+  right: 70px;
+  top: 32px;
+  display: inline-block;
+  background-color: #cfcdcd;
+  width: 300px;
+  height: 375px;
+}
+
+.equipment_window {
+  width: 50px;
+  height: 50px;
 }
 
 .table__nav {
@@ -147,7 +175,7 @@ body {
 }
 
 .name {
-  
+
 }
 
 .block__score {
@@ -173,3 +201,8 @@ body {
   padding: 0 5px 0 5px;
 }
 
+.battle__section{
+  width: 90%;
+  min-height: 100px;
+  margin: 0 auto;
+}

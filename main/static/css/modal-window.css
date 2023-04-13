@@ -11,7 +11,7 @@
   --footer-color-1:#aeadad;
 }
 
-.modal-window {
+.modal-window, .modal-window-1{
   z-index: 200;
   display: none;
   position: fixed;
@@ -33,7 +33,7 @@
   margin-top: 0;
 }
 
-.close-modal-window{
+.close-modal-window, .close-modal-window-1{
   position: absolute;
   top: 10px;
   right: 10px;

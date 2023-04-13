@@ -206,6 +206,21 @@ body {
   margin-bottom: 10px;
 }
 
+.field-balance {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  padding-top: 10px;
+  border-radius: 5px;
+  border: 2px solid var(--sec-color);
+  width: 100px;
+  height: 40px;
+  /*box-shadow: 0 0 6px 3px var(--sec-color);*/
+  color: #bb8d23;
+  user-select: none;
+}
+
 .block__rating-position {
   user-select: none;
   position: relative;
@@ -235,7 +250,15 @@ body {
   border-radius: 5px;
   width: 90%;
   margin: 0 auto;
-  height: 200px;
+  height: 280px;
+}
+
+.block__characteristic div {
+  margin-bottom: 10px ;
+}
+
+.block__characteristic div:last-child {
+  margin-top: 25px ;
 }
 
 .block__h-char {
