@@ -36,9 +36,9 @@ class AnswerAdmin(admin.ModelAdmin):
     list_filter = ('user',)
 
 
+admin.site.register(Group)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice, ChoiceAdmin)
 admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Test)
-admin.site.register(Group)
 # Register your models here.

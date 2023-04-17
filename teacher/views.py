@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.template.response import TemplateResponse
 from django.views.generic import ListView, TemplateView, FormView
 from django.forms import modelformset_factory, NumberInput, TextInput, Textarea
 
 from accounts.models import Account
-from .models import Test, Question, Choice, Answer, Group
-from .forms import TestForm, AnswerForm, QuestionFormSet, GroupFrom
+from .models import Test, Question
+from .forms import TestForm, QuestionFormSet, GroupFrom
 
 
 # from .serializers import QuestionSerializer, AnswerSerializer
@@ -33,52 +35,50 @@ from .forms import TestForm, AnswerForm, QuestionFormSet, GroupFrom
 #             answer.save()
 #             return Response({'result': 'OK'})
 
+@login_required
+def teacher(request):
+    if not request.user.is_teacher and not request.user.is_staff and not request.user.is_admin:
+        return redirect('main')
+    error = ''
+    tests = request.user.test_set.all()
+    groups = request.user.group_set.all()
+    # checked_groups = request.user
 
-def index(request):
-    return render(request, 'main/index.html')
+    if request.method == "POST":
+        group_form = GroupFrom(request.POST)
+        if group_form.is_valid():
+            group_form = group_form.save(commit=False)
+            print(group_form.owner)
+            group_form.owner = Account.objects.get(pk=(request.user.id))
+            group_form.owner_name = f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}'
+            group_form.save()
+            return redirect('teacher')
+        else:
+            error = 'Форма была неверной'
 
+    group_form = GroupFrom()
+    data = {
+        'group_form': group_form,
+        'tests': tests,
+        'groups': groups,
+    }
+    return TemplateResponse(request, 'teacher/teacher.html', data)
 
-def teacher_office(request):
-    return render(request, 'teacher/teacher.html')
+def postuser(request):
+    # получаем из данных запроса POST отправленные через форму данные
+    scales = request.POST.getlist("scales", -1)
+    if scales == -1:
+        return redirect('/teacher/')
+    for id in scales:
+        group = request.user.group_set.all()
 
-class TeacherTestListView(ListView):
-    model = Test
-    template_name = 'teacher/teacher.html'
+    print(scales)
+    return redirect('/teacher/')
 
-def FormGroup(FormView):
-    template_name = 'teacher/teacher.html'
-    model = Group
-
-    form_class = GroupFrom
-    success_url = '/teacher'
-
-    def form_valid(self, form):
-        form = form.save(commit=False)
-        form.owner = Account.objects.get(pk=(request.user.id))
-        form.owner_name = f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}'
-        form.save()
-        return super(add_group, self).form_valid(form)
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(add_group, self).get_context_data(**kwargs)
-    #     context['printer'] = GroupFrom.objects.all()
-    #     context['order'] = Order.objects.all()
-    #     return context
-
-    # error = ''
-    # if request.method == "POST":
-    #     group_form = GroupFrom(request.POST)
-    #     if group_form.is_valid():
-    #         group_form = test_form.save(commit=False)
-    #         group_form.owner = Account.objects.get(pk=(request.user.id))
-    #         group_form.owner_name = f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}'
-    #         group_form.save()
-    #         return redirect('teacher')
-    #     else:
-    #         error = 'Форма была неверной'
-    # return render(request, 'teacher/teacher.html')
 
 def constructor(request):
+    if not request.user.is_teacher and not request.user.is_staff and not request.user.is_admin:
+        return redirect('main')
     error = ''
     if request.method == "POST":
         test_form = TestForm(request.POST)

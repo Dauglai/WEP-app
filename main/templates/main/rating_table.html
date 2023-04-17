@@ -34,31 +34,17 @@
           <button class="btn-nav table__btn-school">Школа</button>
         </div>
         <div class="table__body">
-          
-          <!-- Первая ячейка -->
-          {% for stat in object_list %}
-              <div class="table__cell">
-                <span class="position">1</span>
-                <span class="name">Вася Пупкин Пупкович</span>
-                <div class="block__score">
-                  {{stat.score.la}} <span class="score">{{stat.score}}</span>
-                  {{stat.score}} <span class="experience">{{stat.experience}}</span>
-                  {{stat.score}} <span class="lvl">{{stat.lvl}}</span>
-                </div>
-              </div>
-          {% endfor %}
-
-          
-          <!-- Вторая ячейка -->
+         {% for stat in stats %}
           <div class="table__cell">
-            <span class="position">2</span>
-            <span class="name">НеВася НеПупкин НеПупкович</span>
+            <span class="position">{{ forloop.counter }}</span>
+            <span class="name">{{ stat.account.last_name }} {{ stat.account.first_name }} {{ stat.account.patronymic }}</span>
             <div class="block__score">
-              Очки: <span class="score">0</span>
-              Опыт: <span class="experience">10</span>
-              Уровень: <span class="lvl">1</span>
+              Очки: <span class="score">{{stat.score}}</span>
+              Опыт: <span class="experience">{{stat.experience}}</span>
+              Уровень: <span class="lvl">{{stat.lvl}}</span>
             </div>
           </div>
+        {% endfor %}
 
         </div>
       </div>

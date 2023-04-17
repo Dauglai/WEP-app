@@ -1,12 +1,10 @@
-from django.urls import path, include
-
-from main.views import Teacher
+from django.urls import path, re_path
 from . import views
-from .views import QuestionAddView, FormGroup
+from .views import QuestionAddView
 
 urlpatterns = [
-    path('', Teacher.as_view(), name='teacher'),
-    path('constructor', views.constructor, name="constructor"),
-    path('questions', QuestionAddView.as_view(), name="questions"),
-    path('add-group/', views.FormGroup, name="add_group"),
+    path('', views.teacher, name='teacher'),
+    path("postuser/", views.postuser),
+    path('constructor/', views.constructor, name="constructor"),
+    path('questions/', QuestionAddView.as_view(), name="questions"),
 ]

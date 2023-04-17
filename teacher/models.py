@@ -1,30 +1,14 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 
 from accounts.models import Account
-from django.contrib.auth.models import User
 
 from django.conf import settings
 from django.db import models
 
 
-class Group(models.Model):
-    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
-    owner_name = models.CharField('ФИО автора', max_length=600, null=True)
-    group_name = models.CharField('Название группы', max_length=300)
-    login = models.CharField('Логин', max_length=50)
-    password = models.CharField('Пароль', max_length=50)
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'Группа (класс)'
-        verbose_name_plural = 'Группы (классы)'
-
-
 class Test(models.Model):
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
-    groups = models.ManyToManyField(Group)
     owner_name = models.CharField('ФИО автора', max_length=600, null=True)
     title = models.CharField('Название теста', max_length=300)
     subject = models.CharField('Название предмета', max_length=100, null=True)
@@ -41,9 +25,33 @@ class Test(models.Model):
     def __str__(self):
         return self.title
 
+    # def get_absolute_url(self):
+    #     return "/student/tasks/%i" % self.id
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('task', kwargs={'task_id': self.pk})
+
     class Meta:
         verbose_name = 'Тест'
         verbose_name_plural = 'Тесты'
+
+
+class Group(models.Model):
+    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
+    tasks = models.ManyToManyField(Test, blank=True)
+    owner_name = models.CharField('ФИО автора', max_length=600, null=True)
+    group_name = models.CharField('Название группы', max_length=300)
+    login = models.CharField('Логин', max_length=50, unique=True)
+    password = models.CharField('Пароль', max_length=50)
+
+    def __str__(self):
+        return self.group_name
+
+    class Meta:
+        verbose_name = 'Группа (класс)'
+        verbose_name_plural = 'Группы (классы)'
+
 
 
 class Question(models.Model):

@@ -26,26 +26,30 @@
         </div>
       </div>
     <main class="main-container">
-      <!-- <form action="https://jsonplaceholder.typicode.com/posts"  method="post" id="all-form"> -->
       {% for question in questions%}
-      <form class="question" action="https://jsonplaceholder.typicode.com/posts" method="post" id="task_{{ question.id }}">
-        <h2 class="question__title">Задание <span>{{ question.id }}</span></h2>
-        <p>{{ question.question }}</p>
-        <label for="">
-          <input type="radio" name="1" value="{{ question.first_answer }}"> {{ question.first_answer }}
-        </label>
-        <label for="">
-          <input type="radio" name="1" value="{{ question.second_answer }}"> {{ question.second_answer }}
-        </label>
-        <label for="">
-          <input type="radio" name="1" value="{{ question.third_answer }}"> {{ question.third_answer }}
-        </label>
-        <label for="">
-          <input type="radio" name="1" value="{{ question.four_answer }}"> {{ question.four_answer }}
-        </label>
-        <input type="submit">
-      </form>
+        <form class="question" method="post" id="task_{{ question.id }}">
+        {% csrf_token %}
+          <h2 class="question__title">Задание <span>{{ forloop.counter }}</span></h2>
+          <p>{{ question.question }}</p>
+          <input type="hidden" name="id" value="{{ question.id }}">
+          <label for="">
+            <input type="radio" name="answer" value="{{ question.first_answer }}"> {{ question.first_answer }}
+          </label>
+          <label for="">
+            <input type="radio" name="answer" value="{{ question.second_answer }}"> {{ question.second_answer }}
+          </label>
+          <label for="">
+            <input type="radio" name="answer" value="{{ question.third_answer }}"> {{ question.third_answer }}
+          </label>
+          <label for="">
+            <input type="radio" name="answer" value="{{ question.four_answer }}"> {{ question.four_answer }}
+          </label>
+          <input type="submit">
+        </form>
       {% endfor %}
+      <button type="submit" class="submit-modal-window" onclick="window.location.href='{% url 'student' %}'">
+        Завершить
+      </button>
     </main>
   </body>
   <script src="/static/js/script.js"></script>

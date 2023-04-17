@@ -1,48 +1,25 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView
 
 from student.models import Account_Statistics
-from teacher.models import Test
 
 
 def index(request):
     return render(request, 'main/index.html')
 
-def teacher_office(request):
-    return render(request, 'teacher/teacher.html')
 
-def constructor(request):
-    return render(request, 'teacher/constructor.html')
-
-# def student_office(request):
-#     return render(request, 'student/student.html')
-
-class Teacher(ListView):
-    model = Test
-    template_name = 'teacher/teacher.html'
-    # queryset = Test.objects.filter(owner='2')
-
-class Student(ListView):
-    model = Test
-    template_name = 'student/student.html'
-    # queryset = Test.objects.filter(owner='2')
-
-# На доработку
-class TestDetailView(DetailView):
-    model = Test
-    template_name = "student/student.html"
-    # slug_field = 'custom_slug_field'
-    # queryset = Test.objects.filter(owner='1')
+def statistics(request):
+    stats = Account_Statistics.objects.order_by('-score').all()
+    print(stats)
+    data = {
+        'stats': stats
+    }
+    return render(request, "main/rating_table.html", context=data)
 
 class StatisticListView(ListView):
     model = Account_Statistics
     template_name = "main/rating_table.html"
 
-# def second_page(request):
-#     if request.user.is_teacher or request.user.admin:
-#         return render(request, 'teacher/teacher.html')
-#     else:
-#         return render(request, 'student/student.html')
 
 def login(request):
     return render(request, 'registration/login.html')

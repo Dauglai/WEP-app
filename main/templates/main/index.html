@@ -21,7 +21,7 @@
                 <li><a href = "#" class="profile">{{ user.last_name }} {{ user.first_name }}</a>
                   <ul class = "second profile__second">
                     {% if user.is_superuser %}
-                      <li><a class="second_cell" href = "#">Admin</a></li>
+                    <li><a class="second_cell" href = "/admin">Admin</a></li>
                     {% else %}
                     {% endif %}
                     <!-- <li><a class="second_cell" href = "#">Задания</a></li> -->

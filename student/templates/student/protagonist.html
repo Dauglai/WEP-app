@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<HTML>
+  <head>
+    <title>Персонаж</title>
+    <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/accordion.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/protagonist.css?{% now 'U' %}">
+  </head>
+  <body>
+    <header class="header-container">
+      <div class="container">
+        <div class="btn-container">
+          <button class="btn" id="btn-back">Назад</button>
+          <a href="{% url 'main' %}"><h1 class="logo">WEP</h1></a>
+          <div id = "nav">
+            <ul>
+              <li><a href = "#" class="profile">{{ user.last_name }} {{ user.first_name }}</a>
+                <ul class = "second profile__second">
+                  <li><a href = "{% url 'main' %}">На главную</a></li>
+                  <li><a href = "#">Профиль</a></li>
+                  <li><a href = "{% url 'logout' %}">Выйти</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="table-container">
+      <h1 class="table-title">Персонаж</h1>
+      <div class="table">
+        <div class="block__character"></div>
+        <div class="block__inventory">
+          <input type="image" class="equipment_window" style="position: absolute; left: 50px; top: 55%;" src="https://w7.pngwing.com/pngs/714/559/png-transparent-sword-weapon-pixel-art-pixelation-pixel-angle-katana-8bit-color.png" />
+          <input type="image" class="equipment_window" style="position: absolute; right: 50px; top: 55%;" src="https://w7.pngwing.com/pngs/714/559/png-transparent-sword-weapon-pixel-art-pixelation-pixel-angle-katana-8bit-color.png" />
+          <input type="image" class="equipment_window" style="position: absolute; left: 120px; top: 10%;" src="https://images.cdn1.stockunlimited.net/preview1300/pixel-art-horned-helmet_1959555.jpg" />
+
+        </div>
+        <div class="table__body">
+         {% for stat in stats %}
+          <div class="table__cell">
+            <span class="position">{{ forloop.counter }}</span>
+            <span class="name">{{ stat.account.last_name }} {{ stat.account.first_name }} {{ stat.account.patronymic }}</span>
+            <div class="block__score">
+
+            </div>
+          </div>
+         {% endfor %}
+        </div>
+      </div>
+      <div class="table">
+        <div class="table__body">
+        <h2>Характеристики</h2>
+         {% for stat in stats %}
+          <div class="table__cell">
+            <span class="position">{{ forloop.counter }}</span>
+            <span class="name">{{ stat.account.last_name }} {{ stat.account.first_name }} {{ stat.account.patronymic }}</span>
+            <div class="block__score">
+
+            </div>
+          </div>
+         {% endfor %}
+        </div>
+      </div>
+      <div class="battle__section">
+        <h2>История сражений</h2>
+      </div>
+    </main>
+  </body>
+  <script src="/static/js/previousLink.js?{% now 'U' %}"></script>
+</HTML>
