@@ -64,10 +64,12 @@
                     <button type="button" class="more_horizontal"></button>
 {#                    <span class="more_horizontal"></span>#}
                     <span class="block__test_block">Дедлайн: {{test.time_deadline}} {{test.date_deadline}}</span>
+                    <a href="test/edit/{{test.id}}">Изменить</a>
+                    <a href="test/delete/{{test.id}}">Удалить</a>
                   </div>
                 </a>
               {%endfor%}
-              <button class="block__btn" onclick="window.location.href='{% url 'constructor' %}'">Добавить новый тест +</button>
+              <a href="{% url 'constructor' %}">+ New Test</a>
             </div>
           </li>
         </ul>

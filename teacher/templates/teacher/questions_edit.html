@@ -33,6 +33,9 @@
           {% csrf_token %}
           {{question_formset.management_form}}
           {% for form in question_formset %}
+             {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
             <fieldset class="form-fieldset question-form">
               <h3 class="title-question-number">Вопрос №<span class="question-number">1</span></h3>
               <div>
@@ -74,20 +77,20 @@
                   {{form.reward.label_tag}}
                   {{form.reward}}
                 </div>
-                  <a href="delete/{{form.id}}">Удалить</a>
               </div>
+              <a href="delete/{{form.id}}/"> Удалить </a>
               <div class="explanations">
                 <h4 class="explanations__heading">Памятка</h4>
                 <span class="explanations__text">
-                  Заполните все поля формы и нажмите кнопку "Сохранить". 
-                  <p>Будет создано тестовое задание, которым можно поделиться с учениками.</p>  
+                  Заполните все поля формы и нажмите кнопку "Сохранить".
+                  <p>Будет создано тестовое задание, которым можно поделиться с учениками.</p>
                 </span>
               </div>
             </fieldset>
           {% endfor %}
           <fieldset class="form-fieldset">
             <button type="button" class="add-question">Добавить вопрос +</button>
-            <button type="submit" class="btn-save">Сохранить</button> 
+            <button type="submit" class="btn-save">Сохранить</button>
             <span>{{ error }}</span>
           </fieldset>
         </form>
