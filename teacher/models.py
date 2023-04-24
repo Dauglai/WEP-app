@@ -12,7 +12,7 @@ class Test(models.Model):
     owner_name = models.CharField('ФИО автора', max_length=600, null=True)
     title = models.CharField('Название теста', max_length=300)
     subject = models.CharField('Название предмета', max_length=100, null=True)
-    text = models.TextField('Дополнительный текст к тесту', max_length=1000, null=True, blank = True)
+    text = models.TextField('Дополнительный текст к тесту', max_length=1000, null=True, blank=True)
     difficulty = models.PositiveIntegerField('Сложность', null=True)
     time = models.TimeField('Время выполнения', null=True)
     time_deadline = models.TimeField('Время сдачи', null=True)
@@ -53,8 +53,8 @@ class Group(models.Model):
         verbose_name_plural = 'Группы (классы)'
 
 
-
 class Question(models.Model):
+    # id = models.BigAutoField(primary_key=True, editable=False)
     test = models.ForeignKey(Test, on_delete=models.CASCADE, null=True)
     question = models.CharField('Поле для ввода вопроса', max_length=500)
     first_answer = models.CharField('Вариант ответа №1', max_length=250)

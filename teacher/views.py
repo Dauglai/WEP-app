@@ -8,7 +8,6 @@ from accounts.models import Account
 from .models import Test, Question
 from .forms import TestForm, QuestionFormSet, GroupFrom
 
-
 # from .serializers import QuestionSerializer, AnswerSerializer
 # from rest_framework.permissions import IsAuthenticated
 # from rest_framework.generics import GenericAPIView
@@ -116,6 +115,7 @@ class QuestionAddView(TemplateView):
         if formset.is_valid():
             questions = formset.save(commit=False)
             for question in questions:
+                # print(question.id)
                 question.test = Test.objects.get(pk=(Test.objects.last()).id)
                 question.save()
             return redirect("teacher")
