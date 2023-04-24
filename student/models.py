@@ -25,11 +25,10 @@ class Protagonist(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
     name = models.CharField(max_length=100, default='Hero')
     health = models.PositiveIntegerField('Здоровье', default=100)
-    endurance = models.PositiveIntegerField('Выносливость', default= 5) #Зависит от выбранного класса
+    endurance = models.PositiveIntegerField('Выносливость', default=5) #Зависит от выбранного класса
     power = models.PositiveIntegerField('Сила', default=5)
     dexterity = models.PositiveIntegerField('Ловкость', default=7)
     resistance = models.IntegerField('Стойкость', default=0)
-
     up_score = models.PositiveIntegerField('Очки навыков', default=0) #За них происходит улучшение параметров
 
     # weapon = 
