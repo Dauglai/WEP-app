@@ -71,7 +71,6 @@ class QuestionEditView(TemplateView):
         }
         return self.render_to_response(data)
 
-
 # from .serializers import QuestionSerializer, AnswerSerializer
 # from rest_framework.permissions import IsAuthenticated
 # from rest_framework.generics import GenericAPIView

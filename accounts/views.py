@@ -1,5 +1,6 @@
 import random
 
+from django.db.models.signals import post_save
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -33,3 +34,4 @@ def registration(request):
         'error': error
     }
     return render(request, 'accounts/registration.html', data)
+

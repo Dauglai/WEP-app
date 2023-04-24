@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+{% for account in accounts %}
+  <div>{{ account.account.last_name }} {{ account.account.first_name}} {{ account.account.patronymic }} - lvl: {{ account.lvl }} experience: {{ account.experience }}</div>
+{% endfor %}
+</body>
+</html>

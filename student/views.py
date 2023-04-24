@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -86,4 +87,26 @@ def task(request, task_id):
             print('-')
 
     return render(request, 'student/task.html', context=data)
+
+def watchGroup(request, id):
+    group = Group.objects.get(id=id)
+    allAccounts = Account_Statistics.objects.all()
+    curAccounts = allAccounts.filter(groups=group)
+
+    data = {
+        'accounts': curAccounts,
+    }
+
+    print(curAccounts)
+    return render(request, 'student/watch-group.html', context=data)
+
+def deleteGroup(request, id):
+    try:
+        group = Group.objects.get(id=id)
+        user_stat = Account_Statistics.objects.get(account=request.user)
+        user_stat.groups.remove(group)
+        # print(user_stat.groups)
+        return redirect("student")
+    except Group.DoesNotExist:
+        return redirect("student")
 
