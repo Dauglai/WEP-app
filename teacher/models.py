@@ -48,6 +48,9 @@ class Group(models.Model):
     def __str__(self):
         return self.group_name
 
+    def get_absolute_url(self):
+        return reverse('watch_group', args=[self.id])
+
     class Meta:
         verbose_name = 'Группа (класс)'
         verbose_name_plural = 'Группы (классы)'

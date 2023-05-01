@@ -21,23 +21,25 @@ function addForm() {
     formNum++;
     newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`);
     newForm.querySelector('.question-number').innerHTML = formNum + 1;
-    // recalculateQuestions();
     questionForm[questionForm.length - 1].after(newForm);
     totalForms.setAttribute('value', `${formNum+1}`);
     initializeDeleteButtons();
     recalculateQuestions();
+    console.log(formNum)
 };
 
 function deleteQuestion() {
-    this.parentNode.remove();
-    recalculateQuestions();
+    if( formNum > 0) {
+        this.parentNode.remove();
+        formNum--;
+        recalculateQuestions();
+    }
 }
 
 function recalculateQuestions() {
     let questionNumberField = document.querySelectorAll(".question-number");
     let len = questionNumberField.length;
-    console.log(len)
-    for(let i=0; i < len + 1; i++) {
-        questionNumberField[i].innerHTML = i + 1;
+    for(let i=1; i < len; i++) {
+        questionNumberField[i].textContent = i + 1;
     }
 }

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-{% for participant in participants %}
-  <div>{{ participant.account.last_name }} {{ participant.account.first_name}} {{ participant.account.patronymic }}
-    - lvl: {{ participant.lvl }} experience: {{ participant.experience }}</div>
-{% endfor %}
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    {% for participant in participants %}
+      <div>{{ participant.account.last_name }} {{ participant.account.first_name}} {{ participant.account.patronymic }}
+        - lvl: {{ participant.lvl }} experience: {{ participant.experience }}</div>
+    {% endfor %}
+    <button class="btn" onclick="location.href={% url 'student' %}">Назад</button>
+  </body>
 </html>

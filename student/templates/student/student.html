@@ -83,11 +83,11 @@
                   <button class="block__btn add-new-group">Присоединиться</button>
                   {% for group in groups %}
 {#                      <a href="{% url 'task' %}">#}
-{#                        <a href="{{ task.get_absolute_url }}">#}
+                        <a href="{{ group.get_absolute_url }}">
                           <div class="block__test">
                               <span>{{group.group_name}} - {{group.owner_name}}</span>
-                              <a class="close-group-btn" href="deleteGroup/{{group.id}}">del</a>
-                              <a class="close-group-btn" href="watchGroup/{{group.id}}">watch</a>
+                              <a class="close-group-btn" href="watch_group/{{group.id}}">watch</a>
+                              <a class="close-group-btn" href="delete_group/{{group.id}}">del</a>
 {#                              <span>Предмет: {{task.subject}}</span>#}
 {#                              <span>Учитель: кто-то там</span>#}
                           </div>
