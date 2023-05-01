@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
+from django.urls import reverse #?????
 
 from accounts.models import Account
 
@@ -26,11 +27,10 @@ class Test(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('test_detail', args=[str(self.id)])
+        return reverse('task', args=[self.id])
 
- #   def get_absolute_url(self):
-        #from django.urls import reverse
-        #return reverse('task', kwargs={'task_id': self.pk})
+   # def get_absolute_url(self):
+   #     return reverse('task', kwargs={'task_id': self.pk})
 
     class Meta:
         verbose_name = 'Тест'
@@ -54,7 +54,6 @@ class Group(models.Model):
 
 
 class Question(models.Model):
-    # id = models.BigAutoField(primary_key=True, editable=False)
     test = models.ForeignKey(Test, on_delete=models.CASCADE, null=True)
     question = models.CharField('Поле для ввода вопроса', max_length=500)
     first_answer = models.CharField('Вариант ответа №1', max_length=250)

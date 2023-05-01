@@ -93,6 +93,12 @@ class GroupFrom(ModelForm):
         }
 
 
+class UpdateGroupForm(forms.Form):
+    new_name = forms.CharField(max_length=50, required=False)
+    new_login = forms.CharField(max_length=50, required=False)
+    new_password = forms.CharField(max_length=50, required=False)
+
+
 QuestionFormSet = modelformset_factory(
     model=Question,
     can_delete=False,
@@ -179,3 +185,8 @@ Question_InlineFormset = inlineformset_factory(
     },
     extra=0,
 )
+
+
+class RewardStudent(forms.Form):
+    participant = forms.IntegerField()
+    reward = forms.IntegerField(min_value=0, max_value=100)

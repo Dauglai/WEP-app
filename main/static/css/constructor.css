@@ -217,8 +217,21 @@ input {
 
 .add-question {
 	display: block;
-	/* margin-bottom: 15px; */
-  /* margin-top: 20px; */
+	width: 180px;
+  text-decoration: none;
+  padding: 5px 30px 5px;
+  min-width: 120px;
+  padding: 12px 25px 12px;
+  margin-right: 70px;
+  border-radius: 8px;
+  border: none !important;
+  background-color: var(--header-color-1) !important;
+  cursor: pointer;
+}
+
+.del-question {
+  display: block;
+	width: 180px;
   text-decoration: none;
   padding: 5px 30px 5px;
   min-width: 120px;

@@ -7,8 +7,10 @@ from django.forms import modelformset_factory, NumberInput, TextInput, Textarea,
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 
 from accounts.models import Account
-from .models import Test, Question
-from .forms import TestForm, QuestionFormSet, GroupFrom, Question_InlineFormset
+from student.models import Account_Statistics
+from .decorators import access_teacher
+from .models import Test, Question, Group
+from .forms import TestForm, QuestionFormSet, GroupFrom, Question_InlineFormset, RewardStudent, UpdateGroupForm
 
 
 class QuestionAddView(TemplateView):
@@ -71,6 +73,7 @@ class QuestionEditView(TemplateView):
         }
         return self.render_to_response(data)
 
+
 # from .serializers import QuestionSerializer, AnswerSerializer
 # from rest_framework.permissions import IsAuthenticated
 # from rest_framework.generics import GenericAPIView
@@ -98,9 +101,8 @@ class QuestionEditView(TemplateView):
 #             return Response({'result': 'OK'})
 
 @login_required
+@access_teacher
 def teacher(request):
-    if not request.user.is_teacher and not request.user.is_staff and not request.user.is_admin:
-        return redirect('main')
     error = ''
     tests = request.user.test_set.all()
     groups = request.user.group_set.all()
@@ -127,21 +129,8 @@ def teacher(request):
     return TemplateResponse(request, 'teacher/teacher.html', data)
 
 
-def postuser(request):
-    # получаем из данных запроса POST отправленные через форму данные
-    scales = request.POST.getlist("scales", -1)
-    if scales == -1:
-        return redirect('/teacher/')
-    for id in scales:
-        group = request.user.group_set.all()
-
-    print(scales)
-    return redirect('/teacher/')
-
-
+@access_teacher
 def constructor(request):
-    if not request.user.is_teacher and not request.user.is_staff and not request.user.is_admin:
-        return redirect('main')
     error = ''
     if request.method == "POST":
         test_form = TestForm(request.POST)
@@ -165,6 +154,7 @@ def constructor(request):
     return render(request, 'teacher/constructor.html', data)
 
 
+@access_teacher
 def test_edit(request, id):
     test = Test.objects.get(pk=id)
     if request.method == "POST":
@@ -177,6 +167,7 @@ def test_edit(request, id):
     return render(request, "teacher/test_edit.html", {"test_form": test_form})
 
 
+@access_teacher
 def questions_edit(request, id):
     test = Test.objects.get(pk=id)
     if request.method == "POST":
@@ -189,11 +180,12 @@ def questions_edit(request, id):
             return redirect("teacher")
     formset = Question_InlineFormset(instance=test)
     return render(request,
-        "teacher/questions_edit.html",
-        {'question_formset': formset,
-        'test_id': id})
+                  "teacher/questions_edit.html",
+                  {'question_formset': formset,
+                   'test_id': id})
 
 
+@access_teacher
 def test_delete(request, id):
     try:
         test = Test.objects.get(id=id)
@@ -203,7 +195,100 @@ def test_delete(request, id):
         return HttpResponseNotFound("<h2>Test not found</h2>")
 
 
+@access_teacher
 def question_delete(request, id):
     question = Question.objects.get(id=id)
     question.delete()
     return redirect('questions')
+
+
+@access_teacher
+def edit_group(request, group_id):
+    group = Group.objects.get(id=group_id)
+
+    if str(request.user.email) != str(group.owner):
+        return redirect('main')
+
+    if request.method == 'POST':
+        form = UpdateGroupForm(request.POST)
+        if form.is_valid():
+            new_name = form.data.get('new_name')
+            new_login = form.data.get('new_login')
+            new_password = form.data.get('new_password')
+            if new_name != '' and new_name != ' ':
+                group.group_name = new_name
+            if new_login != '' and new_login != ' ':
+                group.login = new_login
+            if new_password != '' and new_password != ' ':
+                group.password = new_password
+            group.save()
+            return redirect('teacher')
+
+    update_form = UpdateGroupForm(initial={
+        'new_name': group.group_name,
+        'new_login': group.login,
+        'new_password': group.password,
+    })
+    data = {
+        'group': group,
+        'update_form': update_form,
+    }
+    return render(request, 'teacher/edit_group.html', context=data)
+
+
+@access_teacher
+def view_group(request, group_id):
+    group = Group.objects.get(id=group_id)
+
+    if str(request.user.email) != str(group.owner):
+        return redirect('main')
+
+    if request.method == "POST":
+        participant = request.POST.get('participant')
+        reward = int(request.POST.get("reward"))
+        student = Account_Statistics.objects.get(pk=participant)
+        score = int(student.score)
+        print(score)
+        if 'replenishment' in request.POST:
+            score += reward
+        elif 'withdrawal' in request.POST:
+            score -= reward
+            if score < 0: score = 0
+        else:
+            print('error view_group')
+        student.score = score
+        student.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    reward_form = RewardStudent()
+    all_accounts = Account_Statistics.objects.all()
+    participants = all_accounts.filter(groups=group)
+
+    data = {
+        'reward_form': reward_form,
+        'group': group,
+        'participants': participants,
+    }
+    return render(request, 'teacher/view_group.html', context=data)
+
+
+@access_teacher
+def delete_participant(request, group_id, student_id):
+    participant = Account_Statistics.objects.get(pk=student_id)
+    group = Group.objects.get(id=group_id)
+    try:
+        participant.groups.remove(group)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    except Account_Statistics.DoesNotExist:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+@access_teacher
+def delete_group(request, group_id):
+    group = Group.objects.get(id=group_id)
+
+    if str(request.user.email) != str(group.owner):
+        return redirect('main')
+
+    group.delete()
+    return redirect('teacher')

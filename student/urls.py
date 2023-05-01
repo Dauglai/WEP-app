@@ -5,6 +5,6 @@ urlpatterns = [
     path('', views.student, name='student'),
     path('protagonist/', views.protagonist, name='protagonist'),
     path('task/<int:task_id>/', views.task, name='task'),
-    path('watchGroup/<int:id>/', views.watchGroup),
-    path('deleteGroup/<int:id>/', views.deleteGroup),
+    path('watch_group/<int:id>/', views.watch_group),
+    path('delete_group/<int:id>/', views.delete_group),
 ]

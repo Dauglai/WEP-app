@@ -7,16 +7,16 @@ from student.forms import JoinGroupForm
 from student.models import Account_Statistics, Protagonist
 from teacher.models import Test, Question, Group
 
+
 def getAllTests(groups):
     tasks = []
     for group in groups:
         x = group.tasks.all()
         if x is not None:
             tasks = tasks + list(x)
-    #         Выборка без одинаковых
-    #         Сравнивать по id
     print(tasks)
     return tasks
+
 
 @login_required
 def student(request):
@@ -48,10 +48,12 @@ def student(request):
     print(f'Hero_{request.user.id}')
     return TemplateResponse(request, 'student/student.html', data)
 
+
 def protagonist(request):
     if request.user.is_teacher and request.user.is_staff and request.user.is_admin:
         return redirect('main')
     return render(request, 'student/protagonist.html')
+
 
 def task(request, task_id):
     user_stat = Account_Statistics.objects.get(account=request.user)
@@ -80,7 +82,7 @@ def task(request, task_id):
             if getattr(cur_question, transcripts[key]) == user_answer:
                 number_user_answer = key
         if number_user_answer == cur_question.number_correct_answer:
-            user_stat.experience =user_stat.experience + 1
+            user_stat.experience = user_stat.experience + 1
             user_stat.save(update_fields=["experience"])
             print('+')
         else:
@@ -88,19 +90,19 @@ def task(request, task_id):
 
     return render(request, 'student/task.html', context=data)
 
-def watchGroup(request, id):
+
+def watch_group(request, id):
     group = Group.objects.get(id=id)
-    allAccounts = Account_Statistics.objects.all()
-    curAccounts = allAccounts.filter(groups=group)
+    all_accounts = Account_Statistics.objects.all()
+    participants = all_accounts.filter(groups=group)
 
     data = {
-        'accounts': curAccounts,
+        'participants': participants,
     }
-
-    print(curAccounts)
     return render(request, 'student/watch-group.html', context=data)
 
-def deleteGroup(request, id):
+
+def delete_group(request, id):
     try:
         group = Group.objects.get(id=id)
         user_stat = Account_Statistics.objects.get(account=request.user)

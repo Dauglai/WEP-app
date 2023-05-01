@@ -47,6 +47,9 @@
                   <span>Название: {{group.group_name}}</span>
                   <span class="block__test_block">Логин: {{group.login}}</span>
                   <span class="block__test_block">Пароль:{{group.password}}</span>
+                  <a href="{% url "edit_group" group.pk %}">edit</a>
+                  <a href="view_group/{{ group.id }}">view</a>
+                  <a href="delete_group/{{ group.id }}">delete</a>
                 </div>
               {%endfor%}
             </div>
@@ -103,7 +106,7 @@
     <div class="modal-window-1">
       <div class="modal_position_relative">
         <h3 class="modal-window__headling">Группы</h3>
-        <form method="post" action="postuser/" class="form-group">
+        <form method="post" class="form-group">
           <input type="" value="{{group.id}}" name="test_id" hidden>
           {% csrf_token %}
           {% for group in groups %}
