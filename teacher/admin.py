@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Test, Question
+from .models import Test, Question, Group
 from django.contrib import admin
-from .models import Question, Answer, Choice, Group
 
 
 class QuestionAdmin(admin.ModelAdmin):
@@ -17,28 +16,7 @@ class QuestionAdmin(admin.ModelAdmin):
     )
 
 
-class ChoiceAdmin(admin.ModelAdmin):
-    list_display = (
-        'title',
-        'question',
-        'points',
-        'lock_other',
-    )
-    list_filter = ('question',)
-
-
-class AnswerAdmin(admin.ModelAdmin):
-    list_display = (
-        'user',
-        'question',
-        'choice',
-    )
-    list_filter = ('user',)
-
-
 admin.site.register(Group)
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Choice, ChoiceAdmin)
-admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Test)
 # Register your models here.

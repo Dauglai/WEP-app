@@ -145,10 +145,12 @@ def constructor(request):
         else:
             error = 'Форма была неверной'
 
+    groups = Group.objects.all()
     test_form = TestForm()
     data = {
         'test_form': test_form,
-        'error': error
+        'error': error,
+        'groups': groups
     }
 
     return render(request, 'teacher/constructor.html', data)

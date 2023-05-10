@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 
 from accounts.models import Account
-from teacher.models import Group
+from teacher.models import Group, Question, Test
 
 
 class Account_Statistics(models.Model):
@@ -85,3 +85,31 @@ class Inventory(models.Model):
     class Meta:
         verbose_name = 'Инвентарь'
         verbose_name_plural = 'Инвентарь'
+
+
+class Choice(models.Model):
+    question = models.OneToOneField(Question, on_delete=models.DO_NOTHING)
+    number_answer = models.IntegerField()
+    points = models.FloatField()
+    lock_other = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+
+class Answer(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    question = models.ForeignKey(Question, on_delete=models.DO_NOTHING)
+    choice = models.ForeignKey(Choice, on_delete=models.DO_NOTHING)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.choice.title
+
+
+class Test_Record(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    test = models.OneToOneField(Test, on_delete=models.DO_NOTHING)
+    count_correct = models.IntegerField("Количество верных ответов")
+    count_points = models.IntegerField('Количество заработнанных баллов')
+

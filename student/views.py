@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from student.forms import JoinGroupForm
-from student.models import Account_Statistics, Protagonist
+from student.models import Account_Statistics, Protagonist, Choice, Test_Record
 from teacher.models import Test, Question, Group
 
 
@@ -25,7 +25,7 @@ def student(request):
     user_stat = Account_Statistics.objects.get(account=request.user)
     user_protagonist = Protagonist.objects.get(account=request.user)
     groups = user_stat.groups.all()
-    tasks = getAllTests(groups)
+    tasks = Test.objects.all()
 
     if request.method == "POST":
         login = request.POST.get("login")
@@ -35,7 +35,7 @@ def student(request):
         if len(con_group) > 0:
             user_stat.groups.add(con_group[0])
             groups = user_stat.groups.all()
-            tasks = getAllTests(groups)
+            tasks = Test.objects.all()
 
     group_form = JoinGroupForm()
     data = {
@@ -59,7 +59,7 @@ def task(request, task_id):
     user_stat = Account_Statistics.objects.get(account=request.user)
     task = Test.objects.get(pk=task_id)
     questions = Question.objects.filter(test__title=task.title)
-
+    record = Test_Record.objects.create(user=request.user, test=task, count_correct=0, count_points=0)
     transcripts = {
         1: 'first_answer',
         2: 'second_answer',
@@ -81,7 +81,10 @@ def task(request, task_id):
         for key in transcripts:
             if getattr(cur_question, transcripts[key]) == user_answer:
                 number_user_answer = key
+        choice = Choice.objects.create(question=cur_question, number_answer=user_answer, points=cur_question.reward)
         if number_user_answer == cur_question.number_correct_answer:
+            record.count_correct += 1
+            record.count_points += choice.points
             user_stat.experience = user_stat.experience + 1
             user_stat.save(update_fields=["experience"])
             print('+')

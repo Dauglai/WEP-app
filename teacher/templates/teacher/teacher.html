@@ -102,25 +102,6 @@
       </div>
     </div>
 
-
-    <div class="modal-window-1">
-      <div class="modal_position_relative">
-        <h3 class="modal-window__headling">Группы</h3>
-        <form method="post" class="form-group">
-          <input type="" value="{{group.id}}" name="test_id" hidden>
-          {% csrf_token %}
-          {% for group in groups %}
-            <div class="block__test">
-              <span>Название: {{group.group_name}}</span>
-              <input type="checkbox" value="{{group.id}}" name="scales">
-            </div>
-          {%endfor%}
-          <button type="submit" class="submit-modal-window">Подтвердить</button>
-        </form>
-        <button type="button" class="close-modal-window-1"></button>
-      </div>
-    </div>
-
   </body>
   <script src="/static/js/modal-window.js?{% now 'U' %}"></script>
   <script src="/static/js/modal-window-1.js?{% now 'U' %}"></script>
