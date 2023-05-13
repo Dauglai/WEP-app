@@ -1,5 +1,7 @@
 :root {
-  --blue-main: #1570EF;
+  /*--blue-main: #1570EF;*/
+  --blue-main: #2e569f;
+  --color-navbar-text: #e1dada;
 
   /*Старые цвета*/
   --header-color-2:#365998;

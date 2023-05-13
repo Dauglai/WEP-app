@@ -1,0 +1,40 @@
+.nav-bar {
+  position: fixed;
+  top: 68px;
+
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+
+  /*width: 250px;*/
+  height: 100vh;
+  background-color: var(--blue-main);
+}
+
+.nav-bar__container {
+  list-style: none;
+  margin: 0;
+  padding: 25px 20px 25px 15px;
+}
+
+.nav-bar__el {
+  display: flex;
+  align-items: center;
+  width: 180px;
+
+  margin-bottom: 20px;
+}
+
+.nav-bar__img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.nav-bar__link {
+  text-decoration: none;
+
+  color: var(--color-navbar-text);
+}
