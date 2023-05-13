@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<HTML>
+  <head>
+    <title>Constructor</title>
+    <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/constructor.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/accordion.css?{% now 'U' %}">
+  </head>
+  <body>
+    <header class="header-container">
+      <div class="container">
+        <div class="btn-container">
+          <a class="btn" id="btn-back">Назад</a>
+          <a href="{% url 'main' %}"><h1 class="logo">WEP</h1></a>
+          <div id = "nav" >
+            <ul>
+              <li><a href = "#" class="profile">{{ user.last_name }} {{ user.first_name }}</a>
+                <ul class = "second profile__second">
+                  <li><a href = "{% url 'main' %}">На главную</a></li>
+                  <li><a href = "#">Профиль</a></li>
+                  <li><a href = "{% url 'logout' %}">Выйти</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="main-container">
+      <h2 class="main-container__h">Конструктор заданий</h2>
+      <div class="test__container">
+        <form method="post" id="form-container">
+          {% csrf_token %}
+          {{question_formset.management_form}}
+          {% for form in question_formset %}
+            <fieldset class="form-fieldset question-form">
+              <h3 class="title-question-number">Вопрос №<span class="question-number">1</span></h3>
+              <div>
+                <div class="form__item">
+                  {{form.question.label_tag}}
+                  <div>
+                      {{form.question}}
+                  </div>
+                </div>
+                <div class="form__item">
+                  {{form.first_answer.label_tag}}
+                  <div>
+                  {{form.first_answer}}
+                  </div>
+                </div>
+                <div class="form__item">
+                  {{form.second_answer.label_tag}}
+                  <div>
+                  {{form.second_answer}}
+                  </div>
+                </div>
+                <div class="form__item">
+                  {{form.third_answer.label_tag}}
+                  <div>
+                  {{form.third_answer}}
+                  </div>
+                </div>
+                <div class="form__item">
+                  {{form.four_answer.label_tag}}
+                  <div>
+                  {{form.four_answer}}
+                  </div>
+                </div>
+                <div class="form__item">
+                  {{form.number_correct_answer.label_tag}}
+                  {{form.number_correct_answer}}
+                </div>
+                <div class="form__item">
+                  {{form.reward.label_tag}}
+                  {{form.reward}}
+                </div>
+              </div>
+              <div class="explanations">
+                <h4 class="explanations__heading">Памятка</h4>
+                <span class="explanations__text">
+                  Заполните все поля формы и нажмите кнопку "Сохранить". 
+                  <p>Будет создано тестовое задание, которым можно поделиться с учениками.</p>  
+                </span>
+              </div>
+              <button type="button" class="del-question">Удалить вопрос -</button>
+            </fieldset>
+          {% endfor %}
+          <fieldset class="form-fieldset">
+            <button type="button" class="add-question">Добавить вопрос +</button>
+            <button type="submit" class="btn-save">Сохранить</button> 
+            <span>{{ error }}</span>
+          </fieldset>
+        </form>
+      </div>
+    </main>
+  </body>
+  <script src="/static/js/previousLink.js?{% now 'U' %}"></script>
+  <script src="/static/js/addFormQuestion.js?{% now 'U' %}"></script>
+</HTML>

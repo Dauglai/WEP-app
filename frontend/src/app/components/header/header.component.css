@@ -1,0 +1,74 @@
+.header {
+  font-size: 22px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.header__container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+
+  max-width: 1200px;
+  width: 100%;
+
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 35px 0 35px;
+}
+
+.header__logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  text-align: center;
+
+  margin: 10px 0 10px 0;
+}
+
+.header__logo_img {
+  position: relative;
+  height: 45px;
+  width: 45px;
+
+  margin-right: 7px;
+}
+
+.header__logo_text {
+  font-family: 'Oswald', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 47px;
+
+  color: var(--blue-main);
+}
+
+.header__nav {
+  position: relative;
+  top: 2px;
+
+  display: flex;
+  margin-left: auto;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header__notification {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.header__profile {
+  height: 35px;
+  width: 35px;
+}
+

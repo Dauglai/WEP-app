@@ -1,6 +1,4 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-
 from rest_framework import viewsets
 from .models import Task
 from .serializers import TaskSerializer
@@ -12,4 +10,4 @@ class TaskViewSet(viewsets.ModelViewSet):
 
 
 def index(request):
-    return render(request, "main/index.html")
+    return render(request, "index.html")

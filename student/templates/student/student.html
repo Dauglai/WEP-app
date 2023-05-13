@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<HTML>
+  <head>
+    <title>Ученик</title>
+    <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/accordion.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/student.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/modal-window.css?{% now 'U' %}">
+  </head>
+  <body>
+    <div class="modal-overlay"></div>
+    <header class="header-container">
+      <div class="container">
+        <div class="btn-container">
+          <a href="{% url 'main' %}"><h1 class="logo">WEP</h1></a>
+          <a class="btn" href="{% url 'rating_table' %}">Рейтинг</a>
+          <a class="btn" href="{% url 'rating_table' %}">Статистика</a>
+          <a class="btn" href="{% url 'protagonist' %}">Персонаж</a>
+          <div id = "nav">
+            <ul>
+              <li><a href = "#" class="profile">{{ user.last_name }} {{ user.first_name }}</a>
+                <ul class = "second profile__second">
+                  <li><a href = "{% url 'main' %}">На главную</a></li>
+                  <li><a href = "#">Профиль</a></li>
+                  <li><a href = "{% url 'logout' %}">Выйти</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="main-container">
+      <div class="container">
+        <ul class="list-blocks">
+          <li class="character">
+            <div class="block__container"> 
+              <h2 class='block__h'>Персонаж</h2>
+              <div class="block__character"></div>
+              <div class="field-balance">{{ balance }} gold</div>
+              <div class="block__rating-position" onclick="window.location.href='{% url 'rating_table' %}'">
+                <span class="place_in_rating">1 место из 2</span>
+              </div>
+              <div class="block__characteristic">
+                <h4 class="block__h-char">Характеристики</h4>
+                <div>Имя героя: {{ protagonist.name }}</div>
+                <div>Здоровье: {{ protagonist.health }}</div>
+                <div>Выносливость: {{ protagonist.endurance }}</div>
+                <div>Сила: {{ protagonist.power }}</div>
+                <div>Ловкость: {{ protagonist.dexterity }}</div>
+                <div>Стойкость: {{ protagonist.resistance }}</div>
+                <div>Свободные очки навыков: {{ protagonist.up_score }}</div>
+              </div>
+            </div>
+          </li>
+          <li class="closed-tasks">
+            <div class="block__container"> 
+              <h2 class='block__h'>Выполненные задания</h2>
+            </div>
+          </li>
+          <li class="tasks-and-teams">
+            <ul class="list-blocks">
+              <li class="tasks">
+                <div class="block__container">
+                  <h2 class='block__h'>Текущие задания</h2>
+                  {% for task in tasks %}
+                      <a href="{{ task.get_absolute_url }}">
+                          <div class="block__test">
+                              <span>Название: {{task.title}} - {{task.difficulty}}</span>
+                              <span>Предмет: {{task.subject}}</span>
+                              <div>Учитель: {{task.owner_name}}</div>
+                              <span>Дедлайн: {{task.time_deadline}} {{task.date_deadline}}</span>
+                          </div>
+                      </a>
+                    {% empty %}
+                    <p>Отсутствуют новые задания</p>
+                  {% endfor %}
+                </div>
+              </li>
+              <li class="teams">
+                <div class="block__container"> 
+                  <h2 class='block__h'>Группы</h2>
+                  <button class="block__btn add-new-group">Присоединиться</button>
+                  {% for group in groups %}
+{#                      <a href="{% url 'task' %}">#}
+                        <a href="{{ group.get_absolute_url }}">
+                          <div class="block__test">
+                              <span>{{group.group_name}} - {{group.owner_name}}</span>
+                              <a class="close-group-btn" href="watch_group/{{group.id}}">watch</a>
+                              <a class="close-group-btn" href="delete_group/{{group.id}}">del</a>
+{#                              <span>Предмет: {{task.subject}}</span>#}
+{#                              <span>Учитель: кто-то там</span>#}
+                          </div>
+                      </a>
+                  {% endfor %}
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <div class="modal-window">
+      <div class="modal_position_relative">
+        <h3 class="modal-window__headling">Присоединиться к группе</h3>
+        <form method="post" action="{% url 'student' %}" class="form-group">
+          {% csrf_token %}
+          <label class="field-containers">
+            <span class="field-containers__span_margin-right">Login:</span>  
+            {{ group_form.login}}
+          </label>
+          <label class="field-containers">
+            <span>Password:</span>
+            {{ group_form.password}}
+          </label>
+          <!-- <label class="field-containers">
+            {{ group_form.password.label_tag}} 
+            {{ group_form.password}}
+          </label> -->
+          <button type="submit" class="submit-modal-window">Присоединиться</button>
+        </form>
+        <button type="button" class="close-modal-window"></button>
+      </div>
+    </div>
+  </body>
+  <script src="/static/js/script.js"></script>
+  <script src="/static/js/modal-window.js?{% now 'U' %}"></script>
+</HTML>

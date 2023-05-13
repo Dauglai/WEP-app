@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<HTML lang="ru">
+  <head>
+    <title>Teacher</title>
+    <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/accordion.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/teacher.css?{% now 'U' %}">
+    <link rel="stylesheet" href="/static/css/modal-window.css?{% now 'U' %}">
+  </head>
+  <body>
+    <div class="modal-overlay"></div>
+    <header class="header-container">
+      <div class="container">
+        <div class="btn-container">
+          <a href="{% url 'main' %}"><h1 class="logo">WEP</h1></a>
+          <a class="btn" href="{% url 'constructor' %}">Конструктор</a>
+          <a class="btn" href="{% url 'rating_table' %}">Рейтинг</a>
+          <a class="btn" href="{% url 'rating_table' %}">Статистика</a>
+          <div id = "nav">
+            <ul>
+              <li><a href = "#" class="profile">{{ user.last_name }} {{ user.first_name }}</a>
+                <ul class = "second profile__second">
+                  <li><a class="second_cell" href = "{% url 'main' %}">На главную</a></li>
+                  <li><a class="second_cell" href = "#">Профиль</a></li>
+                  <li><a class="second_cell" href = "{% url 'logout' %}">Выйти</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="main-container">
+      <div class="container">
+        <ul class="list-blocks">
+          <li class="stat">
+            <div class="block__container"> 
+              <h2 class="block__h">Статистика</h2>
+            </div>
+          </li>
+          <li class="class">
+            <div class="block__container"> 
+              <h2 class="block__h">Группы</h2>
+              <button class="block__btn add-new-group">Добавить новую группу +</button>
+              {% for group in groups %}
+                <div class="block__test">
+                  <span>Название: {{group.group_name}}</span>
+                  <span class="block__test_block">Логин: {{group.login}}</span>
+                  <span class="block__test_block">Пароль:{{group.password}}</span>
+                  <a href="{% url "edit_group" group.pk %}">edit</a>
+                  <a href="view_group/{{ group.id }}">view</a>
+                  <a href="delete_group/{{ group.id }}">delete</a>
+                </div>
+              {%endfor%}
+            </div>
+          </li>
+          <li class="task">
+            <div class="block__container"> 
+              <h2 class="block__h">Тесты</h2>
+              {% for test in tests %}
+{#                <a href="{{ task.get_absolute_url }}">#}
+                  <div class="block__test">
+                    <span>Название: {{test.title}} - {{test.difficulty}}</span>
+                    <span>Предмет:&nbsp;{{test.subject}}</span>
+{#                    <span class="external_link"></span>#}
+                    <button type="button" value="{{test.id}}" class="external_link add-new-group-1" name="test_id"></button>
+                    <button type="button" class="more_horizontal"></button>
+{#                    <span class="more_horizontal"></span>#}
+                    <span class="block__test_block">Дедлайн: {{test.time_deadline}} {{test.date_deadline}}</span>
+                    <a href="test/edit/{{test.id}}">Изменить</a>
+                    <a href="test/delete/{{test.id}}">Удалить</a>
+                  </div>
+                </a>
+              {%endfor%}
+              <a href="{% url 'constructor' %}">+ New Test</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <div class="modal-window">
+      <div class="modal_position_relative">
+        <h3 class="modal-window__headling">Создание новой группы</h3>
+        <form method="post" action="{% url 'teacher' %}" class="form-group">
+          {% csrf_token %}
+          <label class="field-containers">
+            {{ group_form.group_name.label_tag}}
+            <div>{{ group_form.group_name}}</div>
+          </label>
+          <label class="field-containers">
+            <span class="field-containers__span_margin-right">{{ group_form.login.label_tag}}</span>
+            {{ group_form.login}}
+          </label>
+          <label class="field-containers">
+            {{ group_form.password.label_tag}}
+            {{ group_form.password}}
+          </label>
+          <button type="submit" class="submit-modal-window">Создать</button>
+        </form>
+        <button type="button" class="close-modal-window"></button>
+      </div>
+    </div>
+
+  </body>
+  <script src="/static/js/modal-window.js?{% now 'U' %}"></script>
+  <script src="/static/js/modal-window-1.js?{% now 'U' %}"></script>
+</HTML>

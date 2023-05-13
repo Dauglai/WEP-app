@@ -59,7 +59,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-ROOT_URLCONF = 'example_project.urls'
+ROOT_URLCONF = 'wep_full.urls'
 
 TEMPLATES = [
     {
@@ -76,6 +76,12 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+# Место хранения для других статических файлов
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    # '../static/',
 ]
 
 WSGI_APPLICATION = 'wep_full.wsgi.application'
@@ -114,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 

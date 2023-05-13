@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+{#    <link rel="stylesheet" href="/static/css/normalize.css?{% now 'U' %}">#}
+    <link rel="stylesheet" href="/static/css/view_group.css?{% now 'U' %}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div>name: {{ group.group_name }}</div>
+    <div>login: {{ group.login }}</div>
+    <div>password: {{ group.password }}</div>
+    <div>owner: {{ group.owner }}</div>
+    <div>
+        <h3>Участники</h3>
+        {% for participant in participants %}
+          <div class="block-student">
+            <div>
+              {{ participant.account.last_name }}
+              {{ participant.account.first_name }}
+              {{ participant.account.patronymic }}
+              <button onclick="location.href='{% url "delete_participant" group.pk  participant.pk %}'">delete</button>
+            </div>
+            <div>
+              score: {{ participant.score }} lvl: {{ participant.lvl }} experience: {{ participant.experience }}
+            </div>
+            <form method="post" action="" name="">
+              {% csrf_token %}
+              <input type="hidden" name="participant" value="{{ participant.pk }}" />
+{#              <input name="reward" type="number">#}
+              {{ reward_form.reward }}
+              <input type="submit" name="replenishment" value="reward+" />
+              <input type="submit" name="withdrawal" value="reward-" />
+            </form>
+          </div>
+        {% endfor %}
+    </div>
+    <button class="btn" onclick="location.href={% url 'teacher' %}">Назад</button>
+  </body>
+</html>
