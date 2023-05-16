@@ -1,1 +1,56 @@
-<p>registration works!</p>
+<header class="header">
+  <div class="header__container">
+    <a class="header__logo" routerLink="/main">
+      <img class="header__logo_img" src="../../../assets/img/header/logo.png" alt="logo">
+      <span class="header__logo_text">Master of Dungeons</span>
+    </a>
+    <div class="header__nav">
+      <span class="header__text">Уже есть учетная запись ?</span>
+      <a routerLink="/login" class="header__link">ВХОД</a>
+    </div>
+  </div>
+</header>
+
+<main class="reg__container">
+  <div class="reg__window">
+
+    <div class="template" *ngIf="!nextPage">
+      <h2 class="reg__form-h">Создать учетную запись</h2>
+      <button tuiButton appearance="whiteblock-active" type="button"
+              class="tui-space_right-4 choose-btn" (click)="chooseRoleStudent()">
+        <img src="../../../assets/img/registration/student.svg" class="choose-btn_img">
+        Я ученик
+      </button>
+      <button tuiButton appearance="whiteblock-active" type="button"
+              class="tui-space_right-4 choose-btn " (click)="chooseRoleTeacher()">
+        <img src="../../../assets/img/registration/teacher.svg" class="choose-btn_img">
+        Я учитель
+      </button>
+      <div class="footer__container">
+        <span class="footer__text">Уже есть учетная запись ?</span>
+        <a routerLink="/login" class="footer__link">Войти</a>
+      </div>
+    </div>
+
+    <div class="template" *ngIf="nextPage">
+      <button class="template__back-btn" (click)="previousPage()">
+        <img class="header__logo_img" src="../../../assets/img/registration/arrow.svg" alt="logo">
+      </button>
+      <h2 class="reg__form-h">Регистрация</h2>
+      <form class="form">
+        <input placeholder="Электронная почта" />
+        <input placeholder="Пароль" />
+        <input placeholder="Подтверждение пароля" />
+        <button tuiButton type="submit" appearance="outline"
+                class="tui-space_right-3 tui-space_bottom-3 btn-submit" size="s">
+          Подтвердить
+        </button>
+      </form>
+      <div class="footer__container">
+        <span class="footer__text">Уже есть учетная запись ?</span>
+        <a routerLink="/login" class="footer__link">Войти</a>
+      </div>
+    </div>
+
+  </div>
+</main>

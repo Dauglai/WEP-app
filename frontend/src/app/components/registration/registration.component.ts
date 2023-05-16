@@ -6,5 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
+  isTeacher: boolean = false;
+  nextPage = false;
 
+  chooseRoleTeacher(): void {
+    this.isTeacher = true;
+    this.nextPage = true;
+  }
+
+  chooseRoleStudent(): void {
+    this.isTeacher = false;
+    this.nextPage = true;
+  }
+
+  previousPage(): void {
+    this.nextPage = false;
+  }
 }
