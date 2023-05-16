@@ -8,6 +8,16 @@
   --header-color-3:#4165a9;
 }
 
+.main-block {
+  position: relative;
+  top: 70px;
+  left: 215px;
+  width: calc(100vw - 230px);
+  max-width: calc(1280px - 230px);
+
+  padding: 15px 45px 75px 45px;
+}
+
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */

@@ -1,0 +1,9 @@
+<app-header></app-header>
+<app-navigation-bar></app-navigation-bar>
+<div class="main-block">
+  <div *ngFor="let group of groups">
+<!--    {{group}}-->
+    <span>{{ group.owner }} {{ group.owner_name }} {{ group.group_name }}</span>
+  </div>
+</div>
+

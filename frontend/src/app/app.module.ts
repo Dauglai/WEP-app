@@ -19,6 +19,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { GroupsComponent } from './components/groups/groups.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     MainComponent,
     NavigationBarComponent,
     HeaderComponent,
-    ProfileComponent
+    ProfileComponent,
+    GroupsComponent,
   ],
     imports: [
         BrowserModule,

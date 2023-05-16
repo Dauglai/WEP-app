@@ -7,8 +7,8 @@ router = DefaultRouter()
 router.register(r'tasks', TaskViewSet)
 
 urlpatterns = [
-    path(r'', views.index, name='index'),
-    path('api/', include(router.urls)),
+    # path(r'', views.index, name='index'),
+    path('', include(router.urls)),
 ]
 
 # urlpatterns = [

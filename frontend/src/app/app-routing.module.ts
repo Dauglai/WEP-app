@@ -8,6 +8,7 @@ import {RegistrationComponent} from "./components/registration/registration.comp
 import {LoginComponent} from "./components/login/login.component";
 import {TeacherComponent} from "./components/teacher/teacher.component";
 import {ProfileComponent} from "./components/profile/profile.component";
+import {GroupsComponent} from "./components/groups/groups.component";
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'main', component: MainComponent },
   { path: 'student', component: StudentComponent },
   { path: 'teacher', component: TeacherComponent },
+  { path: 'groups', component: GroupsComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },

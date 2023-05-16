@@ -5,12 +5,37 @@ from django.views.generic import ListView, TemplateView, FormView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.forms import modelformset_factory, NumberInput, TextInput, Textarea, inlineformset_factory
 from django.http import HttpResponseRedirect, HttpResponseNotFound
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
-from accounts.models import Account
+from account.models import Account
 from student.models import Account_Statistics
 from .decorators import access_teacher
 from .models import Test, Question, Group
 from .forms import TestForm, QuestionFormSet, GroupFrom, Question_InlineFormset, RewardStudent, UpdateGroupForm
+
+
+from rest_framework import viewsets, status
+from .serializers import GroupSerializer
+
+
+# <angular>
+
+class GropViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+    def list(self, request):
+        # groups = request.user.group_set.all()
+        groups = Group.objects.filter(owner=1)
+
+        groups_serializer = self.serializer_class(groups, many=True)
+        return Response(groups_serializer.data, status=status.HTTP_200_OK)
+        # groups = request.user.group_set.all()
+        # return Response({'groups': groups})
+
+# </angular>
+
 
 
 class QuestionAddView(TemplateView):

@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-from accounts.models import Account
+from account.models import Account
 from teacher.models import Group, Question, Test
 
 

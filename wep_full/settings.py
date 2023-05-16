@@ -25,6 +25,9 @@ SECRET_KEY = 'django-insecure-it7m23p9^a3)_qpz4a#)hfzd5em@pd-uv=5$lkzhe6qexlv0%j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+AUTH_USER_MODEL = 'account.Account'
+SESSION_SAVE_EVERY_REQUEST = True
+
 ALLOWED_HOSTS = []
 
 
@@ -32,6 +35,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main',
+    'account',
+    'student',
+    'teacher',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'djoser',
     'rest_framework',
     'corsheaders',
 ]
@@ -56,6 +63,19 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+DJOSER = {
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    # подтверждение EMAIL = False, только на локальном сервере
+    'SEND_ACTIVATION_EMAIL': False,
+}
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -138,3 +158,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
