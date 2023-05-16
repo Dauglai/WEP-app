@@ -20,6 +20,7 @@ def getAllTests(groups):
 
 @login_required
 def student(request):
+    request.session['flag'] = True
     if request.user.is_teacher and request.user.is_staff and request.user.is_admin:
         return redirect('main')
     user_stat = Account_Statistics.objects.get(account=request.user)
@@ -59,7 +60,7 @@ def task(request, task_id):
     user_stat = Account_Statistics.objects.get(account=request.user)
     task = Test.objects.get(pk=task_id)
     questions = Question.objects.filter(test__title=task.title)
-    record = Test_Record.objects.create(user=request.user, test=task, count_correct=0, count_points=0)
+
     transcripts = {
         1: 'first_answer',
         2: 'second_answer',
@@ -81,17 +82,24 @@ def task(request, task_id):
         for key in transcripts:
             if getattr(cur_question, transcripts[key]) == user_answer:
                 number_user_answer = key
-        choice = Choice.objects.create(question=cur_question, number_answer=user_answer, points=cur_question.reward)
-        if number_user_answer == cur_question.number_correct_answer:
-            record.count_correct += 1
-            record.count_points += choice.points
-            user_stat.experience = user_stat.experience + 1
-            user_stat.save(update_fields=["experience"])
-            print('+')
-        else:
-            print('-')
-
+        choice = Choice.objects.create(question=cur_question, number_answer=number_user_answer)
     return render(request, 'student/task.html', context=data)
+
+
+def results(request, id):
+    task = Test.objects.get(pk=id)
+    count_correct = 0
+    points = 0
+    questions = Question.objects.filter(test__title=task.title)
+    for cur_question in questions:
+        if cur_question.choice.number_answer == cur_question.number_correct_answer:
+            count_correct += 1
+            points += cur_question.reward
+            #user_stat.experience = user_stat.experience + 1
+            #user_stat.save(update_fields=["experience"])
+
+    record = Test_Record.objects.create(user=request.user, test=task, count_correct=count_correct, count_points=points)
+    return student(request)
 
 
 def watch_group(request, id):

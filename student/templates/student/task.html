@@ -47,9 +47,7 @@
           <input type="submit">
         </form>
       {% endfor %}
-      <button type="submit" class="submit-modal-window" onclick="window.location.href='{% url 'student' %}'">
-        Завершить
-      </button>
+      <a href="{% url "results" test.id %}"> Завершить</a>
     </main>
   </body>
   <script src="/static/js/script.js"></script>

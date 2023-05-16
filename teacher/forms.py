@@ -1,4 +1,4 @@
-from student.models import Test, Question, Choice, Answer, Group
+from student.models import Test, Question, Choice, Group
 from django import forms
 from django.forms import ModelForm, TextInput, DateTimeInput, DateInput, DateField, Textarea, NumberInput, TimeInput, \
     TimeField, FileInput, PasswordInput, modelformset_factory, inlineformset_factory
@@ -10,16 +10,6 @@ class DateInput(DateInput):
 
 class TimeInput(TimeInput):
     input_type = 'time'
-
-
-class AnswerForm(forms.Form):
-    CHOICES = (
-        ("1", "one"),
-        ("2", "two"),
-        ("3", "free"),
-        ("4", "four"))
-    response = forms.ChoiceField(widget=forms.RadioSelect,
-                                 label="question.question", choices=CHOICES)
 
 
 class TestForm(ModelForm):

@@ -90,21 +90,7 @@ class Inventory(models.Model):
 class Choice(models.Model):
     question = models.OneToOneField(Question, on_delete=models.DO_NOTHING)
     number_answer = models.IntegerField()
-    points = models.FloatField()
     lock_other = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.title
-
-
-class Answer(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
-    question = models.ForeignKey(Question, on_delete=models.DO_NOTHING)
-    choice = models.ForeignKey(Choice, on_delete=models.DO_NOTHING)
-    created = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.choice.title
 
 
 class Test_Record(models.Model):
@@ -112,4 +98,5 @@ class Test_Record(models.Model):
     test = models.OneToOneField(Test, on_delete=models.DO_NOTHING)
     count_correct = models.IntegerField("Количество верных ответов")
     count_points = models.IntegerField('Количество заработнанных баллов')
+    created = models.DateTimeField(auto_now_add=True)
 
