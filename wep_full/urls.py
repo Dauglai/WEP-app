@@ -19,12 +19,10 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from teacher.urls import router as teacher_router
-from main.urls import router as main_router
 # from account.urls import router as account_router
 
 router = DefaultRouter()
 router.registry.extend(teacher_router.registry)
-router.registry.extend(main_router.registry)
 # router.registry.extend(account_router.registry)
 
 
@@ -33,10 +31,7 @@ urlpatterns = [
     path(r'api/', include(router.urls)),
 
     path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
-    # path(r'api/', include('teacher.urls')),
-    # path(r'api/teacher/', include('teacher.urls')),
-    # path('', include('main.urls')),
-    # path('api/', include('main.urls')),
-    # path('api/', include('teacher.urls')),
+    path('auth-token/', include('djoser.urls.authtoken')),
+
+    path(r'api/account/', include('account.urls')),
 ]

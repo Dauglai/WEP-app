@@ -9,6 +9,7 @@ from rest_framework import status
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from account.forms import RegisterUserForm
 from account.models import Account
@@ -31,6 +32,19 @@ class RegistrUserView(CreateAPIView):
         else:
             data = serializer.errors
             return Response(data)
+
+
+class UserByToken(APIView):
+    def post(self, request):
+        data = {
+            'id': str(request.user.id),
+            'email': str(request.user.email),
+            # 'password': str(request.user.password),
+        }
+        print(data.values())
+        return Response(data, status=status.HTTP_201_CREATED)
+
+
 
 def registration(request):
     error = ''

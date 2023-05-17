@@ -7,7 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {RouterLink, RouterOutlet} from "@angular/router";
 import { TaskListComponent } from './components/task-list/task-list.component';
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { StudentComponent } from './components/student/student.component';
 import { TeacherComponent } from './components/teacher/teacher.component';
@@ -36,19 +36,20 @@ import { GroupsComponent } from './components/groups/groups.component';
     ProfileComponent,
     GroupsComponent,
   ],
-    imports: [
-        TuiButtonModule,
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        RouterOutlet,
-        FormsModule,
-        RouterLink,
-        BrowserAnimationsModule,
-        TuiRootModule,
-        TuiDialogModule,
-        TuiAlertModule,
-    ],
+  imports: [
+    TuiButtonModule,
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    RouterOutlet,
+    FormsModule,
+    RouterLink,
+    BrowserAnimationsModule,
+    TuiRootModule,
+    TuiDialogModule,
+    TuiAlertModule,
+    ReactiveFormsModule,
+  ],
   providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
   bootstrap: [AppComponent]
 })

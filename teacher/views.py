@@ -27,7 +27,8 @@ class GropViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         # groups = request.user.group_set.all()
-        groups = Group.objects.filter(owner=1)
+        groups = Group.objects.filter(owner=request.user.id)
+        print('user:', request.user)
 
         groups_serializer = self.serializer_class(groups, many=True)
         return Response(groups_serializer.data, status=status.HTTP_200_OK)
