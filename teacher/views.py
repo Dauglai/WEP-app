@@ -6,6 +6,8 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.forms import modelformset_factory, NumberInput, TextInput, Textarea, inlineformset_factory
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from rest_framework.decorators import action
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin
 from rest_framework.response import Response
 
 from account.models import Account
@@ -16,7 +18,7 @@ from .forms import TestForm, QuestionFormSet, GroupFrom, Question_InlineFormset,
 
 
 from rest_framework import viewsets, status
-from .serializers import GroupSerializer
+from .serializers import GroupSerializer, TestsSerializer
 
 
 # <angular>
@@ -26,15 +28,35 @@ class GropViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
     def list(self, request):
-        # groups = request.user.group_set.all()
         groups = Group.objects.filter(owner=request.user.id)
         print('user:', request.user)
 
         groups_serializer = self.serializer_class(groups, many=True)
         return Response(groups_serializer.data, status=status.HTTP_200_OK)
-        # groups = request.user.group_set.all()
-        # return Response({'groups': groups})
 
+
+class TasksViewSet(viewsets.ModelViewSet):
+    queryset = Test.objects.all()
+    serializer_class = TestsSerializer
+
+    def list(self, request):
+        # tests = request.user.test_set.all()
+        tests = Test.objects.filter(owner=request.user.id)
+        print('user:', request.user)
+
+        tests_serializer = self.serializer_class(tests, many=True)
+        return Response(tests_serializer.data, status=status.HTTP_200_OK)
+
+
+# class GropView(ListModelMixin, GenericAPIView):
+#     serializer_class = GroupSerializer
+#
+#     def get_queryset(self):
+#         pk = self.kwargs['pk']
+#         return Group.objects.filter(owner=pk)
+#
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
 # </angular>
 
 

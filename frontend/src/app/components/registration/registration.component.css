@@ -160,8 +160,17 @@
   margin: 15px 0 10px 0;
 }
 
+.text-error {
+  margin: 0 auto;
+  /*width: 70%;*/
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 9px;
+}
+
 .form {
-  /*position: relative;*/
+  position: relative;
   padding: 0;
   margin: 0;
   display: flex;

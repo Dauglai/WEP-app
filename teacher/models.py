@@ -46,9 +46,6 @@ class Test(models.Model):
     def get_absolute_url(self):
         return reverse('task', args=[self.id])
 
-   # def get_absolute_url(self):
-   #     return reverse('task', kwargs={'task_id': self.pk})
-
     class Meta:
         verbose_name = 'Тест'
         verbose_name_plural = 'Тесты'

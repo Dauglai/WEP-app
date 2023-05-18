@@ -1,9 +1,22 @@
 <app-header></app-header>
 <app-navigation-bar></app-navigation-bar>
 <div class="main-block">
-  <div *ngFor="let group of groups">
-<!--    {{group}}-->
-    <span>{{ group.owner }} {{ group.owner_name }} {{ group.group_name }}</span>
+  <div class="groups__container">
+    <div class="groups__nav-container">
+      <h2 class="groups__title">Группы</h2>
+      <button class="groups__btn-add">+ Новая группа</button>
+    </div>
+    <div class="groups__block-container">
+      <div *ngFor="let group of groups" class="groups__block-group">
+        <div class="groups__block-group_header" [ngStyle]="{'background-color': getRandomColor()}">
+          {{ group.group_name }}
+        </div>
+        <div class="groups__block-group_body">
+          <div>login: {{ group.login }}</div>
+          <div>пароль: {{ group.password }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

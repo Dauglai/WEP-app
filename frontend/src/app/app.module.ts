@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {RouterLink, RouterOutlet} from "@angular/router";
-import { TaskListComponent } from './components/task-list/task-list.component';
+import { TasksComponent } from './components/tasks/tasks.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { StudentComponent } from './components/student/student.component';
@@ -20,11 +20,12 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { HeaderComponent } from './components/header/header.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { GroupsComponent } from './components/groups/groups.component';
+import { ConstructorComponent } from './components/constructor/constructor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaskListComponent,
+    TasksComponent,
     StudentComponent,
     TeacherComponent,
     AccountComponent,
@@ -35,6 +36,7 @@ import { GroupsComponent } from './components/groups/groups.component';
     HeaderComponent,
     ProfileComponent,
     GroupsComponent,
+    ConstructorComponent,
   ],
   imports: [
     TuiButtonModule,

@@ -38,20 +38,42 @@
       </button>
       <h2 class="reg__form-h">Регистрация</h2>
       <form class="form" [formGroup]="formRegister" (ngSubmit)="registration()">
-        <input placeholder="Электронная почта" type="email" formControlName="email"/>
-        <input placeholder="Пароль" type="password" formControlName="password"/>
-        <input placeholder="Подтверждение пароля" type="password" formControlName="password2"/>
+        <span class="text-error">{{ errors.email }}</span>
+        <input placeholder="Электронная почта" type="email" formControlName="email" required/>
+        <span class="text-error">{{ errors.password }}</span>
+        <input placeholder="Пароль" type="password" formControlName="password" required/>
+        <span class="text-error">{{ errors.password2 }}</span>
+        <span class="text-error">{{errorPassword}}</span>
+        <input placeholder="Подтверждение пароля" type="password" formControlName="password2" required/>
 
-        <input placeholder="Фамилия" type="text" formControlName="last_name"/>
-        <input placeholder="Имя" type="text" formControlName="first_name"/>
-        <input placeholder="Отчество" type="text" formControlName="patronymic"/>
+        <span class="text-error">{{ errors.last_name }}</span>
+        <input placeholder="Фамилия" type="text" formControlName="last_name" required/>
+        <span class="text-error">{{ errors.first_name }}</span>
+        <input placeholder="Имя" type="text" formControlName="first_name" required/>
+        <span class="text-error">{{ errors.patronymic }}</span>
+        <input placeholder="Отчество" type="text" formControlName="patronymic" required/>
 
-        <select placeholder="Город" type="text" class="form-select" formControlName="location">
-          <option value="Екатеринбург">Екатеринбург</option>
-          <option value="option-2">Option 2</option>
-        </select>
-        <input placeholder="Номер школы" type="number" formControlName="school_number"/>
-        <input placeholder="Город" type="text" formControlName="patronymic"/>
+        <span class="text-error">{{ errors.location }}</span>
+        <label>Место учебы
+          <select placeholder="Место учебы" type="text" class="form-select" formControlName="location">
+            <option value="" disabled selected>-</option>
+            <option value="Екатеринбург">Екатеринбург</option>
+            <option value="Москва">Москва</option>
+            <option value="Санкт-Петербург">Санкт-Петербург</option>
+          </select>
+        </label>
+
+        <span class="text-error">{{ errors.school_number }}</span>
+        <input placeholder="Номер школы" type="number" min="1" formControlName="school_number"/>
+
+        <span class="text-error">{{ errors.gender }}</span>
+        <label>Пол
+          <select placeholder="Пол" type="text" class="form-select" formControlName="gender">
+            <option value="" disabled selected>-</option>
+            <option value="M">мужчина</option>
+            <option value="F">женщина</option>
+          </select>
+        </label>
 
         <button tuiButton type="submit" appearance="outline"
                 class="tui-space_right-3 tui-space_bottom-3 btn-submit" size="s">

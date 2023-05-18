@@ -1,9 +1,9 @@
-.profile__container {
+.tests__container {
   position: relative;
   padding: 10px 50px 50px 20px;
 }
 
-.profile__nav-container {
+.tests__nav-container {
   font-family: 'Inter', sans-serif;
   font-style: normal;
   display: flex;
@@ -13,7 +13,7 @@
   margin-bottom: 20px;
 }
 
-.profile__title {
+.tests__title {
   margin: 0;
   padding: 0;
   font-weight: 600;
@@ -21,7 +21,7 @@
   line-height: 40px;
 }
 
-.profile__btn-add {
+.tests__btn-add {
   padding: 10px 30px;
   /*height: 30px;*/
   align-items: center;
@@ -31,31 +31,29 @@
   color: var(--color-navbar-text);
 }
 
-.profile__block-container {
+.tests__block-container {
   /*padding-right: 100px;*/
   display: flex;
   flex-flow: wrap;
   flex-direction: row;
   position: relative;
-  /*width: 90%;*/
-  margin-bottom: 35px;
+  width: 90%;
 }
 
-.profile__block-group {
-  padding: 15px 20px;
-  min-width: 25%;
+.tests__block-group {
+  padding: 20px 30px;
+  width: 46%;
   display: flex;
   flex-direction: column;
   border: 3px solid var(--blue-main);
   border-radius: 20px;
-  margin-right: 10px;
-  margin-bottom: 20px;
-  align-items: center;
+  margin-right: 7%;
+  margin-bottom: 30px;
 }
 
-/*.profile__block-group:nth-child(2n) {*/
-/*  margin-right: 0;*/
-/*}*/
+.tests__block-group:nth-child(2n) {
+  margin-right: 0;
+}
 
 .test__field {
   display: grid;

@@ -1,1 +1,23 @@
-<p>profile works!</p>
+<app-header></app-header>
+<app-navigation-bar></app-navigation-bar>
+<div class="main-block">
+  <div class="profile__container">
+    <div class="profile__nav-container">
+      <h2 class="profile__title">Информация о профиле</h2>
+    </div>
+    <div class="profile__block-container">
+      <div class="profile__block-group">Фамилия: {{ user.last_name }}</div>
+      <div class="profile__block-group">Имя: {{ user.first_name }}</div>
+      <div class="profile__block-group">Отчество: {{ user.patronymic }}</div>
+    </div>
+    <div class="profile__block-container">
+      <div class="profile__block-group">email: {{ user.email }}</div>
+    </div>
+    <div class="profile__block-container">
+      <div class="profile__block-group">Место учебы: {{ user.location }}</div>
+      <div class="profile__block-group">Номер школы: {{ user.school_number }}</div>
+      <div class="profile__block-group">{{ user.is_teacher }}</div>
+      <div class="profile__block-group">{{ user.gender }}</div>
+    </div>
+  </div>
+</div>

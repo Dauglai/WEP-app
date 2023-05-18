@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -39,7 +39,14 @@ class UserByToken(APIView):
         data = {
             'id': str(request.user.id),
             'email': str(request.user.email),
-            # 'password': str(request.user.password),
+            'last_name': str(request.user.last_name),
+            'first_name': str(request.user.first_name),
+            'patronymic': str(request.user.patronymic),
+
+            'location': str(request.user.location),
+            'school_number': str(request.user.school_number),
+            'is_teacher': str(request.user.is_teacher),
+            'gender': str(request.user.gender),
         }
         print(data.values())
         return Response(data, status=status.HTTP_201_CREATED)

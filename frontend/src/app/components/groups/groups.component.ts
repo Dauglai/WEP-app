@@ -1,14 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GroupService} from "../../servicies/group.service";
-import {Task} from "../task-list/task-list.component";
+import {Group} from "../../interfaces/interface.group";
 
-export interface Group {
-    owner: number;
-    owner_name: string;
-    group_name: string;
-    login: string;
-    password: string;
-}
 
 @Component({
   selector: 'app-groups',
@@ -26,5 +19,10 @@ export class GroupsComponent implements OnInit{
         console.log(groups)
         this.groups = groups;
     });
+  }
+
+  getRandomColor(): string {
+    return "rgba(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ","
+      + Math.floor(Math.random() * 255) + ", 0.34 )";
   }
 }

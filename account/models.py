@@ -38,14 +38,14 @@ class AccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser, PermissionsMixin):
     locations = [
-        ('EKAT', 'Ekaterinburg'),
-        ('MOS', 'Moscow'),
-        ('SPB', 'Saint-Petersburg'),
+        ('Екатеринбург', 'Екатеринбург'),
+        ('Москва', 'Москва'),
+        ('Санкт-Петербург', 'Санкт-Петербург'),
     ]
 
     genders = [
-        ('M', 'Male'),
-        ('F', 'Female'),
+        ('M', 'мужчина'),
+        ('F', 'женщина'),
     ]
 
     roles = [

@@ -1,7 +1,8 @@
 :root {
   /*--blue-main: #1570EF;*/
   --blue-main: #2e569f;
-  --color-navbar-text: #e1dada;
+  --color-navbar-text: #e7e4e4;
+  --group-header: #dedede;
 
   /*Старые цвета*/
   --header-color-2:#365998;
@@ -9,9 +10,10 @@
 }
 
 .main-block {
+  margin: 0 auto;
   position: relative;
   top: 70px;
-  left: 215px;
+  left: 90px;
   width: calc(100vw - 230px);
   max-width: calc(1280px - 230px);
 
