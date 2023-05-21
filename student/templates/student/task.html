@@ -26,7 +26,6 @@
         </div>
       </div>
     <main class="main-container">
-      {% for question in questions%}
         <form class="question" method="post" id="task_{{ question.id }}">
         {% csrf_token %}
           <h2 class="question__title">Задание <span>{{ forloop.counter }}</span></h2>
@@ -46,8 +45,8 @@
           </label>
           <input type="submit">
         </form>
-      {% endfor %}
-      <a href="{% url "results" test.id %}"> Завершить</a>
+      <a href="{% url 'task' test.id id %}"> Следующий вопрос</a>
+      <a href="{% url "student" %}"> Завершить</a>
     </main>
   </body>
   <script src="/static/js/script.js"></script>

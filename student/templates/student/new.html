@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table class="table table-striped">
+    <thead>
+      <tr>
+		<th>Title</th>
+		<th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{img.title}}</td>
+		<td><img src="/{{ BASIC_DIR }}/{{test.boss.photo.url}}" width="120"/></td>
+      </tr>
+	</tbody>
+    </table>
+    <a href="{% url 'task' test.id 0 %}">Начать</a>
+</body>
+</html>

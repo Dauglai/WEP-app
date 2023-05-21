@@ -23,6 +23,7 @@ class Account_Statistics(models.Model):
 
 class Protagonist(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
+    photo = models.ImageField(upload_to='main/static/photos/heroes/%Y/%m/%d', blank=True)
     name = models.CharField(max_length=100, default='Hero')
     health = models.PositiveIntegerField('Здоровье', default=100)
     endurance = models.PositiveIntegerField('Выносливость', default=5) #Зависит от выбранного класса
@@ -43,6 +44,11 @@ class Protagonist(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def photo_url(self):
+        if self.photo and hasattr(self.photo, 'url'):
+            return self.photo.url
 
     class Meta:
         verbose_name = 'Персонаж'
@@ -94,7 +100,7 @@ class Choice(models.Model):
 
 
 class Test_Record(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
     test = models.OneToOneField(Test, on_delete=models.DO_NOTHING)
     count_correct = models.IntegerField("Количество верных ответов")
     count_points = models.IntegerField('Количество заработнанных баллов')

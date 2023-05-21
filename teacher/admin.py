@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Test, Question, Group
+from .models import Test, Question, Group, Boss
 from django.contrib import admin
 
 
@@ -19,4 +19,5 @@ class QuestionAdmin(admin.ModelAdmin):
 admin.site.register(Group)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Test)
+admin.site.register(Boss)
 # Register your models here.

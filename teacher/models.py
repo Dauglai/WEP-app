@@ -26,10 +26,27 @@ class Group(models.Model):
         verbose_name_plural = 'Группы (классы)'
 
 
+class Boss(models.Model):
+    photo = models.ImageField(upload_to='main/static/photos/enemy/%Y/%m/%d', blank=True)
+    name = models.CharField(max_length=100, default='Hero')
+    health = models.PositiveIntegerField('Здоровье', default=100)
+    power = models.PositiveIntegerField('Сила', default=5)
+    resistance = models.IntegerField('Стойкость', default=0)
+
+    def __str__(self):
+        return self.name
+
+    @property
+    def photo_url(self):
+        if self.photo and hasattr(self.photo, 'url'):
+            return self.photo.url
+
+
 class Test(models.Model):
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
     owner_name = models.CharField('ФИО автора', max_length=600, null=True)
     group = models.ManyToManyField(Group, blank=True)
+    boss = models.ForeignKey(Boss, on_delete=models.CASCADE, null=True)
     title = models.CharField('Название теста', max_length=300)
     subject = models.CharField('Название предмета', max_length=100, null=True)
     text = models.TextField('Дополнительный текст к тесту', max_length=1000, null=True, blank=True)
@@ -69,4 +86,3 @@ class Question(models.Model):
     class Meta:
         verbose_name = 'Вопрос'
         verbose_name_plural = 'Вопросы'
-

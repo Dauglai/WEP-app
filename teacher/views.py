@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponseNotFound
 from accounts.models import Account
 from student.models import Account_Statistics
 from .decorators import access_teacher
-from .models import Test, Question, Group
+from .models import Test, Question, Group, Boss
 from .forms import TestForm, QuestionFormSet, GroupFrom, Question_InlineFormset, RewardStudent, UpdateGroupForm
 
 
@@ -22,9 +22,11 @@ class QuestionAddView(TemplateView):
 
     def post(self, *args, **kwargs):
         error = ''
+        test_id = self.request.session['test_id']
+        print(test_id)
+        pk = Test.objects.last().id if test_id == -1 else test_id
         formset = QuestionFormSet(data=self.request.POST)
-        test = Test.objects.get(pk=(Test.objects.last()).id)
-        # print(formset)
+        test = Test.objects.get(pk=pk)
         if formset.is_valid():
             questions = formset.save(commit=False)
             for question in questions:
@@ -74,32 +76,6 @@ class QuestionEditView(TemplateView):
         return self.render_to_response(data)
 
 
-# from .serializers import QuestionSerializer, AnswerSerializer
-# from rest_framework.permissions import IsAuthenticated
-# from rest_framework.generics import GenericAPIView
-# from rest_framework.response import Response
-
-
-# class GetQuestion(GenericAPIView):
-#     permission_classes = (IsAuthenticated,)
-#     serializer_class = QuestionSerializer
-#
-#     def get(self, request, format=None):
-#         questions = Question.objects.all()
-#         last_point = QuestionSerializer(questions, many=True)
-#         return Response(last_point.data)
-#
-#
-# class QuestionAnswer(GenericAPIView):
-#     permission_classes = (IsAuthenticated,)
-#     serializer_class = AnswerSerializer
-#
-#     def post(self, request, format=None):
-#         answer = AnswerSerializer(data=request.data, context=request)
-#         if answer.is_valid(raise_exception=True):
-#             answer.save()
-#             return Response({'result': 'OK'})
-
 @login_required
 @access_teacher
 def teacher(request):
@@ -141,16 +117,17 @@ def constructor(request):
             test_form.owner_name = f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}'
             print(test_form.owner)
             test_form.save()
+            request.session['test_id'] = -1
             return redirect('questions')
         else:
             error = 'Форма была неверной'
 
-    groups = Group.objects.all()
     test_form = TestForm()
+    enemies = Boss.objects.all()
     data = {
         'test_form': test_form,
         'error': error,
-        'groups': groups
+        'enemies': enemies
     }
 
     return render(request, 'teacher/constructor.html', data)
@@ -166,12 +143,14 @@ def test_edit(request, id):
             request.session['test_id'] = id
             return redirect('questions_edit', id=id)
     test_form = TestForm(instance=test)
-    return render(request, "teacher/test_edit.html", {"test_form": test_form})
+    groups = Group.objects.all()
+    return render(request, "teacher/test_edit.html", {"test_form": test_form, 'groups': groups})
 
 
 @access_teacher
 def questions_edit(request, id):
     test = Test.objects.get(pk=id)
+    request.session['test_id'] = id
     if request.method == "POST":
         formset = Question_InlineFormset(data=request.POST, instance=test)
         if formset.is_valid():

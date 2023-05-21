@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from student.forms import JoinGroupForm
 from student.models import Account_Statistics, Protagonist, Choice, Test_Record
-from teacher.models import Test, Question, Group
+from teacher.models import Test, Question, Group, Boss
 
 
 def getAllTests(groups):
@@ -25,6 +25,7 @@ def student(request):
         return redirect('main')
     user_stat = Account_Statistics.objects.get(account=request.user)
     user_protagonist = Protagonist.objects.get(account=request.user)
+    print(request.user)
     groups = user_stat.groups.all()
     tasks = Test.objects.all()
 
@@ -56,21 +57,24 @@ def protagonist(request):
     return render(request, 'student/protagonist.html')
 
 
-def task(request, task_id):
+def task(request, task_id, id):
     user_stat = Account_Statistics.objects.get(account=request.user)
     task = Test.objects.get(pk=task_id)
     questions = Question.objects.filter(test__title=task.title)
-
+    record = Test_Record.objects.get(pk=Test_Record.objects.last().id)
     transcripts = {
         1: 'first_answer',
         2: 'second_answer',
         3: 'third_answer',
         4: 'four_answer',
     }
+    question = questions[id]
+    id =+ 1
 
     data = {
         'test': task,
-        'questions': questions
+        'question': question,
+        'id': id
     }
 
     if request.method == "POST":
@@ -83,23 +87,23 @@ def task(request, task_id):
             if getattr(cur_question, transcripts[key]) == user_answer:
                 number_user_answer = key
         choice = Choice.objects.create(question=cur_question, number_answer=number_user_answer)
+        if cur_question.choice.number_answer == cur_question.number_correct_answer:
+            record.count_correct += 1
+            record.count_points += cur_question.reward
+            record.save()
+            # user_stat.experience = user_stat.experience + 1
+            # user_stat.save(update_fields=["experience"])
     return render(request, 'student/task.html', context=data)
 
 
-def results(request, id):
-    task = Test.objects.get(pk=id)
-    count_correct = 0
-    points = 0
-    questions = Question.objects.filter(test__title=task.title)
-    for cur_question in questions:
-        if cur_question.choice.number_answer == cur_question.number_correct_answer:
-            count_correct += 1
-            points += cur_question.reward
-            #user_stat.experience = user_stat.experience + 1
-            #user_stat.save(update_fields=["experience"])
-
-    record = Test_Record.objects.create(user=request.user, test=task, count_correct=count_correct, count_points=points)
-    return student(request)
+def task_record(request, task_id):
+    test = Test.objects.get(pk=task_id)
+    print(request.user)
+    record = Test_Record.objects.create(user=request.user, test=test, count_correct=1, count_points=0)
+    data = {
+        "test": test
+    }
+    return render(request, 'student/new.html', context=data)
 
 
 def watch_group(request, id):
