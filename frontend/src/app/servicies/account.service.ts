@@ -29,8 +29,8 @@ export class AccountService {
 
   getAccountWhithToken(Token: any) {
     const myHeaders = new HttpHeaders(
-      {'Content-Type': 'application/json', Authorization: 'Token ' + Token})
-      .set('authorization', 'my-token');
+      {'Content-Type': 'application/json', Authorization: 'Token ' + Token}
+    );
     const body = {}
     return this.http.post(this.apiGetAccount, body,
       {headers: {'Content-Type': 'application/json', Authorization: 'Token ' + Token}})

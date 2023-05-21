@@ -4,7 +4,7 @@
   <div class="groups__container">
     <div class="groups__nav-container">
       <h2 class="groups__title">Группы</h2>
-      <button class="groups__btn-add">+ Новая группа</button>
+      <button class="groups__btn-add" (click)="showDialog()">+ Новая группа</button>
     </div>
     <div class="groups__block-container">
       <div *ngFor="let group of groups" class="groups__block-group">
@@ -18,5 +18,6 @@
       </div>
     </div>
   </div>
+  <app-dialog-window *ngIf="isOpen" (isOpen)="manageDialog($event)"></app-dialog-window>
 </div>
 

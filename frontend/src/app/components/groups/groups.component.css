@@ -29,6 +29,7 @@
   border: 1px solid var(--blue-main);
   border-radius: 15px;
   color: var(--color-navbar-text);
+  cursor: pointer;
 }
 
 .groups__block-container {

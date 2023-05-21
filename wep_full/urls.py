@@ -34,4 +34,5 @@ urlpatterns = [
     path('auth-token/', include('djoser.urls.authtoken')),
 
     path(r'api/account/', include('account.urls')),
+    path(r'api/teacher/', include('teacher.urls')),
 ]

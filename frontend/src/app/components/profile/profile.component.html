@@ -6,18 +6,42 @@
       <h2 class="profile__title">Информация о профиле</h2>
     </div>
     <div class="profile__block-container">
-      <div class="profile__block-group">Фамилия: {{ user.last_name }}</div>
-      <div class="profile__block-group">Имя: {{ user.first_name }}</div>
-      <div class="profile__block-group">Отчество: {{ user.patronymic }}</div>
+      <label class="profile__block">
+        Фамилия
+        <div class="profile__block-group">{{ user.last_name }}</div>
+      </label>
+      <label class="profile__block">
+        Имя
+        <div class="profile__block-group">{{ user.first_name }}</div>
+      </label>
+      <label class="profile__block">
+        Отчество
+        <div class="profile__block-group"> {{ user.patronymic }}</div>
+      </label>
     </div>
     <div class="profile__block-container">
-      <div class="profile__block-group">email: {{ user.email }}</div>
+      <label class="profile__block">
+        Электронная почта
+        <div class="profile__block-group"> {{ user.email }}</div>
+      </label>
     </div>
     <div class="profile__block-container">
-      <div class="profile__block-group">Место учебы: {{ user.location }}</div>
-      <div class="profile__block-group">Номер школы: {{ user.school_number }}</div>
-      <div class="profile__block-group">{{ user.is_teacher }}</div>
-      <div class="profile__block-group">{{ user.gender }}</div>
+      <label class="profile__block">
+        Место учебы
+        <div class="profile__block-group">{{ user.location }}</div>
+      </label>
+      <label class="profile__block">
+        Номер школы
+        <div class="profile__block-group">{{ user.school_number }}</div>
+      </label>
+      <label class="profile__block">
+        Роль
+        <div class="profile__block-group">{{ user.is_teacher }}</div>
+      </label>
+      <label class="profile__block">
+        Пол
+        <div class="profile__block-group">{{ user.gender }}</div>
+      </label>
     </div>
   </div>
 </div>

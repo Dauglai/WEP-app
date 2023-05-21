@@ -6,9 +6,11 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.forms import modelformset_factory, NumberInput, TextInput, Textarea, inlineformset_factory
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from rest_framework.decorators import action
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, CreateAPIView
 from rest_framework.mixins import ListModelMixin
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from account.models import Account
 from student.models import Account_Statistics
@@ -17,7 +19,7 @@ from .models import Test, Question, Group
 from .forms import TestForm, QuestionFormSet, GroupFrom, Question_InlineFormset, RewardStudent, UpdateGroupForm
 
 
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, authentication
 from .serializers import GroupSerializer, TestsSerializer
 
 
@@ -33,6 +35,29 @@ class GropViewSet(viewsets.ModelViewSet):
 
         groups_serializer = self.serializer_class(groups, many=True)
         return Response(groups_serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        print(request.user)
+        serializer = GroupSerializer(data=request.data)
+        serializer.data.owner = request.user.email
+        serializer.data.owner_name = request.user.get_full_name()
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class CreateGroup(APIView):
+    # authentication_classes = [authentication.TokenAuthentication]
+    serializer_class = GroupSerializer
+    def post(self, request):
+        serializer = GroupSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(
+                owner=request.user,
+                owner_name= f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}'
+            )
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TasksViewSet(viewsets.ModelViewSet):

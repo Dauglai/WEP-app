@@ -21,6 +21,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { GroupsComponent } from './components/groups/groups.component';
 import { ConstructorComponent } from './components/constructor/constructor.component';
+import {DialogWindowComponent} from "./components/dialog-window/dialog-window.component";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ConstructorComponent } from './components/constructor/constructor.compo
     ProfileComponent,
     GroupsComponent,
     ConstructorComponent,
+    DialogWindowComponent,
   ],
   imports: [
     TuiButtonModule,

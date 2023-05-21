@@ -64,6 +64,11 @@
   align-items: center;
 }
 
+.header__name-user {
+  font-size: 14px;
+  margin-right: 20px;
+}
+
 .header__notification {
   height: 30px;
   width: 30px;

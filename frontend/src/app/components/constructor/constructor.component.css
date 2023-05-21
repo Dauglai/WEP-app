@@ -1,0 +1,237 @@
+textarea {
+  width: 95%;
+}
+
+.constructor__container {
+  position: relative;
+  padding: 10px 50px 50px 20px;
+}
+
+.constructor__nav-container {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.constructor__title {
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 40px;
+}
+
+.constructor__btn-add {
+  padding: 10px 30px;
+  /*height: 30px;*/
+  align-items: center;
+  background: var(--blue-main);
+  border: 1px solid var(--blue-main);
+  border-radius: 15px;
+  color: var(--color-navbar-text);
+}
+
+.constructor__block-container {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  position: relative;
+}
+
+.test__container {
+	border: 1px solid var(--blue-main);
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+}
+
+.form {
+  display: inline-block;
+	margin: 30px 0 30px 40px;
+	width: 50%;
+  z-index: 1000;
+}
+
+.form__item {
+	margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.form__item:last-child {
+  margin-bottom: 60px;
+}
+
+.form-fieldset {
+  position: relative;
+  border: none;
+  border-bottom: 1px solid var(--blue-main);
+  padding: 30px 40px 15px 40px;
+}
+
+.form-fieldset:last-child {
+  /* margin: 0; */
+  /* padding: 0; */
+  border: none;
+  padding-top: 15px;
+}
+
+.title-question-number {
+  margin-top: 0;
+  font-weight: 500;
+}
+
+.test-difficulty {
+  min-width: 300px;
+}
+
+
+/*Для стилизации форм*/
+/* QuestionFormSet */
+
+.question {
+	/*border: 1px solid #cfcfcf;*/
+	/*margin-bottom: 20px;*/
+    /*width: 250px;*/
+    /*height: 50px;*/
+}
+
+.answer {
+
+}
+
+/* Стилизия полей формы */
+
+.name-test {
+
+}
+
+.test-difficulty {
+  width: 30px !important;
+}
+
+/* Конец стилизии полей формы */
+
+.list_reset {
+	list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-question {
+  margin-bottom: 20px;
+}
+
+.sec__item{
+  margin-bottom: 20px;
+}
+
+.list-classes {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.list-classes__item {
+	margin-right: 30px;
+}
+
+.list-classes__item:first-child {
+	margin-left: 20px;
+}
+
+.add-question {
+	display: block;
+	width: 180px;
+  text-decoration: none;
+  padding: 5px 30px 5px;
+  min-width: 120px;
+  padding: 12px 25px 12px;
+  margin-right: 70px;
+  border-radius: 8px;
+  border: none !important;
+  background-color: var(--header-color-1) !important;
+  cursor: pointer;
+}
+
+.del-question {
+  display: block;
+	width: 180px;
+  text-decoration: none;
+  padding: 5px 30px 5px;
+  min-width: 120px;
+  padding: 12px 25px 12px;
+  margin-right: 70px;
+  border-radius: 8px;
+  border: none !important;
+  background-color: var(--header-color-1) !important;
+  cursor: pointer;
+}
+
+.mark-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mark-list li {
+  margin-right: 10px;
+  position: relative;
+  top: 5px;
+}
+
+.mark-list li:last-child {
+  margin-right: 0;
+}
+
+.mark-list__tiitle {
+  margin-right: 20px;
+  width: 80px;
+  /* text-align: center; */
+}
+
+.field__mark {
+  width: 50px;
+}
+
+.btn-save {
+  margin-top: 20px;
+  margin-right: 30px !important;
+  text-decoration: none;
+  padding: 5px 30px 5px;
+  min-width: 120px;
+  padding: 12px 25px 12px;
+  margin-right: 70px;
+  border-radius: 8px;
+  color: #ecebeb;
+  border: none !important;
+  background-color: var(--blue-main) !important;
+  cursor: pointer;
+}
+
+/* Памятка */
+
+.explanations {
+  position: absolute;
+  height: 100%;
+  border-radius: 10px;
+  border-left: 1px solid var(--blue-main);
+  right: 0;
+  top: 0;
+  width: 35%;
+  /* padding-left: 20px; */
+  padding: 0 30px 15px 30px;
+  user-select: none;
+}
+
+.explanations__heading {
+  font-size: 18px;
+  font-weight: 500;
+  /* color: var(--main-heading-1); */
+}
+
+.explanations__text {
+  font-size: 14px;
+}
