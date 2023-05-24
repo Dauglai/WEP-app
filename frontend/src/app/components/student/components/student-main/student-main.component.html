@@ -1,0 +1,66 @@
+<main class="main-container">
+  <div class="container">
+    <ul class="list-blocks">
+      <li class="character">
+        <div class="block__container">
+          <h2 class='block__h'>Персонаж</h2>
+          <div class="block__character"></div>
+          <div class="field-balance"> balance gold</div>
+          <div class="block__rating-position" >
+            <span class="place_in_rating">1 место из 2</span>
+          </div>
+          <div class="block__characteristic">
+            <h4 class="block__h-char">Характеристики</h4>
+            <div>Имя героя: name </div>
+            <div>Здоровье: health </div>
+            <div>Выносливость: endurance </div>
+            <div>Сила: power </div>
+            <div>Ловкость: dexterity</div>
+            <div>Стойкость: resistance</div>
+            <div>Свободные очки навыков: up_score</div>
+          </div>
+        </div>
+      </li>
+      <li class="closed-tasks">
+        <div class="block__container">
+          <h2 class='block__h'>Выполненные задания</h2>
+        </div>
+      </li>
+      <li class="tasks-and-teams">
+        <ul class="list-blocks">
+          <li class="tasks">
+            <div class="block__container">
+              <h2 class='block__h'>Текущие задания</h2>
+              <!--                  {% for task in tasks %}-->
+              <!--                      <a href="{{ task.get_absolute_url }}">-->
+              <div class="block__test">
+                <span>Название: title - difficulty</span>
+                <span>Предмет: subject</span>
+                <div>Учитель: owner_name</div>
+                <span>Дедлайн: time_deadline date_deadline</span>
+              </div>
+              <!--                      </a>-->
+              <!--                    {% empty %}-->
+              <!--                    <p>Отсутствуют новые задания</p>-->
+              <!--                  {% endfor %}-->
+            </div>
+          </li>
+          <li class="teams">
+            <div class="block__container">
+              <h2 class='block__h'>Группы</h2>
+              <button class="block__btn add-new-group">Присоединиться</button>
+              <!--                  {% for group in groups %}-->
+              <!--                        <a href="{{ group.get_absolute_url }}">-->
+              <div class="block__test">
+                <span>group_name - owner_name</span>
+                <a class="close-group-btn">watch</a>
+                <a class="close-group-btn" >del</a>
+              </div>
+              <!--                      </a>-->
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</main>

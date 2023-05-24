@@ -1,0 +1,73 @@
+<div class="constructor__container">
+  <div class="constructor__nav-container">
+    <h2 class="constructor__title">Конструктор заданий</h2>
+  </div>
+  <div class="constructor__block-container">
+    <div class="test__container">
+      <form method="post" class="form" [formGroup]="constFrom" (ngSubmit)="submit()">
+        <div class="block__test">
+          <span>Название теста:</span>
+          <div>
+            <textarea name="story" rows="2" cols="45" formControlName="title"></textarea>
+          </div>
+        </div>
+        <div class="form__item">
+          <ul class="list_reset">
+            <li class="sec__item">
+              <span>Название предмета: </span>
+              <div>
+                <textarea name="story" rows="1" cols="45" formControlName="subject"></textarea>
+              </div>
+            </li>
+            <li class="sec__item">
+              <span>Дополнительный текст к тесту: </span>
+              <div>
+                <textarea name="story" rows="3" cols="45" formControlName="text"></textarea>
+              </div>
+            </li>
+            <li class="sec__item">
+              <span>Сложность: </span><input type="number" min="0" max="10"
+                                             formControlName="difficulty"> [от 0 до 10]
+            </li>
+          </ul>
+        </div>
+        <div class="form__item">
+          <ul class="list_reset">
+            <li class="sec__item">
+              <div>
+                <span>Время выполнения: <input type="time" formControlName="time"></span> [часы:минуты]
+              </div>
+            </li>
+            <li class="sec__item">
+              <div style="margin-bottom: 10px;">
+                <span>Время сдачи: <input type="time" formControlName="time_deadline"></span>
+                [часы:минуты]</div>
+              <div>
+                <span>Дата сдачи: <input type="date" formControlName="date_deadline"></span>
+                [день:месяц:год]
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="form__item">
+          <ul class="list_reset mark-list">
+            <span class="mark-list__tiitle">Критерии оценивания:</span>
+            <li>5 - <input type="number" class="field__mark" formControlName="five" min="0"></li>
+            <li>4 - <input type="number" class="field__mark" formControlName="four" min="0"></li>
+            <li>3 - <input type="number" class="field__mark" formControlName="three" min="0"></li>
+            <li>2 - <input type="number" class="field__mark" formControlName="two" min="0"></li>
+          </ul>
+        </div>
+        <!-- <button type="button" class="add-question">Добавить вопрос +</button> -->
+        <button type="submit" class="btn-save">Сохранить</button>
+        <span>{{ error }}</span>
+      </form>
+      <div class="explanations">
+        <h2 class="explanations__heading">Памятка</h2>
+        <span class="explanations__text">
+          Заполните все поля формы и нажмите кнопку "Сохранить".
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

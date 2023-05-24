@@ -16,6 +16,12 @@ export class TaskService {
     });
   }
 
+  getTask(id: number): any {
+      return this.http.get<ITest[]>(this.apiUrl + id, {headers:
+        {Authorization: 'Token ' + localStorage.getItem('my-token')}
+    });
+  }
+
   createTask(newTask: any) {
       this.http.post(this.apiUrl, newTask);
   }

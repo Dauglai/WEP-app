@@ -20,6 +20,7 @@ export class AppComponent implements OnInit{
         console.log(data);
         localStorage.setItem('user-email', data.email);
         localStorage.setItem('user-full-name', `${data.last_name} ${data.first_name} ${data.patronymic}`);
+        localStorage.setItem('is-teacher', data.is_teacher);
       },
       error => {
         console.log(error);

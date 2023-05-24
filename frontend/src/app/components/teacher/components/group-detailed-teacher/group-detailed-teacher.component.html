@@ -1,0 +1,53 @@
+<a href="/teacher/group/list" class="group__btn_back"><img src="../../../../../assets/img/tasks/arrow-to-left-svgrepo-com.svg"></a>
+<div class="group__container">
+  <div class="group__inf">
+    <div>
+      Название группы: {{ group.group_name }}
+    </div>
+    <div>
+      Владелец: {{ group.owner_name }}
+    </div>
+    <div>
+      Login: {{ group.login }}
+    </div>
+    <div>
+      Пароль: {{ group.password }}
+    </div>
+  </div>
+  <tui-accordion-item class="group__participants">
+    Участники
+    <ng-template tuiAccordionItemContent>
+      <div *ngFor="let account of accounts; let i=index">
+        <div>
+          {{ account.last_name }} {{ account.first_name }} {{ account.patronymic }}
+        </div>
+        <div class="group__participant">
+          Очки: {{ participants[i].score }}
+          Опыт: {{ participants[i].experience }}
+          Уровень: {{ participants[i].lvl }}
+        </div>
+      </div>
+    </ng-template>
+  </tui-accordion-item>
+  <tui-accordion-item>
+    Тесты
+    <ng-template tuiAccordionItemContent>
+      <div class="group__block-container">
+        <div *ngFor="let test of tests" class="tests__block-group">
+          <div class="test__field">
+            <span>Название: </span>
+            <span>{{ test.title }}</span>
+          </div>
+          <div class="test__field">
+            <span>Предмет: </span>
+            <span>{{ test.subject }}</span>
+          </div>
+          <div class="test__field">
+            <span>Дедлайн: </span>
+            <span>{{ test.time_deadline }} {{ test.date_deadline }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </tui-accordion-item>
+</div>

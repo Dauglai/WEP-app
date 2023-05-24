@@ -7,16 +7,35 @@ import {AccountService} from "../../servicies/account.service";
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit{
+  user: string = '';
+  isTeacher: boolean = false;
+  isAuthentication: boolean = false;
 
   constructor(private accountService: AccountService) { }
   ngOnInit() {
-    // this.getUserWithToken(localStorage.getItem('my-token'));
+    this.getUserWithToken(localStorage.getItem('my-token'));
     console.log(localStorage.getItem('my-token'));
   }
   getUserWithToken(MyToken: any): void {
     this.accountService.getAccountWhithToken(MyToken).subscribe(
-      data => {
-        console.log(data);
+      (data: any) => {
+        console.log(data)
+        this.user = `${data.last_name} ${data.first_name} ${data.patronymic}`;
+        this.isAuthentication = true;
+      },
+      error => {
+        console.log(error);
+        this.isAuthentication = false;
+      }
+    )
+  }
+
+  logout(): void {
+    this.accountService.logout().subscribe(
+      (data: any) => {
+        console.log(data)
+        this.isAuthentication = false;
+        localStorage.clear();
       },
       error => {
         console.log(error);

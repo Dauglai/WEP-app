@@ -4,15 +4,12 @@ from django.template.response import TemplateResponse
 from django.views.generic import ListView, TemplateView, FormView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.forms import modelformset_factory, NumberInput, TextInput, Textarea, inlineformset_factory
-from django.http import HttpResponseRedirect, HttpResponseNotFound
-from rest_framework.decorators import action
-from rest_framework.generics import GenericAPIView, CreateAPIView
-from rest_framework.mixins import ListModelMixin
-from rest_framework.permissions import AllowAny
+from django.http import HttpResponseRedirect, HttpResponseNotFound, JsonResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from account.models import Account
+from account.serializers import AccountSerializer, AccountGetSerializer
 from student.models import Account_Statistics
 from .decorators import access_teacher
 from .models import Test, Question, Group
@@ -20,7 +17,7 @@ from .forms import TestForm, QuestionFormSet, GroupFrom, Question_InlineFormset,
 
 
 from rest_framework import viewsets, status, authentication
-from .serializers import GroupSerializer, TestsSerializer
+from .serializers import GroupSerializer, TestSerializer, ParticipantSerializer, QuestionSerializer
 
 
 # <angular>
@@ -36,8 +33,8 @@ class GropViewSet(viewsets.ModelViewSet):
         groups_serializer = self.serializer_class(groups, many=True)
         return Response(groups_serializer.data, status=status.HTTP_200_OK)
 
+
     def post(self, request):
-        print(request.user)
         serializer = GroupSerializer(data=request.data)
         serializer.data.owner = request.user.email
         serializer.data.owner_name = request.user.get_full_name()
@@ -46,9 +43,62 @@ class GropViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class GetGroup(APIView):
+    serializer_class = GroupSerializer
+
+    def get(self, request, *args, **kwargs):
+        id = self.kwargs['pk']
+        group = Group.objects.get(pk=id)
+        groups_serializer = self.serializer_class(group)
+        return Response(groups_serializer.data)
+
+
+class GetParticipants(APIView):
+    serializer_class = ParticipantSerializer
+
+    def get(self, request, *args, **kwargs):
+        id = self.kwargs['pk']
+        group = Group.objects.get(pk=id)
+        participants = Account_Statistics.objects.filter(groups=group.pk)
+        participants_serializer = self.serializer_class(participants, many=True)
+        return Response(participants_serializer.data)
+
+
+class GetTestByGrop(APIView):
+    serializer_class = TestSerializer
+
+    def get(self, request, *args, **kwargs):
+        id = self.kwargs['pk']
+        group = Group.objects.get(pk=id)
+        tests = Test.objects.filter(group=group)
+        tests_serializer = self.serializer_class(tests, many=True)
+        return Response(tests_serializer.data)
+
+
+class GetAccounts(APIView):
+    serializer_class = AccountGetSerializer
+
+    def get(self, request, *args, **kwargs):
+        accounts = []
+        group_pk = self.kwargs['pk']
+        group = Group.objects.get(pk=group_pk)
+        all_accounts = Account_Statistics.objects.all()
+        participants = all_accounts.filter(groups=group.pk)
+        for participant in participants:
+            participant_id = participant.account.pk
+            account = Account.objects.get(pk=participant_id)
+            accounts.append(account)
+            print("account", account)
+        print(accounts)
+        participants_serializer = self.serializer_class(accounts, many=True)
+        return Response(participants_serializer.data)
+
+
 class CreateGroup(APIView):
     # authentication_classes = [authentication.TokenAuthentication]
     serializer_class = GroupSerializer
+
     def post(self, request):
         serializer = GroupSerializer(data=request.data)
         if serializer.is_valid():
@@ -62,26 +112,45 @@ class CreateGroup(APIView):
 
 class TasksViewSet(viewsets.ModelViewSet):
     queryset = Test.objects.all()
-    serializer_class = TestsSerializer
+    serializer_class = TestSerializer
 
     def list(self, request):
-        # tests = request.user.test_set.all()
         tests = Test.objects.filter(owner=request.user.id)
-        print('user:', request.user)
-
         tests_serializer = self.serializer_class(tests, many=True)
         return Response(tests_serializer.data, status=status.HTTP_200_OK)
 
+    def get(self, request, *args, **kwargs):
+        id = self.kwargs['pk']
+        test = Test.objects.get(pk=id)
+        test_serializer = self.serializer_class(test)
+        return Response(test_serializer.data, status=status.HTTP_200_OK)
 
-# class GropView(ListModelMixin, GenericAPIView):
-#     serializer_class = GroupSerializer
-#
-#     def get_queryset(self):
-#         pk = self.kwargs['pk']
-#         return Group.objects.filter(owner=pk)
-#
-#     def get(self, request, *args, **kwargs):
-#         return self.list(request, *args, **kwargs)
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+
+    def list(self, request):
+        question = Question.objects.filter(owner=request.user.id)
+        question_serializer = self.serializer_class(question, many=True)
+        return Response(question_serializer.data, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, *args, **kwargs):
+        id = self.kwargs['pk']
+        question = Question.objects.filter(test=id)
+        question_serializer = self.serializer_class(question, many=True)
+        return Response(question_serializer.data, status=status.HTTP_200_OK)
+
+
+def GetTest(APIView):
+    serializer_class = TestSerializer
+    def get(self, request, *args, **kwargs):
+        id = self.kwargs['pk']
+        test = Test.objects.get(pk=id)
+        test_serializer = self.serializer_class(test)
+        return Response(test_serializer.data, status=status.HTTP_200_OK)
+
+
 # </angular>
 
 
@@ -147,31 +216,6 @@ class QuestionEditView(TemplateView):
         return self.render_to_response(data)
 
 
-# from .serializers import QuestionSerializer, AnswerSerializer
-# from rest_framework.permissions import IsAuthenticated
-# from rest_framework.generics import GenericAPIView
-# from rest_framework.response import Response
-
-
-# class GetQuestion(GenericAPIView):
-#     permission_classes = (IsAuthenticated,)
-#     serializer_class = QuestionSerializer
-#
-#     def get(self, request, format=None):
-#         questions = Question.objects.all()
-#         last_point = QuestionSerializer(questions, many=True)
-#         return Response(last_point.data)
-#
-#
-# class QuestionAnswer(GenericAPIView):
-#     permission_classes = (IsAuthenticated,)
-#     serializer_class = AnswerSerializer
-#
-#     def post(self, request, format=None):
-#         answer = AnswerSerializer(data=request.data, context=request)
-#         if answer.is_valid(raise_exception=True):
-#             answer.save()
-#             return Response({'result': 'OK'})
 
 @login_required
 @access_teacher

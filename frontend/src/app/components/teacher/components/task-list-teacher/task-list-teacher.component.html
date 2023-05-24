@@ -1,0 +1,27 @@
+<div class="tests__container">
+  <div class="tests__nav-container">
+    <h2 class="tests__title">Текущие задания</h2>
+  </div>
+  <div class="tests__block-container">
+    <div *ngFor="let task of tasks" class="tests__block-group">
+      <div class="test__field">
+        <span>Название: </span>
+        <span>{{ task.title }}</span>
+      </div>
+      <div class="test__field">
+        <span>Предмет: </span>
+        <span>{{ task.subject }}</span>
+      </div>
+      <div class="test__field">
+        <span>Дедлайн: </span>
+        <span>{{ task.time_deadline }} {{ task.date_deadline }}</span>
+      </div>
+      <div class="control-panel">
+        <a><img class="control-panel__btn_edit" src="../../../assets/img/tasks/edit.svg" alt="edit"></a>
+        <a><img class="control-panel__btn_view" src="../../../assets/img/tasks/view.svg" alt="edit"></a>
+        <a><img class="control-panel__btn_delete" src="../../../assets/img/tasks/delete.svg" alt="edit"></a>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,16 +1,22 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from . import views
-from .views import QuestionAddView, GropViewSet, TasksViewSet, CreateGroup
+from .views import GropViewSet, TasksViewSet, CreateGroup, GetGroup, GetParticipants, GetAccounts, \
+    GetTestByGrop, QuestionViewSet
 
 router = DefaultRouter()
 router.register(r'groups', GropViewSet)
 router.register(r'tests', TasksViewSet)
+router.register(r'questions', QuestionViewSet)
 
 urlpatterns = [
     path(r'', include(router.urls)),
     path(r'create_group/', CreateGroup.as_view(), name='createGroup'),
+    path('get_group/<int:pk>/', GetGroup.as_view(), name='getGroup'),
+    path('get_participants/<int:pk>/', GetParticipants.as_view(), name='getParticipants'),
+    path('get_accounts/<int:pk>/', GetAccounts.as_view(), name='getAccounts'),
+    path('get_tests_by_group/<int:pk>/', GetTestByGrop.as_view(), name='getAccounts'),
+
 
     # path('group/', GropView.as_view(), name='group'),
 

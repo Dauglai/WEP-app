@@ -5,8 +5,14 @@
       <span class="header__logo_text">Master of Dungeons</span>
     </a>
     <div class="header__nav">
-      <a routerLink="/registration" class="header__link">РЕГИСТРАЦИЯ</a>
-      <a routerLink="/login" class="header__link">ВХОД</a>
+      <div *ngIf="!isAuthentication; else elseBlock">
+        <a routerLink="/registration" class="header__link">РЕГИСТРАЦИЯ</a>
+        <a routerLink="/login" class="header__link">ВХОД</a>
+      </div>
+      <ng-template #elseBlock>
+        <span class="header__name-user">{{ user }}</span>
+        <a (click)="logout()" class="header__link">ВЫХОД</a>
+      </ng-template>
     </div>
   </div>
 </header>
@@ -16,8 +22,8 @@
   <section class="section start-section" id="tasks">
 <!--    <h2>Начать путешествие</h2>-->
     <div class="btn-container">
-      <a routerLink="/groups" class="btn-start">Начать (за учителя)</a>
-      <a routerLink="/student" class="btn-start">Начать (за ученика)</a>
+      <a routerLink="/teacher/group/list" class="btn-start">Начать (за учителя)</a>
+      <a routerLink="/student/main" class="btn-start">Начать (за ученика)</a>
       <a routerLink="/login" class="btn-start">Начать (login)</a>
     </div>
   </section>

@@ -7,8 +7,11 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HeaderComponent implements OnInit{
   userName: string | null = ''
+  isTeacher: boolean = false;
 
   ngOnInit(){
     this.userName = localStorage.getItem('user-full-name');
+    this.isTeacher = localStorage.getItem('is-teacher') == 'True';
+    console.log(this.isTeacher);
   }
 }

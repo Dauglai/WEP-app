@@ -8,6 +8,12 @@ class UserRegistrSerializer(serializers.ModelSerializer):
         fields = ('last_name', 'first_name', 'patronymic', 'email', 'password', 'password2')
 
 
+class AccountGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ('last_name', 'first_name', 'patronymic')
+
+
 class AccountSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField()
 

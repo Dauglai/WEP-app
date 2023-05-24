@@ -1,19 +1,27 @@
 from rest_framework import serializers
-from .models import Group, Test
+
+from student.models import Account_Statistics
+from .models import Group, Test, Question
 
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = ('owner', 'owner_name', 'group_name', 'login', 'password')
+        fields = ('id', 'owner', 'owner_name', 'group_name', 'login', 'password')
+
+class ParticipantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account_Statistics
+        fields = ('balance', 'score', 'experience', 'lvl')
 
 
-class TestsSerializer(serializers.ModelSerializer):
+class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
         fields = '__all__'
 
 
-
-
-
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = '__all__'

@@ -74,13 +74,16 @@
 .header__link {
   text-decoration: none;
   color: var(--blue-main);
+  cursor: pointer;
 }
 
 .header__link:first-child {
   margin-right: 20px;
 }
 
-
+.header__name-user {
+  margin-right: 20px;
+}
 
 .container {
   position: relative;
