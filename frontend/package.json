@@ -23,6 +23,8 @@
     "@taiga-ui/icons": "^3.26.0",
     "@taiga-ui/kit": "^3.26.0",
     "@tinkoff/ng-dompurify": "3.0.0",
+    "ajv": "^8.12.0",
+    "angular": "^1.8.3",
     "dompurify": "2.2.9",
     "randomcolor": "^0.6.2",
     "rxjs": "~7.8.0",
