@@ -13,4 +13,5 @@ https://github.com/webpack/webpack/issues/5469 (если ошибка с ajv)
 **Клиент:**
 
 cd frontend
+
 ng serve (ng serve --port <номер порта>)
