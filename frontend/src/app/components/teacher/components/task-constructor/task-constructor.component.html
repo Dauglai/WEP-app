@@ -73,58 +73,50 @@
 
 
   <div *ngIf="nextPage" class="test__container">
-    <form method="post" id="form-container">
-      <!--          {{question_formset.management_form}}-->
-      <fieldset class="form-fieldset question-form">
-        <h3 class="title-question-number">Вопрос №<span class="question-number">1</span></h3>
+    <form method="post">
+      <fieldset class="form">
+        <h3 class="title-question-number">Вопрос №<span class="question-number"></span></h3>
         <div>
           <div class="form__item">
             Поле для ввода вопроса
             <div>
-              <input/>
+              <textarea type="text"></textarea>
             </div>
           </div>
           <div class="form__item">
-            Ответ
+            Вариант ответа №1:
             <div>
-              <input/>
+              <input type="text"/>
             </div>
           </div>
           <div class="form__item">
-            Ответ
+            Вариант ответа №2:
             <div>
-              <input/>
+              <input type="text"/>
             </div>
           </div>
           <div class="form__item">
-            Ответ
+            Вариант ответа №3:
             <div>
-              <input/>
+              <input type="text"/>
             </div>
           </div>
           <div class="form__item">
-            Ответ
+            Вариант ответа №4:
             <div>
-              <input/>
+              <input type="text"/>
             </div>
           </div>
           <div class="form__item">
-            <!--                  {{form.number_correct_answer.label_tag}}-->
-            <input/>
+            Номер правильного ответа:
+            <input type="number"/>
           </div>
           <div class="form__item">
-            <!--                  {{form.reward.label_tag}}-->
-            <input/>
+            Количество баллов:
+            <input type="number"/>
           </div>
         </div>
-        <div class="explanations">
-          <h4 class="explanations__heading">Памятка</h4>
-          <span class="explanations__text">
-            Заполните все поля формы и нажмите кнопку "Сохранить".
-            <p>Будет создано тестовое задание, которым можно поделиться с учениками.</p>
-          </span>
-        </div>
-        <button type="button" class="del-question">Удалить вопрос -</button>
+        <button type="button" class="add-question">Удалить вопрос -</button>
       </fieldset>
       <fieldset class="form-fieldset">
         <button type="button" class="add-question">Добавить вопрос +</button>
@@ -132,5 +124,12 @@
         <button type="submit" class="btn-save" (click)="returnTest()">Назад</button>
       </fieldset>
     </form>
+    <div class="explanations">
+      <h4 class="explanations__heading">Памятка</h4>
+      <span class="explanations__text">
+        Заполните все поля формы и нажмите кнопку "Сохранить".
+        <p>Будет создано тестовое задание, которым можно поделиться с учениками.</p>
+      </span>
+    </div>
   </div>
 </div>

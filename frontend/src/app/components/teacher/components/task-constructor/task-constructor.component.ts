@@ -7,15 +7,11 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./task-constructor.component.css']
 })
 export class TaskConstructorComponent {
-error ='';
+  error ='';
+  nextPage: boolean = false;
   userEmail = localStorage.getItem('user-email');
   userName = localStorage.getItem('user-full-name');
   constFrom = new FormGroup({
-
-    // На стороне сервера
-    // owner: new FormControl('', [Validators.required]),
-    // owner_name: new FormControl('', [Validators.required]),
-
     title: new FormControl('', [Validators.required]),
     subject: new FormControl('', [Validators.required]),
     group: new FormControl('', [Validators.required]),
@@ -31,6 +27,15 @@ error ='';
     three: new FormControl('', [Validators.required]),
     two: new FormControl('', [Validators.required]),
   })
+
+  saveTest(): void {
+    this.nextPage = true;
+    console.log(this.constFrom.value);
+  }
+
+  returnTest(): void {
+    this.nextPage = false;
+  }
 
   convertDate(date: string): string {
     // год, месяц, день

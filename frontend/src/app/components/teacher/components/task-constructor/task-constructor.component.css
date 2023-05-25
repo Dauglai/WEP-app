@@ -54,6 +54,7 @@ textarea {
 	margin: 30px 0 30px 40px;
 	width: 50%;
   z-index: 1000;
+  border: none;
 }
 
 .form__item {
@@ -67,16 +68,10 @@ textarea {
 
 .form-fieldset {
   position: relative;
+  width: 65%;
   border: none;
-  border-bottom: 1px solid var(--blue-main);
-  padding: 30px 40px 15px 40px;
-}
-
-.form-fieldset:last-child {
-  /* margin: 0; */
-  /* padding: 0; */
-  border: none;
-  padding-top: 15px;
+  padding: 10px 40px 35px 50px;
+  border-top: 1px solid var(--blue-main);
 }
 
 .title-question-number {
@@ -153,7 +148,8 @@ textarea {
   margin-right: 70px;
   border-radius: 8px;
   border: none !important;
-  background-color: var(--header-color-1) !important;
+  background-color: #b1bbce !important;
+  color: white;
   cursor: pointer;
 }
 
