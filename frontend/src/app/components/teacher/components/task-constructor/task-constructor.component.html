@@ -3,7 +3,7 @@
     <h2 class="constructor__title">Конструктор заданий</h2>
   </div>
   <div class="constructor__block-container">
-    <div class="test__container">
+    <div *ngIf="!nextPage" class="test__container">
       <form method="post" class="form" [formGroup]="constFrom" (ngSubmit)="submit()">
         <div class="block__test">
           <span>Название теста:</span>
@@ -59,7 +59,7 @@
           </ul>
         </div>
         <!-- <button type="button" class="add-question">Добавить вопрос +</button> -->
-        <button type="submit" class="btn-save">Сохранить</button>
+        <button type="submit" class="btn-save" (click)="saveTest()">Сохранить</button>
         <span>{{ error }}</span>
       </form>
       <div class="explanations">
@@ -69,5 +69,68 @@
         </span>
       </div>
     </div>
+  </div>
+
+
+  <div *ngIf="nextPage" class="test__container">
+    <form method="post" id="form-container">
+      <!--          {{question_formset.management_form}}-->
+      <fieldset class="form-fieldset question-form">
+        <h3 class="title-question-number">Вопрос №<span class="question-number">1</span></h3>
+        <div>
+          <div class="form__item">
+            Поле для ввода вопроса
+            <div>
+              <input/>
+            </div>
+          </div>
+          <div class="form__item">
+            Ответ
+            <div>
+              <input/>
+            </div>
+          </div>
+          <div class="form__item">
+            Ответ
+            <div>
+              <input/>
+            </div>
+          </div>
+          <div class="form__item">
+            Ответ
+            <div>
+              <input/>
+            </div>
+          </div>
+          <div class="form__item">
+            Ответ
+            <div>
+              <input/>
+            </div>
+          </div>
+          <div class="form__item">
+            <!--                  {{form.number_correct_answer.label_tag}}-->
+            <input/>
+          </div>
+          <div class="form__item">
+            <!--                  {{form.reward.label_tag}}-->
+            <input/>
+          </div>
+        </div>
+        <div class="explanations">
+          <h4 class="explanations__heading">Памятка</h4>
+          <span class="explanations__text">
+            Заполните все поля формы и нажмите кнопку "Сохранить".
+            <p>Будет создано тестовое задание, которым можно поделиться с учениками.</p>
+          </span>
+        </div>
+        <button type="button" class="del-question">Удалить вопрос -</button>
+      </fieldset>
+      <fieldset class="form-fieldset">
+        <button type="button" class="add-question">Добавить вопрос +</button>
+        <button type="submit" class="btn-save">Сохранить</button>
+        <button type="submit" class="btn-save" (click)="returnTest()">Назад</button>
+      </fieldset>
+    </form>
   </div>
 </div>
