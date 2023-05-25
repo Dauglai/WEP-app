@@ -21,17 +21,28 @@ export class StudentMainComponent implements OnInit {
 
   ngOnInit() {
     this.getGroups();
-    this.getTesks();
+    this.getTasks();
   }
 
-  getTesks(): void {
+  public isOpen = false;
+
+  public showDialog() {
+    this.isOpen = true;
+  }
+
+  protected manageDialog(isOpen: boolean) {
+    this.isOpen = false;
+    this.getGroups();
+  }
+
+  getTasks(): void {
     this.taskService.getTestsByGroup().subscribe(
-        (tests: any) => {
-          console.log(tests);
-          this.tasks = tests;
-        }
-      )
-    }
+      (tests: any) => {
+        console.log(tests);
+        this.tasks = tests;
+      }
+    )
+  }
 
   getGroups(): void {
     this.groupService.getGroupsStudent().subscribe(

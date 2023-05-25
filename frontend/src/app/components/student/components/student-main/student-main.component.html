@@ -43,7 +43,7 @@
           <li class="teams">
             <div class="block__container">
               <h2 class='block__h'>Группы</h2>
-              <button class="block__btn add-new-group">Присоединиться</button>
+              <button class="block__btn add-new-group" (click)="showDialog()">Присоединиться</button>
               <div *ngFor="let group of groups" class="block__test" routerLink="/student/group/details/{{group.id}}">
                 <div>Название: {{group.group_name}}</div>
                 <div>Учитель: {{group.owner_name}}</div>
@@ -58,3 +58,5 @@
     </ul>
   </div>
 </main>
+<app-dialog-window-student *ngIf="isOpen" (isOpen)="manageDialog($event)"></app-dialog-window-student>
+

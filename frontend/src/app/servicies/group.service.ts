@@ -60,8 +60,8 @@ constructor(private http: HttpClient, private taskService: TaskService) { }
     return this.http.post(this.apiGroupCreate, group, {headers: this.headers});
   }
 
-  joinGroup(nameGroup: string, login: string, password: string): Observable<any> {
-    const group = {group_name:  nameGroup, login: login, password: password};
+  joinGroup(login: string, password: string): Observable<any> {
+    const group = {login: login, password: password};
     return this.http.post(this.apiGroupCreate, group, {headers: this.headers});
   }
 }

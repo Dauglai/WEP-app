@@ -120,6 +120,7 @@
   border: none;
 
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .block__character {

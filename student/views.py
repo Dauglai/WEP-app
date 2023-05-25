@@ -34,13 +34,12 @@ class GetTestByGrop(viewsets.ModelViewSet):
         print(user_stat)
         groups = user_stat.groups.all()
         print(groups)
-        tests = getAllTests(groups)
+        tests = get_all_tests(groups)
         tests_serializer = self.serializer_class(tests, many=True)
         return Response(tests_serializer.data)
 
 
-
-def getAllTests(groups):
+def get_all_tests(groups):
     tasks = []
     for group in groups:
         x = Test.objects.filter(group=group)
@@ -48,6 +47,21 @@ def getAllTests(groups):
             tasks = tasks + list(x)
     print(tasks)
     return set(tasks)
+
+
+class JoinGroup(APIView):
+    serializer_class = GroupSerializer
+
+    def post(self, request):
+        serializer = GroupSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(
+                owner=request.user,
+                owner_name= f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}'
+            )
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 @login_required
@@ -79,12 +93,6 @@ def student(request):
     }
     print(f'Hero_{request.user.id}')
     return TemplateResponse(request, 'student/student.html', data)
-
-
-def protagonist(request):
-    if request.user.is_teacher and request.user.is_staff and request.user.is_admin:
-        return redirect('main')
-    return render(request, 'student/protagonist.html')
 
 
 def task(request, task_id):

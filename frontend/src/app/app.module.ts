@@ -41,6 +41,9 @@ import { TaskListTeacherComponent } from './components/teacher/components/task-l
 import { TaskListStudentComponent } from './components/student/components/task-list-student/task-list-student.component';
 import { TaskDetailsStudentComponent } from './components/student/components/task-details-student/task-details-student.component';
 import { TaskDetailsTeacherComponent } from './components/teacher/components/task-details-teacher/task-details-teacher.component';
+import {
+  DialogWindowStudentComponent
+} from "./components/student/components/dialog-window-student/dialog-window-student.component";
 
 
 @NgModule({
@@ -73,6 +76,7 @@ import { TaskDetailsTeacherComponent } from './components/teacher/components/tas
     TaskListStudentComponent,
     TaskDetailsStudentComponent,
     TaskDetailsTeacherComponent,
+    DialogWindowStudentComponent
   ],
     imports: [
         TuiButtonModule,

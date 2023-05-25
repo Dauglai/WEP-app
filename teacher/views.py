@@ -33,7 +33,6 @@ class GropViewSet(viewsets.ModelViewSet):
         groups_serializer = self.serializer_class(groups, many=True)
         return Response(groups_serializer.data, status=status.HTTP_200_OK)
 
-
     def post(self, request):
         serializer = GroupSerializer(data=request.data)
         serializer.data.owner = request.user.email

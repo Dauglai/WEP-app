@@ -19,13 +19,10 @@ export class TaskListStudentComponent implements OnInit {
   }
 
   getTasks(): void {
-    this.taskService.getTasks().subscribe(
-      data => {
-        console.log(data);
-        this.tasks = data;
-      },
-      error => {
-        console.log(error);
+    this.taskService.getTestsByGroup().subscribe(
+      (tests: any) => {
+        console.log(tests);
+        this.tasks = tests;
       }
     )
   }
