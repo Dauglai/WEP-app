@@ -9,6 +9,7 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
   private apiUrl = 'http://127.0.0.1:8000/api/account/registr/';
+  private apiUrl2 = 'http://127.0.0.1:8000/api/account/create-statistics/';
   private apiGetToken = 'http://127.0.0.1:8000/auth-token/token/login/';
   private apiGetAccount = 'http://127.0.0.1:8000/api/account/user/by/token/';
   private apiLogoutAccount = 'http://127.0.0.1:8000/auth-token/token/logout/';
@@ -20,6 +21,14 @@ export class AccountService {
       location: location, school_number: school_number, email: email, password: password,
       password2: password2, is_teacher: is_teacher, gender: gender};
     return this.http.post(this.apiUrl, account);
+  }
+
+  createStatistics(Token: any): Observable<any> {
+    const myHeaders = new HttpHeaders(
+      {'Content-Type': 'application/json', Authorization: 'Token ' + Token}
+    );
+    const statistics = { };
+    return this.http.post(this.apiUrl2, statistics, {headers: myHeaders});
   }
 
   getToken(email: string, password: string):Observable<any> {

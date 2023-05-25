@@ -15,6 +15,7 @@ from account.forms import RegisterUserForm
 from account.models import Account
 from account.serializers import AccountSerializer
 from student.models import Account_Statistics, Protagonist, Inventory
+from student.serializers import StatisticsSerializer
 
 
 class RegistrUserView(CreateAPIView):
@@ -27,6 +28,24 @@ class RegistrUserView(CreateAPIView):
         data = {}
         if serializer.is_valid():
             serializer.save()
+            data['response'] = True
+            return Response(data, status=status.HTTP_200_OK)
+        else:
+            data = serializer.errors
+            return Response(data)
+
+
+class CreateStatistics(CreateAPIView):
+    queryset = Account_Statistics.objects.all()
+    serializer_class = StatisticsSerializer
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        serializer = StatisticsSerializer(data=request.data)
+        data = {}
+        if serializer.is_valid():
+            serializer.save()
+            print(serializer.data)
             data['response'] = True
             return Response(data, status=status.HTTP_200_OK)
         else:

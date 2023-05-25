@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {GroupService} from "../../../../servicies/group.service";
@@ -16,7 +17,8 @@ export class GroupDetailedStudentComponent implements OnInit{
   protected accounts: any = [];
   protected tests: any = [];
   private routeSubscription: Subscription;
-  constructor(private route: ActivatedRoute, private groupService: GroupService) {
+  constructor(private route: ActivatedRoute, private groupService: GroupService,
+              private _location: Location) {
     this.routeSubscription = route.params.subscribe(params => {
       this.idGroup = params['id'];
     });
@@ -34,5 +36,9 @@ export class GroupDetailedStudentComponent implements OnInit{
         console.log(this.participants)
     });
     console.log(this.group);
+  }
+
+  returnBack() {
+    this._location.back();
   }
 }

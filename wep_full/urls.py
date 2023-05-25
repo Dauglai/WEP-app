@@ -19,4 +19,5 @@ urlpatterns = [
 
     path(r'api/account/', include('account.urls')),
     path(r'api/teacher/', include('teacher.urls')),
+    path(r'api/student/', include('student.urls')),
 ]

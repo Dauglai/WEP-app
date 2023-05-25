@@ -22,5 +22,27 @@
       </div>
     </div>
   </div>
+
+  <tui-accordion-item>
+    Выполненные тесты
+    <ng-template tuiAccordionItemContent>
+      <div class="group__block-container">
+        <div *ngFor="let test of completedTests" class="tests__block-group">
+          <div class="test__field">
+            <span>Название: </span>
+            <span>{{ test.title }}</span>
+          </div>
+          <div class="test__field">
+            <span>Предмет: </span>
+            <span>{{ test.subject }}</span>
+          </div>
+          <div class="test__field">
+            <span>Дедлайн: </span>
+            <span>{{ test.time_deadline }} {{ test.date_deadline }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </tui-accordion-item>
 </div>
 

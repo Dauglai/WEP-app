@@ -8,6 +8,7 @@ import {AccountService} from "../../servicies/account.service";
 })
 export class ProfileComponent implements OnInit{
   user: any;
+  userRole: string = '';
 
   constructor(private accountService: AccountService) {  }
   ngOnInit() {
@@ -16,7 +17,18 @@ export class ProfileComponent implements OnInit{
 
   getUserWithToken(MyToken: any): void {
     this.accountService.getAccountWhithToken(MyToken).subscribe(
-      data => {
+      (data: any) => {
+        switch (data.is_teacher){
+          case 'True':
+            this.userRole = 'Учитель';
+            break;
+          case 'False':
+            this.userRole = 'Ученик';
+            break;
+          default:
+            this.userRole = 'Нет информации'
+            break;
+        }
         this.user = data;
         console.log(this.user);
       },

@@ -9,15 +9,16 @@ import {TaskService} from "../../../../servicies/task.service";
 })
 export class TaskListStudentComponent implements OnInit {
   protected tasks?: ITest[];
+  protected completedTests?: ITest[];
 
   constructor(private taskService: TaskService) {
   }
 
   ngOnInit() {
-    this.createTask();
+    this.getTasks();
   }
 
-  createTask(): void {
+  getTasks(): void {
     this.taskService.getTasks().subscribe(
       data => {
         console.log(data);

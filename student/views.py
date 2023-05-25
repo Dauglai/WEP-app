@@ -2,20 +2,52 @@ from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from student.forms import JoinGroupForm
 from student.models import Account_Statistics, Protagonist, Choice, Test_Record
 from teacher.models import Test, Question, Group
+from teacher.serializers import GroupSerializer, TestSerializer
+
+
+class GropViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+    def list(self, request):
+        user_stat = Account_Statistics.objects.get(account=request.user)
+        groups = user_stat.groups.all()
+        print('user:', request.user)
+
+        groups_serializer = self.serializer_class(groups, many=True)
+        return Response(groups_serializer.data, status=status.HTTP_200_OK)
+
+
+class GetTestByGrop(viewsets.ModelViewSet):
+    queryset = Test.objects.all()
+    serializer_class = TestSerializer
+
+    def list(self, request):
+        user_stat = Account_Statistics.objects.get(account=request.user)
+        print(user_stat)
+        groups = user_stat.groups.all()
+        print(groups)
+        tests = getAllTests(groups)
+        tests_serializer = self.serializer_class(tests, many=True)
+        return Response(tests_serializer.data)
+
 
 
 def getAllTests(groups):
     tasks = []
     for group in groups:
-        x = group.tasks.all()
+        x = Test.objects.filter(group=group)
         if x is not None:
             tasks = tasks + list(x)
     print(tasks)
-    return tasks
+    return set(tasks)
 
 
 @login_required

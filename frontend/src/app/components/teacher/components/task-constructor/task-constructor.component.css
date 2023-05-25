@@ -57,6 +57,14 @@ textarea {
   border: none;
 }
 
+.form-question {
+  display: inline-block;
+	margin: 30px 0 10px 40px;
+	width: 50%;
+  z-index: 1000;
+  border: none;
+}
+
 .form__item {
 	margin-bottom: 20px;
   border-radius: 5px;
@@ -70,8 +78,16 @@ textarea {
   position: relative;
   width: 65%;
   border: none;
-  padding: 10px 40px 35px 50px;
+  padding: 20px 40px 35px 50px;
   border-top: 1px solid var(--blue-main);
+}
+
+.input-answer {
+
+}
+
+.input-number {
+  width: 50px;
 }
 
 .title-question-number {

@@ -31,30 +31,24 @@
           <li class="tasks">
             <div class="block__container">
               <h2 class='block__h'>Текущие задания</h2>
-              <!--                  {% for task in tasks %}-->
-              <!--                      <a href="{{ task.get_absolute_url }}">-->
-              <div class="block__test">
-                <span>Название: title - difficulty</span>
-                <span>Предмет: subject</span>
-                <div>Учитель: owner_name</div>
-                <span>Дедлайн: time_deadline date_deadline</span>
+              <div *ngFor="let task of tasks" class="block__test">
+                <div>Название: {{task.title}} - {{task.difficulty}}</div>
+                <div>Предмет: {{task.subject}}</div>
+                <div>Учитель: {{task.owner_name}}</div>
+                <div>Дедлайн: {{task.time_deadline}} {{task.date_deadline}}</div>
               </div>
-              <!--                      </a>-->
-              <!--                    {% empty %}-->
-              <!--                    <p>Отсутствуют новые задания</p>-->
-              <!--                  {% endfor %}-->
+              <p *ngIf="tasks!.length < 1">Отсутствуют новые задания</p>
             </div>
           </li>
           <li class="teams">
             <div class="block__container">
               <h2 class='block__h'>Группы</h2>
               <button class="block__btn add-new-group">Присоединиться</button>
-              <!--                  {% for group in groups %}-->
-              <!--                        <a href="{{ group.get_absolute_url }}">-->
-              <div class="block__test">
-                <span>group_name - owner_name</span>
+              <div *ngFor="let group of groups" class="block__test" routerLink="/student/group/details/{{group.id}}">
+                <div>Название: {{group.group_name}}</div>
+                <div>Учитель: {{group.owner_name}}</div>
                 <a class="close-group-btn">watch</a>
-                <a class="close-group-btn" >del</a>
+                <a class="close-group-btn">del</a>
               </div>
               <!--                      </a>-->
             </div>

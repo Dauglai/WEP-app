@@ -4,7 +4,7 @@
   </div>
   <div class="constructor__block-container">
     <div *ngIf="!nextPage" class="test__container">
-      <form method="post" class="form" [formGroup]="constFrom" (ngSubmit)="submit()">
+      <form method="post" class="form" [formGroup]="testFrom" (ngSubmit)="submit()">
         <div class="block__test">
           <span>Название теста:</span>
           <div>
@@ -74,8 +74,8 @@
 
   <div *ngIf="nextPage" class="test__container">
     <form method="post">
-      <fieldset class="form">
-        <h3 class="title-question-number">Вопрос №<span class="question-number"></span></h3>
+      <fieldset class="form-question">
+        <h3 class="title-question-number">Вопрос №<span class="question-number">1</span></h3>
         <div>
           <div class="form__item">
             Поле для ввода вопроса
@@ -86,34 +86,34 @@
           <div class="form__item">
             Вариант ответа №1:
             <div>
-              <input type="text"/>
+              <textarea type="text" class="input-answer"></textarea>
             </div>
           </div>
           <div class="form__item">
             Вариант ответа №2:
             <div>
-              <input type="text"/>
+              <textarea type="text" class="input-answer"></textarea>
             </div>
           </div>
           <div class="form__item">
             Вариант ответа №3:
             <div>
-              <input type="text"/>
+              <textarea type="text" class="input-answer"></textarea>
             </div>
           </div>
           <div class="form__item">
             Вариант ответа №4:
             <div>
-              <input type="text"/>
+              <textarea type="text" class="input-answer"></textarea>
             </div>
           </div>
           <div class="form__item">
             Номер правильного ответа:
-            <input type="number"/>
+            <input type="number" class="input-number"/>
           </div>
           <div class="form__item">
             Количество баллов:
-            <input type="number"/>
+            <input type="number" class="input-number"/>
           </div>
         </div>
         <button type="button" class="add-question">Удалить вопрос -</button>

@@ -76,14 +76,27 @@ export class RegistrationComponent {
       data => {
         console.log(data);
         this.errors = data;
-        if(data.response)
-          this.router.navigate(['/login']);
+        if(data.response) {
+          if (!this.isTeacher) {
+            this.accountService.getToken(email, password).subscribe(
+            data => {
+              console.log(data);
+              this.accountService.createStatistics(data).subscribe(
+                data =>
+                console.log(data)
+              );
+              this.router.navigate(['/login']);
+            },
+              error => {
+              console.log(error);
+            })
+          }
+        }
     },
       error => {
         console.log(error);
         this.errorPassword = error.error.qw12er34;
         // this.errorPassword = error.error();
       })
-
   }
 }
