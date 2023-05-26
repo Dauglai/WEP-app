@@ -1,0 +1,98 @@
+.table-container {
+  position: relative;
+  max-width: 1170px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  background-color: #fff;
+  padding-bottom: 30px;
+  min-height: 700px;
+  max-height: 1000px;
+  padding: 40px 50px 30px 40px;
+  border-radius: 8px;
+}
+
+.table-title {
+  color: var(--main-heading-1);
+  font-size: 25px;
+  text-align: center;
+  width: 30%;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.table {
+  border-radius: 10px;
+  width: 90%;
+  height: 100%;
+  min-height: 400px;
+  border: 5px solid #e5e5e5;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.table__nav {
+  height: 60px;
+  border-bottom: 3px solid #e5e5e5;
+  position: relative;
+}
+
+.btn-nav {
+  min-width: 120px;
+  min-height: 40px;
+  position: absolute;
+  top: 10px;
+}
+
+.table__btn-class {
+  right: 20%;
+}
+
+.table__btn-school {
+  left: 20%;
+}
+
+.table__body {
+  padding: 5px 10px 5px 10px;
+}
+
+.table__cell {
+  margin: 0 auto;
+  padding: 5px 5px 10px 5px;
+  width: 95%;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #e5e5e5;
+  margin-bottom: 5px;
+}
+
+.position {
+  margin-right: 50px;
+  margin-left: 5px;
+}
+
+.name {
+  margin-right: 50px;
+}
+
+.block__score {
+  display: inline-block;
+  position: absolute;
+  /*left: calc(50%);*/
+}
+
+.score {
+  margin-right: 20px;
+  border: 1px solid #e5e5e5;
+  padding: 0 5px 0 5px;
+}
+
+.experience {
+  margin-right: 20px;
+  border: 1px solid #e5e5e5;
+  padding: 0 5px 0 5px;
+}
+
+.lvl {
+  border: 1px solid #e5e5e5;
+  padding: 0 5px 0 5px;
+}

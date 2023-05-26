@@ -33,6 +33,7 @@ import {
 import {
   TaskDetailsTeacherComponent
 } from "./components/teacher/components/task-details-teacher/task-details-teacher.component";
+import {StatisticsComponent} from "./components/statistics/statistics.component";
 
 
 const routesGroupTeacher: any =
@@ -76,10 +77,12 @@ const routes: Routes = [
   { path: 'student', component: StudentComponent, children: [
       { path: 'main', component: StudentMainComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'statistics', component: StatisticsComponent },
       routesGroupStudent, routesTaskStudent
     ]},
   { path: 'teacher', component: TeacherComponent, children: [
       { path: 'profile', component: ProfileComponent },
+      { path: 'statistics', component: StatisticsComponent },
       routesConstructor, routesGroupTeacher, routesTaskTeacher
     ]
   },

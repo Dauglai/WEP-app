@@ -44,6 +44,7 @@ import { TaskDetailsTeacherComponent } from './components/teacher/components/tas
 import {
   DialogWindowStudentComponent
 } from "./components/student/components/dialog-window-student/dialog-window-student.component";
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import {
     TaskListStudentComponent,
     TaskDetailsStudentComponent,
     TaskDetailsTeacherComponent,
-    DialogWindowStudentComponent
+    DialogWindowStudentComponent,
+    StatisticsComponent
   ],
     imports: [
         TuiButtonModule,

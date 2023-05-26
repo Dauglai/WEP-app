@@ -37,11 +37,12 @@
 }
 
 .closed-tasks {
-  left: 0;
-  border: 1px solid #e5e5e5;
+  position: relative;
+  right: 40px;
+  /*border: 1px solid #e5e5e5;*/
   border-radius: 10px;
 
-  width: 46%;
+  width: 55%;
   min-height: 98%;
   /* margin-bottom: 3%; */
 }
@@ -185,7 +186,7 @@
 }
 
 .block__characteristic div:last-child {
-  margin-top: 25px ;
+  margin-top: 15px ;
 }
 
 .block__h-char {
@@ -218,4 +219,8 @@
 
 .field-containers__span_margin-right {
   margin-right: 22px !important;
+}
+
+.close-group-btn {
+  z-index: 1000;
 }

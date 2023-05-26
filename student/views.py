@@ -3,6 +3,7 @@ from django.template.response import TemplateResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets, status
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -62,6 +63,27 @@ class JoinGroup(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def DeleteGroup(request, id):
+    group = Group.objects.get(id=id)
+    user_stat = Account_Statistics.objects.get(account=request.user)
+    user_stat.groups.remove(group)
+    return Response({'Группа исключена'})
+
+
+@api_view(['POST'])
+def JoinGroup(request):
+    if request.method == 'POST':
+        user_stat = Account_Statistics.objects.get(account=request.user)
+        print(user_stat)
+        login = request.data['login']
+        password = request.data['password']
+        print(login, password)
+        con_group = Group.objects.filter(login=login) & Group.objects.filter(password=password)
+        print(con_group)
+        if len(con_group) > 0:
+            user_stat.groups.add(con_group[0])
+        return Response({'Группа подключена'})
 
 
 @login_required
@@ -133,26 +155,4 @@ def task(request, task_id):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     return render(request, 'student/task.html', context=data)
-
-
-def watch_group(request, id):
-    group = Group.objects.get(id=id)
-    all_accounts = Account_Statistics.objects.all()
-    participants = all_accounts.filter(groups=group)
-
-    data = {
-        'participants': participants,
-    }
-    return render(request, 'student/watch-group.html', context=data)
-
-
-def delete_group(request, id):
-    try:
-        group = Group.objects.get(id=id)
-        user_stat = Account_Statistics.objects.get(account=request.user)
-        user_stat.groups.remove(group)
-        # print(user_stat.groups)
-        return redirect("student")
-    except Group.DoesNotExist:
-        return redirect("student")
 

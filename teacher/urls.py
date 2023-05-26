@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from teacher import views
 
 from .views import GropViewSet, TasksViewSet, CreateGroup, GetGroup, GetParticipants, GetAccounts, \
     GetTestByGrop, QuestionViewSet
@@ -16,6 +17,7 @@ urlpatterns = [
     path('get_participants/<int:pk>/', GetParticipants.as_view(), name='getParticipants'),
     path('get_accounts/<int:pk>/', GetAccounts.as_view(), name='getAccounts'),
     path('get_tests_by_group/<int:pk>/', GetTestByGrop.as_view(), name='getAccounts'),
+    path('delete_group/<int:group_id>', views.DeleteGroup, name='delete_group'),
 
 
     # path('group/', GropView.as_view(), name='group'),
@@ -24,7 +26,6 @@ urlpatterns = [
     # path('questions/', QuestionAddView.as_view(), name="questions"),
     #
     # path("test/edit/<int:id>/", views.test_edit, name='test_edit'),
-    # path("test/delete/<int:id>/", views.test_delete, name='test_delete'),
     #
     # path("delete/<int:id>/", views.question_delete, name='question_delete'),
     # path("questions/edit/<id>", views.questions_edit, name='questions_edit'),

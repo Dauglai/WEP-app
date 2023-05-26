@@ -22,9 +22,27 @@
         </div>
       </li>
       <li class="closed-tasks">
-        <div class="block__container">
-          <h2 class='block__h'>Выполненные задания</h2>
-        </div>
+        <tui-accordion-item>
+          Выполненные задания
+          <ng-template tuiAccordionItemContent>
+            <div class="group__block-container">
+              <div *ngFor="let test of completedTests" class="tests__block-group">
+                <div class="test__field">
+                  <span>Название: </span>
+                  <span>{{ test.title }}</span>
+                </div>
+                <div class="test__field">
+                  <span>Предмет: </span>
+                  <span>{{ test.subject }}</span>
+                </div>
+                <div class="test__field">
+                  <span>Дедлайн: </span>
+                  <span>{{ test.time_deadline }} {{ test.date_deadline }}</span>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </tui-accordion-item>
       </li>
       <li class="tasks-and-teams">
         <ul class="list-blocks">
@@ -44,13 +62,12 @@
             <div class="block__container">
               <h2 class='block__h'>Группы</h2>
               <button class="block__btn add-new-group" (click)="showDialog()">Присоединиться</button>
-              <div *ngFor="let group of groups" class="block__test" routerLink="/student/group/details/{{group.id}}">
+              <div *ngFor="let group of groups" class="block__test">
                 <div>Название: {{group.group_name}}</div>
                 <div>Учитель: {{group.owner_name}}</div>
-                <a class="close-group-btn">watch</a>
-                <a class="close-group-btn">del</a>
+                <a class="close-group-btn" routerLink="/student/group/details/{{group.id}}">watch</a>
+                <a class="close-group-btn" (click)="excludeGroup(group.id)">del</a>
               </div>
-              <!--                      </a>-->
             </div>
           </li>
         </ul>

@@ -26,10 +26,10 @@ export class DialogWindowStudentComponent implements OnInit{
   }
 
   submit(){
-    this.createGroup();
+    this.joinGroup();
   }
 
-  createGroup(): void {
+  joinGroup(): void {
     const form = this.formCreateGroup?.value;
     console.log(form)
     this.groupService.joinGroup(

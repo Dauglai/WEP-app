@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {IGroup} from "../../../../interfaces/interface.group";
 import {GroupService} from "../../../../servicies/group.service";
 import {Router} from "@angular/router";
@@ -6,14 +6,17 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-group-list-teacher',
   templateUrl: './group-list-teacher.component.html',
-  styleUrls: ['./group-list-teacher.component.css']
+  styleUrls: ['./group-list-teacher.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class GroupListTeacherComponent implements OnInit{
   protected groups: IGroup[] = [];
-  constructor(private groupService: GroupService, private router: Router) {  }
+  constructor(private groupService: GroupService, private router: Router,
+              private cdr: ChangeDetectorRef) {  }
 
   ngOnInit() {
     this.getGroups();
+    this.cdr.detectChanges();
   }
 
   public isOpen = false;

@@ -12,6 +12,8 @@ constructor(private http: HttpClient, private taskService: TaskService) { }
   private apiUrl = 'http://localhost:8000/api/groups/';
   private apigetGroupsStudent = 'http://localhost:8000/api/student/groups/';
   private apiGroupCreate = 'http://localhost:8000/api/teacher/create_group/';
+  private apiExcludeGroup = 'http://localhost:8000/api/student/exclude_group/';
+  private apiJoinGroup = 'http://localhost:8000/api/student/join_group/';
   private apiGetGroup = 'http://localhost:8000/api/teacher/get_group/';
   private apiGetParticipants= 'http://localhost:8000/api/teacher/get_participants/';
   private apiGetAccounts = 'http://localhost:8000/api/teacher/get_accounts/';
@@ -62,6 +64,10 @@ constructor(private http: HttpClient, private taskService: TaskService) { }
 
   joinGroup(login: string, password: string): Observable<any> {
     const group = {login: login, password: password};
-    return this.http.post(this.apiGroupCreate, group, {headers: this.headers});
+    return this.http.post(this.apiJoinGroup, group, {headers: this.headers});
+  }
+
+  excludeGroup(id: number): any {
+    return this.http.get(this.apiExcludeGroup + id,{headers: this.headers});
   }
 }

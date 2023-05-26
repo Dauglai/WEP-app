@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {IGroup} from "../../../../interfaces/interface.group";
 import {GroupService} from "../../../../servicies/group.service";
 import {Router} from "@angular/router";
@@ -6,7 +6,8 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-group-list-student',
   templateUrl: './group-list-student.component.html',
-  styleUrls: ['./group-list-student.component.css']
+  styleUrls: ['./group-list-student.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class GroupListStudentComponent implements OnInit{
   protected groups: IGroup[] = [];
@@ -28,11 +29,12 @@ export class GroupListStudentComponent implements OnInit{
   }
 
   getGroups(): void {
-    this.groupService.getGroups().subscribe(
-      groups => {
-        console.log(groups)
+    this.groupService.getGroupsStudent().subscribe(
+      (groups: any) => {
+        console.log(groups);
         this.groups = groups;
-    });
+      }
+    )
   }
 
   getRandomColor(): string {

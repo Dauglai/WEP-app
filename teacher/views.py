@@ -5,6 +5,7 @@ from django.views.generic import ListView, TemplateView, FormView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.forms import modelformset_factory, NumberInput, TextInput, Textarea, inlineformset_factory
 from django.http import HttpResponseRedirect, HttpResponseNotFound, JsonResponse
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -107,6 +108,27 @@ class CreateGroup(APIView):
             )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+# def DeleteGroup(request):
+@api_view(['GET', 'POST'])
+def DeleteGroup(request, group_id):
+    group = Group.objects.get(id=group_id)
+    group.delete()
+    return Response({'Группа удалена'})
+
+    # if request.method == 'POST':
+    #     user_stat = Account_Statistics.objects.get(account=request.user)
+    #     print(user_stat)
+    #     login = request.data['login']
+    #     password = request.data['password']
+    #     print(login, password)
+    #     con_group = Group.objects.filter(login=login) & Group.objects.filter(password=password)
+    #     print(con_group)
+    #     if len(con_group) > 0:
+    #         user_stat.groups.add(con_group[0])
+    #     return Response({'Группа подключена'})
 
 
 class TasksViewSet(viewsets.ModelViewSet):
