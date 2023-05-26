@@ -134,6 +134,6 @@ LOGOUT_REDIRECT_URL = '/'
 
 #MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 #MEDIA_ROOT = MEDIA_DIR
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 STATIC_ROOT = 'C:/Users/danil/PycharmProjects/WEP-app'
-MEDIA_ROOT = 'C:/Users/danil/PycharmProjects/WEP-app/media/'
+MEDIA_ROOT = 'C:/Users/danil/PycharmProjects/WEP-app/media'

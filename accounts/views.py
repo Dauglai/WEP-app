@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from accounts.forms import RegisterUserForm
 from accounts.models import Account
-from student.models import Account_Statistics, Protagonist, Inventory
+from student.models import Account_Statistics, Protagonist
 
 
 # Create your views here.

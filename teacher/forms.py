@@ -15,8 +15,7 @@ class TimeInput(TimeInput):
 class TestForm(ModelForm):
     class Meta:
         model = Test
-        fields = ['title', 'boss', 'group', 'subject', 'text', 'difficulty', 'time', 'time_deadline', 'date_deadline', 'five',
-                  'four', 'three', 'two']
+        fields = ['title', 'boss', 'group', 'subject', 'text', 'difficulty', 'time', 'time_deadline', 'date_deadline']
         widgets = {
             'title': Textarea(attrs={
                 'placeholder': "Проверочная работа №3",

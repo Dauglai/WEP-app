@@ -7,9 +7,7 @@ from teacher.models import Group, Question, Test
 
 class Account_Statistics(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True, related_name='stats')
-    balance = models.PositiveIntegerField('Баланс', default=0)
     groups = models.ManyToManyField(Group, blank=True)
-    score = models.PositiveIntegerField('Очки', default=0)
     experience = models.PositiveIntegerField('Опыт', default=0)
     lvl = models.PositiveIntegerField('Уровень', default=0)
 
@@ -26,21 +24,9 @@ class Protagonist(models.Model):
     photo = models.ImageField(upload_to='main/static/photos/heroes/%Y/%m/%d', blank=True)
     name = models.CharField(max_length=100, default='Hero')
     health = models.PositiveIntegerField('Здоровье', default=100)
-    endurance = models.PositiveIntegerField('Выносливость', default=5) #Зависит от выбранного класса
     power = models.PositiveIntegerField('Сила', default=5)
-    dexterity = models.PositiveIntegerField('Ловкость', default=7)
     resistance = models.IntegerField('Стойкость', default=0)
     up_score = models.PositiveIntegerField('Очки навыков', default=0) #За них происходит улучшение параметров
-
-    # weapon = 
-
-    # Снаряжение, экипировка
-    # helmet =
-    # shoulder_pads =
-    # breastplate =
-    # gloves =
-    # trousers =
-    # shoes =
 
     def __str__(self):
         return self.name
@@ -65,32 +51,6 @@ type_of_equipment = [
     ('sh', 'shoes'),
 ]
 
-
-class Item(models.Model):
-    name = models.CharField('Название', max_length=50)
-    type_equipment = models.CharField(choices=type_of_equipment, max_length=2)
-    description = models.CharField('Описание', max_length=200, blank=True)
-    cost = models.PositiveIntegerField('Стоимость')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Предмет'
-        verbose_name_plural = 'Предметы'
-
-
-class Inventory(models.Model):
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    item = models.ManyToManyField(Item, blank=True) #on_delete=models.DO_NOTHING #models.DO_NOTHING
-    quantity = models.PositiveIntegerField(default=0)
-
-    def __str__(self):
-        return f'INV {self.account}'
-
-    class Meta:
-        verbose_name = 'Инвентарь'
-        verbose_name_plural = 'Инвентарь'
 
 
 class Choice(models.Model):

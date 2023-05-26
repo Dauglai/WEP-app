@@ -91,8 +91,8 @@ def task(request, task_id, id):
             record.count_correct += 1
             record.count_points += cur_question.reward
             record.save()
-            # user_stat.experience = user_stat.experience + 1
-            # user_stat.save(update_fields=["experience"])
+            user_stat.experience = user_stat.experience + 1
+            user_stat.save(update_fields=["experience"])
     return render(request, 'student/task.html', context=data)
 
 
