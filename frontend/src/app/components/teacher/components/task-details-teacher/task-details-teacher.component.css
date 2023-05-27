@@ -1,5 +1,18 @@
+.group__btn_back {
+  margin: 0;
+  position: absolute;
+  left: 3%;
+  top: 1%;
+}
+
+.group__btn_back img {
+  width: 30px;
+  height: 30px;
+}
+
 .task-container {
-  /*margin-bottom: 175px;*/
+  position: relative;
+  padding: 10px 50px 50px 20px;
 }
 
 .group__inf {

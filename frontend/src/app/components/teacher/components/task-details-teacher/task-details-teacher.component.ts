@@ -6,6 +6,7 @@ import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {GroupService} from "../../../../servicies/group.service";
 import {QuestionService} from "../../../../servicies/question.service";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-task-details-teacher',
@@ -20,7 +21,7 @@ export class TaskDetailsTeacherComponent implements OnInit{
   private routeSubscription: Subscription;
 
   constructor(private route: ActivatedRoute, private taskService: TaskService,
-              private questionService: QuestionService) {
+              private questionService: QuestionService, private _location: Location) {
      this.routeSubscription = route.params.subscribe(params => {
       this.taskId = params['id'];
     });
@@ -51,5 +52,9 @@ export class TaskDetailsTeacherComponent implements OnInit{
         this.questions = data;
       }
     )
+  }
+
+  returnBack() {
+    this._location.back();
   }
 }

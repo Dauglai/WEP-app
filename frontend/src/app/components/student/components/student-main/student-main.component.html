@@ -62,7 +62,7 @@
             <div class="block__container">
               <h2 class='block__h'>Группы</h2>
               <button class="block__btn add-new-group" (click)="showDialog()">Присоединиться</button>
-              <div *ngFor="let group of groups" class="block__test">
+              <div *ngFor="let group of groups" class="block__group">
                 <div>Название: {{group.group_name}}</div>
                 <div>Учитель: {{group.owner_name}}</div>
                 <a (click)="excludeGroup(group.id)"><img class="control-panel__btn_edit" src="../../../assets/img/minus.svg" alt="del"></a>

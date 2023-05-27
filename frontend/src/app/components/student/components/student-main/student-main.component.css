@@ -214,6 +214,14 @@
   margin-bottom: 10px;
 }
 
+.block__group {
+  position: relative;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #cfcdcd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
 .block__test span {
   margin-right: 20px;
 }

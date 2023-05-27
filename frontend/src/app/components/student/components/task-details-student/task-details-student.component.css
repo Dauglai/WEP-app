@@ -1,4 +1,5 @@
 .task-container {
+  position: relative;
   margin-bottom: 175px;
 }
 

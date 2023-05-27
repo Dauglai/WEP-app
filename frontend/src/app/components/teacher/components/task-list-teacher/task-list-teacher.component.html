@@ -20,9 +20,9 @@
         <span>Текст: {{ task.text }}</span>
       </div>
       <div class="control-panel">
-        <a routerLink="/teacher/task/details/{{task.id}}"><img class="control-panel__btn_edit" src="../../../assets/img/tasks/edit.svg" alt="edit"></a>
-        <a><img class="control-panel__btn_view" src="../../../assets/img/tasks/view.svg" alt="view"></a>
-        <a><img class="control-panel__btn_delete" src="../../../assets/img/tasks/delete.svg" alt="delete"></a>
+        <a><img class="control-panel__btn_edit" src="../../../assets/img/tasks/edit.svg" alt="edit"></a>
+        <a routerLink="/teacher/task/details/{{task.id}}"><img class="control-panel__btn_view" src="../../../assets/img/nav-bar/task.svg" alt="view"></a>
+        <a (click)="deleteTask(task.id)"><img class="control-panel__btn_delete" src="../../../assets/img/tasks/delete.svg" alt="delete"></a>
       </div>
     </div>
   </div>

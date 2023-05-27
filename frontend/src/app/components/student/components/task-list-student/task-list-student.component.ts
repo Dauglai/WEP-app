@@ -19,7 +19,7 @@ export class TaskListStudentComponent implements OnInit {
   }
 
   getTasks(): void {
-    this.taskService.getTestsByGroup().subscribe(
+    this.taskService.getTasksByGroup().subscribe(
       (tests: any) => {
         console.log(tests);
         this.tasks = tests;

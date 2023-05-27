@@ -21,6 +21,8 @@ urlpatterns = [
     path('edit_group/<int:group_id>', views.EditGroup, name='edit_group'),
 
 
+    path('delete_test/<int:test_id>', views.DeleteTest, name='delete_test'),
+
     # path('group/', GropView.as_view(), name='group'),
 
     # path('test/new/', views.constructor, name="constructor"),

@@ -1,3 +1,6 @@
+<a (click)="returnBack()" class="group__btn_back">
+  <img src="../../../../../assets/img/tasks/arrow-to-left-svgrepo-com.svg">
+</a>
 <div class="task-container">
   <div class="group__inf">
     <div>
@@ -12,6 +15,27 @@
     <div>
       Текст: {{ task.text }}
     </div>
+    <div>
+      Время выполнения: {{ task.time }}
+    </div>
+    <div>
+      Время сдачи: {{ task.time_deadline }}
+    </div>
+    <div>
+      Дата сдачи: {{ task.date_deadline }}
+    </div>
+    <div>
+      Количество баллов для оценки 5: {{ task.five }}
+    </div>
+    <div>
+      Количество баллов для оценки 4: {{ task.four }}
+    </div>
+    <div>
+      Количество баллов для оценки 3: {{ task.three }}
+    </div>
+    <div>
+      Количество баллов для оценки 2: {{ task.two }}
+    </div>
   </div>
   <main class="main-container">
     <div *ngFor="let question of questions;  let i = index;" id="task_{{ question.id }}">
@@ -20,16 +44,22 @@
         <p>{{ question.question }}</p>
         <input type="hidden" name="id" value="{{ question.id }}">
         <label>
-          <input type="radio" name="answer" value="{{ question.first_answer }}"> {{ question.first_answer }}
+          1) {{ question.first_answer }}
         </label>
         <label>
-          <input type="radio" name="answer" value="{{ question.second_answer }}"> {{ question.second_answer }}
+          2)  {{ question.second_answer }}
         </label>
         <label>
-          <input type="radio" name="answer" value="{{ question.third_answer }}"> {{ question.third_answer }}
+          3) {{ question.third_answer }}
         </label>
         <label>
-          <input type="radio" name="answer" value="{{ question.four_answer }}"> {{ question.four_answer }}
+          4) {{ question.four_answer }}
+        </label>
+        <label>
+          Количество баллов: {{ question.reward }}
+        </label>
+        <label>
+          Номер правильного ответа:{{ question.number_correct_answer }}
         </label>
       </div>
     </div>

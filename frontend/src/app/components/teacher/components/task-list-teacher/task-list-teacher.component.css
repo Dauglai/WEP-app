@@ -79,15 +79,17 @@
 .control-panel__btn_edit {
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .control-panel__btn_view {
   width: 25px;
   height: 25px;
-  /*margin-bottom: 10px;*/
+  cursor: pointer;
 }
 
 .control-panel__btn_delete {
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }

@@ -28,4 +28,13 @@ export class TaskListTeacherComponent implements OnInit {
       }
     )
   }
+
+  deleteTask(id: number): void {
+    this.taskService.deleteTask(id).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.getTasks();
+      }
+    )
+  }
 }

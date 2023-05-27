@@ -110,8 +110,6 @@ class CreateGroup(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-# def DeleteGroup(request):
 @api_view(['GET', 'POST'])
 def DeleteGroup(request, group_id):
     group = Group.objects.get(id=group_id)
@@ -133,6 +131,13 @@ def EditGroup(request, group_id):
                 group.password = new_password
                 group.save()
                 return Response({'Группа изменена'})
+
+
+@api_view(['GET', 'POST'])
+def DeleteTest(request, test_id):
+    group = Test.objects.get(id=test_id)
+    group.delete()
+    return Response({'Тест удален'})
 
 
 class TasksViewSet(viewsets.ModelViewSet):

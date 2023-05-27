@@ -54,7 +54,7 @@ constructor(private http: HttpClient, private taskService: TaskService) { }
         headers: {Authorization: 'Token ' + localStorage.getItem('my-token')},
         params: params
       }),
-       tests: this.taskService.getTestsByGroup()
+       tests: this.taskService.getTasksByGroup()
     })
   }
 
