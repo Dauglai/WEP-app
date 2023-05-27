@@ -12,26 +12,44 @@ import {QuestionService} from "../../../../servicies/question.service";
   templateUrl: './task-details-teacher.component.html',
   styleUrls: ['./task-details-teacher.component.css']
 })
-export class TaskDetailsTeacherComponent implements OnInit {
-  protected test: ITest = {} as ITest;
+export class TaskDetailsTeacherComponent implements OnInit{
+  protected taskId: number = 0;
+  protected task: any = {};
   protected questions: any = [];
-  private idTest: number = 0;
+  protected serialNumberQuestion: number = 0;
   private routeSubscription: Subscription;
-  constructor(private route: ActivatedRoute, private taskService: TaskService, private questionService: QuestionService ) {
-    this.routeSubscription = route.params.subscribe(params => {
-      this.idTest = params['id'];
+
+  constructor(private route: ActivatedRoute, private taskService: TaskService,
+              private questionService: QuestionService) {
+     this.routeSubscription = route.params.subscribe(params => {
+      this.taskId = params['id'];
     });
   }
-
   ngOnInit() {
-    console.log(this.idTest);
-    this.test = this.taskService.getTask(this.idTest).subscribe(
+    this.getTask(this.taskId);
+    this.getQuestions(this.taskId);
+  }
+
+  sendAnswer(){
+    this.serialNumberQuestion += 1;
+    console.log(this.serialNumberQuestion);
+  }
+
+  getTask(id: number) {
+    this.taskService.getTask(id).subscribe(
       (data: any) => {
         console.log(data)
-    });
-    this.questions = this.questionService.getQuestions(this.idTest).subscribe(
+        this.task = data;
+      }
+    )
+  }
+
+  getQuestions(id: number) {
+    this.questionService.getQuestions(id).subscribe(
       (data: any) => {
         console.log(data)
-    });
+        this.questions = data;
+      }
+    )
   }
 }

@@ -49,7 +49,7 @@
           <li class="tasks">
             <div class="block__container">
               <h2 class='block__h'>Текущие задания</h2>
-              <div *ngFor="let task of tasks" class="block__test">
+              <div *ngFor="let task of tasks" class="block__test" (click)="showDialogStartTest(task)">
                 <div>Название: {{task.title}} - {{task.difficulty}}</div>
                 <div>Предмет: {{task.subject}}</div>
                 <div>Учитель: {{task.owner_name}}</div>
@@ -78,4 +78,4 @@
   </div>
 </main>
 <app-dialog-window-student *ngIf="isOpen" (isOpen)="manageDialog($event)"></app-dialog-window-student>
-
+<app-dialog-window-test-start *ngIf="isOpenStartTest" [curTest]="thisTest" (isOpen)="manageDialogTest($event)"></app-dialog-window-test-start>

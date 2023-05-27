@@ -60,7 +60,7 @@ const routesTaskTeacher: any =
 const routesTaskStudent: any =
   { path: 'task', component: TasksStudentComponent, children: [
     { path: 'list', component: TaskListStudentComponent},
-    { path: 'details/:id', component: TaskDetailsStudentComponent},
+    // { path: 'details/:id', component: TaskDetailsStudentComponent},
     ]
   };
 
@@ -86,6 +86,9 @@ const routes: Routes = [
       routesConstructor, routesGroupTeacher, routesTaskTeacher
     ]
   },
+  { path: 'task', component: TasksStudentComponent, children: [
+    { path: 'details/:id', component: TaskDetailsStudentComponent},
+    ]},
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   // { path: '**', redirectTo: 'main'},

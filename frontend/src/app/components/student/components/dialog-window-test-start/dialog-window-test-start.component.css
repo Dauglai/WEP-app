@@ -1,0 +1,98 @@
+:host {
+  --width-dialog-window: 30vw;
+  --height-dialog-window: 20vh;
+}
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  overflow-x: hidden;
+}
+
+.dialog__container {
+}
+
+.dialog__container_outer {
+  position: fixed;
+  top: calc((100% - var(--height-dialog-window)) / 2 - 10%);
+  left: calc((100% - var(--width-dialog-window)) / 2);
+
+  background: #fff;
+  border-radius: 30px;
+  z-index: 1000;
+}
+
+.dialog__container_inner {
+  position: relative;
+
+  width: var(--width-dialog-window);
+  height: var(--height-dialog-window);
+
+  min-width: 340px;
+  min-height: 230px;
+
+  display: flex;
+  flex-direction: column;
+  padding: 20px 50px 75px 50px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  z-index: 1000;
+}
+
+.dialog__title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+
+  border-left: 4px solid #526ED3;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  display: inline-block;
+  width: 100%;
+}
+
+.dialog__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dialog__select {
+  z-index: 1000;
+  margin-bottom: 15px;
+}
+
+.dialog__label {
+  display: block;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+}
+
+.dialog__input {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.dialog__buttons {
+  position: relative;
+  margin-top: auto;
+}
+
+.block__btn {
+  position: absolute;
+  bottom: 20px;
+}
+
+.dialog__add {
+margin-right: 30px;
+}
+
+.dialog__cancel {
+
+}

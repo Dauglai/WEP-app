@@ -14,6 +14,7 @@ export class StudentMainComponent implements OnInit {
   protected tasks?: ITest[];
   protected groups: IGroup[] = [];
   protected completedTests?: ITest[];
+  public thisTest ={};
 
   constructor(private taskService: TaskService, private groupService: GroupService,
               private cdr: ChangeDetectorRef) {
@@ -24,6 +25,7 @@ export class StudentMainComponent implements OnInit {
   }
 
   public isOpen = false;
+  public isOpenStartTest = false;
 
   public showDialog() {
     this.isOpen = true;
@@ -31,6 +33,16 @@ export class StudentMainComponent implements OnInit {
 
   protected manageDialog(isOpen: boolean) {
     this.isOpen = false;
+    this.updatePage();
+  }
+
+  public showDialogStartTest(test: any) {
+    this.thisTest = test;
+    this.isOpenStartTest = true;
+  }
+
+  protected manageDialogTest(isOpen: boolean) {
+    this.isOpenStartTest = false;
     this.updatePage();
   }
 

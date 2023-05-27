@@ -1,2 +1,37 @@
-<p>task-details-teacher works!</p>
-{{ test }}
+<div class="task-container">
+  <div class="group__inf">
+    <div>
+      Название теста: {{ task.title }}
+    </div>
+    <div>
+      Группы: {{ task.group }}
+    </div>
+    <div>
+      Название предмета: {{ task.subject }}
+    </div>
+    <div>
+      Текст: {{ task.text }}
+    </div>
+  </div>
+  <main class="main-container">
+    <div *ngFor="let question of questions;  let i = index;" id="task_{{ question.id }}">
+      <div method="post" class="question">
+        <h2 class="question__title">Задание <span>{{i + 1}} </span></h2>
+        <p>{{ question.question }}</p>
+        <input type="hidden" name="id" value="{{ question.id }}">
+        <label>
+          <input type="radio" name="answer" value="{{ question.first_answer }}"> {{ question.first_answer }}
+        </label>
+        <label>
+          <input type="radio" name="answer" value="{{ question.second_answer }}"> {{ question.second_answer }}
+        </label>
+        <label>
+          <input type="radio" name="answer" value="{{ question.third_answer }}"> {{ question.third_answer }}
+        </label>
+        <label>
+          <input type="radio" name="answer" value="{{ question.four_answer }}"> {{ question.four_answer }}
+        </label>
+      </div>
+    </div>
+  </main>
+</div>
