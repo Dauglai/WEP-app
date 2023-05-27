@@ -1,0 +1,34 @@
+<tui-root>
+  <div class="wrapper"></div>
+  <div class="dialog__container">
+    <div class="dialog__container_outer">
+      <div class="dialog__container_inner">
+        <h2 class="dialog__title">Изменить группу</h2>
+        <div>
+          <form class="dialog__form" [formGroup]="formEditGroup" (ngSubmit)="submit()">
+            <label class="dialog__label">Название</label>
+            <input type="text" value=curGroup.title formControlName="nameGroup"/>
+
+            <label class="dialog__label">login</label>
+            <input type="text" formControlName="login"/>
+
+            <label class="dialog__label">Пароль</label>
+            <input type="text" formControlName="password"/>
+            <div>{{error}}</div>
+          </form>
+        </div>
+
+        <div class="dialog__buttons">
+          <button tuiButton type="submit" class="dialog__add" size="m" (click)="submit()">
+            Изменить
+          </button>
+          <button tuiButton type="button" appearance="outline"
+                  class="tui-space_right-3 tui-space_bottom-3 dialog__cancel" size="m"
+                  (click)="manageDialog()">
+            Отмена
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</tui-root>

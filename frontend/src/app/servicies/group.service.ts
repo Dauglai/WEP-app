@@ -13,7 +13,9 @@ constructor(private http: HttpClient, private taskService: TaskService) { }
   private apigetGroupsStudent = 'http://localhost:8000/api/student/groups/';
   private apiGroupCreate = 'http://localhost:8000/api/teacher/create_group/';
   private apiExcludeGroup = 'http://localhost:8000/api/student/exclude_group/';
+  private apiDeleteGroup = 'http://localhost:8000/api/teacher/delete_group/';
   private apiJoinGroup = 'http://localhost:8000/api/student/join_group/';
+  private  apiEditGroup = 'http://localhost:8000/api/teacher/edit_group/'
   private apiGetGroup = 'http://localhost:8000/api/teacher/get_group/';
   private apiGetParticipants= 'http://localhost:8000/api/teacher/get_participants/';
   private apiGetAccounts = 'http://localhost:8000/api/teacher/get_accounts/';
@@ -70,4 +72,14 @@ constructor(private http: HttpClient, private taskService: TaskService) { }
   excludeGroup(id: number): any {
     return this.http.get(this.apiExcludeGroup + id,{headers: this.headers});
   }
+
+  deleteGroup(id: number): any {
+    return this.http.get(this.apiDeleteGroup + id, {headers: this.headers});
+  }
+
+  editGroup(id: number, newName: string, newLogin: string, newPassword: string): any {
+    const data = {new_name: newName, new_login: newLogin, new_password: newPassword}
+    return this.http.post(this.apiEditGroup + id, data, {headers: this.headers});
+  }
+
 }

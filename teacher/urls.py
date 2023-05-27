@@ -18,6 +18,7 @@ urlpatterns = [
     path('get_accounts/<int:pk>/', GetAccounts.as_view(), name='getAccounts'),
     path('get_tests_by_group/<int:pk>/', GetTestByGrop.as_view(), name='getAccounts'),
     path('delete_group/<int:group_id>', views.DeleteGroup, name='delete_group'),
+    path('edit_group/<int:group_id>', views.EditGroup, name='edit_group'),
 
 
     # path('group/', GropView.as_view(), name='group'),

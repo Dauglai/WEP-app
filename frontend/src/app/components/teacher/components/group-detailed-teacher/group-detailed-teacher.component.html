@@ -13,6 +13,8 @@
     <div>
       Пароль: {{ group.password }}
     </div>
+    <a (click)="showDialog()"><img class="control-panel__btn_edit" src="../../../assets/img/tasks/edit.svg" alt="edit"></a>
+    <a (click)="deleteGroup(group.id)"><img class="control-panel__btn_delete" src="../../../assets/img/tasks/delete.svg" alt="delete"></a>
   </div>
   <tui-accordion-item class="group__participants">
     Участники
@@ -51,3 +53,4 @@
     </ng-template>
   </tui-accordion-item>
 </div>
+<app-dialog-window-teacher [curGroup]="group" *ngIf="isOpen" (isOpen)="manageDialog($event)"></app-dialog-window-teacher>

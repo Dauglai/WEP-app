@@ -65,8 +65,10 @@
               <div *ngFor="let group of groups" class="block__test">
                 <div>Название: {{group.group_name}}</div>
                 <div>Учитель: {{group.owner_name}}</div>
-                <a class="close-group-btn" routerLink="/student/group/details/{{group.id}}">watch</a>
-                <a class="close-group-btn" (click)="excludeGroup(group.id)">del</a>
+                <a (click)="excludeGroup(group.id)"><img class="control-panel__btn_edit" src="../../../assets/img/minus.svg" alt="del"></a>
+                <a routerLink="/student/group/details/{{group.id}}"><img class="control-panel__btn_delete" src="../../../assets/img/tasks/view.svg" alt="view"></a>
+<!--                <a class="close-group-btn" routerLink="/student/group/details/{{group.id}}">watch</a>-->
+<!--                <a class="close-group-btn" >del</a>-->
               </div>
             </div>
           </li>

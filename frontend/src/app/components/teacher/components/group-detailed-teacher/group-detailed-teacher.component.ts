@@ -26,16 +26,43 @@ export class GroupDetailedTeacherComponent implements OnInit{
 
   ngOnInit() {
     console.log(this.idGroup);
-    this.group = this.groupService.getGroup(this.idGroup).subscribe(
+    this.getGroup(this.idGroup);
+    // console.log(this.group);
+  }
+
+  public isOpen = false;
+
+  public showDialog() {
+    this.isOpen = true;
+  }
+
+  protected manageDialog(isOpen: boolean) {
+    this.isOpen = false;
+    this.getGroup(this.idGroup);
+  }
+
+  getGroup(idGroup: number) {
+    this.group = this.groupService.getGroup(idGroup).subscribe(
       (data: any) => {
-        console.log(data)
+        // console.log(data)
         this.group = data.group;
         this.participants = data.participants;
         this.accounts = data.accounts;
         this.tests = data.tests;
-        console.log(this.participants)
+        // console.log(this.participants)
     });
-    console.log(this.group);
+  }
+
+  deleteGroup(id: number) {
+    this.groupService.deleteGroup(id).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.getGroup(this.idGroup);
+        this.returnBack();
+      }
+    );
+    // console.log(this.idGroup);
+
   }
 
   returnBack() {

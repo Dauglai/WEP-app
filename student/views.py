@@ -50,19 +50,6 @@ def get_all_tests(groups):
     return set(tasks)
 
 
-class JoinGroup(APIView):
-    serializer_class = GroupSerializer
-
-    def post(self, request):
-        serializer = GroupSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(
-                owner=request.user,
-                owner_name= f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}'
-            )
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 @api_view(['GET'])
 def DeleteGroup(request, id):
     group = Group.objects.get(id=id)

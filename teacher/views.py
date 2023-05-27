@@ -118,17 +118,21 @@ def DeleteGroup(request, group_id):
     group.delete()
     return Response({'Группа удалена'})
 
-    # if request.method == 'POST':
-    #     user_stat = Account_Statistics.objects.get(account=request.user)
-    #     print(user_stat)
-    #     login = request.data['login']
-    #     password = request.data['password']
-    #     print(login, password)
-    #     con_group = Group.objects.filter(login=login) & Group.objects.filter(password=password)
-    #     print(con_group)
-    #     if len(con_group) > 0:
-    #         user_stat.groups.add(con_group[0])
-    #     return Response({'Группа подключена'})
+
+@api_view(['GET', 'POST'])
+def EditGroup(request, group_id):
+    group = Group.objects.get(id=group_id)
+    new_name = request.data['new_name']
+    new_login = request.data['new_login']
+    new_password = request.data['new_password']
+    if new_name != '' and new_name != ' ':
+        group.group_name = new_name
+        if new_login != '' and new_login != ' ':
+            group.login = new_login
+            if new_password != '' and new_password != ' ':
+                group.password = new_password
+                group.save()
+                return Response({'Группа изменена'})
 
 
 class TasksViewSet(viewsets.ModelViewSet):
