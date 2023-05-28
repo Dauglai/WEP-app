@@ -29,12 +29,12 @@ export class BossService {
     return this.http.get<any>(this.apiHeroes);
   }
 
-  getAccountStatistics(id: number): any {
-    return this.http.get<any>(this.apiAccountStatistics + id);
+  getAccountStatistics(): any {
+    return this.http.get<any>(this.apiAccountStatistics, {headers: this.headers });
   }
 
-  getProtagonist(id: number): any {
-    return this.http.get<any>(this.apiProtagonist + id);
+  getProtagonist(): any {
+    return this.http.get<any>(this.apiProtagonist, {headers: this.headers });
   }
 
   createProtagonist(): any {

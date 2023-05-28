@@ -3,6 +3,7 @@ import {ITest} from "../../../../interfaces/interface.test";
 import {TaskService} from "../../../../servicies/task.service";
 import {IGroup} from "../../../../interfaces/interface.group";
 import {GroupService} from "../../../../servicies/group.service";
+import {BossService} from "../../../../servicies/boss.service";
 
 @Component({
   selector: 'app-student-main',
@@ -11,13 +12,15 @@ import {GroupService} from "../../../../servicies/group.service";
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class StudentMainComponent implements OnInit {
+  protected statistic: any = {};
+  protected protagonist: any = {};
   protected tasks?: ITest[];
   protected groups: IGroup[] = [];
   protected completedTests?: ITest[];
   public thisTest ={};
 
   constructor(private taskService: TaskService, private groupService: GroupService,
-              private cdr: ChangeDetectorRef) {
+              private studentService: BossService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -64,6 +67,24 @@ export class StudentMainComponent implements OnInit {
     )
   }
 
+  getAccountStatistics(): void {
+    this.studentService.getAccountStatistics().subscribe(
+      (data: any) => {
+        console.log(data);
+        this.statistic = data;
+      }
+    )
+  }
+
+  getProtagonist(): void {
+    this.studentService.getProtagonist().subscribe(
+      (data: any) => {
+        console.log(data);
+        this.protagonist = data;
+      }
+    )
+  }
+
   excludeGroup(id: number) {
     this.groupService.excludeGroup(id).subscribe(
       (data: any) => console.log(data)
@@ -77,6 +98,8 @@ export class StudentMainComponent implements OnInit {
   updatePage() {
     this.getGroups();
     this.getTasks();
+    this.getAccountStatistics();
+    this.getProtagonist();
     this.cdr.detectChanges()
   }
 }

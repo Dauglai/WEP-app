@@ -33,13 +33,11 @@
 
           <div class="field__groups">
             Выбор группы:
-            <ul class="list-group">
-              <li *ngFor="let group of groups; let i=index">
+            <select name="group" class="list-group" multiple="">
+              <option *ngFor="let group of groups; let i=index" value="group.id">
                 Название: {{group.group_name}}
-<!--                <input type="checkbox" [value]="group.id" (change)="onCheckChange($event)">-->
-                <input class="checkbox-group" type="checkbox" name="" formControlName="group">
-              </li>
-            </ul>
+              </option>
+            </select>
           </div>
 
           <div>

@@ -63,20 +63,20 @@ class ProtagonistViewSet(viewsets.ModelViewSet):
     queryset = Protagonist.objects.all()
     serializer_class = ProtagonistSerializer
 
-    def get(self, request):
-        protagonist = Protagonist.objects.get(pk=self.kwargs['pk'])
+    def list(self, request):
+        protagonist = Protagonist.objects.get(account=request.user)
         protagonist_serializer = self.serializer_class(protagonist)
-        return Response(protagonist_serializer.data, status=status.HTTP_200_OK)
+        return Response(protagonist_serializer.data)
 
 
 class AccountStatisticsViewSet(viewsets.ModelViewSet):
     queryset = AccountStatistics.objects.all()
     serializer_class = StatisticsSerializer
 
-    def get(self, request):
-        account_statistics = Hero.objects.get(pk=self.kwargs['pk'])
-        account_statistics_serializer = self.serializer_class(account_statistics)
-        return Response(account_statistics_serializer.data, status=status.HTTP_200_OK)
+    def list(self, request):
+        user_stat = AccountStatistics.objects.get(account=request.user)
+        user_stat_serializer = self.serializer_class(user_stat)
+        return Response(user_stat_serializer.data)
 
 
 @api_view(['GET'])
