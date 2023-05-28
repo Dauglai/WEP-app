@@ -71,8 +71,10 @@ class Choice(models.Model):
 
 class TestRecord(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
-    test = models.OneToOneField(Test, on_delete=models.DO_NOTHING)
-    count_correct = models.IntegerField("Количество верных ответов")
-    count_points = models.IntegerField('Количество заработнанных баллов')
+    user_name = models.CharField('ФИО', max_length=100, default='')
+    test = models.ForeignKey(Test, on_delete=models.CASCADE, null=True)
+    count_correct = models.IntegerField("Количество верных ответов", default=0)
+    grades = models.IntegerField('Оценка', default=0)
+    count_points = models.IntegerField('Количество заработнанных баллов', default=0)
     created = models.DateTimeField(auto_now_add=True)
 

@@ -86,13 +86,18 @@
 
 .question {
   display: block;
-  width: 95%;
+  width: 80%;
   min-height: 50px;
-  border: 1px solid #cfcdcd;
+  border: 1px solid var(--blue-main);
   margin: 0 auto;
   border-radius: 5px;
-  padding: 0 20px 10px 20px;
+  padding: 10px 40px 20px 40px;
   margin-bottom: 40px;
+}
+
+.block__question h2{
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--blue-main);
 }
 
 .question label {
@@ -172,13 +177,19 @@
 .container-battle__enemy {
 }
 
-.submit-modal-window {
-  position: absolute;
-  right: 10px;
+.btn-send {
   margin-top: 20px;
+  border-radius: 5px;
+}
+
+.submit {
+  position: absolute;
+  background-color: #adcca7;
+  right: 10%;
+  margin-top: 20px;
+  /*color: white;*/
   margin-bottom: 5px;
-  width: 300px;
-  padding: 5px 0 5px 0;
+  padding: 15px 5px 15px 5px;
   border-radius: 5px;
   border-width: 1px;
   cursor: pointer;

@@ -70,14 +70,35 @@ class ProtagonistViewSet(viewsets.ModelViewSet):
         return Response(protagonist_serializer.data)
 
 
-class TestRecordViewSet(viewsets.ModelViewSet):
+class TestRecordViewSetList(viewsets.ViewSet):
     queryset = TestRecord.objects.all()
     serializer_class = TestRecordSerializer
 
     def list(self, request):
-        test_record = TestRecord.objects.get(account=request.user)
+        test_record = TestRecord.objects.filter(user=request.user)
+        test_record_serializer = self.serializer_class(test_record, many=True)
+        return Response(test_record_serializer.data)
+
+
+class TestRecordViewSet(viewsets.ModelViewSet):
+    queryset = TestRecord.objects.all()
+    serializer_class = TestRecordSerializer
+
+    def create(self, request):
+        print(request.data['test'])
+        test_record = TestRecord.objects.create(
+            user=request.user,
+            user_name=f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}',
+            test=Test.objects.get(pk=request.data['test']),
+            count_correct=request.data['count_correct'],
+            grades=request.data['grades'],
+            count_points=request.data['count_points'],
+        )
         test_record_serializer = self.serializer_class(test_record)
         return Response(test_record_serializer.data)
+
+    def update(self, request, pk=None):
+        pass
 
 
 class ChoiceViewSet(viewsets.ModelViewSet):
@@ -96,6 +117,8 @@ class AccountStatisticsViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         user_stat = AccountStatistics.objects.get(account=request.user)
+        # login = request.data['login']
+        # password = request.data['password']
         user_stat_serializer = self.serializer_class(user_stat)
         return Response(user_stat_serializer.data)
 
@@ -142,9 +165,8 @@ def student(request):
             groups = user_stat.groups.all()
             tasks = Test.objects.all()
 
-    group_form = JoinGroupForm()
     data = {
-        'group_form': group_form,
+        # 'group_form': group_form,
         'tasks': tasks,
         'groups': groups,
         'balance': user_stat.balance,

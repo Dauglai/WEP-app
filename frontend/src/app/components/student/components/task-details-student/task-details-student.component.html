@@ -23,8 +23,10 @@
   <main class="main-container">
     <div *ngFor="let question of questions;  let i = index;" id="task_{{ question.id }}">
       <div *ngIf="this.serialNumberQuestion == i" class="question">
-        <h2 class="question__title">Задание <span>{{i + 1}} </span></h2>
-        <p>{{ question.question }}</p>
+        <div class="block__question">
+          <h2 class="question__title">Задание <span>{{i + 1}} </span></h2>
+          <p>{{ question.question }}</p>
+        </div>
         <label>
           <input type="radio" name="answer" [value]='question.first_answer' [(ngModel)]="formChoice" > {{ question.first_answer }}
         </label>
@@ -37,11 +39,15 @@
         <label>
           <input type="radio" name="answer" [value]='question.four_answer' [(ngModel)]="formChoice" > {{ question.four_answer }}
         </label>
-        <input type="submit" (click)="sendAnswer()">
+        <button tuiButton type="button" size='s' (click)="sendAnswer()" appearance="primary"
+                class="tui-space_right-3 tui-space_bottom-3 btn-send">
+          Отправить
+        </button>
       </div>
     </div>
-    <button type="submit" class="submit-modal-window">
-      Завершить
-    </button>
+    	<button tuiButton type="button" appearance="custom" size='s'
+      class="submit" (click)="completeTask()">
+          Завершить тест
+      </button>
   </main>
 </div>

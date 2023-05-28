@@ -18,6 +18,7 @@ export class StudentService {
 
   private apiChoice = 'http://localhost:8000/api/student/choice/';
   private apiTestRecord = 'http://localhost:8000/api/student/test_record/';
+  private apiTestRecordList = 'http://localhost:8000/api/student/test_record_list/';
 
   private headers = new HttpHeaders(
       {'Content-Type': 'application/json',
@@ -29,9 +30,14 @@ export class StudentService {
     return this.http.post(this.apiChoice, data, {headers: this.headers })
   }
 
-  postTestRecord(test: number, count_correct: number, count_points: number): any {
-    const data = {test: test, count_correct: count_correct, count_points: count_points}
+  postTestRecord(test: number, count_correct: number, grades: number, count_points: number): any {
+    const data = {test: test, count_correct: count_correct, grades: grades,
+      count_points: count_points};
     return this.http.post(this.apiTestRecord, data, {headers: this.headers })
+  }
+
+  getTestRecord(): any {
+    return this.http.get<any>(this.apiTestRecordList, {headers: this.headers })
   }
 
   getBosses(): Observable<any> {

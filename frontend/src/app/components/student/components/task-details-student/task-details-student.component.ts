@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {TaskService} from "../../../../servicies/task.service";
 import {QuestionService} from "../../../../servicies/question.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {GroupService} from "../../../../servicies/group.service";
 import {StudentService} from "../../../../servicies/student.service";
@@ -24,10 +24,13 @@ export class TaskDetailsStudentComponent implements OnInit{
   public heroHP: number = 0;
   public bossHP: number = 0;
 
+  protected countCorrect: number = 0;
+  protected countPoints: number = 0;
+
   protected serialNumberQuestion: number = 0;
   private routeSubscription: Subscription;
 
-  constructor(private route: ActivatedRoute, private taskService: TaskService,
+  constructor(private route: ActivatedRoute, private router1: Router, private taskService: TaskService,
               private questionService: QuestionService, private groupService: GroupService,
               private studentService: StudentService) {
      this.routeSubscription = route.params.subscribe(params => {
@@ -54,7 +57,22 @@ export class TaskDetailsStudentComponent implements OnInit{
         console.log(data);
       }
     )
-    console.log(this.questions[this.serialNumberQuestion].id, this.formChoice)
+    const question = this.questions[this.serialNumberQuestion];
+
+    const hero = this.protagonist;
+    const boss = this.boss;
+    if(question.number_correct_answer == this.formChoice) {
+      this.countCorrect += 1;
+      this.countPoints += question.reward;
+      console.log(hero.power + hero.endurance * 0.5);
+      this.bossHP -=
+        Math.round((this.protagonist.health / this.questions.length) + hero.power * hero.endurance);
+      console.log(this.bossHP);
+    }
+    else {
+      this.heroHP -= Math.round((this.boss.health / this.questions.length) + boss.power + boss.resistance);
+      console.log(this.heroHP);
+    }
     this.serialNumberQuestion += 1;
   }
 
@@ -64,6 +82,7 @@ export class TaskDetailsStudentComponent implements OnInit{
         console.log(data)
         this.task = data;
         this.getBoss(data.boss);
+        console.log(data.id)
       }
     )
   }
@@ -112,6 +131,32 @@ export class TaskDetailsStudentComponent implements OnInit{
         console.log(data);
         this.boss = data;
         this.bossHP = data.health;
+      }
+    )
+  }
+
+  completeTask() {
+    let grades = 0;
+    if (this.countCorrect == this.task.five) {
+      grades = 5;
+    }
+    else if (this.countCorrect == this.task.four) {
+      grades = 4;
+    }
+    else if (this.countCorrect == this.task.three) {
+      grades = 3;
+    }
+    else if (this.countCorrect == this.task.two) {
+      grades = 2;
+    }
+    this.createTestRecord(this.task.id, this.countCorrect, grades, this.countPoints);
+    this.router1.navigate(['/student/main']);
+  }
+
+  createTestRecord(test: number, count_correct: number, grades: number, count_points: number) {
+    this.studentService.postTestRecord(test, count_correct, grades, count_points).subscribe(
+      (data: any) => {
+        console.log(data);
       }
     )
   }
