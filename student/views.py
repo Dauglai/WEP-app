@@ -7,7 +7,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from student.models import AccountStatistics, Protagonist, Choice, TestRecord, Hero
-from student.serializers import HeroSerializer, ProtagonistSerializer, StatisticsSerializer
+from student.serializers import HeroSerializer, ProtagonistSerializer, StatisticsSerializer, \
+    TestRecordSerializer, ChoiceSerializer
 from teacher.models import Test, Question, Group
 from teacher.serializers import GroupSerializer, TestSerializer
 
@@ -67,6 +68,26 @@ class ProtagonistViewSet(viewsets.ModelViewSet):
         protagonist = Protagonist.objects.get(account=request.user)
         protagonist_serializer = self.serializer_class(protagonist)
         return Response(protagonist_serializer.data)
+
+
+class TestRecordViewSet(viewsets.ModelViewSet):
+    queryset = TestRecord.objects.all()
+    serializer_class = TestRecordSerializer
+
+    def list(self, request):
+        test_record = TestRecord.objects.get(account=request.user)
+        test_record_serializer = self.serializer_class(test_record)
+        return Response(test_record_serializer.data)
+
+
+class ChoiceViewSet(viewsets.ModelViewSet):
+    queryset = Choice.objects.all()
+    serializer_class = ChoiceSerializer
+
+    # def list(self, request):
+    #     choice = Choice.objects.get(account=request.user)
+    #     choice_serializer = self.serializer_class(choice)
+    #     return Response(choice_serializer.data)
 
 
 class AccountStatisticsViewSet(viewsets.ModelViewSet):

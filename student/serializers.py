@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from student.models import AccountStatistics, Hero, Protagonist
+from student.models import AccountStatistics, Hero, Protagonist, TestRecord, Choice
 
 
 class StatisticsSerializer(serializers.ModelSerializer):
@@ -18,5 +18,17 @@ class HeroSerializer(serializers.ModelSerializer):
 class ProtagonistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Protagonist
+        fields = '__all__'
+
+
+class TestRecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TestRecord
+        fields = '__all__'
+
+
+class ChoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Choice
         fields = '__all__'
 

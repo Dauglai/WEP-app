@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../../servicies/account.service";
 import {Router} from "@angular/router";
-import {BossService} from "../../servicies/boss.service";
+import {StudentService} from "../../servicies/student.service";
 
 export interface IError {
   last_name: string,
@@ -34,7 +34,7 @@ export class RegistrationComponent implements OnInit{
     this.getHeroes();
   }
 
-  constructor(private accountService: AccountService, private router: Router, private heroService: BossService) { }
+  constructor(private accountService: AccountService, private router: Router, private heroService: StudentService) { }
 
   formRegister = new FormGroup({
     email: new FormControl('', [Validators.required]),

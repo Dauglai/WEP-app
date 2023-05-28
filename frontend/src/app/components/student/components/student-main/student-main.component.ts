@@ -3,7 +3,7 @@ import {ITest} from "../../../../interfaces/interface.test";
 import {TaskService} from "../../../../servicies/task.service";
 import {IGroup} from "../../../../interfaces/interface.group";
 import {GroupService} from "../../../../servicies/group.service";
-import {BossService} from "../../../../servicies/boss.service";
+import {StudentService} from "../../../../servicies/student.service";
 
 @Component({
   selector: 'app-student-main',
@@ -14,13 +14,14 @@ import {BossService} from "../../../../servicies/boss.service";
 export class StudentMainComponent implements OnInit {
   protected statistic: any = {};
   protected protagonist: any = {};
+  protected hero: any = {};
   protected tasks?: ITest[];
   protected groups: IGroup[] = [];
   protected completedTests?: ITest[];
   public thisTest ={};
 
   constructor(private taskService: TaskService, private groupService: GroupService,
-              private studentService: BossService, private cdr: ChangeDetectorRef) {
+              private studentService: StudentService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -81,6 +82,17 @@ export class StudentMainComponent implements OnInit {
       (data: any) => {
         console.log(data);
         this.protagonist = data;
+        this.getHero(data.hero)
+      }
+    )
+  }
+
+  getHero(id: number): any {
+    this.studentService.getHero(id).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.hero = data;
+        return data;
       }
     )
   }

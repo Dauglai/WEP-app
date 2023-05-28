@@ -5,8 +5,7 @@
 
 .header-container {
   height: 60px;
-  background-color: #cfcdcd;
-  border-bottom: 1px solid #e5e5e5;
+  background-color: var(--header-color-2);
   margin-bottom: 20px;
 }
 
@@ -29,7 +28,7 @@
   min-width: 150px;
   height: 30px;
   user-select: none;
-  background-color: #e5e5e5;
+  background-color: #fff;
   /* margin-right: 70px; */
 }
 
@@ -47,7 +46,7 @@
   height: 30px;
   margin: 0 auto;
   user-select: none;
-  background-color: #e5e5e5;
+  background-color: #fff;
   /* margin-right: 70px; */
 }
 
@@ -111,7 +110,8 @@
 }
 
 .container-battle {
-  position: fixed;
+  position: relative;
+  left: -20px;
   margin: 0 auto;
   text-align: center;
   width: 30%;
@@ -126,13 +126,32 @@
   height: 150px;
 }
 
-.block__character {
-  /* position: absolute; */
-  background-color: #cfcdcd;
+.block__hero {
+  position: relative;
+  /*background-color: #cfcdcd;*/
   width: 100px;
   height: 150px;
   display: inline-block;
   margin-bottom: 3px;
+}
+
+.block__hero img {
+  width: 100%;
+  height: 100%;
+}
+
+.block__boss{
+  position: relative;
+  /*background-color: #cfcdcd;*/
+  width: 150px;
+  /*height: 150px;*/
+  display: inline-block;
+  margin-bottom: 3px;
+}
+
+.block__boss img {
+  width: 100%;
+  height: 100%;
 }
 
 .container-battle__student {

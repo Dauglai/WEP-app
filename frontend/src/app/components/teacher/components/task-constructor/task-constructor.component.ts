@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {BossService} from "../../../../servicies/boss.service";
+import {StudentService} from "../../../../servicies/student.service";
 import {GroupService} from "../../../../servicies/group.service";
 
 @Component({
@@ -13,7 +13,7 @@ export class TaskConstructorComponent implements OnInit{
   private task: any = {};
   protected groups: any = [];
 
-  constructor(private bossService: BossService, private groupService: GroupService,
+  constructor(private bossService: StudentService, private groupService: GroupService,
               private _fb: FormBuilder) {  }
 
   ngOnInit() {

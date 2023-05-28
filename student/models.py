@@ -36,7 +36,7 @@ class Hero(models.Model):
 
 class Protagonist(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
-    hero = models.OneToOneField(Hero, on_delete=models.CASCADE, null=True)
+    hero = models.ManyToManyField(Hero, null=True)
     name = models.CharField(max_length=100, default='Protagonist')
     health = models.PositiveIntegerField('Здоровье', default=100)
     endurance = models.PositiveIntegerField('Выносливость', default=5)
@@ -64,7 +64,7 @@ type_of_equipment = [
 
 
 class Choice(models.Model):
-    question = models.OneToOneField(Question, on_delete=models.DO_NOTHING)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True )
     number_answer = models.IntegerField()
     lock_other = models.BooleanField(default=False)
 

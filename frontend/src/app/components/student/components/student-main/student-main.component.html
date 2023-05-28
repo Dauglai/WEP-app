@@ -4,14 +4,15 @@
       <li class="character">
         <div class="block__container">
           <h2 class='block__h'>Персонаж</h2>
-          <div class="block__character"></div>
-          <div class="field-balance"> balance gold</div>
+          <div class="block__character">
+            <img class="" [src]="hero.photo">
+          </div>
+          <div class="field-balance"> {{statistic.balance}} gold</div>
           <div class="block__rating-position" >
-            <span class="place_in_rating">1 место из 2</span>
+            <span class="place_in_rating">{{protagonist.name}} </span>
           </div>
           <div class="block__characteristic">
             <h4 class="block__h-char">Характеристики</h4>
-            <div>Имя героя: {{protagonist.name}} </div>
             <div>Здоровье: {{protagonist.health }} </div>
             <div>Выносливость: {{protagonist.endurance }}</div>
             <div>Сила: {{protagonist.power }}</div>
@@ -55,7 +56,6 @@
                 <div>Учитель: {{task.owner_name}}</div>
                 <div>Дедлайн: {{task.time_deadline}} {{task.date_deadline}}</div>
               </div>
-              <p *ngIf="tasks!.length < 1">Отсутствуют новые задания</p>
             </div>
           </li>
           <li class="teams">

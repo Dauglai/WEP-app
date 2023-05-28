@@ -2,7 +2,8 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from . import views
-from .views import GropViewSet, GetTestByGrop, HeroViewSet, ProtagonistViewSet, AccountStatisticsViewSet
+from .views import GropViewSet, GetTestByGrop, HeroViewSet, ProtagonistViewSet, AccountStatisticsViewSet, ChoiceViewSet, \
+    TestRecordViewSet
 
 router = DefaultRouter()
 router.register(r'groups', GropViewSet)
@@ -10,6 +11,8 @@ router.register(r'tests-by-group', GetTestByGrop)
 router.register(r'hero', HeroViewSet)
 router.register(r'protagonist', ProtagonistViewSet)
 router.register(r'account_statistics', AccountStatisticsViewSet)
+router.register(r'choice', ChoiceViewSet)
+router.register(r'test_record', TestRecordViewSet)
 
 urlpatterns = [
     path(r'', include(router.urls)),

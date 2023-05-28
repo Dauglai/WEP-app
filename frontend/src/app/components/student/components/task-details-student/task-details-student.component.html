@@ -7,35 +7,38 @@
 </header>
   <div class="container-battle">
     <div class="container-battle__item">
-      <div class="block__character container-battle__student">student</div>
-      <span>100 HP</span>
+      <div class="block__hero container-battle__student">
+        <img class="" [src]="hero.photo">
+      </div>
+      HP: <span>{{ heroHP }}</span>
     </div>
-    <div class="block__character container-battle__img-battle">vs</div>
+    <div class="block__boss container-battle__img-battle">vs</div>
     <div class="container-battle__item">
-      <div class="block__character container-battle__enemy">enemy</div>
-      <span>90 HP</span>
+      <div class="block__boss container-battle__enemy">
+        <img class="" [src]="boss.photo">
+      </div>
+      HP: <span>{{ bossHP }}</span>
     </div>
   </div>
   <main class="main-container">
     <div *ngFor="let question of questions;  let i = index;" id="task_{{ question.id }}">
-      <form *ngIf="this.serialNumberQuestion == i" method="post" class="question">
+      <div *ngIf="this.serialNumberQuestion == i" class="question">
         <h2 class="question__title">Задание <span>{{i + 1}} </span></h2>
         <p>{{ question.question }}</p>
-        <input type="hidden" name="id" value="{{ question.id }}">
         <label>
-          <input type="radio" name="answer" value="{{ question.first_answer }}"> {{ question.first_answer }}
+          <input type="radio" name="answer" [value]='question.first_answer' [(ngModel)]="formChoice" > {{ question.first_answer }}
         </label>
         <label>
-          <input type="radio" name="answer" value="{{ question.second_answer }}"> {{ question.second_answer }}
+          <input type="radio" name="answer" [value]='question.second_answer' [(ngModel)]="formChoice" > {{ question.second_answer }}
         </label>
         <label>
-          <input type="radio" name="answer" value="{{ question.third_answer }}"> {{ question.third_answer }}
+          <input type="radio" name="answer" [value]='question.third_answer' [(ngModel)]="formChoice" > {{ question.third_answer }}
         </label>
         <label>
-          <input type="radio" name="answer" value="{{ question.four_answer }}"> {{ question.four_answer }}
+          <input type="radio" name="answer" [value]='question.four_answer' [(ngModel)]="formChoice" > {{ question.four_answer }}
         </label>
         <input type="submit" (click)="sendAnswer()">
-      </form>
+      </div>
     </div>
     <button type="submit" class="submit-modal-window">
       Завершить

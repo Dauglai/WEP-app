@@ -127,11 +127,17 @@
 .block__character {
   margin: 0 auto;
   position: relative;
-  right: 15px;
-  background-color: #cfcdcd;
-  width: 150px;
-  height: 225px;
+  /*left: 5px;*/
+  /*border: 1px solid darkgoldenrod;*/
+  /*border-radius: 17px;*/
+  width: 170px;
+  height: 245px;
   margin-bottom: 10px;
+}
+
+.block__character img {
+  width: 100%;
+  height: 100%;
 }
 
 .field-balance {

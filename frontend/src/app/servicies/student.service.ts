@@ -7,7 +7,7 @@ import {IGroup} from "../interfaces/interface.group";
 @Injectable({
   providedIn: 'root'
 })
-export class BossService {
+export class StudentService {
 
   constructor(private http: HttpClient) { }
 
@@ -16,17 +16,38 @@ export class BossService {
   private apiAccountStatistics = 'http://localhost:8000/api/student/account_statistics/';
   private apiProtagonist = 'http://localhost:8000/api/student/protagonist/';
 
+  private apiChoice = 'http://localhost:8000/api/student/choice/';
+  private apiTestRecord = 'http://localhost:8000/api/student/test_record/';
+
   private headers = new HttpHeaders(
       {'Content-Type': 'application/json',
         Authorization: 'Token ' + localStorage.getItem('my-token')}
     );
 
+  postChoice(question: number, number_answer: number): any {
+    const data = {question: question, number_answer: number_answer};
+    return this.http.post(this.apiChoice, data, {headers: this.headers })
+  }
+
+  postTestRecord(test: number, count_correct: number, count_points: number): any {
+    const data = {test: test, count_correct: count_correct, count_points: count_points}
+    return this.http.post(this.apiTestRecord, data, {headers: this.headers })
+  }
+
   getBosses(): Observable<any> {
     return this.http.get<any>(this.apiGetBoss,{headers: this.headers });
   }
 
+  getBoss(id: number): any {
+    return this.http.get<any>(this.apiGetBoss + id,{headers: this.headers });
+  }
+
   getHeroes(): Observable<any> {
     return this.http.get<any>(this.apiHeroes);
+  }
+
+  getHero(id: number): any {
+    return this.http.get<any>(this.apiHeroes + id);
   }
 
   getAccountStatistics(): any {
