@@ -14,6 +14,8 @@ router.registry.extend(teacher_router.registry)
 
 
 urlpatterns = [
+    path(r'', include('main.urls')),
+
     path('admin/', admin.site.urls),
     path(r'api/', include(router.urls)),
 

@@ -22,6 +22,8 @@ export class MainComponent implements OnInit{
         console.log(data)
         this.user = `${data.last_name} ${data.first_name} ${data.patronymic}`;
         this.isAuthentication = true;
+        this.isTeacher = data.is_teacher == 'False'? false: true;
+        console.log(this.isTeacher);
       },
       error => {
         console.log(error);
