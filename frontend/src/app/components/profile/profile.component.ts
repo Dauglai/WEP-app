@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountService} from "../../servicies/account.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +11,7 @@ export class ProfileComponent implements OnInit{
   user: any;
   userRole: string = '';
 
-  constructor(private accountService: AccountService) {  }
+  constructor(private accountService: AccountService, private router1: Router) {  }
   ngOnInit() {
     this.getUserWithToken(localStorage.getItem('my-token'));
   }
@@ -34,6 +35,19 @@ export class ProfileComponent implements OnInit{
       },
       error => {
         // console.log(error);
+      }
+    )
+  }
+
+  logout(): void {
+    this.accountService.logout().subscribe(
+      (data: any) => {
+        console.log(data)
+        localStorage.clear();
+        this.router1.navigate(['']);
+      },
+      error => {
+        console.log(error);
       }
     )
   }

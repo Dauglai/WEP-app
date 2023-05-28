@@ -36,8 +36,12 @@ export class StudentService {
     return this.http.post(this.apiTestRecord, data, {headers: this.headers })
   }
 
-  getTestRecord(): any {
+  getTestRecordList(): any {
     return this.http.get<any>(this.apiTestRecordList, {headers: this.headers })
+  }
+
+  getTestRecord(): any {
+    return this.http.get<any>(this.apiTestRecord, {headers: this.headers })
   }
 
   getBosses(): Observable<any> {

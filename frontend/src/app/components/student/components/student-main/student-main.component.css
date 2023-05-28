@@ -192,7 +192,9 @@
 }
 
 .block__characteristic div:last-child {
-  margin-top: 15px ;
+  /*margin-top: 15px ;*/
+  position: absolute;
+  bottom: 15px;
 }
 
 .block__h-char {

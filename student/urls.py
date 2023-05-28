@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 
 from . import views
 from .views import GropViewSet, GetTestByGrop, HeroViewSet, ProtagonistViewSet, AccountStatisticsViewSet, ChoiceViewSet, \
-    TestRecordViewSet
+    TestRecordViewSet, TestRecordViewSetList
 
 router = DefaultRouter()
 router.register(r'groups', GropViewSet)
@@ -13,6 +13,7 @@ router.register(r'protagonist', ProtagonistViewSet)
 router.register(r'account_statistics', AccountStatisticsViewSet)
 router.register(r'choice', ChoiceViewSet)
 router.register(r'test_record', TestRecordViewSet)
+router.register(r'test_record_list', TestRecordViewSetList)
 
 urlpatterns = [
     path(r'', include(router.urls)),

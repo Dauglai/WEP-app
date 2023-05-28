@@ -49,6 +49,7 @@ import {
   DialogWindowTeacherComponent
 } from "./components/teacher/components/dialog-window-teacher/dialog-window-teacher.component";
 import { DialogWindowTestStartComponent } from './components/student/components/dialog-window-test-start/dialog-window-test-start.component';
+import { StatisticsTeacherComponent } from './components/teacher/components/statistics-teacher/statistics-teacher.component';
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import { DialogWindowTestStartComponent } from './components/student/components/
     StatisticsComponent,
     DialogWindowTeacherComponent,
     DialogWindowTestStartComponent,
+    StatisticsTeacherComponent,
   ],
     imports: [
         TuiButtonModule,

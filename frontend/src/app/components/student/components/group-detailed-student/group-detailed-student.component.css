@@ -64,3 +64,18 @@
   grid-template-columns: 27% 73%;
   margin-bottom: 5px;
 }
+
+.tasks-block {
+  width: 55%;
+  right: 0;
+}
+
+.block__test {
+  position: relative;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #cfcdcd;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+

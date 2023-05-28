@@ -1,0 +1,24 @@
+<div class="groups__container">
+  <div class="groups__nav-container">
+    <h2 class="groups__title">Статистика по группам</h2>
+  </div>
+  <div class="groups__block-container">
+    <div *ngFor="let group of groups" class="groups__block-group">
+      <tui-accordion-item class="group__participants">
+        {{group.group_name}}
+        <ng-template tuiAccordionItemContent>
+<!--          <div *ngFor="let account of accounts; let i=index">-->
+            <div>
+              Выполненные задания
+            </div>
+            <div class="group__participant">
+<!--              Очки: {{ participants[i].score }}-->
+<!--              Опыт: {{ participants[i].experience }}-->
+<!--              Уровень: {{ participants[i].lvl }}-->
+            </div>
+<!--          </div>-->
+        </ng-template>
+      </tui-accordion-item>
+    </div>
+  </div>
+</div>

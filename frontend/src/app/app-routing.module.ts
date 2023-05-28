@@ -34,6 +34,9 @@ import {
   TaskDetailsTeacherComponent
 } from "./components/teacher/components/task-details-teacher/task-details-teacher.component";
 import {StatisticsComponent} from "./components/statistics/statistics.component";
+import {
+  StatisticsTeacherComponent
+} from "./components/teacher/components/statistics-teacher/statistics-teacher.component";
 
 
 const routesGroupTeacher: any =
@@ -83,6 +86,7 @@ const routes: Routes = [
   { path: 'teacher', component: TeacherComponent, children: [
       { path: 'profile', component: ProfileComponent },
       { path: 'statistics', component: StatisticsComponent },
+      { path: 'statistics-teacher', component: StatisticsTeacherComponent },
       routesConstructor, routesGroupTeacher, routesTaskTeacher
     ]
   },

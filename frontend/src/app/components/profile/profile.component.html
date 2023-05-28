@@ -1,44 +1,49 @@
-
-<div class="profile__container">
-  <div class="profile__nav-container">
-    <h2 class="profile__title">Информация о профиле</h2>
+<tui-root>
+  <div class="profile__container">
+    <div class="profile__nav-container">
+      <h2 class="profile__title">Информация о профиле</h2>
+    </div>
+    <div class="profile__block-container">
+      <label class="profile__block">
+        Фамилия
+        <div class="profile__block-group">{{ user.last_name }}</div>
+      </label>
+      <label class="profile__block">
+        Имя
+        <div class="profile__block-group">{{ user.first_name }}</div>
+      </label>
+      <label class="profile__block">
+        Отчество
+        <div class="profile__block-group"> {{ user.patronymic }}</div>
+      </label>
+    </div>
+    <div class="profile__block-container">
+      <label class="profile__block">
+        Электронная почта
+        <div class="profile__block-group"> {{ user.email }}</div>
+      </label>
+    </div>
+    <div class="profile__block-container">
+      <label class="profile__block">
+        Место учебы
+        <div class="profile__block-group">{{ user.location }}</div>
+      </label>
+      <label class="profile__block">
+        Номер школы
+        <div class="profile__block-group">{{ user.school_number }}</div>
+      </label>
+      <label class="profile__block">
+        Роль
+        <div class="profile__block-group">{{ userRole }}</div>
+      </label>
+      <label class="profile__block">
+        Пол
+        <div class="profile__block-group">{{ user.gender }}</div>
+      </label>
+    </div>
+    <button tuiButton type="button" appearance="primary"
+            class="tui-space_right-3 tui-space_bottom-3" (click)="logout()">
+      ВЫХОД
+    </button>
   </div>
-  <div class="profile__block-container">
-    <label class="profile__block">
-      Фамилия
-      <div class="profile__block-group">{{ user.last_name }}</div>
-    </label>
-    <label class="profile__block">
-      Имя
-      <div class="profile__block-group">{{ user.first_name }}</div>
-    </label>
-    <label class="profile__block">
-      Отчество
-      <div class="profile__block-group"> {{ user.patronymic }}</div>
-    </label>
-  </div>
-  <div class="profile__block-container">
-    <label class="profile__block">
-      Электронная почта
-      <div class="profile__block-group"> {{ user.email }}</div>
-    </label>
-  </div>
-  <div class="profile__block-container">
-    <label class="profile__block">
-      Место учебы
-      <div class="profile__block-group">{{ user.location }}</div>
-    </label>
-    <label class="profile__block">
-      Номер школы
-      <div class="profile__block-group">{{ user.school_number }}</div>
-    </label>
-    <label class="profile__block">
-      Роль
-      <div class="profile__block-group">{{ userRole }}</div>
-    </label>
-    <label class="profile__block">
-      Пол
-      <div class="profile__block-group">{{ user.gender }}</div>
-    </label>
-  </div>
-</div>
+</tui-root>

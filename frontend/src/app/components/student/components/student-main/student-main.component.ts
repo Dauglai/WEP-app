@@ -16,6 +16,7 @@ export class StudentMainComponent implements OnInit {
   protected protagonist: any = {};
   protected hero: any = {};
   protected tasks?: ITest[];
+  protected testRecord: any = {};
   protected groups: IGroup[] = [];
   protected completedTests?: ITest[];
   public thisTest ={};
@@ -87,6 +88,14 @@ export class StudentMainComponent implements OnInit {
     )
   }
 
+  getTestRecord(): void {
+    this.studentService.getTestRecordList().subscribe(
+      (data: any) => {
+        this.testRecord = data;
+      }
+    )
+  }
+
   getHero(id: number): any {
     this.studentService.getHero(id).subscribe(
       (data: any) => {
@@ -112,6 +121,7 @@ export class StudentMainComponent implements OnInit {
     this.getTasks();
     this.getAccountStatistics();
     this.getProtagonist();
+    this.getTestRecord();
     this.cdr.detectChanges()
   }
 }

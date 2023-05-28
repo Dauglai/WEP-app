@@ -30,19 +30,12 @@
     Выполненные задания
     <ng-template tuiAccordionItemContent>
       <div class="group__block-container">
-        <div *ngFor="let test of completedTests" class="tests__block-group">
-          <div class="test__field">
-            <span>Название: </span>
-            <span>{{ test.title }}</span>
-          </div>
-          <div class="test__field">
-            <span>Предмет: </span>
-            <span>{{ test.subject }}</span>
-          </div>
-          <div class="test__field">
-            <span>Дедлайн: </span>
-            <span>{{ test.time_deadline }} {{ test.date_deadline }}</span>
-          </div>
+        <div *ngFor="let task of testRecord" class="block__test">
+          <div>Название: {{task.test}}</div>
+          <div>Количество првильных ответов: {{task.count_correct}}</div>
+          <div>Оценка: {{task.grades}}</div>
+          <div>Количество заработнанных баллов: {{task.count_points}}</div>
+          <div>Время: {{task.created}}</div>
         </div>
       </div>
     </ng-template>
