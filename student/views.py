@@ -5,10 +5,9 @@ from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
-from student.forms import JoinGroupForm
-from student.models import Account_Statistics, Protagonist, Choice, Test_Record
+from student.models import AccountStatistics, Protagonist, Choice, TestRecord, Hero
+from student.serializers import HeroSerializer, ProtagonistSerializer, StatisticsSerializer
 from teacher.models import Test, Question, Group
 from teacher.serializers import GroupSerializer, TestSerializer
 
@@ -18,7 +17,7 @@ class GropViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
     def list(self, request):
-        user_stat = Account_Statistics.objects.get(account=request.user)
+        user_stat = AccountStatistics.objects.get(account=request.user)
         groups = user_stat.groups.all()
         print('user:', request.user)
 
@@ -31,7 +30,7 @@ class GetTestByGrop(viewsets.ModelViewSet):
     serializer_class = TestSerializer
 
     def list(self, request):
-        user_stat = Account_Statistics.objects.get(account=request.user)
+        user_stat = AccountStatistics.objects.get(account=request.user)
         print(user_stat)
         groups = user_stat.groups.all()
         print(groups)
@@ -50,10 +49,40 @@ def get_all_tests(groups):
     return set(tasks)
 
 
+class HeroViewSet(viewsets.ModelViewSet):
+    queryset = Hero.objects.all()
+    serializer_class = HeroSerializer
+
+    def get(self, request):
+        hero = Hero.objects.get(pk=self.kwargs['pk'])
+        hero_serializer = self.serializer_class(hero)
+        return Response(hero_serializer.data, status=status.HTTP_200_OK)
+
+
+class ProtagonistViewSet(viewsets.ModelViewSet):
+    queryset = Protagonist.objects.all()
+    serializer_class = ProtagonistSerializer
+
+    def get(self, request):
+        protagonist = Protagonist.objects.get(pk=self.kwargs['pk'])
+        protagonist_serializer = self.serializer_class(protagonist)
+        return Response(protagonist_serializer.data, status=status.HTTP_200_OK)
+
+
+class AccountStatisticsViewSet(viewsets.ModelViewSet):
+    queryset = AccountStatistics.objects.all()
+    serializer_class = StatisticsSerializer
+
+    def get(self, request):
+        account_statistics = Hero.objects.get(pk=self.kwargs['pk'])
+        account_statistics_serializer = self.serializer_class(account_statistics)
+        return Response(account_statistics_serializer.data, status=status.HTTP_200_OK)
+
+
 @api_view(['GET'])
 def DeleteGroup(request, id):
     group = Group.objects.get(id=id)
-    user_stat = Account_Statistics.objects.get(account=request.user)
+    user_stat = AccountStatistics.objects.get(account=request.user)
     user_stat.groups.remove(group)
     return Response({'Группа исключена'})
 
@@ -61,7 +90,7 @@ def DeleteGroup(request, id):
 @api_view(['POST'])
 def JoinGroup(request):
     if request.method == 'POST':
-        user_stat = Account_Statistics.objects.get(account=request.user)
+        user_stat = AccountStatistics.objects.get(account=request.user)
         print(user_stat)
         login = request.data['login']
         password = request.data['password']
@@ -77,7 +106,7 @@ def JoinGroup(request):
 def student(request):
     if request.user.is_teacher and request.user.is_staff and request.user.is_admin:
         return redirect('main')
-    user_stat = Account_Statistics.objects.get(account=request.user)
+    user_stat = AccountStatistics.objects.get(account=request.user)
     user_protagonist = Protagonist.objects.get(account=request.user)
     groups = user_stat.groups.all()
     tasks = Test.objects.all()
@@ -105,10 +134,10 @@ def student(request):
 
 
 def task(request, task_id):
-    user_stat = Account_Statistics.objects.get(account=request.user)
+    user_stat = AccountStatistics.objects.get(account=request.user)
     task = Test.objects.get(pk=task_id)
     questions = Question.objects.filter(test__title=task.title)
-    record = Test_Record.objects.create(user=request.user, test=task, count_correct=0, count_points=0)
+    record = TestRecord.objects.create(user=request.user, test=task, count_correct=0, count_points=0)
     transcripts = {
         1: 'first_answer',
         2: 'second_answer',

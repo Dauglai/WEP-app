@@ -30,6 +30,31 @@
                                              formControlName="difficulty"> [от 0 до 10]
             </li>
           </ul>
+
+          <div class="field__groups">
+            Выбор группы:
+            <ul class="list-group">
+              <li *ngFor="let group of groups; let i=index">
+                Название: {{group.group_name}}
+<!--                <input type="checkbox" [value]="group.id" (change)="onCheckChange($event)">-->
+                <input class="checkbox-group" type="checkbox" name="" formControlName="group">
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            Выбор босса:
+            <ul class="list-boss">
+              <li *ngFor="let boss of bosses">
+                <img [src]="boss.photo">
+                Здоровье: {{boss.health}}
+                Сила: {{boss.health}}
+                Стойкость: {{boss.health}}
+                <input class="radio-boss" type="radio" formControlName="boss" value={{boss.id}} checked>
+              </li>
+            </ul>
+          </div>
+
         </div>
         <div class="form__item">
           <ul class="list_reset">
@@ -47,6 +72,8 @@
                 [день:месяц:год]
               </div>
             </li>
+            <span>Количество попыток: </span>
+            <input type="number" value="1" class="field__mark" formControlName="" min="1">
           </ul>
         </div>
         <div class="form__item">

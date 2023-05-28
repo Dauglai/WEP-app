@@ -1,8 +1,11 @@
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from teacher.urls import router as teacher_router
+from wep_full import settings
+
 # from account.urls import router as account_router
 
 router = DefaultRouter()
@@ -21,3 +24,5 @@ urlpatterns = [
     path(r'api/teacher/', include('teacher.urls')),
     path(r'api/student/', include('student.urls')),
 ]
+
+urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

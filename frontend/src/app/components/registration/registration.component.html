@@ -1,90 +1,131 @@
-<header class="header">
-  <div class="header__container">
-    <a class="header__logo" routerLink="/main">
-      <img class="header__logo_img" src="../../../assets/img/header/logo.png" alt="logo">
-      <span class="header__logo_text">Master of Dungeons</span>
-    </a>
-    <div class="header__nav">
-      <span class="header__text">Уже есть учетная запись ?</span>
-      <a routerLink="/login" class="header__link">ВХОД</a>
-    </div>
-  </div>
-</header>
-
-<main class="reg__container">
-  <div class="reg__window">
-
-    <div class="template" *ngIf="!nextPage">
-      <h2 class="reg__form-h">Создать учетную запись</h2>
-      <button tuiButton appearance="whiteblock-active" type="button"
-              class="tui-space_right-4 choose-btn" (click)="chooseRoleStudent()">
-        <img src="../../../assets/img/registration/student.svg" class="choose-btn_img">
-        Я ученик
-      </button>
-      <button tuiButton appearance="whiteblock-active" type="button"
-              class="tui-space_right-4 choose-btn " (click)="chooseRoleTeacher()">
-        <img src="../../../assets/img/registration/teacher.svg" class="choose-btn_img">
-        Я учитель
-      </button>
-      <div class="footer__container">
-        <span class="footer__text">Уже есть учетная запись ?</span>
-        <a routerLink="/login" class="footer__link">Войти</a>
+<tui-root>
+    <header class="header">
+      <div class="header__container">
+        <a class="header__logo" routerLink="/main">
+          <img class="header__logo_img" src="../../../assets/img/header/logo.png" alt="logo">
+          <span class="header__logo_text">Master of Dungeons</span>
+        </a>
+        <div class="header__nav">
+          <span class="header__text">Уже есть учетная запись ?</span>
+          <a routerLink="/login" class="header__link">ВХОД</a>
+        </div>
       </div>
-    </div>
+    </header>
 
-    <div class="template" *ngIf="nextPage">
-      <button class="template__back-btn" (click)="previousPage()">
-        <img class="header__logo_img" src="../../../assets/img/registration/arrow.svg" alt="logo">
-      </button>
-      <h2 class="reg__form-h">Регистрация</h2>
-      <form class="form" [formGroup]="formRegister" (ngSubmit)="registration()">
-        <span class="text-error">{{ errors.email }}</span>
-        <input placeholder="Электронная почта" type="email" formControlName="email" required/>
-        <span class="text-error">{{ errors.password }}</span>
-        <input placeholder="Пароль" type="password" formControlName="password" required/>
-        <span class="text-error">{{ errors.password2 }}</span>
-        <span class="text-error">{{errorPassword}}</span>
-        <input placeholder="Подтверждение пароля" type="password" formControlName="password2" required/>
+  <main class="reg__container">
+    <div class="reg__window">
 
-        <span class="text-error">{{ errors.last_name }}</span>
-        <input placeholder="Фамилия" type="text" formControlName="last_name" required/>
-        <span class="text-error">{{ errors.first_name }}</span>
-        <input placeholder="Имя" type="text" formControlName="first_name" required/>
-        <span class="text-error">{{ errors.patronymic }}</span>
-        <input placeholder="Отчество" type="text" formControlName="patronymic" required/>
-
-        <span class="text-error">{{ errors.location }}</span>
-        <label>Место учебы
-          <select placeholder="Место учебы" type="text" class="form-select" formControlName="location">
-            <option value="" disabled selected>-</option>
-            <option value="Екатеринбург">Екатеринбург</option>
-            <option value="Москва">Москва</option>
-            <option value="Санкт-Петербург">Санкт-Петербург</option>
-          </select>
-        </label>
-
-        <span class="text-error">{{ errors.school_number }}</span>
-        <input placeholder="Номер школы" type="number" min="1" formControlName="school_number"/>
-
-        <span class="text-error">{{ errors.gender }}</span>
-        <label>Пол
-          <select placeholder="Пол" type="text" class="form-select" formControlName="gender">
-            <option value="" disabled selected>-</option>
-            <option value="M">мужчина</option>
-            <option value="F">женщина</option>
-          </select>
-        </label>
-
-        <button tuiButton type="submit" appearance="outline"
-                class="tui-space_right-3 tui-space_bottom-3 btn-submit" size="s">
-          Подтвердить
+      <div class="template" *ngIf="!nextPage">
+        <h2 class="reg__form-h">Создать учетную запись</h2>
+        <button tuiButton appearance="whiteblock-active" type="button"
+                class="tui-space_right-4 choose-btn" (click)="chooseRoleStudent()">
+          <img src="../../../assets/img/registration/student.svg" class="choose-btn_img">
+          Я ученик
         </button>
-      </form>
-      <div class="footer__container">
-        <span class="footer__text">Уже есть учетная запись ?</span>
-        <a routerLink="/login" class="footer__link">Войти</a>
+        <button tuiButton appearance="whiteblock-active" type="button"
+                class="tui-space_right-4 choose-btn " (click)="chooseRoleTeacher()">
+          <img src="../../../assets/img/registration/teacher.svg" class="choose-btn_img">
+          Я учитель
+        </button>
+        <div class="footer__container">
+          <span class="footer__text">Уже есть учетная запись ?</span>
+          <a routerLink="/login" class="footer__link">Войти</a>
+        </div>
+      </div>
+
+      <div class="template" *ngIf="nextPage === true && characterSelection === false">
+        <button class="template__back-btn" (click)="previousPage()">
+          <img class="header__logo_img" src="../../../assets/img/registration/arrow.svg" alt="logo">
+        </button>
+        <h2 class="reg__form-h">Регистрация</h2>
+        <form class="form" [formGroup]="formRegister" (ngSubmit)="registration()">
+          <span class="text-error">{{ errors.email }}</span>
+          <input placeholder="Электронная почта" type="email" formControlName="email" required/>
+          <span class="text-error">{{ errors.password }}</span>
+          <input placeholder="Пароль" type="password" formControlName="password" required/>
+          <span class="text-error">{{ errors.password2 }}</span>
+          <span class="text-error">{{errorPassword}}</span>
+          <input placeholder="Подтверждение пароля" type="password" formControlName="password2" required/>
+
+          <span class="text-error">{{ errors.last_name }}</span>
+          <input placeholder="Фамилия" type="text" formControlName="last_name" required/>
+          <span class="text-error">{{ errors.first_name }}</span>
+          <input placeholder="Имя" type="text" formControlName="first_name" required/>
+          <span class="text-error">{{ errors.patronymic }}</span>
+          <input placeholder="Отчество" type="text" formControlName="patronymic" required/>
+
+          <span class="text-error">{{ errors.location }}</span>
+          <label>Место учебы
+            <select placeholder="Место учебы" type="text" class="form-select" formControlName="location">
+              <option value="" disabled selected>-</option>
+              <option value="Екатеринбург">Екатеринбург</option>
+              <option value="Москва">Москва</option>
+              <option value="Санкт-Петербург">Санкт-Петербург</option>
+            </select>
+          </label>
+
+          <span class="text-error">{{ errors.school_number }}</span>
+          <input placeholder="Номер школы" type="number" min="1" formControlName="school_number"/>
+
+          <span class="text-error">{{ errors.gender }}</span>
+          <label>Пол
+            <select placeholder="Пол" type="text" class="form-select" formControlName="gender">
+              <option value="" disabled selected>-</option>
+              <option value="M">мужчина</option>
+              <option value="F">женщина</option>
+            </select>
+          </label>
+
+          <button tuiButton type="submit" appearance="outline"
+                  class="tui-space_right-3 tui-space_bottom-3 btn-submit" size="s">
+            Подтвердить
+          </button>
+          <button tuiButton appearance="outline" (click)="characterSelection = true"
+                  class="tui-space_right-3 tui-space_bottom-3 btn-submit" size="s">
+            Вперед
+          </button>
+        </form>
+        <div class="footer__container">
+          <span class="footer__text">Уже есть учетная запись ?</span>
+          <a routerLink="/login" class="footer__link">Войти</a>
+        </div>
       </div>
     </div>
 
-  </div>
-</main>
+    <div class="stat__window">
+      <div class="template character-selection" *ngIf="characterSelection">
+        <div class="character-block">
+          <ul class="character-block__list">
+            <li><img [src]="heroes[0].photo"></li>
+            <li><img [src]="heroes[1].photo"></li>
+          </ul>
+          <div class="character-block__name">Воин</div>
+        </div>
+        <div class="character-block">
+          <ul class="character-block__list">
+            <li><img [src]="heroes[2].photo"></li>
+            <li><img [src]="heroes[3].photo"></li>
+          </ul>
+          <div class="character-block__name">Маг</div>
+        </div>
+        <div class="character-block">
+          <ul class="character-block__list">
+            <li><img [src]="heroes[4].photo"></li>
+            <li><img [src]="heroes[5].photo"></li>
+          </ul>
+          <div class="character-block__name">Наемник</div>
+        </div>
+        <div class="qwer">
+          <label class="form-hero-name">
+            <div>Имя героя: </div>
+            <input formControlName="" >
+          </label>
+          <button tuiButton type="submit" appearance="outline"
+                  class="tui-space_right-3 tui-space_bottom-3 btn-submit" size="s">
+            Подтвердить
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</tui-root>

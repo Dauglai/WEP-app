@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from student.models import Account_Statistics
-from .models import Group, Test, Question
+from student.models import AccountStatistics
+from .models import Group, Test, Question, Boss
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -11,7 +11,7 @@ class GroupSerializer(serializers.ModelSerializer):
 
 class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Account_Statistics
+        model = AccountStatistics
         fields = ('balance', 'score', 'experience', 'lvl')
 
 
@@ -24,4 +24,10 @@ class TestSerializer(serializers.ModelSerializer):
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
+        fields = '__all__'
+
+
+class BossSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Boss
         fields = '__all__'

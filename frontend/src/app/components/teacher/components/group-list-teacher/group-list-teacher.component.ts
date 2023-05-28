@@ -39,8 +39,8 @@ export class GroupListTeacherComponent implements OnInit{
   }
 
   getRandomColor(): string {
-    return 'rgba(123,17,70, 0.34 )'
-    // return "rgba(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ","
-    //   + Math.floor(Math.random() * 255) + ", 0.34 )";
+    // return 'rgba(123,17,70, 0.34 )'
+    return "rgba(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ","
+      + Math.floor(Math.random() * 255) + ", 0.34 )";
   }
 }

@@ -14,7 +14,7 @@ from rest_framework.views import APIView
 from account.forms import RegisterUserForm
 from account.models import Account
 from account.serializers import AccountSerializer
-from student.models import Account_Statistics, Protagonist, Inventory
+from student.models import AccountStatistics, Protagonist
 from student.serializers import StatisticsSerializer
 
 
@@ -36,7 +36,7 @@ class RegistrUserView(CreateAPIView):
 
 
 class CreateStatistics(CreateAPIView):
-    queryset = Account_Statistics.objects.all()
+    queryset = AccountStatistics.objects.all()
     serializer_class = StatisticsSerializer
     permission_classes = [AllowAny]
 
@@ -79,7 +79,7 @@ def registration(request):
         if account_form.is_valid():
             account_form = account_form.save(commit=False)
             account_form.save()
-            Account_Statistics.objects.create(account=Account.objects.get(email=account_form.email))
+            AccountStatistics.objects.create(account=Account.objects.get(email=account_form.email))
             if not account_form.is_teacher:
                 Protagonist.objects.create(account=Account.objects.get(email=account_form.email),
                                            name=f'Hero_{random.randrange(1, 1000, 1)}')

@@ -21,7 +21,7 @@ import { GroupTeacherComponent } from './components/teacher/components/group-tea
 import { ConstructorComponent } from './components/teacher/components/constructor/constructor.component';
 import {DialogWindowComponent} from "./components/dialog-window/dialog-window.component";
 import { GroupDetailedTeacherComponent } from './components/teacher/components/group-detailed-teacher/group-detailed-teacher.component';
-import {TuiAccordionModule} from "@taiga-ui/kit";
+import {TuiAccordionModule, TuiCheckboxModule} from "@taiga-ui/kit";
 import {NavigationBarStudentComponent} from "./components/student/components/navigation-bar-student/navigation-bar-student.component";
 import {NavigationBarTeacherComponent} from "./components/teacher/components/navigation-bar-teacher/navigation-bar-teacher.component";
 import { GroupListTeacherComponent } from './components/teacher/components/group-list-teacher/group-list-teacher.component';
@@ -100,6 +100,7 @@ import { DialogWindowTestStartComponent } from './components/student/components/
         TuiAlertModule,
         ReactiveFormsModule,
         TuiAccordionModule,
+        TuiCheckboxModule,
     ],
   providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
   bootstrap: [AppComponent]

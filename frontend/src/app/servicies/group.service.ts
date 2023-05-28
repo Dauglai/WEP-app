@@ -26,7 +26,6 @@ constructor(private http: HttpClient, private taskService: TaskService) { }
     );
 
   getGroups(): Observable<IGroup[]> {
-    const body = {}
     return this.http.get<IGroup[]>(this.apiUrl,{headers:
         {Authorization: 'Token ' + localStorage.getItem('my-token')}
     });

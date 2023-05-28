@@ -1,24 +1,22 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.template.response import TemplateResponse
-from django.views.generic import ListView, TemplateView, FormView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
-from django.forms import modelformset_factory, NumberInput, TextInput, Textarea, inlineformset_factory
-from django.http import HttpResponseRedirect, HttpResponseNotFound, JsonResponse
+from django.views.generic import TemplateView
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from account.models import Account
-from account.serializers import AccountSerializer, AccountGetSerializer
-from student.models import Account_Statistics
+from account.serializers import AccountGetSerializer
+from student.models import AccountStatistics
 from .decorators import access_teacher
-from .models import Test, Question, Group
+from .models import Test, Question, Group, Boss
 from .forms import TestForm, QuestionFormSet, GroupFrom, Question_InlineFormset, RewardStudent, UpdateGroupForm
 
 
 from rest_framework import viewsets, status, authentication
-from .serializers import GroupSerializer, TestSerializer, ParticipantSerializer, QuestionSerializer
+from .serializers import GroupSerializer, TestSerializer, ParticipantSerializer, QuestionSerializer, BossSerializer
 
 
 # <angular>
@@ -60,7 +58,7 @@ class GetParticipants(APIView):
     def get(self, request, *args, **kwargs):
         id = self.kwargs['pk']
         group = Group.objects.get(pk=id)
-        participants = Account_Statistics.objects.filter(groups=group.pk)
+        participants = AccountStatistics.objects.filter(groups=group.pk)
         participants_serializer = self.serializer_class(participants, many=True)
         return Response(participants_serializer.data)
 
@@ -83,7 +81,7 @@ class GetAccounts(APIView):
         accounts = []
         group_pk = self.kwargs['pk']
         group = Group.objects.get(pk=group_pk)
-        all_accounts = Account_Statistics.objects.all()
+        all_accounts = AccountStatistics.objects.all()
         participants = all_accounts.filter(groups=group.pk)
         for participant in participants:
             participant_id = participant.account.pk
@@ -138,6 +136,15 @@ def DeleteTest(request, test_id):
     group = Test.objects.get(id=test_id)
     group.delete()
     return Response({'Тест удален'})
+
+class BossViewSet(viewsets.ModelViewSet):
+    queryset = Boss.objects.all()
+    serializer_class = BossSerializer
+
+    def get(self, request):
+        boss = Boss.objects.get(pk=self.kwargs['pk'])
+        boss_serializer = self.serializer_class(boss)
+        return Response(boss_serializer.data, status=status.HTTP_200_OK)
 
 
 class TasksViewSet(viewsets.ModelViewSet):
@@ -336,25 +343,6 @@ def questions_edit(request, id):
                   {'question_formset': formset,
                    'test_id': id})
 
-# @access_teacher
-# def question_delete(request, question_id):
-#     print(question_id)
-#     question = Question.question.get(pk=question_id)
-#     if request.method == "POST":
-#         question.delete()
-#         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-#     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
-@access_teacher
-def test_delete(request, id):
-    try:
-        test = Test.objects.get(id=id)
-        test.delete()
-        return redirect('teacher')
-    except Test.DoesNotExist:
-        return HttpResponseNotFound("<h2>Test not found</h2>")
-
 
 @access_teacher
 def question_delete(request, id):
@@ -362,39 +350,6 @@ def question_delete(request, id):
     question.delete()
     return redirect('questions')
 
-
-@access_teacher
-def edit_group(request, group_id):
-    group = Group.objects.get(id=group_id)
-
-    if str(request.user.email) != str(group.owner):
-        return redirect('main')
-
-    if request.method == 'POST':
-        form = UpdateGroupForm(request.POST)
-        if form.is_valid():
-            new_name = form.data.get('new_name')
-            new_login = form.data.get('new_login')
-            new_password = form.data.get('new_password')
-            if new_name != '' and new_name != ' ':
-                group.group_name = new_name
-            if new_login != '' and new_login != ' ':
-                group.login = new_login
-            if new_password != '' and new_password != ' ':
-                group.password = new_password
-            group.save()
-            return redirect('teacher')
-
-    update_form = UpdateGroupForm(initial={
-        'new_name': group.group_name,
-        'new_login': group.login,
-        'new_password': group.password,
-    })
-    data = {
-        'group': group,
-        'update_form': update_form,
-    }
-    return render(request, 'teacher/edit_group.html', context=data)
 
 
 @access_teacher
@@ -407,7 +362,7 @@ def view_group(request, group_id):
     if request.method == "POST":
         participant = request.POST.get('participant')
         reward = int(request.POST.get("reward"))
-        student = Account_Statistics.objects.get(pk=participant)
+        student = AccountStatistics.objects.get(pk=participant)
         score = int(student.score)
         print(score)
         if 'replenishment' in request.POST:
@@ -422,7 +377,7 @@ def view_group(request, group_id):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     reward_form = RewardStudent()
-    all_accounts = Account_Statistics.objects.all()
+    all_accounts = AccountStatistics.objects.all()
     participants = all_accounts.filter(groups=group)
 
     data = {
@@ -435,21 +390,10 @@ def view_group(request, group_id):
 
 @access_teacher
 def delete_participant(request, group_id, student_id):
-    participant = Account_Statistics.objects.get(pk=student_id)
+    participant = AccountStatistics.objects.get(pk=student_id)
     group = Group.objects.get(id=group_id)
     try:
         participant.groups.remove(group)
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    except Account_Statistics.DoesNotExist:
+    except AccountStatistics.DoesNotExist:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
-@access_teacher
-def delete_group(request, group_id):
-    group = Group.objects.get(id=group_id)
-
-    if str(request.user.email) != str(group.owner):
-        return redirect('main')
-
-    group.delete()
-    return redirect('teacher')

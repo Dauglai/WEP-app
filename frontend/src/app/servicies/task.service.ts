@@ -21,6 +21,11 @@ export class TaskService {
       return this.http.get<ITest[]>(this.apiUrl, {headers: this.headers });
   }
 
+  postTask(): any {
+    const data = {};
+    return this.http.post<ITest[]>(this.apiUrl, data, {headers: this.headers });
+  }
+
   getTask(id: number): any {
       return this.http.get<ITest[]>(this.apiUrl + id, {headers: this.headers });
   }

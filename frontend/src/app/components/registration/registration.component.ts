@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../../servicies/account.service";
 import {Router} from "@angular/router";
+import {BossService} from "../../servicies/boss.service";
 
 export interface IError {
   last_name: string,
@@ -21,13 +22,19 @@ export interface IError {
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit{
+  heroes: any = [];
   isTeacher: boolean = false;
   nextPage = false;
+  characterSelection = false;
   errors: IError = {} as IError;
   errorPassword = '';
 
-  constructor(private accountService: AccountService, private router: Router) { }
+  ngOnInit() {
+    this.getHeroes();
+  }
+
+  constructor(private accountService: AccountService, private router: Router, private heroService: BossService) { }
 
   formRegister = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -68,6 +75,15 @@ export class RegistrationComponent {
     this.nextPage = false;
   }
 
+  getHeroes(): any {
+    this.heroService.getHeroes().subscribe(
+      (data: any) => {
+        this.heroes = data;
+        console.log(data);
+      }
+    )
+  }
+
   createAccount(last_name: string, first_name: string, patronymic: string, location: string,
                 school_number: number, email: string, password: string, password2: string,
                 is_teacher: boolean, gender: string) {
@@ -78,25 +94,19 @@ export class RegistrationComponent {
         this.errors = data;
         if(data.response) {
           if (!this.isTeacher) {
-            this.accountService.getToken(email, password).subscribe(
-            data => {
-              console.log(data);
-              this.accountService.createStatistics(data).subscribe(
-                data =>
+            console.log(data);
+            this.characterSelection = true;
+            this.accountService.createStatistics(email).subscribe(
+              data =>
                 console.log(data)
-              );
-              this.router.navigate(['/login']);
-            },
-              error => {
-              console.log(error);
-            })
+            );
+            // this.router.navigate(['/login']);
           }
         }
-    },
+      },
       error => {
         console.log(error);
-        this.errorPassword = error.error.qw12er34;
-        // this.errorPassword = error.error();
+        this.errorPassword = error;
       })
   }
 }
