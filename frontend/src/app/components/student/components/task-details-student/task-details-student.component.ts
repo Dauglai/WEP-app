@@ -137,24 +137,33 @@ export class TaskDetailsStudentComponent implements OnInit{
 
   completeTask() {
     let grades = 0;
-    if (this.countCorrect == this.task.five) {
+    if (this.countCorrect >= this.task.five) {
       grades = 5;
     }
-    else if (this.countCorrect == this.task.four) {
+    else if (this.countCorrect >= this.task.four && this.countCorrect < this.task.five) {
       grades = 4;
     }
-    else if (this.countCorrect == this.task.three) {
+    else if (this.countCorrect >= this.task.three && this.countCorrect < this.task.four) {
       grades = 3;
     }
-    else if (this.countCorrect == this.task.two) {
+    else if (this.countCorrect >= this.task.two && this.countCorrect < this.task.three) {
       grades = 2;
     }
-    this.createTestRecord(this.task.id, this.countCorrect, grades, this.countPoints);
+    this.createTestRecord(this.task.id, this.task.title, this.countCorrect, grades, this.countPoints);
+    this.postAccountStatistics();
     this.router1.navigate(['/student/main']);
   }
 
-  createTestRecord(test: number, count_correct: number, grades: number, count_points: number) {
-    this.studentService.postTestRecord(test, count_correct, grades, count_points).subscribe(
+  postAccountStatistics(): void {
+    this.studentService.postAccountStatistics(1).subscribe(
+      (data: any) => {
+        console.log(data);
+      }
+    )
+  }
+
+  createTestRecord(test: number, test_name: string, count_correct: number, grades: number, count_points: number) {
+    this.studentService.postTestRecord(test,test_name, count_correct, grades, count_points).subscribe(
       (data: any) => {
         console.log(data);
       }

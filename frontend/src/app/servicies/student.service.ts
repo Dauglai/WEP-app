@@ -14,6 +14,7 @@ export class StudentService {
   private apiGetBoss = 'http://localhost:8000/api/teacher/boss/';
   private apiHeroes = 'http://localhost:8000/api/student/hero/';
   private apiAccountStatistics = 'http://localhost:8000/api/student/account_statistics/';
+  private apiAllAccountStatistics = 'http://localhost:8000/api/student/all_account_statistics/';
   private apiProtagonist = 'http://localhost:8000/api/student/protagonist/';
 
   private apiChoice = 'http://localhost:8000/api/student/choice/';
@@ -30,8 +31,8 @@ export class StudentService {
     return this.http.post(this.apiChoice, data, {headers: this.headers })
   }
 
-  postTestRecord(test: number, count_correct: number, grades: number, count_points: number): any {
-    const data = {test: test, count_correct: count_correct, grades: grades,
+  postTestRecord(test: number,test_name: string, count_correct: number, grades: number, count_points: number): any {
+    const data = {test: test, test_name: test_name, count_correct: count_correct, grades: grades,
       count_points: count_points};
     return this.http.post(this.apiTestRecord, data, {headers: this.headers })
   }
@@ -62,6 +63,15 @@ export class StudentService {
 
   getAccountStatistics(): any {
     return this.http.get<any>(this.apiAccountStatistics, {headers: this.headers });
+  }
+
+  postAccountStatistics(i: number): any {
+    const data: any = {i: i};
+    return this.http.post(this.apiAccountStatistics, data, {headers: this.headers });
+  }
+
+  getAllAccountStatistics(): any {
+    return this.http.get<any>(this.apiAllAccountStatistics, {headers: this.headers });
   }
 
   getProtagonist(): any {

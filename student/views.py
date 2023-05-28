@@ -90,6 +90,7 @@ class TestRecordViewSet(viewsets.ModelViewSet):
             user=request.user,
             user_name=f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}',
             test=Test.objects.get(pk=request.data['test']),
+            test_name=request.data['test_name'],
             count_correct=request.data['count_correct'],
             grades=request.data['grades'],
             count_points=request.data['count_points'],
@@ -122,6 +123,18 @@ class AccountStatisticsViewSet(viewsets.ModelViewSet):
         user_stat_serializer = self.serializer_class(user_stat)
         return Response(user_stat_serializer.data)
 
+    def update(self, request, pk=None):
+        user_stat = AccountStatistics.objects.get(account=request.user)
+        i = request.data['i']
+        user_stat.experience += i
+        print('experience', user_stat.experience)
+        user_stat.save()
+        user_stat_serializer = self.serializer_class(user_stat)
+        return Response(user_stat_serializer.data)
+
+class AllAccountStatisticsViewSet(viewsets.ModelViewSet):
+    queryset = AccountStatistics.objects.all()
+    serializer_class = StatisticsSerializer
 
 @api_view(['GET'])
 def DeleteGroup(request, id):

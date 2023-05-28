@@ -7,6 +7,7 @@ from teacher.models import Group, Question, Test
 
 class AccountStatistics(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True, related_name='stats')
+    user_name = models.CharField('ФИО', max_length=300, default='')
     balance = models.PositiveIntegerField('Баланс', default=0)
     groups = models.ManyToManyField(Group, blank=True)
     score = models.PositiveIntegerField('Очки', default=0)
@@ -71,8 +72,9 @@ class Choice(models.Model):
 
 class TestRecord(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
-    user_name = models.CharField('ФИО', max_length=100, default='')
+    user_name = models.CharField('ФИО', max_length=300, default='')
     test = models.ForeignKey(Test, on_delete=models.CASCADE, null=True)
+    test_name = models.CharField('Название теста', max_length=400, default='')
     count_correct = models.IntegerField("Количество верных ответов", default=0)
     grades = models.IntegerField('Оценка', default=0)
     count_points = models.IntegerField('Количество заработнанных баллов', default=0)
