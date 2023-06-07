@@ -12,6 +12,10 @@ export class TaskService {
   private apiDeleteTest = 'http://localhost:8000/api/teacher/delete_test/';
   private apiGetTestsByGroup = 'http://localhost:8000/api/student/tests-by-group/';
 
+  // private apiUrl = 'http://DenisGM.pythonanywhere.com/api/tests/';
+  // private apiDeleteTest = 'http://DenisGM.pythonanywhere.com/api/teacher/delete_test/';
+  // private apiGetTestsByGroup = 'http://DenisGM.pythonanywhere.com/api/student/tests-by-group/';
+
   private headers = new HttpHeaders(
       {'Content-Type': 'application/json',
         Authorization: 'Token ' + localStorage.getItem('my-token')}

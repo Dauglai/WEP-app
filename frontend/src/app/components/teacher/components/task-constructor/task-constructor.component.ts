@@ -11,14 +11,24 @@ import {GroupService} from "../../../../servicies/group.service";
 export class TaskConstructorComponent implements OnInit{
   protected bosses: any = [];
   private task: any = {};
+  public groupSelect: FormControl = new FormControl();
+  protected contactForm: FormGroup;
   protected groups: any = [];
 
-  constructor(private bossService: StudentService, private groupService: GroupService,
-              private _fb: FormBuilder) {  }
+  constructor(private bossService: StudentService, private groupService: GroupService, private _fb: FormBuilder) {
+    this.contactForm = this._fb.group({
+      groupSelect: [null]
+    });
+  }
 
   ngOnInit() {
     this.getGroups();
     this.getBosses();
+  }
+
+  submitGroup() {
+    console.log("Form Submitted")
+    console.log(this.contactForm.value)
   }
 
   error ='';
@@ -66,6 +76,7 @@ export class TaskConstructorComponent implements OnInit{
     this.task = this.testFrom.value;
     this.nextPage = true;
     console.log(this.task);
+    console.log(this.groupSelect);
   }
 
   returnTest(): void {
@@ -73,35 +84,6 @@ export class TaskConstructorComponent implements OnInit{
     this.getGroups();
     this.getBosses();
   }
-
-  // initModelForm(): FormGroup{
-  //   return this._fb.group({
-  //       otherControls: [''],
-  //       // The formArray, empty
-  //       myChoices: new FormArray([]),
-  //     }
-  // }
-  //
-  // onCheckChange(event: any) {
-  //   const formArray: FormArray = this.testFrom.get('group') as FormArray;
-  //
-  //   if(event.target.checked){
-  //     formArray.push(new FormControl(event.target.value));
-  //   }
-  //   else{
-  //     let i: number = 0;
-  //
-  //     formArray.controls.forEach(
-  //       (ctrl: FormControl) => {
-  //         if(ctrl.value == event.target.value) {
-  //           formArray.removeAt(i);
-  //           return;
-  //         }
-  //         i++;
-  //       }
-  //     );
-  //   }
-  // }
 
   convertDate(date: string): string {
     // год, месяц, день

@@ -95,7 +95,7 @@ const routes: Routes = [
     ]},
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  // { path: '**', redirectTo: 'main'},
+  { path: '**', redirectTo: 'main'},
 ];
 
 @NgModule({

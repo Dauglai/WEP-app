@@ -23,13 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-it7m23p9^a3)_qpz4a#)hfzd5em@pd-uv=5$lkzhe6qexlv0%j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 AUTH_USER_MODEL = 'account.Account'
 SESSION_SAVE_EVERY_REQUEST = True
 
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'http://localhost:4200']
 ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['DenisGM.pythonanywhere.com']
 
 
 INSTALLED_APPS = [
@@ -88,22 +89,19 @@ DJOSER = {
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOWED_ORIGINS = [
-    # "https://example.com",
-    # "https://sub.example.com",
+    'http://denisgm.pythonanywhere.com',
     'http://localhost:8080',
-    # 'http://127.0.0.1:8000',
     'http://localhost:4200',
-    # 'http://127.0.0.1:8000/api/account/user/by/token/'
 ]
 
-# CORS_ALLOW_METHODS = (
-#     "DELETE",
-#     "GET",
-#     "OPTIONS",
-#     "PATCH",
-#     "POST",
-#     "PUT",
-# )
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
 
 CORS_ALLOW_HEADERS = ('content-disposition', 'accept-encoding',
                       'content-type', 'accept', 'origin', 'authorization')
@@ -185,8 +183,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
+# STATIC_URL = 'static/'
+# STATIC_ROOT = 'static/'
+# STATICFILES_DIRS = (
+#     # BASE_DIR / "static",
+#     'frontend/assets/img',
+#     "/assets",
+#     "static/frontend/assets/img/",
+#     'frontend/assets/img/',
+#     'frontend/',
+#     'frontend/assets/',
+# )
+
+STATIC_URL = 'static/'
+# STATIC_ROOT = 'static'
+STATIC_ROOT = 'static'
+STATICFILES_DIRS = [
+    '../static/frontend/assets/',
+    '../static/frontend/',
+    '../static/frontend/assets/img',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -196,4 +212,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/static/frontend/assets'

@@ -13,11 +13,25 @@
           </div>
           <div class="block__characteristic">
             <h4 class="block__h-char">Характеристики</h4>
-            <div>Здоровье: {{protagonist.health }} </div>
-            <div>Выносливость: {{protagonist.endurance }}</div>
-            <div>Сила: {{protagonist.power }}</div>
-            <div>Стойкость: {{protagonist.resistance}} </div>
-            <div>Свободные очки навыков: {{protagonist.up_score}}</div>
+            <div>
+              Здоровье: {{protagonist.health }}
+              <span *ngIf="protagonist.up_score > 0" class="block__characteristic_btn">+</span>
+            </div>
+            <div>
+              Выносливость: {{protagonist.endurance }}
+              <span *ngIf="protagonist.up_score > 0" class="block__characteristic_btn">+</span>
+            </div>
+            <div>
+              Сила: {{protagonist.power }}
+              <span *ngIf="protagonist.up_score > 0" class="block__characteristic_btn">+</span>
+            </div>
+            <div>
+              Стойкость: {{protagonist.resistance}}
+              <span *ngIf="protagonist.up_score > 0" class="block__characteristic_btn">+</span>
+            </div>
+            <div>
+              Свободные очки навыков: {{protagonist.up_score}}
+            </div>
           </div>
         </div>
       </li>

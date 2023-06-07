@@ -20,6 +20,19 @@ constructor(private http: HttpClient, private taskService: TaskService) { }
   private apiGetParticipants= 'http://localhost:8000/api/teacher/get_participants/';
   private apiGetAccounts = 'http://localhost:8000/api/teacher/get_accounts/';
 
+  // private apiUrl = 'http://DenisGM.pythonanywhere.com/api/groups/';
+  // private apigetGroupsStudent = 'http://DenisGM.pythonanywhere.com/api/student/groups/';
+  // private apiGroupCreate = 'http://DenisGM.pythonanywhere.com/api/teacher/create_group/';
+  // private apiExcludeGroup = 'http://DenisGM.pythonanywhere.com/api/student/exclude_group/';
+  // private apiDeleteGroup = 'http://DenisGM.pythonanywhere.com/api/teacher/delete_group/';
+  // private apiJoinGroup = 'http://DenisGM.pythonanywhere.com/api/student/join_group/';
+  // private  apiEditGroup = 'http://DenisGM.pythonanywhere.com/api/teacher/edit_group/'
+  // private apiGetGroup = 'http://DenisGM.pythonanywhere.com/api/teacher/get_group/';
+  // private apiGetParticipants= 'http://DenisGM.pythonanywhere.com/api/teacher/get_participants/';
+  // private apiGetAccounts = 'http://DenisGM.pythonanywhere.com/api/teacher/get_accounts/';
+
+
+
   private headers = new HttpHeaders(
       {'Content-Type': 'application/json',
         Authorization: 'Token ' + localStorage.getItem('my-token')}

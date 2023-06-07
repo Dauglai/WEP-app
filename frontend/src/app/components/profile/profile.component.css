@@ -59,12 +59,12 @@
   align-items: center;
 }
 
-/*.profile__block-group:nth-child(2n) {*/
-/*  margin-right: 0;*/
-/*}*/
-
 .test__field {
   display: grid;
   grid-template-columns: 24% 76%;
   margin-bottom: 5px;
+}
+
+.profile__btn_exit {
+  margin-right: 20px;
 }

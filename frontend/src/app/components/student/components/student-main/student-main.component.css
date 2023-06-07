@@ -179,6 +179,7 @@
 }
 
 .block__characteristic {
+  font-size: 16px;
   padding: 20px 30px 30px;
   border: 1px solid #cfcdcd;
   border-radius: 5px;
@@ -201,6 +202,18 @@
   margin-top: 0;
   color: var(--main-heading-1);
   font-size: 18px;
+}
+
+.block__characteristic_btn {
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  justify-content: center;
+  margin-left: 10px;
+  width: 20px;
+  border: 1px solid #0b347e;
+  border-radius: 50px;
+  user-select: none;
 }
 
 .character-block {

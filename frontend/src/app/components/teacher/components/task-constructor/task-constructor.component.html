@@ -32,12 +32,15 @@
           </ul>
 
           <div class="field__groups">
-            Выбор группы:
-            <select name="group" class="list-group" multiple="">
-              <option *ngFor="let group of groups; let i=index" value="group.id">
-                Название: {{group.group_name}}
-              </option>
-            </select>
+            <form [formGroup]="contactForm" (ngSubmit)="submitGroup()">
+              Выбор группы:
+              <select name="group" class="list-group" multiple="" formControlName="groupSelect">
+                <option *ngFor="let group of groups; let i=index" [ngValue]="group.id" >
+                  Название: {{group.group_name}}
+                </option>
+              </select>
+              <button>Добавить</button>
+            </form>
           </div>
 
           <div>

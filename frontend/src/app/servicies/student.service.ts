@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {TaskService} from "./task.service";
 import {Observable} from "rxjs";
-import {IGroup} from "../interfaces/interface.group";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +18,17 @@ export class StudentService {
   private apiChoice = 'http://localhost:8000/api/student/choice/';
   private apiTestRecord = 'http://localhost:8000/api/student/test_record/';
   private apiTestRecordList = 'http://localhost:8000/api/student/test_record_list/';
+
+  // private apiGetBoss = 'http://DenisGM.pythonanywhere.com/api/teacher/boss/';
+  // private apiHeroes = 'http://DenisGM.pythonanywhere.com/api/student/hero/';
+  // private apiAccountStatistics = 'http://DenisGM.pythonanywhere.com/api/student/account_statistics/';
+  // private apiAllAccountStatistics = 'http://DenisGM.pythonanywhere.com/api/student/all_account_statistics/';
+  // private apiProtagonist = 'http://DenisGM.pythonanywhere.com/api/student/protagonist/';
+  //
+  // private apiChoice = 'http://DenisGM.pythonanywhere.com/api/student/choice/';
+  // private apiTestRecord = 'http://DenisGM.pythonanywhere.com/api/student/test_record/';
+  // private apiTestRecordList = 'http://DenisGM.pythonanywhere.com/api/student/test_record_list/';
+
 
   private headers = new HttpHeaders(
       {'Content-Type': 'application/json',

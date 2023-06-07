@@ -14,6 +14,14 @@ export class AccountService {
   private apiGetAccount = 'http://127.0.0.1:8000/api/account/user/by/token/';
   private apiLogoutAccount = 'http://127.0.0.1:8000/auth-token/token/logout/';
 
+  // private apiUrl = 'http://DenisGM.pythonanywhere.com/api/account/registr/';
+  // private apiUrl2 = 'http://DenisGM.pythonanywhere.com/api/account/create-statistics/';
+  // private apiGetToken = 'http://DenisGM.pythonanywhere.com/auth-token/token/login/';
+  // private apiGetAccount = 'http://DenisGM.pythonanywhere.com/api/account/user/by/token/';
+  // private apiLogoutAccount = 'http://DenisGM.pythonanywhere.com/auth-token/token/logout/';
+
+
+
   createAccount(last_name: string, first_name: string, patronymic: string, location: string,
                 school_number: number, email: string, password: string, password2: string,
                 is_teacher: boolean, gender: string): Observable<any> {
