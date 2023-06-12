@@ -8,9 +8,19 @@ import {ITest} from "../interfaces/interface.test";
 })
 export class TaskService {
   constructor(private http: HttpClient) { }
-  private apiUrl = 'http://127.0.0.1:8000/api/tests/';
-  private apiDeleteTest = 'http://localhost:8000/api/teacher/delete_test/';
-  private apiGetTestsByGroup = 'http://localhost:8000/api/student/tests-by-group/';
+  // private apiUrl = 'http://127.0.0.1:8000/api/tests/';
+  // private apiDeleteTest = 'http://localhost:8000/api/teacher/delete_test/';
+  // private apiCreateTest = 'http://localhost:8000/api/teacher/create_test/';
+  // private apiGetTestsByGroup = 'http://localhost:8000/api/student/tests-by-group/';
+
+  private apiUrl = 'http://danilsvp.beget.tech/api/tests/';
+  private apiDeleteTest = 'http://danilsvp.beget.tech/api/teacher/delete_test/';
+  private apiCreateTest = 'http://danilsvp.beget.tech/api/teacher/create_test/';
+  private apiGetTestsByGroup = 'http://danilsvp.beget.tech/api/student/tests-by-group/';
+
+  // private apiUrl = 'http://danilsvp.beget.tech/api/tests/';
+  // private apiDeleteTest = 'http://danilsvp.beget.tech/api/teacher/delete_test/';
+  // private apiGetTestsByGroup = 'http://danilsvp.beget.tech/api/student/tests-by-group/';
 
   // private apiUrl = 'http://DenisGM.pythonanywhere.com/api/tests/';
   // private apiDeleteTest = 'http://DenisGM.pythonanywhere.com/api/teacher/delete_test/';
@@ -43,7 +53,7 @@ export class TaskService {
     return this.http.get(this.apiDeleteTest + id, {headers: this.headers});
   }
 
-  createTask(newTask: any) {
-      this.http.post(this.apiUrl, newTask);
+  createTask(test: {}) {
+    return this.http.post<any>(this.apiCreateTest, test, {headers: this.headers });
   }
 }

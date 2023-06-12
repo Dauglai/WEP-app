@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.template.response import TemplateResponse
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect, HttpResponseNotFound
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -94,7 +94,6 @@ class GetAccounts(APIView):
 
 
 class CreateGroup(APIView):
-    # authentication_classes = [authentication.TokenAuthentication]
     serializer_class = GroupSerializer
 
     def post(self, request):
@@ -106,6 +105,19 @@ class CreateGroup(APIView):
             )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def RewardStudent(request):
+    if request.method == 'POST':
+        user_stat = AccountStatistics.objects.get(account=request.user)
+        print(user_stat)
+        score = request.data['score']
+        exp = request.data['exp']
+        user_stat.experience = user_stat.experience + exp
+        user_stat.score = user_stat.score + score
+        user_stat.save()
+        return Response({'Транзакция прошла успешно'})
 
 
 @api_view(['GET', 'POST'])
@@ -137,6 +149,7 @@ def DeleteTest(request, test_id):
     group.delete()
     return Response({'Тест удален'})
 
+
 class BossViewSet(viewsets.ModelViewSet):
     queryset = Boss.objects.all()
     serializer_class = BossSerializer
@@ -161,6 +174,41 @@ class TasksViewSet(viewsets.ModelViewSet):
         test = Test.objects.get(pk=id)
         test_serializer = self.serializer_class(test)
         return Response(test_serializer.data, status=status.HTTP_200_OK)
+
+
+class CreateTest(APIView):
+    serializer_class = TestSerializer
+
+    def post(self, request):
+        serializer = TestSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(
+                owner=request.user,
+                owner_name=f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}',
+                boss=Boss.objects.get(pk=request.data['boss']),
+            )
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CreateQuestion(APIView):
+    serializer_class = QuestionSerializer
+
+    def post(self, request):
+        serializer = QuestionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(
+                test=Test.objects.get(pk=request.data['id']),
+            )
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
+def DeleteQuestion(request):
+    question = Question.objects.get(pk=request.data['id'])
+    question.delete()
+    return Response({'Вопрос удален'})
 
 
 class QuestionViewSet(viewsets.ModelViewSet):

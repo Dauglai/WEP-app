@@ -131,7 +131,7 @@ textarea {
 }
 
 .form__item:last-child {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .form-fieldset {
@@ -215,6 +215,21 @@ textarea {
 }
 
 .add-question {
+	margin-top: 20px;
+  margin-right: 30px !important;
+  text-decoration: none;
+  padding: 5px 30px 5px;
+  min-width: 120px;
+  padding: 12px 25px 12px;
+  margin-right: 70px;
+  border-radius: 8px;
+  color: #ecebeb;
+  border: none !important;
+  background-color: var(--blue-main) !important;
+  cursor: pointer;
+}
+
+.submit-question {
 	display: block;
 	width: 180px;
   text-decoration: none;
@@ -227,6 +242,8 @@ textarea {
   background-color: #b1bbce !important;
   color: white;
   cursor: pointer;
+  margin-left: 50px;
+  margin-bottom: 30px;
 }
 
 .del-question {

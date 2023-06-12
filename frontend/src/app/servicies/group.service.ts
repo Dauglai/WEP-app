@@ -9,16 +9,30 @@ import {TaskService} from "./task.service";
 })
 export class GroupService {
 constructor(private http: HttpClient, private taskService: TaskService) { }
-  private apiUrl = 'http://localhost:8000/api/groups/';
-  private apigetGroupsStudent = 'http://localhost:8000/api/student/groups/';
-  private apiGroupCreate = 'http://localhost:8000/api/teacher/create_group/';
-  private apiExcludeGroup = 'http://localhost:8000/api/student/exclude_group/';
-  private apiDeleteGroup = 'http://localhost:8000/api/teacher/delete_group/';
-  private apiJoinGroup = 'http://localhost:8000/api/student/join_group/';
-  private  apiEditGroup = 'http://localhost:8000/api/teacher/edit_group/'
-  private apiGetGroup = 'http://localhost:8000/api/teacher/get_group/';
-  private apiGetParticipants= 'http://localhost:8000/api/teacher/get_participants/';
-  private apiGetAccounts = 'http://localhost:8000/api/teacher/get_accounts/';
+  // private apiUrl = 'http://localhost:8000/api/groups/';
+  // private apigetGroupsStudent = 'http://localhost:8000/api/student/groups/';
+  // private apiGroupCreate = 'http://localhost:8000/api/teacher/create_group/';
+  // private apiExcludeGroup = 'http://localhost:8000/api/student/exclude_group/';
+  // private apiDeleteGroup = 'http://localhost:8000/api/teacher/delete_group/';
+  // private apiJoinGroup = 'http://localhost:8000/api/student/join_group/';
+  // private  apiEditGroup = 'http://localhost:8000/api/teacher/edit_group/'
+  // private apiGetGroup = 'http://localhost:8000/api/teacher/get_group/';
+  // private apiGetParticipants= 'http://localhost:8000/api/teacher/get_participants/';
+  // private apiGetAccounts = 'http://localhost:8000/api/teacher/get_accounts/';
+
+
+  private apiUrl = 'http://danilsvp.beget.tech/api/groups/';
+  private apigetGroupsStudent = 'http://danilsvp.beget.tech/api/student/groups/';
+  private apiGroupCreate = 'http://danilsvp.beget.tech/api/teacher/create_group/';
+  private apiExcludeGroup = 'http://danilsvp.beget.tech/api/student/exclude_group/';
+  private apiDeleteGroup = 'http://danilsvp.beget.tech/api/teacher/delete_group/';
+  private apiJoinGroup = 'http://danilsvp.beget.tech/api/student/join_group/';
+  private  apiEditGroup = 'http://danilsvp.beget.tech/api/teacher/edit_group/'
+  private apiGetGroup = 'http://danilsvp.beget.tech/api/teacher/get_group/';
+  private apiGetParticipants= 'http://danilsvp.beget.tech/api/teacher/get_participants/';
+  private apiGetAccounts = 'http://danilsvp.beget.tech/api/teacher/get_accounts/';
+
+
 
   // private apiUrl = 'http://DenisGM.pythonanywhere.com/api/groups/';
   // private apigetGroupsStudent = 'http://DenisGM.pythonanywhere.com/api/student/groups/';

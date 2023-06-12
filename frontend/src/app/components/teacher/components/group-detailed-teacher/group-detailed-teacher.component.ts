@@ -44,8 +44,9 @@ export class GroupDetailedTeacherComponent implements OnInit{
   getGroup(idGroup: number) {
     this.group = this.groupService.getGroup(idGroup).subscribe(
       (data: any) => {
-        // console.log(data)
+        console.log(data)
         this.group = data.group;
+        console.log(this.group);
         this.participants = data.participants;
         this.accounts = data.accounts;
         this.tests = data.tests;
@@ -61,8 +62,6 @@ export class GroupDetailedTeacherComponent implements OnInit{
         this.returnBack();
       }
     );
-    // console.log(this.idGroup);
-
   }
 
   returnBack() {

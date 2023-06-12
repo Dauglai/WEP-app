@@ -8,11 +8,19 @@ import {Observable} from "rxjs";
 export class AccountService {
 
   constructor(private http: HttpClient) { }
-  private apiUrl = 'http://127.0.0.1:8000/api/account/registr/';
-  private apiUrl2 = 'http://127.0.0.1:8000/api/account/create-statistics/';
-  private apiGetToken = 'http://127.0.0.1:8000/auth-token/token/login/';
-  private apiGetAccount = 'http://127.0.0.1:8000/api/account/user/by/token/';
-  private apiLogoutAccount = 'http://127.0.0.1:8000/auth-token/token/logout/';
+  // private apiUrl = 'http://127.0.0.1:8000/api/account/registr/';
+  // private apiUrl2 = 'http://127.0.0.1:8000/api/account/create-statistics/';
+  // private apiGetToken = 'http://127.0.0.1:8000/auth-token/token/login/';
+  // private apiGetAccount = 'http://127.0.0.1:8000/api/account/user/by/token/';
+  // private apiLogoutAccount = 'http://127.0.0.1:8000/auth-token/token/logout/';
+  // private apiCreateStudent = 'http://localhost:8000/api/account/create-hero/';
+
+  private apiUrl = 'http://danilsvp.beget.tech/api/account/registr/';
+  private apiUrl2 = 'http://danilsvp.beget.tech/api/account/create-statistics/';
+  private apiGetToken = 'http://danilsvp.beget.tech/auth-token/token/login/';
+  private apiGetAccount = 'http://danilsvp.beget.tech/api/account/user/by/token/';
+  private apiLogoutAccount = 'http://danilsvp.beget.tech/auth-token/token/logout/';
+  private apiCreateStudent = 'http://danilsvp.beget.tech/api/account/create-hero/';
 
   // private apiUrl = 'http://DenisGM.pythonanywhere.com/api/account/registr/';
   // private apiUrl2 = 'http://DenisGM.pythonanywhere.com/api/account/create-statistics/';
@@ -37,6 +45,14 @@ export class AccountService {
     );
     const statistics = { };
     return this.http.post(this.apiUrl2, statistics, {headers: myHeaders});
+  }
+
+  createStudent(Token: any, hero: number, hero_name: string): Observable<any> {
+    const myHeaders = new HttpHeaders(
+      {'Content-Type': 'application/json', Authorization: 'Token ' + Token}
+    );
+    const student = { hero: hero, hero_name: hero_name };
+    return this.http.post(this.apiCreateStudent, student, {headers: myHeaders});
   }
 
   getToken(email: string, password: string):Observable<any> {

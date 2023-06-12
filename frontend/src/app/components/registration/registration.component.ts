@@ -30,6 +30,10 @@ export class RegistrationComponent implements OnInit{
   errors: IError = {} as IError;
   errorPassword = '';
 
+  private login: string = '';
+  private password: string = '';
+  protected token: string = '';
+
   ngOnInit() {
     this.getHeroes();
   }
@@ -50,6 +54,11 @@ export class RegistrationComponent implements OnInit{
 
     gender: new FormControl('', [Validators.required]),
     is_teacher: new FormControl(this.isTeacher),
+  })
+
+  fromStudent = new FormGroup({
+    protagonist: new FormControl(1, [Validators.required]),
+    name_protagonist: new FormControl('Мой герой', [Validators.required]),
   })
 
   registration(): void {
@@ -93,13 +102,21 @@ export class RegistrationComponent implements OnInit{
         console.log(data);
         this.errors = data;
         if(data.response) {
+          console.log('next response');
           if (!this.isTeacher) {
-            console.log(data);
-            this.characterSelection = true;
-            this.accountService.createStatistics(email).subscribe(
-              data =>
-                console.log(data)
+            this.login = email;
+            this.password = password;
+            this.accountService.getToken(email, password).subscribe(
+              data => {
+                this.token = data.auth_token;
+                // localStorage.setItem('my-token', data.auth_token);
+                console.log(this.token);
+              },
+              error => console.log(error),
             );
+            this.characterSelection = true;
+          }
+          else {
             this.router.navigate(['/login']);
           }
         }
@@ -108,5 +125,19 @@ export class RegistrationComponent implements OnInit{
         console.log(error);
         this.errorPassword = error;
       })
+  }
+
+  createStudent() {
+    const form = this.fromStudent.value;
+    console.log(this.token, form.name_protagonist);
+    this.accountService.createStudent(this.token, form.protagonist!, form.name_protagonist!).subscribe(
+      data => {
+        console.log(data);
+        this.router.navigate(['/login']);
+      },
+      error => {
+        console.log(error);
+      },
+    )
   }
 }

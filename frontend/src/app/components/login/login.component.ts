@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit{
       data => {
         console.log(data);
         localStorage.setItem('my-token', data.auth_token);
+        // window.location.reload();
         this.router.navigate(['/main']);
       },
       error => {

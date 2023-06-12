@@ -11,12 +11,14 @@ import {Router} from "@angular/router";
 })
 export class GroupListTeacherComponent implements OnInit{
   protected groups: IGroup[] = [];
+  color: any;
   constructor(private groupService: GroupService, private router: Router,
               private cdr: ChangeDetectorRef) {  }
 
   ngOnInit() {
     this.getGroups();
     this.cdr.detectChanges();
+    this.color = this.getRandomColor();
   }
 
   public isOpen = false;

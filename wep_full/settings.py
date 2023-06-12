@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-it7m23p9^a3)_qpz4a#)hfzd5em@pd-uv=5$lkzhe6qexlv0%j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 AUTH_USER_MODEL = 'account.Account'
 SESSION_SAVE_EVERY_REQUEST = True
@@ -195,9 +195,9 @@ USE_TZ = True
 #     'frontend/assets/',
 # )
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 # STATIC_ROOT = 'static'
-STATIC_ROOT = 'static'
+STATIC_ROOT = '/static/'
 STATICFILES_DIRS = [
     '../static/frontend/assets/',
     '../static/frontend/',

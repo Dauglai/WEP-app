@@ -51,7 +51,6 @@ export class TaskDetailsStudentComponent implements OnInit{
   // });
 
   sendAnswer(){
-    console.log(this.questions[this.serialNumberQuestion].id);
     this.studentService.postChoice(this.questions[this.serialNumberQuestion].id, this.formChoice).subscribe(
       (data: any) => {
         console.log(data);
@@ -61,17 +60,18 @@ export class TaskDetailsStudentComponent implements OnInit{
 
     const hero = this.protagonist;
     const boss = this.boss;
+    // console.log(question.number_correct_answer, this.formChoice);
     if(question.number_correct_answer == this.formChoice) {
       this.countCorrect += 1;
       this.countPoints += question.reward;
-      console.log(hero.power + hero.endurance * 0.5);
+      // console.log(hero.power + hero.endurance * 0.5);
       this.bossHP -=
-        Math.round((this.protagonist.health / this.questions.length) + hero.power * hero.endurance);
-      console.log(this.bossHP);
+        Math.round((this.protagonist.health / this.questions.length) + hero.power * hero.endurance - boss.resistance);
+      // console.log(this.bossHP);
     }
     else {
-      this.heroHP -= Math.round((this.boss.health / this.questions.length) + boss.power + boss.resistance);
-      console.log(this.heroHP);
+      this.heroHP -= Math.round((this.boss.health / this.questions.length) + (boss.power + boss.resistance) * question.reward);
+      // console.log(this.heroHP);
     }
     this.serialNumberQuestion += 1;
   }
@@ -79,10 +79,10 @@ export class TaskDetailsStudentComponent implements OnInit{
   getTask(id: number) {
     this.taskService.getTask(id).subscribe(
       (data: any) => {
-        console.log(data)
+        // console.log(data)
         this.task = data;
         this.getBoss(data.boss);
-        console.log(data.id)
+        // console.log(data.id)
       }
     )
   }
@@ -90,7 +90,7 @@ export class TaskDetailsStudentComponent implements OnInit{
   getQuestions(id: number) {
     this.questionService.getQuestions(id).subscribe(
       (data: any) => {
-        console.log(data)
+        // console.log(data)
         this.questions = data;
       }
     )
@@ -99,7 +99,7 @@ export class TaskDetailsStudentComponent implements OnInit{
   getAccountStatistics(): void {
     this.studentService.getAccountStatistics().subscribe(
       (data: any) => {
-        console.log(data);
+        // console.log(data);
         this.statistic = data;
       }
     )
@@ -108,7 +108,7 @@ export class TaskDetailsStudentComponent implements OnInit{
   getProtagonist(): void {
     this.studentService.getProtagonist().subscribe(
       (data: any) => {
-        console.log(data);
+        // console.log(data);
         this.protagonist = data;
         this.getHero(data.hero);
         this.heroHP = data.health;
@@ -119,7 +119,7 @@ export class TaskDetailsStudentComponent implements OnInit{
   getHero(id: number): void {
     this.studentService.getHero(id).subscribe(
       (data: any) => {
-        console.log(data);
+        // console.log(data);
         this.hero = data;
       }
     )
@@ -128,7 +128,7 @@ export class TaskDetailsStudentComponent implements OnInit{
   getBoss(id: number) {
     this.studentService.getBoss(id).subscribe(
       (data: any) => {
-        console.log(data);
+        // console.log(data);
         this.boss = data;
         this.bossHP = data.health;
       }
@@ -137,17 +137,33 @@ export class TaskDetailsStudentComponent implements OnInit{
 
   completeTask() {
     let grades = 0;
+    let reward = 0;
     if (this.countCorrect >= this.task.five) {
       grades = 5;
+      reward += 5;
     }
     else if (this.countCorrect >= this.task.four && this.countCorrect < this.task.five) {
       grades = 4;
+      reward += 2;
     }
     else if (this.countCorrect >= this.task.three && this.countCorrect < this.task.four) {
       grades = 3;
+      reward += 1;
     }
     else if (this.countCorrect >= this.task.two && this.countCorrect < this.task.three) {
       grades = 2;
+    }
+    if (this.bossHP <= 0){
+      console.log('Победа!');
+      console.log(reward + 10);
+      this.studentService.rewardStudent(reward + 10, 0).subscribe(
+        (data: any) => {
+          console.log(data);
+        },
+        (error: any) => {
+          console.log(error)
+        }
+      )
     }
     this.createTestRecord(this.task.id, this.task.title, this.countCorrect, grades, this.countPoints);
     this.postAccountStatistics();

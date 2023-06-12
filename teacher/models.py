@@ -44,7 +44,7 @@ class Test(models.Model):
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
     owner_name = models.CharField('ФИО автора', max_length=600, null=True)
     group = models.ManyToManyField(Group, blank=True)
-    boss = models.ForeignKey(Boss, on_delete=models.CASCADE, null=True)
+    boss = models.ForeignKey(Boss, on_delete=models.DO_NOTHING, null=True)
     title = models.CharField('Название теста', max_length=300)
     subject = models.CharField('Название предмета', max_length=100, null=True)
     text = models.TextField('Дополнительный текст к тесту', max_length=1000, null=True, blank=True)

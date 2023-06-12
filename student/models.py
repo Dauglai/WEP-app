@@ -37,7 +37,7 @@ class Hero(models.Model):
 
 class Protagonist(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
-    hero = models.ManyToManyField(Hero, null=True)
+    hero = models.ForeignKey(Hero, on_delete=models.DO_NOTHING, null=True)
     name = models.CharField(max_length=100, default='Protagonist')
     health = models.PositiveIntegerField('Здоровье', default=100)
     endurance = models.PositiveIntegerField('Выносливость', default=5)

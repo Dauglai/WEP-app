@@ -5,7 +5,7 @@
   </div>
   <div class="groups__block-container">
     <div *ngFor="let group of groups" class="groups__block-group" routerLink='/teacher/group/details/{{group.id}}'>
-      <div class="groups__block-group_header" [ngStyle]="{'background-color': getRandomColor()}">
+      <div class="groups__block-group_header" [ngStyle]="{'background-color': color}">
         {{ group.group_name }}
       </div>
       <div class="groups__block-group_body">

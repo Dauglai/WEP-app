@@ -92,40 +92,59 @@
       </div>
     </div>
 
-    <div class="stat__window">
+    <form [formGroup]="fromStudent" class="stat__window" (submit)="createStudent()">
       <div class="template character-selection" *ngIf="characterSelection">
         <div class="character-block">
-          <ul class="character-block__list">
-            <li><img [src]="heroes[0].photo"></li>
-            <li><img [src]="heroes[1].photo"></li>
-          </ul>
           <div class="character-block__name">Воин</div>
+          <ul class="character-block__list">
+            <li>
+              <img [src]="heroes[0].photo">
+              <div>М <input type="radio" name="protagonist" formControlName="protagonist" value={{heroes[0].id}} /></div>
+            </li>
+            <li>
+              <img [src]="heroes[1].photo">
+              <div>Ж <input type="radio" name="protagonist" formControlName="protagonist" value={{heroes[1].id}} /></div>
+            </li>
+          </ul>
         </div>
         <div class="character-block">
-          <ul class="character-block__list">
-            <li><img [src]="heroes[2].photo"></li>
-            <li><img [src]="heroes[3].photo"></li>
-          </ul>
           <div class="character-block__name">Маг</div>
+          <ul class="character-block__list">
+            <li>
+              <img [src]="heroes[2].photo">
+              <div>М <input type="radio" name="protagonist" formControlName="protagonist" value={{heroes[2].id}} /></div>
+            </li>
+            <li>
+              <img [src]="heroes[3].photo">
+              <div>Ж <input type="radio" name="protagonist" formControlName="protagonist" value={{heroes[3].id}} /></div>
+            </li>
+          </ul>
         </div>
         <div class="character-block">
-          <ul class="character-block__list">
-            <li><img [src]="heroes[4].photo"></li>
-            <li><img [src]="heroes[5].photo"></li>
-          </ul>
           <div class="character-block__name">Наемник</div>
+          <ul class="character-block__list">
+            <li>
+              <img [src]="heroes[4].photo">
+              <div>М <input type="radio" name="protagonist" formControlName="protagonist" value={{heroes[4].id}} /></div>
+            </li>
+            <li>
+              <img [src]="heroes[5].photo">
+              <div>Ж <input type="radio" name="protagonist" formControlName="protagonist" value={{heroes[5].id}} /></div>
+            </li>
+          </ul>
         </div>
         <div class="qwer">
-          <label class="form-hero-name">
+          <div for='name_protagonist' class="form-hero-name">
             <div>Имя героя: </div>
-            <input formControlName="" >
-          </label>
+            <input type="text" name="name_protagonist" formControlName="name_protagonist" required
+              minlength="3" maxlength="100"/>
+          </div>
           <button tuiButton type="submit" appearance="outline"
                   class="tui-space_right-3 tui-space_bottom-3 btn-submit" size="s">
             Подтвердить
           </button>
         </div>
       </div>
-    </div>
+    </form>
   </main>
 </tui-root>

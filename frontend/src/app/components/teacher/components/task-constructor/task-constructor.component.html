@@ -39,7 +39,7 @@
                   Название: {{group.group_name}}
                 </option>
               </select>
-              <button>Добавить</button>
+              <button>Сохранить выбор групп</button>
             </form>
           </div>
 
@@ -93,7 +93,8 @@
       <div class="explanations">
         <h2 class="explanations__heading">Памятка</h2>
         <span class="explanations__text">
-          Заполните все поля формы и нажмите кнопку "Сохранить".
+          Подтвердите выбор групп (выбрать несколько групп можно при помощи кнопки 'ctrl').
+          <p>Заполните все поля формы и нажмите кнопку "Сохранить".</p>
         </span>
       </div>
     </div>
@@ -101,62 +102,65 @@
 
 
   <div *ngIf="nextPage" class="test__container">
-    <form method="post">
+    <form [formGroup]="questionsForm" (submit)="saveQuestion()">
       <fieldset class="form-question">
-        <h3 class="title-question-number">Вопрос №<span class="question-number">1</span></h3>
+        <h3 class="title-question-number">Вопрос №<span class="question-number">{{ seqQuestions }}</span></h3>
         <div>
           <div class="form__item">
             Поле для ввода вопроса
             <div>
-              <textarea type="text"></textarea>
+              <textarea type="text" formControlName="question" value=""></textarea>
             </div>
           </div>
           <div class="form__item">
             Вариант ответа №1:
             <div>
-              <textarea type="text" class="input-answer"></textarea>
+              <textarea type="text" class="input-answer" formControlName="first_answer" value=""></textarea>
             </div>
           </div>
           <div class="form__item">
             Вариант ответа №2:
             <div>
-              <textarea type="text" class="input-answer"></textarea>
+              <textarea type="text" class="input-answer" formControlName="second_answer" value=""></textarea>
             </div>
           </div>
           <div class="form__item">
             Вариант ответа №3:
             <div>
-              <textarea type="text" class="input-answer"></textarea>
+              <textarea type="text" class="input-answer" formControlName="third_answer" value=""></textarea>
             </div>
           </div>
           <div class="form__item">
             Вариант ответа №4:
             <div>
-              <textarea type="text" class="input-answer"></textarea>
+              <textarea type="text" class="input-answer" formControlName="four_answer" value=""></textarea>
             </div>
           </div>
           <div class="form__item">
             Номер правильного ответа:
-            <input type="number" class="input-number"/>
+            <input type="number" class="input-number" formControlName="number_correct_answer" value="1"/>
           </div>
           <div class="form__item">
             Количество баллов:
-            <input type="number" class="input-number"/>
+            <input type="number" class="input-number" formControlName="reward" value="1"/>
           </div>
         </div>
-        <button type="button" class="add-question">Удалить вопрос -</button>
       </fieldset>
+      <button type="submit" class="submit-question">Подтвердить</button>
       <fieldset class="form-fieldset">
-        <button type="button" class="add-question">Добавить вопрос +</button>
-        <button type="submit" class="btn-save">Сохранить</button>
-        <button type="submit" class="btn-save" (click)="returnTest()">Назад</button>
+        <button type="button" class="add-question" (click)="addQuestions()">Добавить вопрос +</button>
+        <button type="button" class="add-question" (click)="deleteQuestions()">Удалить предыдущий вопрос -</button>
+        <button type="button" class="btn-save" (click)="returnTest()">Сохранить</button>
+<!--        <button type="submit" class="btn-save" (click)="returnTest()">Назад</button>-->
       </fieldset>
     </form>
     <div class="explanations">
       <h4 class="explanations__heading">Памятка</h4>
       <span class="explanations__text">
-        Заполните все поля формы и нажмите кнопку "Сохранить".
-        <p>Будет создано тестовое задание, которым можно поделиться с учениками.</p>
+        Заполните все поля формы и нажмите кнопку "Подтвердить", чтобы сохранить вопрос.
+        <p>Для добавления нового вопроса в тест - "Добавить вопрос +"</p>
+        <p>Для удаления предыдущего сохраненного вопроса - "Удалить предыдущий вопрос -"</p>
+        <p>Чтобы закончить создание теста нажмите кнопку "Сохранить". Будет создано тестовое задание, которым можно поделиться с учениками.</p>
       </span>
     </div>
   </div>

@@ -1,20 +1,14 @@
-import random
 
-from django.db.models.signals import post_save
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
-from django.views import generic
-from rest_framework import status, viewsets
+from rest_framework import status
+from rest_framework.decorators import api_view
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from account.forms import RegisterUserForm
 from account.models import Account
 from account.serializers import AccountSerializer
-from student.models import AccountStatistics, Protagonist
+from student.models import AccountStatistics, Protagonist, Hero
 from student.serializers import StatisticsSerializer
 
 
@@ -71,27 +65,20 @@ class UserByToken(APIView):
         return Response(data, status=status.HTTP_201_CREATED)
 
 
+@api_view(['POST'])
+def CreateHero(request):
+    if request.method == 'POST':
+        acc = AccountStatistics.objects.create(
+            account=request.user,
+            user_name=f'{request.user.last_name} {request.user.first_name} {request.user.patronymic}'
+        )
+        print(acc)
+        id_hero = request.data['hero']
+        prot = Protagonist.objects.create(
+            account=request.user,
+            hero=Hero.objects.get(pk=id_hero),
+            name=request.data['hero_name']
+        )
+        return Response({'Студент успошно создан'})
 
-def registration(request):
-    error = ''
-    if request.method == "POST":
-        account_form = RegisterUserForm(request.POST)
-        if account_form.is_valid():
-            account_form = account_form.save(commit=False)
-            account_form.save()
-            AccountStatistics.objects.create(account=Account.objects.get(email=account_form.email))
-            if not account_form.is_teacher:
-                Protagonist.objects.create(account=Account.objects.get(email=account_form.email),
-                                           name=f'Hero_{random.randrange(1, 1000, 1)}')
-                Inventory.objects.create(account=Account.objects.get(email=account_form.email))
-            return redirect('login')
-        else:
-            error = 'Форма была неверной'
-
-    account_form = RegisterUserForm()
-    data = {
-        'form': account_form,
-        'error': error
-    }
-    return render(request, 'accounts/registration.html', data)
 

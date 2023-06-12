@@ -256,6 +256,18 @@
   height: 250px;
 }
 
+.character-block__list li div {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.character-block__list li div input {
+  margin-left: 20px;
+  /*width: 15px;*/
+  /*height: 15px;*/
+}
+
 .qwer {
   margin: 20px auto;
   display: flex;

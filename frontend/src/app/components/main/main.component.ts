@@ -10,6 +10,7 @@ export class MainComponent implements OnInit{
   user: string = '';
   isTeacher: boolean = false;
   isAuthentication: boolean = false;
+  isOneReload: boolean = false;
 
   constructor(private accountService: AccountService) { }
   ngOnInit() {
@@ -24,6 +25,10 @@ export class MainComponent implements OnInit{
         this.isAuthentication = true;
         this.isTeacher = data.is_teacher == 'False'? false: true;
         console.log(this.isTeacher);
+        // if(!this.isOneReload) {
+        //   window.location.reload();
+        //   this.isOneReload = true;
+        // }
       },
       error => {
         console.log(error);
@@ -38,6 +43,7 @@ export class MainComponent implements OnInit{
         console.log(data)
         this.isAuthentication = false;
         localStorage.clear();
+        // this.isOneReload = false;
       },
       error => {
         console.log(error);

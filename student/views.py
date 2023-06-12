@@ -6,11 +6,13 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from account.models import Account
 from student.models import AccountStatistics, Protagonist, Choice, TestRecord, Hero
 from student.serializers import HeroSerializer, ProtagonistSerializer, StatisticsSerializer, \
     TestRecordSerializer, ChoiceSerializer
 from teacher.models import Test, Question, Group
 from teacher.serializers import GroupSerializer, TestSerializer
+from rest_framework import filters
 
 
 class GropViewSet(viewsets.ModelViewSet):
@@ -106,11 +108,6 @@ class ChoiceViewSet(viewsets.ModelViewSet):
     queryset = Choice.objects.all()
     serializer_class = ChoiceSerializer
 
-    # def list(self, request):
-    #     choice = Choice.objects.get(account=request.user)
-    #     choice_serializer = self.serializer_class(choice)
-    #     return Response(choice_serializer.data)
-
 
 class AccountStatisticsViewSet(viewsets.ModelViewSet):
     queryset = AccountStatistics.objects.all()
@@ -132,9 +129,11 @@ class AccountStatisticsViewSet(viewsets.ModelViewSet):
         user_stat_serializer = self.serializer_class(user_stat)
         return Response(user_stat_serializer.data)
 
+
 class AllAccountStatisticsViewSet(viewsets.ModelViewSet):
     queryset = AccountStatistics.objects.all()
     serializer_class = StatisticsSerializer
+
 
 @api_view(['GET'])
 def DeleteGroup(request, id):
@@ -157,6 +156,19 @@ def JoinGroup(request):
         if len(con_group) > 0:
             user_stat.groups.add(con_group[0])
         return Response({'Группа подключена'})
+
+
+@api_view(['POST'])
+def RewardStudent(request):
+    if request.method == 'POST':
+        user_stat = AccountStatistics.objects.get(account=request.user)
+        print(user_stat)
+        score = request.data['score']
+        exp = request.data['exp']
+        user_stat.experience = user_stat.experience + exp
+        user_stat.score = user_stat.score + score
+        user_stat.save()
+        return Response({'Транзакция прошла успешно'})
 
 
 @login_required

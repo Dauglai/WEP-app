@@ -77,6 +77,7 @@ const routesConstructor: any =
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: 'main', component: MainComponent },
+  // { path: '', component: MainComponent },
   { path: 'student', component: StudentComponent, children: [
       { path: 'main', component: StudentMainComponent },
       { path: 'profile', component: ProfileComponent },
