@@ -28,15 +28,4 @@ urlpatterns = [
 
     path('create_question/', CreateQuestion.as_view(), name='createQuestion'),
     path('delete_question/', views.DeleteQuestion, name='delete_question'),
-
-    # path('test/new/', views.constructor, name="constructor"),
-    # path('questions/', QuestionAddView.as_view(), name="questions"),
-    #
-    # path("test/edit/<int:id>/", views.test_edit, name='test_edit'),
-    #
-    # path("delete/<int:id>/", views.question_delete, name='question_delete'),
-    # path("questions/edit/<id>", views.questions_edit, name='questions_edit'),
-    # # path("question_delete/<int: question_id>", views.question_delete, name='question_delete'),
-
-    # path('delete_participant/<int:group_id>/<int:student_id>', views.delete_participant, name='delete_participant'),
 ]

@@ -21,6 +21,4 @@ urlpatterns = [
     path('exclude_group/<int:id>/', views.DeleteGroup, name='delete_group'),
     path('join_group/', views.JoinGroup, name='join_group'),
     path('reward/', views.RewardStudent, name='reward'),
-
-    # path('protagonist/', views.protagonist, name='protagonist'),
 ]
