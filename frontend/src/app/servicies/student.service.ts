@@ -9,27 +9,16 @@ export class StudentService {
 
   constructor(private http: HttpClient) { }
 
-  // private apiGetBoss = 'http://localhost:8000/api/teacher/boss/';
-  // private apiHeroes = 'http://localhost:8000/api/student/hero/';
-  // private apiAccountStatistics = 'http://localhost:8000/api/student/account_statistics/';
-  // private apiAllAccountStatistics = 'http://localhost:8000/api/student/all_account_statistics/';
-  // private apiProtagonist = 'http://localhost:8000/api/student/protagonist/';
-  //
-  // private apiChoice = 'http://localhost:8000/api/student/choice/';
-  // private apiTestRecord = 'http://localhost:8000/api/student/test_record/';
-  // private apiTestRecordList = 'http://localhost:8000/api/student/test_record_list/';
-  // private apiReward = 'http://localhost:8000/api/student/reward/';
+  private apiGetBoss = 'http://localhost:8000/api/teacher/boss/';
+  private apiHeroes = 'http://localhost:8000/api/student/hero/';
+  private apiAccountStatistics = 'http://localhost:8000/api/student/account_statistics/';
+  private apiAllAccountStatistics = 'http://localhost:8000/api/student/all_account_statistics/';
+  private apiProtagonist = 'http://localhost:8000/api/student/protagonist/';
 
-  private apiGetBoss = 'http://danilsvp.beget.tech/api/teacher/boss/';
-  private apiHeroes = 'http://danilsvp.beget.tech/api/student/hero/';
-  private apiAccountStatistics = 'http://danilsvp.beget.tech/api/student/account_statistics/';
-  private apiAllAccountStatistics = 'http://danilsvp.beget.tech/api/student/all_account_statistics/';
-  private apiProtagonist = 'http://danilsvp.beget.tech/api/student/protagonist/';
-
-  private apiChoice = 'http://danilsvp.beget.tech/api/student/choice/';
-  private apiTestRecord = 'http://danilsvp.beget.tech/api/student/test_record/';
-  private apiTestRecordList = 'http://danilsvp.beget.tech/api/student/test_record_list/';
-  private apiReward = 'http://danilsvp.beget.tech/api/student/reward/';
+  private apiChoice = 'http://localhost:8000/api/student/choice/';
+  private apiTestRecord = 'http://localhost:8000/api/student/test_record/';
+  private apiTestRecordList = 'http://localhost:8000/api/student/test_record_list/';
+  private apiReward = 'http://localhost:8000/api/student/reward/';
 
   // private apiGetBoss = 'http://danilsvp.beget.tech/api/teacher/boss/';
   // private apiHeroes = 'http://danilsvp.beget.tech/api/student/hero/';
@@ -40,19 +29,7 @@ export class StudentService {
   // private apiChoice = 'http://danilsvp.beget.tech/api/student/choice/';
   // private apiTestRecord = 'http://danilsvp.beget.tech/api/student/test_record/';
   // private apiTestRecordList = 'http://danilsvp.beget.tech/api/student/test_record_list/';
-
-
-
-
-  // private apiGetBoss = 'http://DenisGM.pythonanywhere.com/api/teacher/boss/';
-  // private apiHeroes = 'http://DenisGM.pythonanywhere.com/api/student/hero/';
-  // private apiAccountStatistics = 'http://DenisGM.pythonanywhere.com/api/student/account_statistics/';
-  // private apiAllAccountStatistics = 'http://DenisGM.pythonanywhere.com/api/student/all_account_statistics/';
-  // private apiProtagonist = 'http://DenisGM.pythonanywhere.com/api/student/protagonist/';
-  //
-  // private apiChoice = 'http://DenisGM.pythonanywhere.com/api/student/choice/';
-  // private apiTestRecord = 'http://DenisGM.pythonanywhere.com/api/student/test_record/';
-  // private apiTestRecordList = 'http://DenisGM.pythonanywhere.com/api/student/test_record_list/';
+  // private apiReward = 'http://danilsvp.beget.tech/api/student/reward/';
 
 
   private headers = new HttpHeaders(

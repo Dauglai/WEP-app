@@ -67,4 +67,6 @@
 
 .profile__btn_exit {
   margin-right: 20px;
+  color: #fff;
+  background: var(--header-color-2) !important;
 }

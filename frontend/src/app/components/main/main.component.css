@@ -1,7 +1,7 @@
 :host {
     --header-color-1:#e5e5e5;
-    --header-color-2:#365998;
-    --header-color-3:#4165a9;
+    /*--header-color-2:#365998;*/
+    /*--header-color-3:#4165a9;*/
     --main-color-1:#cfcfcf;
     --main-color-2:#f5f4f4;
     --main-heading-1:#817f7f;
@@ -58,7 +58,8 @@
   font-size: 22px;
   line-height: 47px;
 
-  color: var(--blue-main);
+  /*color: var(--blue-main);*/
+  color: var(--header-color-2);
 }
 
 .header__nav {
@@ -73,7 +74,8 @@
 
 .header__link {
   text-decoration: none;
-  color: var(--blue-main);
+  /*color: var(--blue-main);*/
+  color: var(--header-color-2);
   cursor: pointer;
 }
 
@@ -141,6 +143,10 @@
 }
 
 .btn-start {
+  font-size: 18px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+
   display: flex;
   width: 200px;
   height: 70px;

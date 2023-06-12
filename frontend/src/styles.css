@@ -1,12 +1,16 @@
 :root {
-  /*--blue-main: #1570EF;*/
-  --blue-main: #2e569f;
-  --color-navbar-text: #e7e4e4;
+  --blue-main: #1570EF;
+  /*--blue-main: #2e569f;*/
+  --color-navbar-text: #fff;
+  /*--color-navbar-text: #e7e4e4;*/
+  /*--group-header: #1570EF;*/
   --group-header: #dedede;
 
   /*Старые цвета*/
-  --header-color-2:#365998;
-  --header-color-3:#4165a9;
+  --header-color-2:#1570EF;
+  /*--header-color-2:#365998;*/
+  --header-color-3:#1570EF;
+  /*--header-color-3:#4165a9;*/
 }
 
 .main-block {
